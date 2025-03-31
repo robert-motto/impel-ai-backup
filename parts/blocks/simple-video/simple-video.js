@@ -1,2 +1,1 @@
-
-import('../../../src/js/scripts/video.js');
+import '../../../src/js/scripts/video';

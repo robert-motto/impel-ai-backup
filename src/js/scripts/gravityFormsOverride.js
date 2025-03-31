@@ -156,9 +156,19 @@ const formScripts = function(forms) {
 };
 
 if (gFormHldAll) {
-	/* eslint-disable */
-	jQuery(document).on('gform_post_render', function (event, form_id) { // reinits form scripts each time form is rendered (ajax)
-		formScripts(gFormHldAll);
-	});
-	/* eslint-enable */
+	if (typeof window.jQuery !== 'undefined') {
+		/* eslint-disable */
+		window.jQuery(document).on('gform_post_render', function (event, form_id) { // reinits form scripts each time form is rendered (ajax)
+			formScripts(gFormHldAll);
+		});
+		/* eslint-enable */
+	} else {
+		document.addEventListener('DOMContentLoaded', () => {
+			formScripts(gFormHldAll);
+		});
+
+		document.addEventListener('gform_post_render', () => {
+			formScripts(gFormHldAll);
+		});
+	}
 }
