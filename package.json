@@ -1,0 +1,73 @@
+{
+	"name": "motto-wp-starter-pack",
+	"version": "2.0.0",
+	"description": "Motto Webpack for WordPress themes boilerplate",
+	"license": "ISC",
+	"browserslist": [
+		"> 1%",
+		"last 2 versions"
+	],
+	"config": {
+		"css": {
+			"srcFiles1": "src/sass/",
+			"srcFiles2": "parts/blocks/",
+			"minFile": "dist/css/",
+			"loadPaths": "src/sass/00_forward"
+		}
+	},
+	"scripts": {
+		"sass-development": "sass --load-path=$npm_package_config_css_loadPaths --update $npm_package_config_css_srcFiles1:$npm_package_config_css_minFile --style=compressed && sass --load-path=$npm_package_config_css_loadPaths --update $npm_package_config_css_srcFiles2:$npm_package_config_css_minFile --style=compressed",
+		"postsass-development": "stylelint \"$npm_package_config_css_srcFiles1/**/*.scss\" --cache --fix && stylelint \"$npm_package_config_css_srcFiles2/**/*.scss\" --cache --fix",
+		"sass-production": "sass --load-path=$npm_package_config_css_loadPaths $npm_package_config_css_srcFiles1:$npm_package_config_css_minFile --style=compressed --no-source-map && sass --load-path=$npm_package_config_css_loadPaths $npm_package_config_css_srcFiles2:$npm_package_config_css_minFile --style=compressed --no-source-map",
+		"webpack-development": "webpack --mode=development --env port=8890 --watch --progress",
+		"webpack-development-local": "webpack --mode=development --watch --progress",
+		"webpack-production": "webpack --mode=production",
+		"watch:sass": "onchange \"$npm_package_config_css_srcFiles1/**/*\" \"$npm_package_config_css_srcFiles2/**/*\" -e \".DS_Store\" -- npm-run-all -p sass-development",
+		"watch:webpack": "npm run webpack-development",
+		"webpack-local": "npm run webpack-development-local",
+		"minify": "cleancss --source-map --with-rebase -o src/css/*",
+		"dev": "npm-run-all -p sass-development -p watch:* -p minify",
+		"dev-local": "npm-run-all -p sass-development -p watch:sass webpack-local -p minify",
+		"build": "npm-run-all -p sass-production -p webpack-production"
+	},
+	"engines": {
+		"node": ">= 12.0.0",
+		"npm": ">= 6.9.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.17.2",
+		"@babel/eslint-parser": "^7.22.11",
+		"@babel/preset-env": "^7.16.11",
+		"autoprefixer": "^9.8.8",
+		"babel-eslint": "^10.1.0",
+		"babel-loader": "^8.2.3",
+		"browser-sync": "^2.27.7",
+		"browser-sync-webpack-plugin": "^2.3.0",
+		"clean-css-cli": "^5.6.1",
+		"css-loader": "^3.6.0",
+		"delay-copy-webpack-plugin": "^1.0.2",
+		"eslint": "^8.47.0",
+		"eslint-webpack-plugin": "^4.0.1",
+		"espree": "^9.6.1",
+		"fs-extra": "^11.1.1",
+		"glob": "^8.0.3",
+		"npm-run-all": "^4.1.5",
+		"onchange": "^6.1.1",
+		"remove-files-webpack-plugin": "^1.5.0",
+		"sass": "^1.49.7",
+		"sass-loader": "^8.0.2",
+		"style-loader": "^1.1.3",
+		"stylelint": "^13.8.0",
+		"stylelint-config-standard": "^20.0.0",
+		"stylelint-order": "^4.1.0",
+		"stylelint-scss": "^3.21.0",
+		"webpack": "^5.88.2",
+		"webpack-cli": "^4.10.0"
+	},
+	"dependencies": {
+		"gsap": "file:src/js/libs/gsap-bonus.tgz",
+		"lodash": "^4.17.21",
+		"swiper": "^11.1.15",
+		"vanilla-lazyload": "^17.5.0"
+	}
+}

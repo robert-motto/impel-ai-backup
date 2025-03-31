@@ -1,0 +1,184 @@
+@use 'config'as *;
+
+.l-section {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	margin-bottom: -1px;
+	background-color: var(--bg-primary);
+
+	main > &:first-child {
+		padding-top: rem(78px);
+
+		@include lg {
+			padding-top: rem(82.2px);
+		}
+	}
+}
+
+.l-pt {
+
+	&-none {
+		padding-top: 0;
+	}
+
+	&-3xs {
+		padding-top: var(--padding-vertical-3xs);
+	}
+
+	&-2xs {
+		padding-top: var(--padding-vertical-2xs);
+	}
+
+	&-xs {
+		padding-top: var(--padding-vertical-xs);
+	}
+
+	&-s {
+		padding-top: var(--padding-vertical-s);
+	}
+
+	&-md {
+		padding-top: var(--padding-vertical-md);
+	}
+
+	&-lg {
+		padding-top: var(--padding-vertical-lg);
+	}
+
+	&-xl {
+		padding-top: var(--padding-vertical-xl);
+	}
+
+	&-2xl {
+		padding-top: var(--padding-vertical-2xl);
+	}
+
+	&-3xl {
+		padding-top: var(--padding-vertical-3xl);
+	}
+
+	&-4xl {
+		padding-top: var(--padding-vertical-4xl);
+	}
+}
+
+.l-pb {
+
+	&-none {
+		padding-bottom: 0;
+	}
+
+	&-3xs {
+		padding-bottom: var(--padding-vertical-3xs);
+	}
+
+	&-2xs {
+		padding-bottom: var(--padding-vertical-2xs);
+	}
+
+	&-xs {
+		padding-bottom: var(--padding-vertical-xs);
+	}
+
+	&-s {
+		padding-bottom: var(--padding-vertical-s);
+	}
+
+	&-md {
+		padding-bottom: var(--padding-vertical-md);
+	}
+
+	&-lg {
+		padding-bottom: var(--padding-vertical-lg);
+	}
+
+	&-xl {
+		padding-bottom: var(--padding-vertical-xl);
+	}
+
+	&-2xl {
+		padding-bottom: var(--padding-vertical-2xl);
+	}
+
+	&-3xl {
+		padding-bottom: var(--padding-vertical-3xl);
+	}
+
+	&-4xl {
+		padding-bottom: var(--padding-vertical-4xl);
+	}
+}
+
+.l-wrapper {
+	position: relative;
+	width: calc(100% - rem(40));
+	max-width: rem(1300px);
+	margin: 0 auto;
+
+	&--medium {
+		// max-width: rem(1236);
+	}
+
+	&--tight {
+		max-width: rem(1000);
+	}
+}
+
+.l-row {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+
+	&--reverse {
+		flex-direction: row-reverse;
+	}
+
+	&--col {
+		flex-direction: column;
+	}
+
+	&--center {
+		align-items: center;
+		justify-content: center;
+	}
+
+	&--ai-s {
+		align-items: flex-start;
+	}
+
+	&--ai-c {
+		align-items: center;
+	}
+
+	&--ai-e {
+		align-items: flex-end;
+	}
+
+	&--ai-sb {
+		align-items: space-between;
+	}
+
+	&--jc-c {
+		justify-content: flex-start;
+	}
+
+	&--jc-c {
+		justify-content: center;
+	}
+
+	&--jc-e {
+		justify-content: flex-end;
+	}
+
+	&--jc-sb {
+		justify-content: space-between;
+	}
+}
+
+.l-sidebar {
+	@include lg {
+		position: sticky;
+		top: rem(120);
+	}
+}

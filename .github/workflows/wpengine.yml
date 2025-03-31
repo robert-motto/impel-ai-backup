@@ -1,0 +1,77 @@
+#name: Deploy to WPEngine
+#
+#env:
+#    DEV_BRANCH: dev
+#    LIVE_BRANCH: master
+#    WPE_ENV_DEV: mottotestdev
+#    WPE_ENV_PROD: mottotest
+#    THEME_NAME: actions-test-dist
+#
+#on:
+#    push:
+#        branches:
+#            - master
+#            - dev
+#
+#jobs:
+#    build:
+#        runs-on: ubuntu-latest
+#        steps:
+#            -   uses: actions/checkout@v4
+#            -   uses: actions/setup-node@v4
+#                with:
+#                    node-version: 22
+#
+#            -   name: Cache node modules
+#                uses: actions/cache@v4
+#                with:
+#                    path: ~/.npm
+#                    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#                    restore-keys: |
+#                        ${{ runner.os }}-node-
+#
+#            -   name: Composer install
+#                run: composer install
+#
+#            -   name: Install dependencies
+#                run: yarn install
+#
+#            -   name: Build dist folder
+#                run: yarn build
+#
+#            -   name: Save dist folder
+#                uses: actions/upload-artifact@v4
+#                with:
+#                    name: dist-folder
+#                    path: tmp/
+#
+#    deploy:
+#        needs: build
+#        runs-on: ubuntu-latest
+#        steps:
+#            -   name: Check branch
+#                id: check_branch
+#                run: |
+#                    if [[ "${{ github.ref }}" == "refs/heads/${{ env.DEV_BRANCH }}" ]]; then
+#                      echo "WPE_ENV=${{ env.WPE_ENV_DEV }}" >> $GITHUB_ENV
+#                    elif [[ "${{ github.ref }}" == "refs/heads/${{ env.LIVE_BRANCH }}" ]]; then
+#                      echo "WPE_ENV=${{ env.WPE_ENV_PROD }}" >> $GITHUB_ENV
+#                    else
+#                      echo "Branch not recognized. Skipping deployment."
+#                      exit 1
+#                    fi
+#
+#            -   name: Download dist folder
+#                uses: actions/download-artifact@v4
+#                with:
+#                    name: dist-folder
+#                    path: tmp/
+#
+#            -   name: Deploy to WP Engine
+#                uses: wpengine/github-action-wpe-site-deploy@v3
+#                with:
+#                    WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSH_PRIVATE_KEY }}
+#                    WPE_ENV: ${{ env.WPE_ENV }}
+#                    SRC_PATH: "tmp/"
+#                    REMOTE_PATH: "wp-content/themes/${{ env.THEME_NAME }}/"
+#                    CACHE_CLEAR: TRUE

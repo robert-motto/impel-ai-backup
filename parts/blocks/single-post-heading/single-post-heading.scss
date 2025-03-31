@@ -1,0 +1,10 @@
+@use 'config' as *;
+
+.block-post-heading {
+	margin-top: fluid(32px, 64px);
+	margin-bottom: fluid(18px, 24px);
+
+	&:first-child {
+		margin-top: 0;
+	}
+}

@@ -1,0 +1,15 @@
+node_modules
+dist/
+.DS_Store
+*/.DS_Store
+.stylelintcache
+yarn.lock
+package-lock.json
+composer.lock
+.idea
+*.LICENSE.txt
+vendor/
+style.min.css
+style.min.css.map
+main.min.js
+main.min.js.map

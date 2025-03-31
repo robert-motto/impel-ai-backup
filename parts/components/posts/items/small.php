@@ -1,0 +1,57 @@
+<?php
+	$post_id = $args['post_id'];
+	$classes = $args['classes'] ?? '';
+
+	$post_type  = get_post_type($post_id);
+	$title      = get_the_title($post_id);
+	$date       = get_the_date('F d, Y', $post_id);
+	$link_url   = get_the_permalink($post_id);
+	$link_title = __('Go to - ',  get_option('template')) . $title;
+	$image      = [
+		'id'  => get_post_thumbnail_id($post_id),
+		'alt' => get_post_meta($post_id, '_wp_attachment_image_alt', true),
+	];
+
+	switch($post_type) {
+		case 'custom':
+			$category_taxonomy = 'custom_category';
+			break;
+		default:
+			$category_taxonomy = 'category';
+			break;
+	}
+	$primary_category = get_post_primary_category($post_id, $category_taxonomy);
+
+?>
+<article class="post-item post-item--small <?php echo $classes; ?>">
+	<a href="<?php echo $link_url; ?>" class="post-item__link" title="<?php echo $link_title; ?>">
+		<?php
+			if (has_post_thumbnail($post_id)) :
+				echo bis_get_attachment_picture(
+					get_post_thumbnail_id($post_id),
+					[
+						1920 => [ 165, 120 , 1 ],
+						2800 => [ 165 * 2, 120 * 2, 1 ],
+					],
+					[
+						'alt' => $image['alt'] ? $image['alt'] : wp_strip_all_tags($title),
+						'loading' => 'lazy',
+						'class' => 'post-item__img',
+						'style' => 'width: 165px; height: 120px;',
+					]
+				);
+			else :
+		?>
+			<div class="post-item__img--placeholder">
+				<?php get_icon('logo'); ?>
+			</div>
+		<?php endif; ?>
+		<div class="post-item__content">
+			<?php if(!empty($primary_category)) : ?>
+				<span class="post-item__category category-tag t-caption t-caption--2"><?php echo $primary_category['primary_category']->name; ?></span>
+			<?php endif; ?>
+			<span class="post-item__title t-heading t-heading--h7"><?php echo $title; ?></span>
+			<span class="post-item__date t-paragraph t-paragraph--4"><?php echo $date; ?></span>
+		</div>
+	</a>
+</article>

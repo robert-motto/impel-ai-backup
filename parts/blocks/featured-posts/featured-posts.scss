@@ -1,0 +1,52 @@
+@use 'config' as *;
+
+.l-section--featured-posts {
+	overflow: hidden;
+
+	&:first-child {
+		.featured-posts {
+			&__breadcrumbs {
+				display: block;
+			}
+		}
+	}
+}
+
+.featured-posts {
+	&__breadcrumbs {
+		display: none;
+	}
+
+	&__heading {
+		margin-bottom: fluid(22px, 44px);
+		text-align: center;
+		margin-inline: auto;
+
+		@include md {
+			max-width: 62.5%;
+		}
+	}
+
+	&__posts {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: rem(24px);
+	}
+
+	&__small-posts {
+		display: flex;
+		flex: 1 1 0%;
+		flex-direction: column;
+		width: auto;
+		gap: rem(24px) 0;
+	}
+
+	&__large-post {
+		width: 100%;
+
+		@include md {
+			width: 57.5%;
+		}
+	}
+}

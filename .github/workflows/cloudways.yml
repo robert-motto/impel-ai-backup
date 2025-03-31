@@ -1,0 +1,144 @@
+#name: Deploy to Cloudways
+#
+#env:
+#    DEV_BRANCH: dev
+#    LIVE_BRANCH: master
+#    THEME_NAME: actions-test-dist
+#    CLOUDWAYS_SERVER_ID: 1413064
+#    CLOUDWAYS_LIVE_APP_ID: 5259884
+#    CLOUDWAYS_LIVE_APP_NAME: motto-hosting
+#    CLOUDWAYS_STAGING_APP_ID: 5266970
+#    CLOUDWAYS_STAGING_APP_NAME: Staging-motto-hosting
+#
+#on:
+#    push:
+#        branches: [dev, master]
+#
+#permissions:
+#    contents: write
+#
+#jobs:
+#    build-and-deploy:
+#        runs-on: ubuntu-latest
+#        steps:
+#            -   name: Set Allowed Branches
+#                run: echo "ALLOWED_BRANCHES=[\"${{ env.DEV_BRANCH }}\", \"${{ env.LIVE_BRANCH }}\"]" >> $GITHUB_ENV
+#
+#            -   name: Checkout repository
+#                uses: actions/checkout@v4
+#                if: contains(fromJson(env.ALLOWED_BRANCHES), github.ref_name)
+#
+#            -   name: Print branch name
+#                if: contains(fromJson(env.ALLOWED_BRANCHES), github.ref_name)
+#                run: echo "Running on branch ${{ github.ref_name }}"
+#
+#            -   name: Checkout repository
+#                uses: actions/checkout@v4
+#                with:
+#                    persist-credentials: false
+#
+#            -   name: Setup Node.js
+#                uses: actions/setup-node@v4
+#                with:
+#                    node-version: 22
+#
+#            -   name: Install dependencies
+#                run: yarn install
+#
+#            -   name: Install Composer
+#                run: composer install
+#
+#            -   name: Build Webpack
+#                run: yarn build
+#
+#            -   name: Commit built files
+#                run: |
+#                    git config --global user.name "GitHub Actions"
+#                    git config --global user.email "actions@github.com"
+#                    git add dist/ vendor/
+#                    git commit -m "Automated: build dist/ & vendor/ folders" || echo "No changes to commit"
+#
+#            -   name: Push changes
+#                uses: ad-m/github-push-action@v0.8.0
+#                with:
+#                    github_token: ${{ secrets.GITHUB_TOKEN }}
+#                    branch: ${{ github.ref_name }}
+#
+#            -   name: Get Access Token from Cloudways
+#                id: get_token
+#                run: |
+#                    response=$(curl -s -X POST "https://api.cloudways.com/api/v1/oauth/access_token" \
+#                    -H "Content-Type: application/json" \
+#                    -d '{"email": "${{ secrets.CLOUDWAYS_EMAIL }}", "api_key": "${{ secrets.CLOUDWAYS_API_KEY }}"}')
+#
+#                    token=$(echo "$response" | jq -r '.access_token')
+#                    if [ "$token" == "null" ]; then
+#                      echo "Failed to get access token"
+#                      exit 1
+#                    fi
+#                    echo "ACCESS_TOKEN=$token" >> $GITHUB_ENV
+#
+#            -   name: Set Cloudways App Variables
+#                id: check_branch
+#                run: |
+#                    if [[ "${{ github.ref }}" == "refs/heads/${{ env.LIVE_BRANCH }}" ]]; then
+#                        echo "CLOUDWAYS_APP_NAME=${{ env.CLOUDWAYS_LIVE_APP_NAME }}" >> $GITHUB_ENV
+#                        echo "CLOUDWAYS_APP_ID=${{ env.CLOUDWAYS_LIVE_APP_ID }}" >> $GITHUB_ENV
+#                    elif [[ "${{ github.ref }}" == "refs/heads/${{ env.DEV_BRANCH }}" ]]; then
+#                        echo "CLOUDWAYS_APP_NAME=${{ env.CLOUDWAYS_STAGING_APP_NAME }}" >> $GITHUB_ENV
+#                        echo "CLOUDWAYS_APP_ID=${{ env.CLOUDWAYS_STAGING_APP_ID }}" >> $GITHUB_ENV
+#                    else
+#                        echo "Branch not recognized. Skipping deployment."
+#                        exit 1
+#                    fi
+#
+#            -   name: Deploy to Cloudways
+#                run: |
+#                    DEPLOY_RESPONSE=$(curl -X POST "https://api.cloudways.com/api/v1/git/pull" \
+#                    -H "Content-Type: application/json" \
+#                    -H "Authorization: Bearer $ACCESS_TOKEN" \
+#                    -d '{
+#                         "server_id": ${{ env.CLOUDWAYS_SERVER_ID }},
+#                         "app_id": ${{ env.CLOUDWAYS_APP_ID }},
+#                         "branch_name": "${{ github.ref_name }}",
+#                         "deploy_path": "wp-content/themes/${{ env.THEME_NAME }}"
+#                       }')
+#
+#                    echo "Waiting for deployment to complete..."
+#                    OPERATION_ID=$(echo $DEPLOY_RESPONSE | jq -r '.operation_id')
+#
+#                    while true; do
+#                     sleep 10
+#                     STATUS_RESPONSE=$(curl -X GET "https://api.cloudways.com/api/v1/operation/$OPERATION_ID" \
+#                     -H "Authorization: Bearer $ACCESS_TOKEN")
+#
+#                     IS_COMPLETED=$(echo $STATUS_RESPONSE | jq -r '.operation.is_completed')
+#
+#                     if [ "$IS_COMPLETED" = "1" ]; then
+#                       echo "Deployment completed successfully!"
+#                       break
+#                     else
+#                       echo "Deployment still in progress... waiting 10 seconds"
+#                     fi
+#                    done
+#
+#
+#            -   name: Cleanup after deployment
+#                run: |
+#                    echo "Waiting 10 seconds before cleanup..."
+#                    sleep 10
+#
+#                    rm -rf dist/ vendor/
+#
+#            -   name: Commit after deployment
+#                run: |
+#                    git config --global user.name "GitHub Actions"
+#                    git config --global user.email "actions@github.com"
+#                    git add -u dist/ vendor/
+#                    git commit -m "Automated: remove dist/ & vendor/ folders after deployment"
+#
+#            -   name: Push after deployment
+#                uses: ad-m/github-push-action@v0.8.0
+#                with:
+#                    github_token: ${{ secrets.GITHUB_TOKEN }}
+#                    branch: ${{ github.ref_name }}
