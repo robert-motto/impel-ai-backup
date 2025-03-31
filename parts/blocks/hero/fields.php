@@ -26,18 +26,17 @@
 					'group_subheading',
 				]
 			])
-			->addField('content', 'clone', [
-				'clone' => [
-					'group_content',
-				]
-			])
 			->addField('buttons', 'clone', [
 				'clone' => [
 					'group_buttons',
 				]
 			])
 			->addImage('image',[
-				'instructions' => 'Sizing: 2800 x 1520px',
+				'label' => 'Hero Image',
+				'instructions' => 'Recommended size: 2560px x 1008px',
+				'return_format' => 'array',
+				'preview_size' => 'medium',
+				'default_value' => get_template_directory_uri() . '/screenshot.jpg',
 			])
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path)

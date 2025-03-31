@@ -26,8 +26,8 @@
 				'instructions' => 'Values displayed in px',
 				'choices' => [
 					'1' => '15',
-					'2' => '13',
-					'3' => '11',
+					'2' => '14',
+					'3' => '13',
 				],
 				'default_value' => '2',
 				'layout' => 'horizontal',

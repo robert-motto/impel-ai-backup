@@ -1,0 +1,138 @@
+- Write code comments only when asked to do so (!)
+- Use CSS variables for colors, fonts and other reusable values but only in SCSS files, in JS use css hex so it can be animated by GSAP
+- Use SCSS nesting for component styling
+- Follow BEM naming convention for CSS classes
+- Prefer function declarations over arrow functions for main functions
+- Use descriptive variable and function names
+- Organize GSAP animations into separate scene functions
+- Use constants for selectors and configuration options
+- Prefer early returns for validation
+- Use responsive design with mixins for breakpoints
+- Keep PHP templates clean with minimal logic
+- Separate field definitions in ACF blocks
+- Use consistent indentation (tabs)
+- Organize code in logical sections
+
+## Selector Naming Conventions
+- Use js-prefixed classes for JavaScript hooks (e.g., js-about-us-animation-container)
+  - js-prefixed classes should only be manipulated in JavaScript files, never in SCSS
+  - In SCSS, always select elements using their non-js-prefixed counterparts
+  - Include both js-prefixed and semantic classes on elements that need JavaScript interaction
+- Use l-prefixed classes for layout components (e.g., l-section)
+- For BEM naming:
+  - Block: meaningful standalone entity (e.g., about-us-animation)
+  - Element: parts of a block denoted with double underscore (e.g., about-us-animation__logo-wrapper)
+  - Modifier: flags on blocks or elements denoted with double dash (e.g., l-section--about-us-animation)
+- Use descriptive class names that reflect component purpose
+- Group related selectors with nesting in SCSS
+- Keep selector specificity as low as possible
+- Avoid ID selectors for styling, reserve them for JavaScript hooks when necessary
+- When targeting states in JavaScript animations, use data-attributes instead of classes where appropriate
+- Use class names that match component structure in PHP templates for consistency
+
+## PHP Conventions
+- Use null coalescing operator (??) for fallback values
+- Use consistent indentation with PHP conditional blocks
+- Keep conditionals simple and focused on presentation logic
+
+## SCSS Conventions
+- Use calc() e.g.: line-height: calc(60 / 50)
+- Include breakpoint mixins directly within BEM elements
+- Use SCSS parent selector (&) for BEM elements and modifiers
+
+## JavaScript Conventions
+- Group configuration settings in constants with clear naming (e.g., SCROLL_TRIGGER_CONFIG)
+- Structure GSAP animations with consistent position and duration parameters
+- Initialize animations immediately after import/registration
+- Check for element existence before operating on it
+
+## Code Formatting
+### All files
+[*]
+	charset = utf-8
+	end_of_line = lf
+	trim_trailing_whitespace = true
+	insert_final_newline = true
+	indent_style = tab
+	indent_size = 4
+
+[*.{liquid}]
+	charset = utf-8
+	end_of_line = lf
+	trim_trailing_whitespace = true
+	insert_final_newline = true
+	indent_style = tab
+	indent_size = 4
+
+### YAML doesn't allow usage of tabs
+[*.{yaml,yml}]
+	indent_style = space
+	indent_size = 4
+
+### These files are automatically generated, thus is best to NOT touch them at all.
+[{*.lock,*-lock.json,*-lock.yaml}]
+	indent_style = space
+	indent_size = 2
+
+# Figma to Code Implementation Rules
+
+## General Principles
+- Follow BEM naming convention for CSS classes
+- Use SCSS nesting for component styling
+- Use CSS variables from src/sass/01_base/_variables.scss file for colors, fonts and other reusable values in SCSS files
+- Prefer function declarations over arrow functions for main functions
+- Use ACF block system with existing components when possible
+- Use responsive design with mixins for breakpoints from src/sass/01_base/_mixins.scss file
+- Preserve coding style from existing files
+
+## WordPress Block Structure
+- Always use ACF clone fields for components when available
+- Use existing components in parts/acf-components/ directory (heading, subheading, buttons, etc.)
+- Use screenshot.jpg from main theme directory as default/fallback image
+- Follow established file structure: fields.php and template.php for each block
+
+## PHP Conventions
+- Use null coalescing operator (??) for fallback values
+- Use consistent indentation with PHP conditional blocks
+- Keep conditionals simple and focused on presentation logic
+- Follow the existing ACF component pattern when rendering components
+- Use blockFieldGroup() for getting block data
+
+## HTML/Template Structure
+- Wrap blocks with appropriate section class (e.g., l-section l-section--block-name)
+- Use l-wrapper for container width constraints
+- Add js-prefixed classes for JavaScript hooks (e.g., js-hero)
+- Use data-block attribute to identify blocks
+- Add proper responsive image handling; For images by default use <img> instead of background-image
+
+## SCSS Styling Conventions
+- Place block styles in appropriate files (e.g., src/sass/03_sections/_block-name.scss) except for Above The Fold sections like Hero, Header, etc.
+- Use fluid() function for responsive spacing and typography; defined in src/sass/01_base/_functions.scss file
+- Use rem() function for fixed pixel values; defined in src/sass/01_base/_functions.scss file
+- Use calc() for proportional line-height values, e.g.: calc(60 / 50) = 60px line-height for 50px font-size
+- Follow existing media query patterns; defined in src/sass/01_base/_mixins.scss file;
+- Include breakpoint mixins directly within BEM elements
+- Use SCSS parent selector (&) for BEM elements and modifiers
+
+## Class Naming Conventions
+- Use l-prefixed classes for layout components (e.g., l-section, l-wrapper)
+- Block elements use block__element pattern
+- Modifiers use block--modifier or block__element--modifier pattern
+- Keep class names semantic and descriptive of purpose
+- Match class names between PHP templates and SCSS files
+
+## Image Handling
+- Use appropriate image size recommendations (update in ACF fields)
+- Implement fallback images for required image fields
+- Set proper image dimensions matching Figma design, use 2x size recommendations for retina displays
+
+## Layout Patterns
+- Use flexbox or grid for complex layouts
+- Ensure proper mobile/responsive adaptations
+- Move padding from inner elements to section level when possible
+- Use appropriate max-width constraints
+
+## Typography
+- Match Figma font sizes, weights, and line heights
+- Use CSS variables for font families and common sizes
+- Ensure proper text alignment matches design
