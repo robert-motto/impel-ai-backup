@@ -18,6 +18,7 @@
 				'acf/hero',
 				'acf/hero-left',
 				'acf/content-block-left-right',
+				'acf/content-block-left-right-with-metrics',
 				'acf/simple-video',
 				'acf/recent-posts'
 			);
