@@ -1,0 +1,82 @@
+@use 'config' as *;
+
+.block-post-cta-2 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	position: relative;
+	border-radius: var(--border-radius-xs);
+	background-color: var(--bg-primary);
+	overflow: hidden;
+
+	&.l-row--reverse {
+		picture {
+			@include media-min(550) {
+				right: inherit;
+				left: 0;
+			}
+		}
+	}
+
+	&__content-hld {
+		display: flex;
+		flex-direction: column;
+		padding: fluid(24px, 40px);
+
+		@include media-min(550) {
+			width: 50%;
+		}
+	}
+
+	&__content {
+		margin-top: fluid(14px, 16px);
+	}
+
+	&__btns {
+		align-items: flex-start;
+		margin-top: fluid(18px, 36px);
+	}
+
+	picture {
+		display: block;
+		z-index: 1;
+		width: 100%;
+
+		@include media-min(550) {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 50%;
+			height: 100%;
+		}
+	}
+
+	&__img {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+
+		@include media-max(767) {
+			aspect-ratio: 6 / 3;
+		}
+
+		@include media-min(550) {
+			height: 100%;
+		}
+	}
+
+	.btn--link {
+		.btn__icon {
+			width: rem(32px);
+			height: rem(32px);
+		}
+
+		.text {
+			font-family: var(--font-family-secondary);
+			font-size: var(--t--btn-1);
+			font-weight: var(--font-weight-700);
+			letter-spacing: -0.01em;
+			line-height: var(--t--line-hight-secondary-4);
+		}
+	}
+}

@@ -1,0 +1,73 @@
+@use 'config' as *;
+
+.l-section--pwt {
+	position: relative;
+	overflow: hidden;
+}
+
+.pwt {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	position: relative;
+	gap: fluid(32px, 64px) 0;
+
+	&__content-hld {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		@include lg {
+			width: 45.83%;
+		}
+	}
+
+	&__subheading {
+		margin-top: var(--spacing-700);
+	}
+
+	&__content {
+		margin-top: rem(16px);
+	}
+
+	&__btns,
+	&__big-number {
+		margin-top: rem(36px);
+	}
+
+	picture {
+		display: block;
+		width: 100%;
+
+		@include lg {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 42.5%;
+			height: 100%;
+		}
+	}
+
+	&.l-row--reverse {
+		picture {
+			@include md {
+				right: inherit;
+				left: 0;
+			}
+		}
+	}
+
+	&__img {
+		height: auto;
+		border-radius: var(--border-radius-xs);
+		object-fit: cover;
+
+		@include media-max(1023) {
+			aspect-ratio: 6 / 3;
+		}
+
+		@include lg {
+			height: 100%;
+		}
+	}
+}

@@ -12,6 +12,7 @@
 - Separate field definitions in ACF blocks
 - Use consistent indentation (tabs)
 - Organize code in logical sections
+- Avoid empty lines within code blocks; only include the final newline at the end of the file.
 
 ## Selector Naming Conventions
 - Use js-prefixed classes for JavaScript hooks (e.g., js-about-us-animation-container)
@@ -34,6 +35,9 @@
 - Use null coalescing operator (??) for fallback values
 - Use consistent indentation with PHP conditional blocks
 - Keep conditionals simple and focused on presentation logic
+- Do not use wp_kses_post() or wpautop() unless specifically requested (!)
+- For alternative control syntax, use `<?php else: ?>` format instead of `else :`
+- Make only targeted changes to PHP templates, avoid modifying unrelated code
 
 ## SCSS Conventions
 - Use calc() e.g.: line-height: calc(60 / 50)
@@ -84,19 +88,16 @@
 - Use ACF block system with existing components when possible
 - Use responsive design with mixins for breakpoints from src/sass/01_base/_mixins.scss file
 - Preserve coding style from existing files
+- When adding new functional components like media (video/image), reuse existing patterns and components
+- Preserve existing layout structures when enhancing components with new functionality
 
 ## WordPress Block Structure
 - Always use ACF clone fields for components when available
 - Use existing components in parts/acf-components/ directory (heading, subheading, buttons, etc.)
 - Use screenshot.jpg from main theme directory as default/fallback image
 - Follow established file structure: fields.php and template.php for each block
-
-## PHP Conventions
-- Use null coalescing operator (??) for fallback values
-- Use consistent indentation with PHP conditional blocks
-- Keep conditionals simple and focused on presentation logic
-- Follow the existing ACF component pattern when rendering components
-- Use blockFieldGroup() for getting block data
+- Add default/fallback content to ACF fields for easier preview and testing
+- Implement proper fallback for required components with sensible defaults
 
 ## HTML/Template Structure
 - Wrap blocks with appropriate section class (e.g., l-section l-section--block-name)
