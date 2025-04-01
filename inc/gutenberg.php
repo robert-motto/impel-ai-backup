@@ -17,7 +17,7 @@
 				'acf/featured-posts',
 				'acf/hero',
 				'acf/hero-left',
-				'acf/photo-with-text',
+				'acf/content-block-left-right',
 				'acf/simple-video',
 				'acf/recent-posts'
 			);

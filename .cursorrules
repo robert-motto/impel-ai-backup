@@ -1,27 +1,44 @@
-- Write code comments only when asked to do so (!)
-- Use CSS variables for colors, fonts and other reusable values but only in SCSS files, in JS use css hex so it can be animated by GSAP
-- Use SCSS nesting for component styling
-- Follow BEM naming convention for CSS classes
-- Prefer function declarations over arrow functions for main functions
+# .cursorrules - Project Coding Standards
+
+## Core Principles
+- Maintainability and consistency are paramount
+- Follow existing patterns exactly as implemented in the codebase
+- Study existing components thoroughly before creating new ones
+- Take time to understand requirements fully before implementation
+- Prioritize accuracy over speed of implementation
+
+## General Coding Rules
+- Write code comments only when specifically requested (!)
+- Use consistent indentation (tabs, 4) for all files
+- Avoid empty lines within code blocks (except in SCSS files)
+- Include only the final newline at the end of each file
 - Use descriptive variable and function names
-- Organize GSAP animations into separate scene functions
-- Use constants for selectors and configuration options
-- Prefer early returns for validation
-- Use responsive design with mixins for breakpoints
-- Keep PHP templates clean with minimal logic
-- Separate field definitions in ACF blocks
-- Use consistent indentation (tabs)
 - Organize code in logical sections
-- Avoid empty lines within code blocks (but don't apply it to SCSS files)
-- Only include the final newline at the end of the file.
+- Prefer early returns for validation
+
+## CSS/SCSS Conventions
+- Use SCSS nesting for component styling
+- Follow BEM naming convention strictly (block__element--modifier)
+- Use CSS variables for colors, fonts and other reusable values but ONLY in SCSS files
+- Use calc() for proportional line-height, e.g.: calc(60 / 50) = 60px line-height for 50px font-size
+- Include breakpoint mixins directly within BEM elements
+- Use SCSS parent selector (&) for BEM elements and modifiers
+- Use rem() function for fixed pixel values (e.g., margin-top: rem(16px))
+- Use fluid() function for responsive spacing and typography
+- For line-height, always use calc() with division (e.g., line-height: calc(24 / 16))
+
+## SCSS File Location - IMPORTANT
+- Only Above The Fold sections (Hero, Header) should have their SCSS in src/sass/03_sections/
+- All other blocks MUST have their SCSS files in their respective block directories
+- Never place non-Above The Fold component styles in the sections directory
 
 ## Selector Naming Conventions
 - Don't write classes for future use, only write classes that are used in the current block
 - Use js-prefixed classes for JavaScript hooks (e.g., js-about-us-animation-container)
-  - js-prefixed classes should only be manipulated in JavaScript files, never in SCSS
+  - js-prefixed classes should ONLY be manipulated in JavaScript files, NEVER in SCSS
   - In SCSS, always select elements using their non-js-prefixed counterparts
   - Include both js-prefixed and semantic classes on elements that need JavaScript interaction
-- Use l-prefixed classes for layout components (e.g., l-section)
+- Use l-prefixed classes for layout components (e.g., l-section, l-wrapper)
 - For BEM naming:
   - Block: meaningful standalone entity (e.g., about-us-animation)
   - Element: parts of a block denoted with double underscore (e.g., about-us-animation__logo-wrapper)
@@ -40,17 +57,90 @@
 - Do not use wp_kses_post() or wpautop() unless specifically requested (!)
 - For alternative control syntax, use `<?php else: ?>` format instead of `else :`
 - Make only targeted changes to PHP templates, avoid modifying unrelated code
-
-## SCSS Conventions
-- Use calc() e.g.: line-height: calc(60 / 50)
-- Include breakpoint mixins directly within BEM elements
-- Use SCSS parent selector (&) for BEM elements and modifiers
+- Escape all output with appropriate escaping functions
+- Remember to escape single quotes in strings with a backslash (\) to prevent syntax errors. Example: echo 'It\'s a great day!'
 
 ## JavaScript Conventions
+- Prefer function declarations over arrow functions for main functions
 - Group configuration settings in constants with clear naming (e.g., SCROLL_TRIGGER_CONFIG)
 - Structure GSAP animations with consistent position and duration parameters
+- Organize GSAP animations into separate scene functions
 - Initialize animations immediately after import/registration
 - Check for element existence before operating on it
+- Use constants for selectors and configuration options
+
+## WordPress Block Structure
+- Always use ACF clone fields for components when available
+- Use existing components in parts/acf-components/ directory (heading, subheading, buttons, etc.)
+- Use screenshot.jpg from main theme directory as default/fallback image
+- Follow established file structure: fields.php and template.php for each block
+- Add default/fallback content to ACF fields for easier preview and testing
+- Implement proper fallback for required components with sensible defaults
+
+## Fallback Image Pattern - CRITICAL
+- Always implement fallback images exactly as in the hero/hero-left blocks:
+  - Check media_type first, then check for image ID, then check for image URL
+  - Use main themescreenshot.jpg as the default fallback image source
+  - Include proper alt text based on heading or default text
+  - Use bis_get_attachment_picture for responsive images when an ID is available
+  - Use a simple img tag as a last resort when only a URL is available
+
+## HTML/Template Structure
+- Wrap blocks with appropriate section class (e.g., l-section l-section--block-name)
+- Use l-wrapper for container width constraints
+- Add js-prefixed classes for JavaScript hooks (e.g., js-hero)
+- Use data-block attribute to identify blocks
+- Add proper responsive image handling; For images by default use <img> instead of background-image
+- Follow exact conditional patterns for optional elements as established in existing blocks
+
+## SCSS Styling Conventions
+- Place block styles in appropriate files (e.g., src/sass/03_sections/_block-name.scss) except for Above The Fold sections like Hero, Header, etc.
+- Use fluid() function for responsive spacing and typography; defined in src/sass/01_base/_functions.scss file
+- Use rem() function for fixed pixel values; defined in src/sass/01_base/_functions.scss file
+- Use calc() for proportional line-height values, e.g.: calc(60 / 50) = 60px line-height for 50px font-size
+- Follow existing media query patterns; defined in src/sass/01_base/_mixins.scss file
+- Include breakpoint mixins directly within BEM elements
+- Use SCSS parent selector (&) for BEM elements and modifiers
+- Only use CSS variables that are defined in the src/sass/01_base/_variables.scss file
+- Do not create new CSS variables unless absolutely necessary and approved
+
+## Class Naming Conventions
+- Use l-prefixed classes for layout components (e.g., l-section, l-wrapper)
+- Block elements use block__element pattern
+- Modifiers use block--modifier or block__element--modifier pattern
+- Keep class names semantic and descriptive of purpose
+- Match class names between PHP templates and SCSS files
+
+## Image Handling
+- Use appropriate image size recommendations (update in ACF fields)
+- Implement fallback images for required image fields
+- Set proper image dimensions matching Figma design, use 2x size recommendations for retina displays
+
+## Layout Patterns
+- Use flexbox or grid for complex layouts
+- Ensure proper mobile/responsive adaptations
+- Move padding from inner elements to section level when possible
+- Use appropriate max-width constraints
+
+## Typography
+- Match Figma font sizes, weights, and line heights
+- Use CSS variables for font families and common sizes
+- Ensure proper text alignment matches design
+
+## Before Implementation
+- Study similar blocks in the codebase to understand structure and patterns
+- Review all variable naming, className patterns, and conditional logic
+- Check available CSS variables instead of creating new ones
+- Verify breakpoint mixins and their usage
+- Understand how fallbacks are implemented for all potential empty fields
+
+## After Implementation
+- Verify BEM naming consistency across templates and SCSS
+- Check all conditional logic matches existing patterns
+- Verify fallback handling for all required fields
+- Ensure no empty lines within code blocks
+- Test mobile and desktop appearance
+- Validate escaping for all output
 
 ## Code Formatting
 ### All files
@@ -79,63 +169,3 @@
 [{*.lock,*-lock.json,*-lock.yaml}]
 	indent_style = space
 	indent_size = 2
-
-# Figma to Code Implementation Rules
-
-## General Principles
-- Follow BEM naming convention for CSS classes
-- Use SCSS nesting for component styling
-- Use CSS variables from src/sass/01_base/_variables.scss file for colors, fonts and other reusable values in SCSS files
-- Prefer function declarations over arrow functions for main functions
-- Use ACF block system with existing components when possible
-- Use responsive design with mixins for breakpoints from src/sass/01_base/_mixins.scss file
-- Preserve coding style from existing files
-- When adding new functional components like media (video/image), reuse existing patterns and components
-- Preserve existing layout structures when enhancing components with new functionality
-
-## WordPress Block Structure
-- Always use ACF clone fields for components when available
-- Use existing components in parts/acf-components/ directory (heading, subheading, buttons, etc.)
-- Use screenshot.jpg from main theme directory as default/fallback image
-- Follow established file structure: fields.php and template.php for each block
-- Add default/fallback content to ACF fields for easier preview and testing
-- Implement proper fallback for required components with sensible defaults
-
-## HTML/Template Structure
-- Wrap blocks with appropriate section class (e.g., l-section l-section--block-name)
-- Use l-wrapper for container width constraints
-- Add js-prefixed classes for JavaScript hooks (e.g., js-hero)
-- Use data-block attribute to identify blocks
-- Add proper responsive image handling; For images by default use <img> instead of background-image
-
-## SCSS Styling Conventions
-- Place block styles in appropriate files (e.g., src/sass/03_sections/_block-name.scss) except for Above The Fold sections like Hero, Header, etc.
-- Use fluid() function for responsive spacing and typography; defined in src/sass/01_base/_functions.scss file
-- Use rem() function for fixed pixel values; defined in src/sass/01_base/_functions.scss file
-- Use calc() for proportional line-height values, e.g.: calc(60 / 50) = 60px line-height for 50px font-size
-- Follow existing media query patterns; defined in src/sass/01_base/_mixins.scss file;
-- Include breakpoint mixins directly within BEM elements
-- Use SCSS parent selector (&) for BEM elements and modifiers
-
-## Class Naming Conventions
-- Use l-prefixed classes for layout components (e.g., l-section, l-wrapper)
-- Block elements use block__element pattern
-- Modifiers use block--modifier or block__element--modifier pattern
-- Keep class names semantic and descriptive of purpose
-- Match class names between PHP templates and SCSS files
-
-## Image Handling
-- Use appropriate image size recommendations (update in ACF fields)
-- Implement fallback images for required image fields
-- Set proper image dimensions matching Figma design, use 2x size recommendations for retina displays
-
-## Layout Patterns
-- Use flexbox or grid for complex layouts
-- Ensure proper mobile/responsive adaptations
-- Move padding from inner elements to section level when possible
-- Use appropriate max-width constraints
-
-## Typography
-- Match Figma font sizes, weights, and line heights
-- Use CSS variables for font families and common sizes
-- Ensure proper text alignment matches design
