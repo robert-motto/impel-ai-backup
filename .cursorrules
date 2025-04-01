@@ -12,9 +12,11 @@
 - Separate field definitions in ACF blocks
 - Use consistent indentation (tabs)
 - Organize code in logical sections
-- Avoid empty lines within code blocks; only include the final newline at the end of the file.
+- Avoid empty lines within code blocks (but don't apply it to SCSS files)
+- Only include the final newline at the end of the file.
 
 ## Selector Naming Conventions
+- Don't write classes for future use, only write classes that are used in the current block
 - Use js-prefixed classes for JavaScript hooks (e.g., js-about-us-animation-container)
   - js-prefixed classes should only be manipulated in JavaScript files, never in SCSS
   - In SCSS, always select elements using their non-js-prefixed counterparts

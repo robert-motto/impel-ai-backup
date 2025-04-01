@@ -16,6 +16,7 @@
 				'acf/post-listing',
 				'acf/featured-posts',
 				'acf/hero',
+				'acf/hero-left',
 				'acf/photo-with-text',
 				'acf/simple-video',
 				'acf/recent-posts'

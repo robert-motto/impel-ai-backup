@@ -14,7 +14,6 @@
 		$media_type  = $group['media_type'] ?? 'image'; // Default to image
 		$image       = $group['image'] ?? null;
 		$video_group = $group['video_group'] ?? []; // Get video data if type is video
-
 		// Set fallback image if none is selected and media type is image
 		if ($media_type === 'image' && (empty($image) || !isset($image['id']))) {
 			$fallback_image_path = get_template_directory() . '/screenshot.jpg';
@@ -31,7 +30,6 @@
 				}
 			}
 		}
-
 		// Section classes
 		$classes = ['l-section', 'l-section--hero'];
 		if (!empty($group['section_settings_group']['background_color'])) {
@@ -39,20 +37,16 @@
 		} else {
 			$classes[] = 'is-light';
 		}
-
-		// JS class for potential animations
-		$js_class = 'js-hero';
 	?>
 	<section class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group);?>" data-block="hero">
 		<div class="l-wrapper">
-			<div class="hero <?php echo $js_class; ?>">
+			<div class="hero">
 				<div class="hero__text-hld">
 					<?php if (!empty($heading)) : ?>
 						<div class="hero__heading ">
 							<?php echo $heading; ?>
 						</div>
 					<?php endif; ?>
-
 					<?php if (!empty($subheading)) : ?>
 						<div class="hero__subheading">
 							<?php echo $subheading; ?>

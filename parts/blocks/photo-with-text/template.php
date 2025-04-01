@@ -3,13 +3,11 @@
 	Block Align: center
 	Block Icon: format-aside
 */ ?>
-
 <?php if (isset($block['data']['is_preview'])) :?>
 	<?php block_preview(__FILE__); ?>
 <?php else :?>
 	<?php
 		$group        = isset($args['data']) ? $args['data'] : blockFieldGroup(__FILE__);
-
 		$layout_classes = $group['image_position'] ?? '';
 		$heading        = $group['heading'] ?? '';
 		$subheading     = $group['subheading'] ?? '';
@@ -25,21 +23,17 @@
 						<?php echo $heading; ?>
 					</div>
 				<?php endif; ?>
-
 				<?php if (!empty($subheading)) : ?>
 					<div class="pwt__subheading">
 						<?php echo $subheading; ?>
 					</div>
 				<?php endif; ?>
-
 				<?php if (!empty($content)) : ?>
 					<div class="pwt__content">
 						<?php echo $content; ?>
 					</div>
 				<?php endif; ?>
-
 				<?php
-					// Only render buttons component
 					get_acf_components([
 						'buttons' => [
 							'data'    => $buttons,
