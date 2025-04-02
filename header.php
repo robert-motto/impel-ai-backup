@@ -2,7 +2,10 @@
 	$GLOBALS['theme_dir'] = get_template_directory_uri();
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="<?php
+	$url_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+	echo esc_attr(empty($url_path) ? 'homepage-slug' : $url_path . '-slug');
+?>">
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
