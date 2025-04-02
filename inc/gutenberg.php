@@ -19,6 +19,7 @@
 				'acf/hero-left',
 				'acf/content-block-left-right',
 				'acf/content-block-left-right-with-metrics',
+				'acf/before-after-comparison',
 				'acf/general-metrics-section',
 				'acf/integrations',
 				'acf/single-media-section',
