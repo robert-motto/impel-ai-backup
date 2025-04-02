@@ -1,0 +1,227 @@
+@use 'config' as *;
+
+.l-section--grid-of-items {
+	position: relative;
+	overflow: hidden;
+
+	&.is-light {
+		background-color: var(--wf-neutral-neutral-95);
+	}
+
+	&.is-dark {
+		background-color: var(--wf-neutral-neutral-10);
+		color: var(--wf-neutral-neutral-100-white);
+	}
+
+	&.is-white {
+		background-color: var(--wf-neutral-neutral-100-white);
+	}
+}
+
+.grid-of-items {
+	display: flex;
+	flex-direction: column;
+	gap: fluid(40px, 64px);
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 768px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	&__caption {
+		margin-bottom: rem(12px);
+		color: var(--wf-neutral-neutral-20);
+		font-size: fluid(14px, 16px);
+		font-weight: 400;
+		letter-spacing: 0.07em;
+		line-height: calc(20 / 16);
+		text-transform: uppercase;
+
+		.is-dark & {
+			color: var(--wf-neutral-neutral-80);
+		}
+	}
+
+	&__heading {
+		color: var(--wf-neutral-neutral-0-black);
+		font-size: fluid(36px, 48px);
+		font-weight: 600;
+		line-height: calc(58 / 48);
+
+		.is-dark & {
+			color: var(--wf-neutral-neutral-100-white);
+		}
+	}
+
+	&__body {
+		margin-top: rem(16px);
+		color: var(--wf-neutral-neutral-40);
+		font-size: fluid(16px, 18px);
+		line-height: calc(28 / 18);
+
+		.is-dark & {
+			color: var(--wf-neutral-neutral-80);
+		}
+	}
+
+	&__btns {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin-top: rem(32px);
+		gap: rem(16px);
+
+		@include mobile {
+			flex-direction: column;
+			width: 100%;
+		}
+	}
+
+	&__grid {
+		display: grid;
+		gap: rem(32px);
+		width: 100%;
+
+		@include mobile {
+			grid-template-columns: 1fr;
+		}
+
+		@include md {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include lg {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		&--icons {
+			.grid-of-items__media-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: rem(200px);
+				padding: rem(32px);
+
+				@include mobile {
+					height: rem(160px);
+				}
+			}
+
+			.grid-of-items__svg {
+				max-width: 80px;
+				max-height: 80px;
+				margin: 0 auto;
+			}
+		}
+
+		&--images {
+			.grid-of-items__media-container {
+				height: rem(300px);
+
+				@include mobile {
+					height: rem(240px);
+				}
+			}
+
+			.grid-of-items__img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		border: 1px solid var(--wf-neutral-neutral-80);
+		border-radius: 8px;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		overflow: hidden;
+
+		&:hover {
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+			transform: translateY(-5px);
+		}
+
+		.is-dark & {
+			border-color: var(--wf-neutral-neutral-40);
+		}
+	}
+
+	&__media-container {
+		width: 100%;
+		background-color: var(--wf-neutral-neutral-95);
+		overflow: hidden;
+
+		.is-dark & {
+			background-color: var(--wf-neutral-neutral-20);
+		}
+	}
+
+	&__img,
+	&__svg {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&__content {
+		display: flex;
+		flex-grow: 1;
+		flex-direction: column;
+		padding: rem(32px);
+	}
+
+	&__badge {
+		display: inline-block;
+		width: fit-content;
+		margin-bottom: rem(12px);
+		padding: rem(8px) rem(16px);
+		border-radius: 8px;
+		background-color: var(--wf-neutral-neutral-60);
+		color: var(--wf-neutral-neutral-100-white);
+		font-size: rem(14px);
+		font-weight: 700;
+		line-height: calc(17 / 14);
+	}
+
+	&__item-heading {
+		margin-bottom: rem(12px);
+		color: var(--wf-neutral-neutral-20);
+		font-size: fluid(18px, 20px);
+		font-weight: 700;
+		line-height: calc(32 / 20);
+
+		.is-dark & {
+			color: var(--wf-neutral-neutral-100-white);
+		}
+	}
+
+	&__item-content {
+		margin-bottom: rem(24px);
+		color: var(--wf-neutral-neutral-40);
+		font-size: fluid(14px, 16px);
+		line-height: calc(24 / 16);
+
+		.is-dark & {
+			color: var(--wf-neutral-neutral-80);
+		}
+	}
+
+	&__item-btns {
+		display: flex;
+		margin-top: auto;
+		padding-top: rem(16px);
+
+		@include mobile {
+			flex-direction: column;
+			width: 100%;
+		}
+	}
+}

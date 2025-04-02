@@ -26,7 +26,8 @@
 				'acf/simple-video',
 				'acf/recent-posts',
 				'acf/logos-certification',
-				'acf/tabs'
+				'acf/tabs',
+				'acf/grid-of-items'
 			);
 		} else {
 			return array(
