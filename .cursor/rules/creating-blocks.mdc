@@ -1,0 +1,89 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+# Instructions for Creating WordPress Blocks from Figma Designs
+
+## 1. Analyze the Figma Design
+- Study the design carefully, noting all elements, spacing, and responsive behavior
+- Identify the block's purpose and main components (headings, content, media, special elements)
+- Note color schemes, typography, and interaction patterns
+- Use the Figma dev mode to inspect exact measurements, colors, and font styles
+
+## 2. Plan the Block Structure
+- Determine the block name using kebab-case (e.g., `content-block-left-right-with-metrics`)
+- Identify required ACF fields based on content elements in the design
+- Map out the HTML structure following BEM naming conventions
+- Plan the responsive behavior based on breakpoints defined in `_mixins.scss`
+
+## 3. Create the Block Files
+- Create a new directory in `parts/blocks/your-block-name/`
+- Create three essential files:
+  - `fields.php` - ACF field definitions
+  - `template.php` - HTML template structure
+  - `your-block-name.scss` - Block-specific styles
+
+## 4. Implement ACF Fields
+- Use the existing blocks as reference for field structure
+- Always include section settings clone field at the beginning
+- Add layout variant fields for alternate appearances (e.g., text-left/text-right)
+- Include appropriate fallback values for all fields
+- Follow field naming conventions from existing blocks
+- Use field types that match content requirements (WYSIWYG, Image, Repeater, etc.)
+
+## 5. Build the Template Structure
+- Implement fallback mechanisms for required media (follow exact fallback pattern from hero blocks)
+- Use proper escaping for all outputs (`esc_attr`, `esc_url`, `esc_html`)
+- Structure HTML with appropriate nested elements
+- Add data attributes for JavaScript hooks if needed
+- Include conditional logic for optional elements
+- Use BEM class naming for all elements
+
+## 6. Style with SCSS
+- Place the SCSS file in the block directory (not in src/sass/03_sections/ unless it's Above The Fold)
+- Use SCSS nesting with BEM naming convention
+- Use existing CSS variables from `_variables.scss` for colors and spacing
+- Include responsive styles using mixins (`@include lg`, `@include mobile`, etc.)
+- Use `fluid()` function for responsive sizing
+- Use `rem()` function for fixed pixel values
+- Use `calc()` for proportional line-height values
+
+## 7. Integration
+- Update `inc/gutenberg.php` to add the new block to allowed blocks list
+- Add block meta comments at the top of template.php:
+```php
+<?php /*
+    Block Name: Your Block Name
+    Block Align: center
+    Block Icon: appropriate-dashicon
+*/ ?>
+```
+
+## 8. Follow Established Patterns
+- Study similar blocks before starting implementation
+- Match exact conditional logic patterns for optional elements
+- Follow exact fallback implementation patterns
+- Use existing components with `get_acf_components()` for buttons and other reusable elements
+- Follow the section class structure: `l-section l-section--your-block-name`
+- Wrap content with `l-wrapper` for container width constraints
+
+## 9. Critical Implementation Notes
+- Never place non-Above The Fold component styles in the src/sass/03_sections/ directory
+- Always implement proper fallback images using the main theme's screenshot.jpg
+- Use js-prefixed classes only for JavaScript hooks, never in SCSS
+- Use l-prefixed classes for layout components
+- Strictly follow BEM naming (block__element--modifier)
+- Only use CSS variables defined in _variables.scss
+- Check for element existence before outputting it
+- Use exact conditional patterns from existing blocks
+
+## 10. Testing
+- Test on all breakpoints for responsive behavior
+- Verify BEM naming consistency across templates and SCSS
+- Check all conditional logic matches existing patterns
+- Test with empty fields to ensure fallbacks work correctly
+- Validate escaping for all output
+
+Remember: Maintainability and consistency are paramount. Study existing blocks thoroughly before creating new ones, and always follow established patterns exactly as implemented in the codebase.

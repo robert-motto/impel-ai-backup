@@ -1,0 +1,113 @@
+@use '../../../src/sass/01_base/mixins' as *;
+@use '../../../src/sass/01_base/functions' as *;
+
+.l-section--general-metrics-section {
+	padding-top: var(--padding-vertical-md);
+	padding-bottom: var(--padding-vertical-md);
+
+	@include md {
+		padding-top: var(--padding-vertical-lg);
+		padding-bottom: var(--padding-vertical-lg);
+	}
+
+	@include lg {
+		padding-top: var(--padding-vertical-xl);
+		padding-bottom: var(--padding-vertical-xl);
+	}
+}
+
+.general-metrics-section {
+	display: flex;
+	flex-direction: column;
+	gap: rem(40px);
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		gap: rem(20px);
+	}
+
+	&__caption {
+		color: var(--wf-neutral-neutral-20);
+		font-size: rem(14px);
+		font-weight: 400;
+		letter-spacing: 7%;
+		line-height: calc(16 / 14);
+		text-transform: uppercase;
+	}
+
+	&__heading {
+		color: var(--wf-neutral-neutral-20);
+		font-size: rem(32px);
+		font-weight: 700;
+		letter-spacing: 1%;
+		line-height: calc(38 / 32);
+
+		@include md {
+			font-size: rem(36px);
+			line-height: calc(43 / 36);
+		}
+
+		@include lg {
+			font-size: rem(40px);
+			line-height: calc(48 / 40);
+		}
+	}
+
+	&__content {
+		margin-top: rem(10px);
+		color: var(--wf-neutral-neutral-40);
+	}
+
+	&__buttons {
+		margin-top: rem(10px);
+	}
+
+	&__metrics {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: rem(24px);
+
+		@include md {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include lg {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+
+	&__metric {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: rem(8px);
+		padding: rem(32px) 0;
+	}
+
+	&__metric-value {
+		color: var(--wf-neutral-neutral-20);
+		font-size: rem(40px);
+		font-weight: 700;
+		line-height: calc(52 / 40);
+		text-align: center;
+
+		@include md {
+			font-size: rem(50px);
+			line-height: calc(65 / 50);
+		}
+
+		@include lg {
+			font-size: rem(60px);
+			line-height: calc(78 / 60);
+		}
+	}
+
+	&__metric-label {
+		color: var(--wf-neutral-neutral-40);
+		font-size: rem(16px);
+		font-weight: 500;
+		line-height: calc(21 / 16);
+		text-align: center;
+	}
+}
