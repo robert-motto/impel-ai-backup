@@ -21,6 +21,7 @@
 				'acf/content-block-left-right-with-metrics',
 				'acf/general-metrics-section',
 				'acf/integrations',
+				'acf/single-media-section',
 				'acf/simple-video',
 				'acf/recent-posts'
 			);

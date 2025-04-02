@@ -7,6 +7,7 @@ alwaysApply: false
 # Instructions for Creating WordPress Blocks from Figma Designs
 
 ## 1. Analyze the Figma Design
+- When provided with a link to Figma design always connect to Figma via MCP server. If can't establish connection, abort everything and ask user for a fix. 
 - Study the design carefully, noting all elements, spacing, and responsive behavior
 - Identify the block's purpose and main components (headings, content, media, special elements)
 - Note color schemes, typography, and interaction patterns
