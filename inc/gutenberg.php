@@ -20,6 +20,7 @@
 				'acf/content-block-left-right',
 				'acf/content-block-left-right-with-metrics',
 				'acf/general-metrics-section',
+				'acf/integrations',
 				'acf/simple-video',
 				'acf/recent-posts'
 			);
