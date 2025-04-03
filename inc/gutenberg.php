@@ -29,6 +29,8 @@
 				'acf/tabs',
 				'acf/grid-of-items',
 				'acf/carousel-slider',
+				'acf/testimonials',
+				'acf/case-study-grid',
 			);
 		} else {
 			return array(
