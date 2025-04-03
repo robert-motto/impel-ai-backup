@@ -31,6 +31,7 @@
 				'acf/carousel-slider',
 				'acf/testimonials',
 				'acf/case-study-grid',
+				'acf/main-cta',
 			);
 		} else {
 			return array(
