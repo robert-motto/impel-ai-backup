@@ -21,7 +21,6 @@ function initLogosCarousels() {
 		const prevButton = carouselElement.querySelector('.js-logos-prev');
 		const nextButton = carouselElement.querySelector('.js-logos-next');
 
-		const swiperWrapper = carouselElement.querySelector('.swiper-wrapper');
 		const slides = carouselElement.querySelectorAll('.swiper-slide');
 
 		try {
@@ -90,6 +89,7 @@ function initLogosCarousels() {
 				});
 			}
 		} catch (error) {
+			console.error(`Swiper initialization error for carousel ${index}:`, error);
 		}
 	});
 }
