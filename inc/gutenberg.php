@@ -32,6 +32,7 @@
 				'acf/testimonials',
 				'acf/case-study-grid',
 				'acf/main-cta',
+				'acf/secondary-cta',
 			);
 		} else {
 			return array(

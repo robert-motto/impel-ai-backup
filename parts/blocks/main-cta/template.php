@@ -15,7 +15,6 @@
 		$has_background = $group['has_background'] ?? false;
 		$background_color = $group['background_color'] ?? 'dark';
 
-		// Section classes
 		$classes = ['l-section', 'l-section--main-cta', 'js-main-cta'];
 		if ($has_background) {
 			$classes[] = 'is-' . $background_color;
