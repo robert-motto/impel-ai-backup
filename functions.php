@@ -28,4 +28,3 @@
 	//featured posts
 	global $featured_loaded_posts;
 	$featured_loaded_posts = [];
-

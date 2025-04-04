@@ -33,6 +33,10 @@
 				'acf/case-study-grid',
 				'acf/main-cta',
 				'acf/secondary-cta',
+				'acf/tertiary-cta',
+				'acf/shortlist',
+				'acf/related-content',
+				'acf/general-form',
 			);
 		} else {
 			return array(

@@ -4,42 +4,42 @@
 
 %input-base {
 	padding: rem(8.5px) rem(14px);
-	border: 1.5px solid var(--input-field-border-border-idle);
-	border-radius: var(--border-radius-xs);
+	border: 1.5px solid var(--wf-neutral-neutral-80);
+	border-radius: rem(4px);
 	outline: 1px solid transparent;
-	background: var(--input-field-bg-primary-idle);
+	background: var(--wf-neutral-neutral-100-white);
 	box-shadow: 0 0 0 1.5px transparent inset;
-	color: var(--input-field-txt-active-text);
+	color: var(--wf-neutral-neutral-10);
 	transition: border-color 0.3s ease-in-out,
 		box-shadow 0.3s ease-in-out,
 		outline-color 0.3s ease-in-out;
 
 	&::placeholder,
 	&.is-placeholder {
-		color: var(--input-field-txt-hint);
+		color: var(--wf-neutral-neutral-60);
 	}
 
 	&:hover {
-		border-color: var(--input-field-border-border-hover);
+		border-color: var(--wf-neutral-neutral-40);
 	}
 
 	&:focus {
 		// border-width: 2px;
-		border-color: var(--bg-primary);
-		outline-color: var(--input-field-border-focus);
-		box-shadow: 0 0 0 1px var(--input-field-border-border-idle) inset;
+		border-color: var(--wf-neutral-neutral-0-black);
+		outline-color: var(--c-semanctic-info-60);
+		box-shadow: 0 0 0 1px var(--wf-neutral-neutral-80) inset;
 
 		.is-light .is-light & {
-			border-color: var(--bg-tertiary);
+			border-color: var(--wf-neutral-neutral-20);
 		}
 	}
 
 	&:active {
-		border-color: var(--input-field-border-border-active);
+		border-color: var(--wf-neutral-neutral-20);
 	}
 
 	&:invalid {
-		// border-color: var(--input-field-border-border-validation);
+		// border-color: var(--c-semanctic-error-60);
 	}
 }
 
@@ -66,9 +66,9 @@
 		pointer-events: none;
 		width: max(100%, rem(153px));
 		padding: rem(16px) rem(8px);
-		border: 1px solid var(--input-field-border-border-idle);
-		border-radius: var(--border-radius-xs);
-		background-color: var(--bg-primary);
+		border: 1px solid var(--wf-neutral-neutral-80);
+		border-radius: rem(4px);
+		background-color: var(--wf-neutral-neutral-100-white);
 		transition: opacity 0.3s ease-in-out,
 			translate 0.3s ease-in-out;
 		overflow: hidden;
@@ -81,14 +81,14 @@
 		display: block;
 		cursor: pointer;
 		padding: rem(4px) rem(8px);
-		border-radius: var(--border-radius-xs);
+		border-radius: rem(4px);
 
 		&.is-hidden {
 			display: none;
 		}
 
 		&:hover {
-			background-color: var(--bg-secondary);
+			background-color: var(--wf-neutral-neutral-95);
 		}
 	}
 }
@@ -185,7 +185,7 @@ form {
 		&-display {
 			display: flex;
 			// align-items: center;
-			color: var(--txt-paragraph);
+			color: var(--wf-neutral-neutral-20);
 
 			& > span {
 				margin-left: rem(10) !important;
@@ -214,7 +214,7 @@ form {
 				min-height: rem(16);
 				margin-top: rem(4px);
 				padding-top: 2px;
-				border: 1.5px solid var(--input-field-border-border-idle);
+				border: 1.5px solid var(--wf-neutral-neutral-80);
 				border-radius: rem(4);
 				outline: 1px solid transparent;
 				box-shadow: 0 0 0 1.5px transparent inset;
@@ -222,22 +222,22 @@ form {
 
 			&:hover {
 				&::before {
-					border-color: var(--input-field-border-border-hover);
+					border-color: var(--wf-neutral-neutral-40);
 				}
 			}
 
 			&:focus-within {
 				&::before {
-					outline-color: var(--input-field-border-focus);
-					box-shadow: 0 0 0 1px var(--input-field-border-border-idle) inset;
+					outline-color: var(--c-semanctic-info-60);
+					box-shadow: 0 0 0 1px var(--wf-neutral-neutral-80) inset;
 				}
 			}
 
 			&:has(input[type='checkbox']:checked) {
 				&::before {
 					content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9ImNoZWNrIj4KPHBhdGggaWQ9IlZlY3RvciIgZD0iTTIuNSA2TDUgOC41TDEwIDMuNSIgc3Ryb2tlPSIjRkVGOEU4IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjwvZz4KPC9zdmc+Cg==');
-					border-color: var(--checkbox-bg-idle);
-					background: var(--checkbox-bg-idle);
+					border-color: var(--c-semanctic-success-60);
+					background: var(--c-semanctic-success-60);
 				}
 			}
 		}
@@ -254,7 +254,7 @@ form {
 
 	.hs-error-msgs {
 		label {
-			color: var(--input-field-txt-validation);
+			color: var(--c-semanctic-error-60);
 		}
 	}
 }
