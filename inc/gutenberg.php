@@ -17,6 +17,7 @@
 				'acf/featured-posts',
 				'acf/hero',
 				'acf/hero-left',
+			'acf/hero-secondary',
 				'acf/content-block-left-right',
 				'acf/content-block-left-right-with-metrics',
 				'acf/before-after-comparison',
