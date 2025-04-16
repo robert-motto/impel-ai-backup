@@ -38,6 +38,7 @@
 				'acf/shortlist',
 				'acf/related-content',
 				'acf/general-form',
+			'acf/vertical-scrolling-cards',
 			);
 		} else {
 			return array(
