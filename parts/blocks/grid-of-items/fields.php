@@ -56,6 +56,17 @@
 				'layout' => 'horizontal',
 				'return_format' => 'value',
 			])
+			->addRadio('columns_count', [
+				'label' => 'Number of Columns',
+				'instructions' => 'Select number of columns to display on desktop',
+				'choices' => [
+					'2' => '2 Columns',
+					'3' => '3 Columns'
+				],
+				'default_value' => '3',
+				'layout' => 'horizontal',
+				'return_format' => 'value',
+			])
 			->addRepeater('grid_items', [
 				'label' => 'Grid Items',
 				'instructions' => 'Add items to display in the grid',
