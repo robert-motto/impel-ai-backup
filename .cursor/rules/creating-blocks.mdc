@@ -35,6 +35,8 @@ alwaysApply: true
 - Include appropriate fallback values for all fields
 - Follow field naming conventions from existing blocks
 - Use field types that match content requirements (WYSIWYG, Image, Repeater, etc.)
+- When using Repeater, rememeber to end it with `->endRepeater()`
+- Do not use `sub_fields` property, instead use `->` syntax
 - For carousels, include fields for settings (e.g., autoplay speed, pause on hover, slides per view for desktop, show scrollbar).
 
 ## 5. Build the Template Structure
@@ -54,6 +56,7 @@ alwaysApply: true
 - Use `fluid()` function for responsive sizing
 - Use `rem()` function for fixed pixel values
 - Use `calc()` for proportional line-height values
+- Add `@use 'config' as *;` at the top of file
 - **Swiper SCSS:** Do not rely solely on base Swiper CSS. Within the block's scope (e.g., inside `.your-block__carousel`):
     - Style `.swiper-wrapper` with `display: flex; align-items: stretch;`
     - Style `.swiper-slide` with `display: flex; flex-direction: column; width: auto; height: auto; flex-shrink: 0;`
