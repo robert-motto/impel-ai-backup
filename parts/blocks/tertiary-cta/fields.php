@@ -45,6 +45,34 @@
 					'group_buttons',
 				]
 			])
+			->addSelect('media_type', [
+				'label' => 'Media Type',
+				'instructions' => 'Select the type of media to display',
+				'choices' => [
+					'none' => 'None',
+					'image' => 'Image'
+				],
+				'default_value' => 'none',
+				'return_format' => 'value',
+				'multiple' => 0,
+				'ui' => 1,
+			])
+			->addImage('image', [
+				'label' => 'Image',
+				'instructions' => 'Upload or select an image. Recommended size: 300x300px (2x for retina).',
+				'preview_size' => 'medium',
+				'return_format' => 'array',
+				'library' => 'all',
+				'conditional_logic' => [
+					[
+						[
+							'field' => 'media_type',
+							'operator' => '==',
+							'value' => 'image',
+						]
+					]
+				]
+			])
 			->addTrueFalse('has_background', [
 				'label' => 'Use Background Color',
 				'instructions' => 'Add background color to the section',

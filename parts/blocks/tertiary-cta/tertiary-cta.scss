@@ -12,6 +12,15 @@
 	padding: fluid(24px, 36px) fluid(16px, 36px);
 	text-align: center;
 
+	@include md {
+		&--has-image {
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			text-align: left;
+		}
+	}
+
 	&--has-background {
 		&.tertiary-cta--bg-light {
 			background-color: var(--wf-neutral-neutral-95);
@@ -36,6 +45,14 @@
 		align-items: center;
 		max-width: rem(740px);
 		margin: 0 auto;
+
+		@include md {
+			.tertiary-cta--has-image & {
+				align-items: flex-start;
+				max-width: calc(100% - rem(340px));
+				margin: 0;
+			}
+		}
 	}
 
 	&__caption {
@@ -90,6 +107,28 @@
 				width: rem(20px);
 				height: rem(20px);
 			}
+		}
+	}
+
+	&__media {
+		display: flex;
+		justify-content: center;
+		margin-top: rem(24px);
+		
+		@include md {
+			margin-top: 0;
+			margin-left: rem(20px);
+		}
+	}
+
+	&__image {
+		width: rem(220px);
+		max-width: 100%;
+		height: auto;
+		object-fit: contain;
+		
+		@include md {
+			width: rem(300px);
 		}
 	}
 }
