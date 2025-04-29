@@ -19,13 +19,22 @@
 	<?php echo $head_code ?>
 	<style>
 		@font-face {
-			font-family: 'presicav';
-			src: url('https://use.typekit.net/af/462ab8/00000000000000003b9afe26/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff2'),
-				url('https://use.typekit.net/af/462ab8/00000000000000003b9afe26/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff'),
-				url('https://use.typekit.net/af/462ab8/00000000000000003b9afe26/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('opentype');
+			font-family: 'KHTeka';
+			src: url('<?php echo $GLOBALS['theme_dir']; ?>/src/fonts/KHTeka/regular/KHTeka-Regular.woff2') format('woff2'),
+				url('<?php echo $GLOBALS['theme_dir']; ?>/src/fonts/KHTeka/regular/KHTeka-Regular.woff') format('woff'),
+				url('<?php echo $GLOBALS['theme_dir']; ?>/src/fonts/KHTeka/regular/KHTeka-Regular.otf') format('opentype');
 			font-display: swap;
 			font-style: normal;
 			font-weight: 400;
+		}
+		@font-face {
+			font-family: 'KHTeka';
+			src: url('<?php echo $GLOBALS['theme_dir']; ?>/src/fonts/KHTeka/medium/KHTeka-Medium.woff2') format('woff2'),
+				url('<?php echo $GLOBALS['theme_dir']; ?>/src/fonts/KHTeka/medium/KHTeka-Medium.woff') format('woff'),
+				url('<?php echo $GLOBALS['theme_dir']; ?>/src/fonts/KHTeka/medium/KHTeka-Medium.otf') format('opentype');
+			font-display: swap;
+			font-style: normal;
+			font-weight: 500;
 		}
 	</style>
 	<?php wp_head(); ?>
