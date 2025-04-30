@@ -1,0 +1,26 @@
+/* Effects - Idle */
+:root {
+	--e-elevation-overlay-shadow-x: 0;
+	--e-elevation-overlay-shadow-y: 70px;
+	--e-elevation-overlay-shadow-blur: 130px;
+	--e-elevation-overlay-shadow-spread: 0;
+	--e-elevation-overlay-shadow-color: rgba(0, 0, 0, 0.15000000596046448);
+}
+
+/* Effects - Hover */
+:root {
+	--e-elevation-overlay-shadow-x: 0;
+	--e-elevation-overlay-shadow-y: 4px;
+	--e-elevation-overlay-shadow-blur: 12px;
+	--e-elevation-overlay-shadow-spread: 0;
+	--e-elevation-overlay-shadow-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Effects - Pressed */
+:root {
+	--e-elevation-overlay-shadow-x: 0;
+	--e-elevation-overlay-shadow-y: 4px;
+	--e-elevation-overlay-shadow-blur: 12px;
+	--e-elevation-overlay-shadow-spread: 0;
+	--e-elevation-overlay-shadow-color: rgba(0, 0, 0, 0.25);
+}
