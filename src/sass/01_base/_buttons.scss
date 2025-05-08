@@ -5,7 +5,7 @@
 	display: inline-flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	gap: fluid(12px, 16px);
+	gap: var(--spacing-500);
 
 	&--left {
 		align-items: flex-start;
@@ -24,10 +24,10 @@
 	position: relative;
 	z-index: 1;
 	cursor: pointer;
-	padding: rem(8px) rem(20px);
+	padding: rem(8px) rem(12px);
 	border: 2px solid transparent;
-	border-radius: var(--border-radius-xs);
-	outline: 1px solid transparent;
+	border-radius: var(--border-radius-s);
+	outline: 2px solid transparent;
 	text-align: center;
 	text-decoration: none !important;
 	transition: background-color 0.3s ease-in-out,
@@ -35,10 +35,11 @@
 		border-color 0.3s ease-in-out,
 		outline-color 0.3s ease-in-out,
 		box-shadow 0.3s ease-in-out;
-	gap: rem(4px);
+	gap: rem(8px);
 
 	.text {
-		@extend .t-btn, .t-btn--4;
+		font-size: var(--t--btn-2);
+		line-height: var(--t--line-height-300);
 	}
 
 	&.is-reverse {
@@ -49,31 +50,33 @@
 		&--large,
 		&--extra-large {
 			.btn__icon {
-				width: rem(26px);
-				height: rem(26px);
+				width: rem(24px);
+				height: rem(24px);
 			}
 		}
 
 		&--large {
-			padding: rem(11px) rem(24px);
+			padding: var(--spacing-300) var(--spacing-500);
 
 			.text {
-				@extend .t-btn--3;
+				font-size: var(--t--btn-3);
+				line-height: 24px;
 			}
 		}
 
 		&--extra-large {
-			padding: rem(12px) rem(24px);
+			padding: rem(16px) rem(28px);
 
 			.text {
-				@extend .t-btn--2;
+				font-size: var(--t--btn-1);
+				line-height: 24px;
 			}
 		}
 	}
 
 	&__icon {
-		width: rem(22px);
-		height: rem(22px);
+		width: rem(20px);
+		height: rem(20px);
 
 		svg {
 			width: 100%;
@@ -97,25 +100,17 @@
 		&:hover {
 			background-color: var(--button-bg-primary-hover);
 			color: var(--button-label-primary-hover);
-
-			.is-dark & {
-				outline-color: var(--button-label-primary-idle);
-			}
-
-			.is-accent & {
-				outline-color: var(--button-bg-primary-idle);
-			}
 		}
 
 		&:focus {
-			border-color: var(--bg-primary);
-			outline-color: var(--button-border-focus);
+			border-color: transparent;
+			outline-color: var(--background-bg-primary--c-brand-primary-forest);
 		}
 
 		&.is-disabled {
 			pointer-events: none;
-			background-color: var(--button-bg-primary-disabled);
-			color: var(--button-label-primary-disabled);
+			background-color: rgba(153, 150, 168, 0.1);
+			color: var(--button-label-disabled);
 		}
 	}
 
@@ -145,17 +140,18 @@
 
 	&--link {
 		padding: rem(4px) 0 !important;
+		border-radius: 0;
 		background-color: transparent;
 		color: var(--button-label-link-idle);
 
 		&::after {
 			content: '';
 			position: absolute;
-			bottom: rem(-4px);
+			bottom: rem(5px);
 			left: 0;
 			width: 100%;
 			height: rem(1px);
-			background-color: var(--button-underline-link-idle);
+			background-color: var(--button-label-link-idle);
 			transform-origin: right;
 			transition: scale 0.3s ease-in-out;
 			scale: 0 1;
