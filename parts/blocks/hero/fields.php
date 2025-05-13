@@ -16,29 +16,25 @@
 					'group_section_settings',
 				]
 			])
-			->addWysiwyg('heading', [
-				'label' => 'Heading',
-				'instructions' => 'Enter the main heading text. Use Enter/Return for line breaks.',
-				'media_upload' => 0,
-				'toolbar' => 'basic',
-				'tabs' => 'visual',
-				'delay' => 0,
-				'new_lines' => 'br',
-				'default_value' => 'Leading The Way In Automotive AI',
+			->addButtonGroup('mode_variant', [
+				'label'   => 'Color Mode Variant',
+				'choices' => [
+					'primary' => 'Primary',
+					'secondary'  => 'Secondary',
+				],
+				'default_value' => 'primary',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
 			])
-			->addWysiwyg('subheading', [
-				'label' => 'Subheading',
-				'instructions' => 'Enter the subheading text.',
-				'media_upload' => 0,
-				'toolbar' => 'basic',
-				'tabs' => 'all',
-				'delay' => 0,
-				'default_value' => 'The only AI-powered platform driving every stage of your business—from research to purchase and beyond.',
-			])
-			->addField('buttons', 'clone', [
+			->addField('heading', 'clone', [
 				'clone' => [
-					'group_buttons',
+					'group_heading_box',
 				]
+			])
+			->addField('tab_buttons', 'clone', [
+				'clone' => [
+					'group_action_group',
+				],
 			])
 			->addRadio('media_type', [
 				'label' => 'Media Type',
@@ -50,6 +46,28 @@
 				'layout' => 'horizontal',
 				'return_format' => 'value',
 			])
+			->addButtonGroup('media_position', [
+				'label'   => 'Media Position',
+				'choices' => [
+					'background' => 'Background',
+					'right'  => 'Right',
+					'bottom'  => 'Bottom',
+				],
+				'default_value' => 'background',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
+			->addButtonGroup('text_position', [
+				'label'   => 'Text Position',
+				'choices' => [
+					'center' => 'Center',
+					'left'  => 'Left',
+				],
+				'default_value' => 'center',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
+				->conditional('media_position', '==', 'background')
 			->addImage('image',[
 				'label' => 'Hero Image',
 				'instructions' => 'Recommended size: 2560px x 1008px',
