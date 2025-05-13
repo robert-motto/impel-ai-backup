@@ -206,3 +206,11 @@
 			'redirect' => false
 		));
 	}
+
+/* Custom WYSIWYG toolbar */
+add_filter('acf/fields/wysiwyg/toolbars', function ($toolbars) {
+	$toolbars['Bold'] = [];
+	$toolbars['Bold'][1] = ['bold']; // Add only bold button
+
+	return $toolbars;
+});
