@@ -16,6 +16,16 @@
 					'group_section_settings',
 				]
 			])
+			->addButtonGroup('mode_variant', [
+				'label'   => 'Color Mode Variant',
+				'choices' => [
+					'primary' => 'Primary',
+					'secondary'  => 'Secondary',
+				],
+				'default_value' => 'primary',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
 			->addButtonGroup('layout_variant', [
 				'label' => 'Layout Variant',
 				'choices' => [
@@ -26,34 +36,15 @@
 				'layout' => 'horizontal',
 				'return_format' => 'value',
 			])
-			->addText('caption', [
-				'label' => 'Caption',
-				'instructions' => 'Short text above the heading',
-				'default_value' => 'Feature',
-			])
-			->addWysiwyg('heading', [
-				'label' => 'Heading',
-				'instructions' => 'Enter the main heading text. Use Enter/Return for line breaks.',
-				'media_upload' => 0,
-				'toolbar' => 'basic',
-				'tabs' => 'visual',
-				'delay' => 0,
-				'new_lines' => 'br',
-				'default_value' => 'Build a Digital Retailing Experience That Drives Results',
-			])
-			->addWysiwyg('content', [
-				'label' => 'Body Content',
-				'instructions' => 'Enter the main content text. Use the toolbar for lists and formatting.',
-				'media_upload' => 0,
-				'toolbar' => 'full',
-				'tabs' => 'all',
-				'delay' => 0,
-				'default_value' => '<p>Impel\'s AI-powered digital retailing solutions empower buyers to move seamlessly between online and in-store experiences through a personalized, guided commerce journey that simplifies the purchase process, facilitates deal structuring, and inspires confident buying decisions.</p>',
-			])
-			->addField('buttons', 'clone', [
+			->addField('heading', 'clone', [
 				'clone' => [
-					'group_buttons',
+					'group_heading_box',
 				]
+			])
+			->addField('tab_buttons', 'clone', [
+				'clone' => [
+					'group_action_group',
+				],
 			])
 			->addRadio('media_type', [
 				'label' => 'Media Type',
@@ -81,37 +72,6 @@
 				'prefix_name' => true,
 			])
 				->conditional('media_type', '==', 'video')
-			->addText('media_disclaimer', [
-				'label' => 'Media Disclaimer',
-				'instructions' => 'Optional description for the image or video (appears below media)',
-				'default_value' => '',
-			])
-			->addTrueFalse('show_divider', [
-				'label' => 'Show Divider Line',
-				'instructions' => 'Display a divider line below the content',
-				'default_value' => 0,
-				'ui' => 1,
-			])
-			->addTrueFalse('has_background', [
-				'label' => 'Use Background Color',
-				'instructions' => 'Add background color to the section',
-				'default_value' => 0,
-				'ui' => 1,
-			])
-			->addSelect('background_color', [
-				'label' => 'Background Color',
-				'instructions' => 'Select background color',
-				'choices' => [
-					'light' => 'Light (Gray)',
-					'white' => 'White',
-					'dark' => 'Dark',
-				],
-				'default_value' => 'light',
-				'return_format' => 'value',
-				'multiple' => 0,
-				'ui' => 1,
-			])
-				->conditional('has_background', '==', 1)
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path);
 	return $name;
