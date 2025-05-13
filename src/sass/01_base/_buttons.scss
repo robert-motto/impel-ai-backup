@@ -144,29 +144,39 @@
 		background-color: transparent;
 		color: var(--button-label-link-idle);
 
-		&::after {
-			content: '';
-			position: absolute;
-			bottom: rem(5px);
-			left: 0;
-			width: 100%;
-			height: rem(1px);
-			background-color: var(--button-label-link-idle);
-			transform-origin: right;
-			transition: scale 0.3s ease-in-out;
-			scale: 0 1;
+		.text {
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: rem(3px);
+				left: 0;
+				width: 100%;
+				height: rem(1px);
+				background-color: var(--button-label-link-idle);
+				transform-origin: right;
+				transition: scale 0.3s ease-in-out;
+				scale: 0 1;
+			}
 		}
 
-		&:hover::after {
-			transform-origin: left;
-			scale: 1 1;
+		&:hover {
+			.text {
+				&::after {
+					transform-origin: left;
+					scale: 1 1;
+				}
+			}
 		}
 
 		&:focus {
 			outline-color: var(--button-border-focus);
 
-			&::after {
-				scale: 0;
+			.text {
+				&::after {
+					scale: 0;
+				}
 			}
 		}
 
