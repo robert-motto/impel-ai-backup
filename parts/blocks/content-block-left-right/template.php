@@ -9,17 +9,13 @@
 	<?php
 		$group           = isset($args['data']) ? $args['data'] : blockFieldGroup(__FILE__);
 		$layout_variant  = $group['layout_variant'] ?? 'text-left';
-		$caption         = $group['caption'] ?? '';
-		$heading         = $group['heading'] ?? '';
-		$content         = $group['content'] ?? '';
-		$buttons         = $group['buttons_group'] ?? [];
+		$color_mode      		= $group['section_settings_group']['mode'] ?? 'light';
+		$color_mode_variant	= $group['mode_variant'] ?? 'regular';
+		$heading         		= $group['heading_box_group'] ?? '';
+		$buttons 						= $group['action_group_group'] ?? [];
 		$media_type      = $group['media_type'] ?? 'image';
 		$image           = $group['image'] ?? '';
 		$video_group     = $group['video_group'] ?? [];
-		$media_disclaimer = $group['media_disclaimer'] ?? '';
-		$show_divider    = $group['show_divider'] ?? false;
-		$has_background  = $group['has_background'] ?? false;
-		$background_color = $group['background_color'] ?? 'light';
 
 		// Set fallback image if none is selected and media type is image
 		if ($media_type === 'image' && (empty($image) || !isset($image['id']))) {
@@ -39,46 +35,33 @@
 		}
 
 		// Section classes
-		$classes = ['l-section', 'l-section--content-block', 'js-content-block'];
-		if ($has_background) {
-			$classes[] = 'is-' . $background_color;
-		}
+		$classes = ['l-section', 'l-section--content-block', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", ];
 
 		// Row classes for layout variants
 		$row_classes = ['content-block', 'l-wrapper'];
 		if ($layout_variant === 'text-right') {
 			$row_classes[] = 'content-block--reverse';
 		}
+
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group); ?>" data-block="content-block" data-variant="<?php echo esc_attr($layout_variant); ?>">
 		<div class="<?php echo esc_attr(implode(' ', $row_classes)); ?>">
 			<div class="content-block__content-hld">
-				<?php if (!empty($caption)) : ?>
-					<div class="content-block__caption">
-						<?php echo esc_html($caption); ?>
-					</div>
-				<?php endif; ?>
-				<?php if (!empty($heading)) : ?>
-					<div class="content-block__heading">
-						<?php echo $heading; ?>
-					</div>
-				<?php endif; ?>
-				<?php if (!empty($content)) : ?>
-					<div class="content-block__body">
-						<?php echo $content; ?>
-					</div>
-				<?php endif; ?>
 				<?php
-					get_acf_components([
-						'buttons' => [
-							'data'    => $buttons,
+					get_acf_component(
+						'heading-box', [
+							'data' => $heading,
+						],
+					);
+				?>
+				<?php
+					get_acf_component(
+						'action-group', [
+							'data' => $buttons,
 							'classes' => 'content-block__btns',
 						],
-					]);
+					);
 				?>
-				<?php if ($show_divider) : ?>
-					<div class="content-block__divider"></div>
-				<?php endif; ?>
 			</div>
 			<div class="content-block__media-hld">
 				<?php if ($media_type === 'image') : ?>
@@ -111,11 +94,6 @@
 							]
 						]);
 					?>
-				<?php endif; ?>
-				<?php if (!empty($media_disclaimer)) : ?>
-					<div class="content-block__media-disclaimer">
-						<?php echo esc_html($media_disclaimer); ?>
-					</div>
 				<?php endif; ?>
 			</div>
 		</div>
