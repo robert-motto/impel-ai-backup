@@ -8,25 +8,23 @@
 <?php else :?>
 	<?php
 		$group = isset($args['data']) ? $args['data'] : blockFieldGroup(__FILE__);
-		$caption = $group['caption'] ?? '';
-		$heading = $group['heading'] ?? '';
-		$content = $group['content'] ?? '';
-		$buttons = $group['buttons_group'] ?? [];
-		$has_background = $group['has_background'] ?? false;
-		$background_color = $group['background_color'] ?? 'dark';
+		$color_mode	= $group['section_settings_group']['mode'] ?? 'light';
+		$caption 		= $group['caption'] ?? '';
+		$heading 		= $group['heading'] ?? '';
+		$content 		= $group['content'] ?? '';
+		$buttons 		= $group['action_group_group'] ?? [];
 
-		$classes = ['l-section', 'l-section--main-cta', 'js-main-cta'];
-		if ($has_background) {
-			$classes[] = 'is-' . $background_color;
-		}
+		// Section classes
+		$classes = ['l-section', 'l-section--main-cta', "color-mode-{$color_mode}"];
+
 	?>
-	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group); ?>" data-block="main-cta">
+	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="main-cta" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/parts/blocks/main-cta/cta_main_' . ( $color_mode === 'is-dark' ? 'dark' : 'light' ) . '_glimmer.jpg' ); ?>');">
 		<div class="main-cta l-wrapper">
 			<div class="main-cta__content">
 				<?php if (!empty($caption)) : ?>
-					<div class="main-cta__caption">
+					<p class="main-cta__caption">
 						<?php echo esc_html($caption); ?>
-					</div>
+					</p>
 				<?php endif; ?>
 				<?php if (!empty($heading)) : ?>
 					<div class="main-cta__heading">
@@ -34,17 +32,17 @@
 					</div>
 				<?php endif; ?>
 				<?php if (!empty($content)) : ?>
-					<div class="main-cta__body">
+					<p class="main-cta__body">
 						<?php echo $content; ?>
-					</div>
+					</p>
 				<?php endif; ?>
 				<?php
-					get_acf_components([
-						'buttons' => [
-							'data'    => $buttons,
+					get_acf_component(
+						'action-group', [
+							'data' => $buttons,
 							'classes' => 'main-cta__btns',
 						],
-					]);
+					);
 				?>
 			</div>
 		</div>
