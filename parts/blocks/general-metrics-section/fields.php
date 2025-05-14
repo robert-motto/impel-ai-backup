@@ -16,32 +16,19 @@
 					'group_section_settings',
 				]
 			])
-			->addText('caption', [
-				'label' => 'Caption',
-				'instructions' => 'Short text above the heading (displayed in uppercase with letter spacing)',
-				'default_value' => 'Our Accomplishments',
+			->addButtonGroup('mode_variant', [
+				'label'   => 'Color Mode Variant',
+				'choices' => [
+					'primary' => 'Primary',
+					'secondary'  => 'Secondary',
+				],
+				'default_value' => 'primary',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
 			])
-			->addWysiwyg('heading', [
-				'label' => 'Heading',
-				'instructions' => 'Enter the main heading text. Use Enter/Return for line breaks.',
-				'media_upload' => 0,
-				'toolbar' => 'basic',
-				'tabs' => 'visual',
-				'delay' => 0,
-				'new_lines' => 'br',
-				'default_value' => 'We\'ve got the numbers to prove it',
-			])
-			->addWysiwyg('content', [
-				'label' => 'Body Content',
-				'instructions' => 'Enter optional description text below the heading.',
-				'media_upload' => 0,
-				'toolbar' => 'basic',
-				'tabs' => 'all',
-				'delay' => 0,
-			])
-			->addField('buttons', 'clone', [
+			->addField('heading', 'clone', [
 				'clone' => [
-					'group_buttons',
+					'group_heading_box',
 				]
 			])
 			->addRepeater('metrics', [
@@ -56,13 +43,21 @@
 					'label' => 'Metric Value',
 					'instructions' => 'Enter the numeric value (can include currency symbols, e.g., $7.45B).',
 					'required' => 1,
-					'default_value' => '$7.45B',
 				])
 				->addText('metric_label', [
 					'label' => 'Metric Label',
 					'instructions' => 'Enter a descriptive label for the metric.',
 					'required' => 1,
-					'default_value' => 'Sales and service revenue influenced by Impel\'s AI',
+				])
+				->addButtonGroup('variant', [
+					'label'   => 'Variant',
+					'choices' => [
+						'narrow' => 'Narrow',
+						'wide'  => 'Wide',
+					],
+					'default_value' => 'wide',
+					'layout'        => 'horizontal',
+					'return_format' => 'value',
 				])
 			->endRepeater()
 		->endGroup()
