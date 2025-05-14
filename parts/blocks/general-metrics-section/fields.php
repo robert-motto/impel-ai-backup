@@ -49,16 +49,6 @@
 					'instructions' => 'Enter a descriptive label for the metric.',
 					'required' => 1,
 				])
-				->addButtonGroup('variant', [
-					'label'   => 'Variant',
-					'choices' => [
-						'narrow' => 'Narrow',
-						'wide'  => 'Wide',
-					],
-					'default_value' => 'wide',
-					'layout'        => 'horizontal',
-					'return_format' => 'value',
-				])
 			->endRepeater()
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path);
