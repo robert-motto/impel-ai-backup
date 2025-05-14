@@ -19,19 +19,19 @@
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="general-metrics-section">
 		<div class="l-wrapper">
 			<div class="general-metrics-section">
+				<div class="general-metrics-section__header">
+					<?php
+						get_acf_component(
+							'heading-box', [
+								'data' => $heading,
+							],
+						);
+					?>
+				</div>
 				<div class="general-metrics-section__metrics">
-					<div class="general-metrics-section__header">
-						<?php
-							get_acf_component(
-								'heading-box', [
-									'data' => $heading,
-								],
-							);
-						?>
-					</div>
 						<?php if (!empty($metrics)) : ?>
 							<?php foreach ($metrics as $metric) : ?>
-								<div class="general-metrics-section__metric general-metrics-section__metric--<?php echo esc_html($metric['variant'] ?? 'wide'); ?>">
+								<div class="general-metrics-section__metric">
 									<div class="general-metrics-section__metric-value">
 										<?php echo esc_html($metric['metric_value'] ?? ''); ?>
 									</div>
