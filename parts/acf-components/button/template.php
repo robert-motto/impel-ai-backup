@@ -3,8 +3,8 @@
 	$btn_classes = $args['classes'] ?? '';
 	$tag         = $args['tag'] ?? 'a';
 
-	$btn_classes .= 'btn--'.$button['type'];
-	$btn_classes .= $button['size']          !== 'default' ? ' btn--'.$button['size'] : '';
+	$btn_classes .= ' btn--'.$button['type'];
+	$btn_classes .= $button['size'] !== 'default' ? ' btn--'.$button['size'] : '';
 	$btn          = $button['button'] ?? [];
 	$link         = $btn['url'] ?? '';
 	$title        = $btn['title'] ?? '';
