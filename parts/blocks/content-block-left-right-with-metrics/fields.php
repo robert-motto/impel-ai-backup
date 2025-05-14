@@ -16,6 +16,16 @@
 					'group_section_settings',
 				]
 			])
+			->addButtonGroup('mode_variant', [
+				'label'   => 'Color Mode Variant',
+				'choices' => [
+					'primary' => 'Primary',
+					'secondary'  => 'Secondary',
+				],
+				'default_value' => 'primary',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
 			->addButtonGroup('layout_variant', [
 				'label' => 'Layout Variant',
 				'choices' => [
@@ -26,29 +36,10 @@
 				'layout' => 'horizontal',
 				'return_format' => 'value',
 			])
-			->addText('caption', [
-				'label' => 'Caption',
-				'instructions' => 'Short text above the heading',
-				'default_value' => 'Key Metrics',
-			])
-			->addWysiwyg('heading', [
-				'label' => 'Heading',
-				'instructions' => 'Enter the main heading text. Use Enter/Return for line breaks.',
-				'media_upload' => 0,
-				'toolbar' => 'basic',
-				'tabs' => 'visual',
-				'delay' => 0,
-				'new_lines' => 'br',
-				'default_value' => 'Our Impact in Numbers',
-			])
-			->addWysiwyg('content', [
-				'label' => 'Body Content',
-				'instructions' => 'Enter the main content text. Use the toolbar for lists and formatting.',
-				'media_upload' => 0,
-				'toolbar' => 'full',
-				'tabs' => 'all',
-				'delay' => 0,
-				'default_value' => '<p>Our solutions have driven significant improvements across various metrics, showcasing the effectiveness of our approach.</p>',
+			->addField('heading', 'clone', [
+				'clone' => [
+					'group_heading_box',
+				]
 			])
 			->addRepeater('metrics', [
 				'label' => 'Key Metrics',
@@ -58,17 +49,21 @@
 				'min' => 4,
 				'max' => 4,
 			])
+				->addImage('metric_icon', [
+					'label' => 'Metric Icon',
+					'return_format' => 'array',
+					'preview_size' => 'medium',
+					'required' => 1,
+				])
 				->addText('metric_value', [
 					'label' => 'Metric Value',
 					'instructions' => 'Enter the value of the metric.',
 					'required' => 1,
-					'default_value' => '100%',
 				])
 				->addText('metric_label', [
 					'label' => 'Metric Label',
 					'instructions' => 'Enter a short label for the metric.',
 					'required' => 1,
-					'default_value' => 'Increase in Efficiency',
 				])
 			->endRepeater()
 		->endGroup()
