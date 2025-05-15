@@ -1,0 +1,126 @@
+@use 'config' as *;
+
+.l-section--bento-grid-section {
+	padding: var(--padding-vertical-4xl) 0;
+	background-color: var(--background-bg-primary--c-brand-primary-forest);
+
+	&.color-mode-variant-secondary {
+		background-color: var(--bg-secondary);
+	}
+}
+
+.bento-grid-section {
+
+	&__segments {
+		display: grid;
+		grid-auto-rows: 1fr;
+		grid-template-columns: repeat(2, 1fr);
+		margin-top: var(--spacing-1000);
+		gap: var(--spacing-500);
+
+		@include mobile {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&__segment {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-500);
+
+		&--double {
+			.bento-grid-section__tile {
+				flex-direction: row;
+
+				&::before {
+					content: '';
+					display: block;
+					position: absolute;
+					top: 0;
+					left: 0;
+					z-index: 0;
+					width: 100%;
+					height: 100%;
+					background: linear-gradient(270deg, rgba(96, 96, 96, 0.2) 0%, rgba(96, 96, 96, 0) 100%);
+				}
+
+				&-content {
+					order: 1;
+					width: 50%;
+				}
+
+				&-image {
+					order: 2;
+					width: 50%;
+					margin: calc(var(--spacing-600) * -1);
+					margin-left: 0;
+				}
+			}
+		}
+	}
+
+	&__tile {
+		display: flex;
+		flex-grow: 1;
+		flex-direction: column;
+		position: relative;
+		padding: var(--spacing-600);
+		border-radius: 16px;
+		background: var(--elevation-surface-sunken-primary-default);
+		transition: transform 0.3s ease;
+		overflow: hidden;
+		justify-items: flex-end;
+		gap: 32px;
+
+		&:hover {
+			transform: translateY(rem(-4px));
+		}
+
+		&::before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(180deg, rgba(96, 96, 96, 0.2) 0%, rgba(96, 96, 96, 0) 100%);
+		}
+
+		&-image {
+			z-index: 1;
+			margin: calc(var(--spacing-600) * -1);
+			margin-bottom: 0;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+		}
+
+		&-content {
+			z-index: 1;
+			margin-top: auto;
+		}
+
+		&-title {
+			color: var(--txt-heading);
+			font-size: var(--t--card-title-3);
+			line-height: var(--t--line-height-500);
+		}
+
+		&-text {
+			margin-top: var(--spacing-400);
+			color: var(--txt-paragraph-primary);
+			font-size: var(--t--paragraph-2);
+			line-height: var(--t--line-height-400);
+		}
+
+		&-btns {
+			margin-top: var(--spacing-400);
+		}
+	}
+}
