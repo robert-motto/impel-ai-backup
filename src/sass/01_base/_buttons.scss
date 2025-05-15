@@ -183,5 +183,12 @@
 		&.is-disabled {
 			color: var(--button-label-link-disabled);
 		}
+
+		.btn__icon {
+			* {
+				fill: var(--button-icon-secondary-idle);
+				stroke: var(--button-icon-secondary-idle);
+			}
+		}
 	}
 }
