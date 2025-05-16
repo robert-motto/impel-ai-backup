@@ -1,1 +1,4 @@
-<svg width="84" height="84" viewBox="0 0 84 84" class="<?php echo $args['classes'] ?? ''; ?>" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M42 83.998C65.196 83.998 84 65.194 84 41.998C84 18.8021 65.196 -0.00195312 42 -0.00195312C18.804 -0.00195312 0 18.8021 0 41.998C0 65.194 18.804 83.998 42 83.998ZM36.0196 27.7874C34.6864 26.9974 33 27.9583 33 29.508V54.4881C33 56.0378 34.6864 56.9987 36.0196 56.2087L57.0965 43.7186C58.4037 42.944 58.4037 41.0521 57.0965 40.2775L36.0196 27.7874Z"/></svg>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="video__player-btn-icon">
+  <circle cx="32" cy="32" r="32" fill="#6C44E4" class="video__player-btn-icon__circle" />
+  <path d="M45.4609 32.0004L25.2675 43.6591L25.2675 20.3417L45.4609 32.0004Z" fill="white" class="video__player-btn-icon__arrow" />
+</svg>
