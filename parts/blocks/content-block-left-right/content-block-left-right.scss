@@ -56,8 +56,7 @@
 		width: 100%;
 		height: auto;
 		border-radius: 10px;
-		aspect-ratio: 720 / 480;
-		object-fit: cover;
+		object-fit: contain;
 
 		.video__player {
 			width: 100%;
