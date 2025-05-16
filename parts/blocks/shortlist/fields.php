@@ -31,7 +31,7 @@
 			])
 			->addRelationship('selected_posts', [
 				'label' => 'Select Posts',
-				'instructions' => 'Choose up to 3 posts to display',
+				'instructions' => 'Choose posts to display',
 				'post_type' => ['post'],
 				'taxonomy' => [],
 				'filters' => [
@@ -40,7 +40,7 @@
 					2 => 'taxonomy',
 				],
 				'min' => 0,
-				'max' => 3,
+				'max' => 10,
 				'return_format' => 'id',
 			])
 				->conditional('type_of_display', '==', 'custom')

@@ -3,6 +3,7 @@
 .l-section--shortlist {
 	padding: var(--padding-vertical-4xl) 0;
 	background-color: var(--background-bg-primary--c-brand-primary-forest);
+	overflow: hidden;
 }
 
 .shortlist {
@@ -19,7 +20,17 @@
 		line-height: var(--t--line-height-1200);
 	}
 
-	&__items {
+	&__slider {
 		margin-top: var(--spacing-1050);
+
+		&--hide-desktop-nav {
+			.slider__navigation {
+				display: none;
+
+				@include mobile {
+					display: flex;
+				}
+			}
+		}
 	}
 }

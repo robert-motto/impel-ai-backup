@@ -1,6 +1,7 @@
 <?php
 $slides = $args['slides'] ?? '';
 $button = $args['button'] ?? '';
+$classes = $args['classes'] ?? '';
 $slider_settings = $args['slider_settings'] ?? [];
 $autoplay_speed = $slider_settings['autoplay_speed'] ?? '';
 $pause_on_hover = $slider_settings['pause_on_hover'] ?? '';
@@ -9,12 +10,11 @@ $show_progressbar = $slider_settings['show_progressbar'] ?? '';
 ?>
 
 <?php if (!empty($slides)) : ?>
-  <div class="slider__carousel-container">
+  <div class="slider__carousel-container <?php echo esc_attr($classes); ?>">
     <div class="slider__carousel js-slider swiper"
       data-autoplay="<?php echo esc_attr($autoplay_speed); ?>"
       data-pause-hover="<?php echo esc_attr($pause_on_hover ? 'true' : 'false'); ?>"
       data-slides-per-view="<?php echo esc_attr($slides_per_view); ?>"
-      data-show-scrollbar="<?php echo esc_attr($show_scrollbar ? 'true' : 'false'); ?>"
       data-show-progressbar="<?php echo esc_attr($show_progressbar ? 'true' : 'false'); ?>">
       <div class="swiper-wrapper">
 

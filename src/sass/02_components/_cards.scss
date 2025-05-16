@@ -15,20 +15,13 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	height: 100%;
 	padding: var(--spacing-300);
 	padding-bottom: 0;
 	border-radius: rem(12px);
 	background-color: var(--elevation-surface-sunken-primary-default);
 	transition: transform 0.3s ease;
 	overflow: hidden;
-
-	@include md {
-		width: calc(50% - rem(12px));
-	}
-
-	@include lg {
-		width: calc(33.333% - rem(16px));
-	}
 
 	&:hover {
 		transform: translateY(rem(-4px));
