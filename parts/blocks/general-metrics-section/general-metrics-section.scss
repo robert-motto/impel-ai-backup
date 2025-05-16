@@ -37,6 +37,10 @@
 			min-height: 200px;
 			padding: 16px;
 		}
+
+		&--wide {
+			grid-column: span 2;
+		}
 	}
 
 	&__metric-value {
