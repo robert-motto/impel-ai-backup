@@ -31,7 +31,7 @@
 				<div class="general-metrics-section__metrics">
 						<?php if (!empty($metrics)) : ?>
 							<?php foreach ($metrics as $metric) : ?>
-								<div class="general-metrics-section__metric">
+								<div class="general-metrics-section__metric general-metrics-section__metric--<?php echo esc_html($metric['variant'] ?? 'wide'); ?>">
 									<div class="general-metrics-section__metric-value">
 										<?php echo esc_html($metric['metric_value'] ?? ''); ?>
 									</div>
