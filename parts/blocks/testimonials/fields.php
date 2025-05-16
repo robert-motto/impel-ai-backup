@@ -16,29 +16,20 @@
 					'group_section_settings',
 				]
 			])
-			->addText('caption', [
-				'label' => 'Caption',
-				'instructions' => 'Short text above the heading',
-				'default_value' => 'Testimonials',
+			->addButtonGroup('mode_variant', [
+				'label'   => 'Color Mode Variant',
+				'choices' => [
+					'primary' => 'Primary',
+					'secondary'  => 'Secondary',
+				],
+				'default_value' => 'primary',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
 			])
-			->addWysiwyg('heading', [
-				'label' => 'Heading',
-				'instructions' => 'Enter the main heading text. Use Enter/Return for line breaks.',
-				'media_upload' => 0,
-				'toolbar' => 'basic',
-				'tabs' => 'visual',
-				'delay' => 0,
-				'new_lines' => 'br',
-				'default_value' => 'Real Results from Real Clients',
-			])
-			->addWysiwyg('content', [
-				'label' => 'Body Content',
-				'instructions' => 'Enter the main content text.',
-				'media_upload' => 0,
-				'toolbar' => 'full',
-				'tabs' => 'all',
-				'delay' => 0,
-				'default_value' => 'Our clients have transformed their operations with Impel.ai\'s unified platform. Hear their stories and see how we drive results.',
+			->addField('heading', 'clone', [
+				'clone' => [
+					'group_heading_box',
+				]
 			])
 			->addRepeater('testimonials', [
 				'label' => 'Testimonials',
@@ -75,22 +66,31 @@
 					'label' => 'Media Type',
 					'choices' => [
 						'video' => 'Video',
-						'image' => 'Image Only',
+						'image' => 'Image',
 					],
 					'default_value' => 'video',
 					'layout' => 'horizontal',
 					'return_format' => 'value',
 				])
 				->addImage('thumbnail', [
-					'label' => 'Thumbnail Image',
-					'instructions' => 'Upload a thumbnail image (recommended size: 800x450px)',
-					'return_format' => 'array',
-					'preview_size' => 'medium',
+					'label' => 'Image',
+					'instructions' => 'Upload an image (recommended size: 800x450px)',
+									'return_format' => 'array',
+									'preview_size' => 'medium',
+					'conditional_logic' => [
+						[
+							[
+								'field' => 'media_type',
+								'operator' => '==',
+								'value' => 'image',
+							]
+						]
+					]
 				])
-				->addUrl('video_url', [
-					'label' => 'Video URL',
-					'instructions' => 'Enter the video URL (YouTube, Vimeo, or direct mp4 link)',
-					'default_value' => '',
+				->addField('video', 'clone', [
+					'clone' => [
+						'group_video',
+					],
 					'conditional_logic' => [
 						[
 							[
@@ -107,66 +107,47 @@
 					'default_value' => 0,
 					'ui' => 1,
 				])
-				->addText('metric_value', [
-					'label' => 'Metric Value',
-					'instructions' => 'Enter the metric value (e.g., 75%)',
-					'default_value' => '75%',
-					'conditional_logic' => [
-						[
+				->addRepeater('metrics', [
+					'label' => 'Metrics',
+					'instructions' => 'Add one or more metrics',
+					'min' => 0,
+					'max' => 0,
+					'layout' => 'block',
+					'button_label' => 'Add Metric',
+						'conditional_logic' => [
 							[
-								'field' => 'has_metric',
-								'operator' => '==',
-								'value' => 1,
+								[
+									'field' => 'has_metric',
+									'operator' => '==',
+									'value' => 1,
+								]
 							]
 						]
-					]
 				])
-				->addText('metric_description', [
-					'label' => 'Metric Description',
-					'instructions' => 'Brief description of what the metric represents',
-					'default_value' => 'Boosts conversion rates through personalized interactions.',
-					'conditional_logic' => [
-						[
-							[
-								'field' => 'has_metric',
-								'operator' => '==',
-								'value' => 1,
-							]
-						]
-					]
-				])
+					->addText('metric_value', [
+						'label' => 'Metric Value',
+						'instructions' => 'Enter the metric value (e.g., 75%)',
+					])
+					->addText('metric_description', [
+						'label' => 'Metric Description',
+						'instructions' => 'Brief description of what the metric represents',
+					])
+					->addSelect('metric_icon', [
+						'label' => 'Metric Icon',
+						'instructions' => 'Select icon to display in the metric badge',
+						'choices' => [
+							'arrow-up' => 'Arrow Up (Increase)',
+							'arrow-down' => 'Arrow Down (Decrease)',
+						],
+						'default_value' => 'arrow-up',
+						'return_format' => 'value',
+						'ui' => 1,
+					])
+				->endRepeater()
 			->endRepeater()
-			->addField('buttons', 'clone', [
+			->addField('button', 'clone', [
 				'clone' => [
-					'group_buttons',
-				]
-			])
-			->addTrueFalse('has_background', [
-				'label' => 'Use Background Color',
-				'instructions' => 'Add background color to the section',
-				'default_value' => 1,
-				'ui' => 1,
-			])
-			->addSelect('background_color', [
-				'label' => 'Background Color',
-				'instructions' => 'Select background color',
-				'choices' => [
-					'light' => 'Light (Gray)',
-					'white' => 'White',
-					'dark' => 'Dark',
-				],
-				'default_value' => 'light',
-				'return_format' => 'value',
-				'multiple' => 0,
-				'ui' => 1,
-				'conditional_logic' => [
-					[
-						[
-							'field' => 'has_background',
-							'operator' => '==',
-							'value' => 1,
-						]
-					]
+					'group_button',
 				]
 			])
 		->endGroup()
