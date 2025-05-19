@@ -76,6 +76,15 @@
 				'default_value' => get_template_directory_uri() . '/screenshot.jpg',
 			])
 				->conditional('media_type', '==', 'image')
+			->addImage('image_mobile', [
+				'label' => 'Hero Image (Mobile)',
+				'instructions' => 'Recommended size: 750px x 1008px',
+				'return_format' => 'array',
+				'preview_size' => 'medium',
+				'default_value' => get_template_directory_uri() . '/screenshot.jpg',
+			])
+				->conditional('media_type', '==', 'image')
+				->conditional('media_position', '==', 'background')
 			->addField('video', 'clone', [
 				'label' => 'Video',
 				'clone' => [
