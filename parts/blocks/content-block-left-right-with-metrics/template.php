@@ -14,13 +14,13 @@
 		$heading         		= $group['heading_box_group'] ?? '';
 		$metrics        		= $group['metrics'] ?? [];
 
-		// TODO: add media asset support
-		// $media_type      = $group['media_type'] ?? 'image';
-		// $image           = $group['image'] ?? '';
-		// $video_group     = $group['video_group'] ?? [];
+	// TODO: add media asset support [ON HOLD - waiting for info from design]
+	// $media_type      = $group['media_type'] ?? 'image';
+	// $image           = $group['image'] ?? '';
+	// $video_group     = $group['video_group'] ?? [];
 
-		// Section classes
-		$classes = ['l-section', 'l-section--content-block-metrics', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
+	// Section classes
+	$classes = ['l-section', 'l-section--content-block-metrics', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
 
 		// Row classes for layout variants
 		$row_classes = ['content-block-metrics', 'l-wrapper'];

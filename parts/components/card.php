@@ -7,8 +7,9 @@ $title = $item['title'] ?? '';
 $text = $item['text'] ?? '';
 $link = $item['link'] ?? '';
 
-// Set fallback image if none is selected
-if (empty($thumbnail) || !isset($thumbnail['id'])) {
+  // Set fallback image if none is selected
+  // TODO: Add category specific images
+  if (empty($thumbnail) || !isset($thumbnail['id'])) {
   $fallback_image_path = get_template_directory() . '/screenshot.jpg';
   $fallback_image_uri = get_template_directory_uri() . '/screenshot.jpg';
   if (file_exists($fallback_image_path)) {
