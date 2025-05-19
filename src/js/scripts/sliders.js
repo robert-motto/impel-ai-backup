@@ -1,5 +1,5 @@
 import Swiper from 'swiper';
-import { Navigation, Scrollbar, Autoplay, Pagination } from 'swiper/modules';
+import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -8,9 +8,6 @@ import 'swiper/css/autoplay';
 
 function initSliders() {
 	const carousels = document.querySelectorAll('.js-slider');
-
-	console.log(carousels);
-
 
 	if (!carousels.length) {
 		return;
@@ -21,14 +18,13 @@ function initSliders() {
 		const autoplaySpeed = parseInt(carouselElement.dataset.autoplay, 10) || 0;
 		const pauseOnHover = carouselElement.dataset.pauseHover === 'true';
 		const slidesPerViewDesktop = parseInt(carouselElement.dataset.slidesPerView, 10) || 3;
-		const showScrollbar = carouselElement.dataset.showScrollbar === 'true';
+		const showNavigation = carouselElement.dataset.showNavigation === 'true';
 		const showProgressbar = carouselElement.dataset.showProgressbar === 'true';
 
 		// Find navigation and scrollbar elements relative to the carousel element
 		const container = carouselElement.closest('.slider__carousel-container');
 		const prevButton = container ? container.querySelector('.js-slider-prev') : null;
 		const nextButton = container ? container.querySelector('.js-slider-next') : null;
-		const scrollbarEl = container ? container.querySelector('.js-slider-scrollbar') : null;
 		const progressbarEl = container ? container.querySelector('.js-slider-progressbar') : null;
 
 		try {
@@ -37,10 +33,6 @@ function initSliders() {
 
 			if (autoplaySpeed > 0) {
 				swiperModules.push(Autoplay);
-			}
-
-			if (showScrollbar && scrollbarEl) {
-				swiperModules.push(Scrollbar);
 			}
 
 			if (showProgressbar && progressbarEl) {
@@ -68,7 +60,7 @@ function initSliders() {
 			};
 
 			// Add navigation if buttons exist
-			if (prevButton && nextButton) {
+			if (showNavigation && prevButton && nextButton) {
 				swiperConfig.navigation = {
 					nextEl: nextButton,
 					prevEl: prevButton,
@@ -80,15 +72,6 @@ function initSliders() {
 				swiperConfig.pagination = {
 					el: progressbarEl,
 					type: 'progressbar',
-					hide: false, // Keep scrollbar visible
-				};
-			}
-
-			// Add scrollbar configuration if enabled and element exists
-			if (showScrollbar && scrollbarEl) {
-				swiperConfig.scrollbar = {
-					el: scrollbarEl,
-					draggable: true,
 					hide: false, // Keep scrollbar visible
 				};
 			}
