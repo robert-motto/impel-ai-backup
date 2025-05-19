@@ -160,6 +160,7 @@
 				'slides' => $slides,
 				'button' => $button,
 				'slider_settings' => [
+					'show_navigation' => true,
 					'show_progressbar' => true,
 					'slides_per_view' => 2
 				]

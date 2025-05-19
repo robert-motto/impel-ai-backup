@@ -122,6 +122,7 @@
 						'slides' => $slides,
 						'slider_settings' => [
 							'slides_per_view' => 3,
+							'show_navigation' => true,
 							'show_progressbar' => true,
 						],
 						'classes' => $classes
