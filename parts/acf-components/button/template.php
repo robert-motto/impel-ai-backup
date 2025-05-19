@@ -10,7 +10,7 @@
 	$title        = $btn['title'] ?? '';
 	$target       = isset($btn['target']) ? 'target="'.$btn['target'].'"' : '';
 	$has_icon     = $button['has_icon'] ?? 'n';
-	$btn_classes .= $button['icon_position'] === 'left' ? ' is-reverse' : '';
+	$btn_classes .= !empty($button['has_icon']) ? ($button['icon_position'] === 'left' ? ' is-reverse' : '') : '';
 	$icon         = $button['icon'] ?? '';
 ?>
 

@@ -34,7 +34,7 @@ $show_progressbar = $slider_settings['show_progressbar'] ?? '';
       </div>
 
       <?php if ($show_progressbar) : ?><div class="slider__progressbar js-slider-progressbar"></div><?php endif; ?>
-      <?php if ($button['button']):
+      <?php if ($button && $button['button']):
         get_acf_component('button', [
           'data' => $button,
         ]);
