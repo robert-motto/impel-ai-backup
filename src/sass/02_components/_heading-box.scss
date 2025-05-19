@@ -57,8 +57,12 @@
 	&__subheading {
 		max-width: 622px;
 		margin-top: var(--spacing-600);
-		color: var(--txt-subheading);
+		color: var(--txt-paragraph-secondary);
 		font-size: var(--t--subheading-2);
 		line-height: var(--t--line-height-500);
+
+		.color-mode-variant-secondary & {
+			color: var(--txt-subheading);
+		}
 	}
 }
