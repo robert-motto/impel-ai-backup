@@ -1,0 +1,32 @@
+@use 'config' as *;
+
+.block-post-quote {
+	display: flex;
+	flex-direction: column;
+	padding: fluid(16px, 30px) fluid(24px, 40px);
+	border-radius: var(--border-radius-xs);
+	background-color: var(--c--brand-primary-950);
+	gap: fluid(16px, 24px);
+
+	@include media-min(450) {
+		flex-direction: row;
+	}
+
+	&__icon {
+		flex: none;
+		width: rem(30px);
+		height: rem(30px);
+		color: blue;
+	}
+
+	&__author {
+		display: flex;
+		flex-direction: column;
+		gap: rem(4px);
+		margin-top: fluid(16px, 24px);
+
+		&__title {
+			color: var(--txt-caption);
+		}
+	}
+}

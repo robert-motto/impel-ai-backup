@@ -1,0 +1,38 @@
+@use 'config' as *;
+
+.site-top-mobile {
+	display: none;
+	align-items: center;
+	justify-content: space-between;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 500;
+	width: 100%;
+	padding: 10px 20px;
+	border-bottom: 1px solid var(--c-black);
+	background-color: var(--c-white);
+
+	@include tablet-big {
+		display: flex;
+	}
+}
+
+.site-top-mobile__toggle-mobile {
+	margin-right: -10px;
+	padding: 10px;
+	border: 0;
+	outline: 0;
+	background-color: transparent;
+
+	span:not(.u-sr-only) {
+		display: block;
+		width: 30px;
+		height: 2px;
+		background-color: var(--c-black);
+
+		&:not(:first-child) {
+			margin-top: 5px;
+		}
+	}
+}

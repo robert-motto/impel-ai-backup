@@ -1,0 +1,125 @@
+@use 'config' as *;
+
+.slider {
+	&__carousel-container {
+		position: relative;
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	&__carousel {
+		position: relative;
+		width: 100%;
+
+		.swiper-wrapper {
+			display: flex;
+			align-items: stretch;
+			box-sizing: content-box;
+		}
+
+		.swiper-slide {
+			display: flex;
+			flex-shrink: 0;
+			flex-direction: column;
+			position: relative;
+			width: auto;
+			height: auto;
+			box-sizing: border-box;
+		}
+	}
+
+	&__navigation {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: var(--spacing-1000);
+		gap: var(--spacing-1000);
+
+		@include mobile {
+			flex-direction: column;
+			align-items: stretch;
+		}
+	}
+
+	&__buttons {
+		display: flex;
+
+		@include mobile {
+			display: none;
+		}
+
+		&-divider {
+			position: relative;
+			width: 1px;
+			height: 100%;
+			background-color: var(--interface-ui-controls-bg-fill);
+
+			&::before {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 4px;
+				bottom: 4px;
+				left: 0;
+				width: 100%;
+				background-color: var(--interface-divider-divider);
+			}
+		}
+	}
+
+	&__button-prev,
+	&__button-next {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		margin: 0;
+		padding: 0;
+		padding: 4px 16px 4px 12px;
+		border: none;
+		border-radius: 0 8px 8px 0;
+		outline: none;
+		background-color: var(--interface-ui-controls-bg-fill);
+		appearance: none;
+
+		&:hover {
+			background-color: var(--wf-neutral-neutral-95);
+		}
+
+		&.swiper-button-disabled {
+			cursor: not-allowed;
+			opacity: 0.5;
+		}
+
+		svg {
+			* {
+				fill: var(--txt-heading);
+				stroke: var(--txt-heading);
+			}
+		}
+	}
+
+	&__button-prev {
+		padding: 4px 12px 4px 16px;
+		border-radius: 8px 0 0 8px;
+		transform: rotate(180deg);
+	}
+
+	&__progressbar {
+		flex-grow: 1;
+		position: relative;
+		height: 2px;
+		border-radius: 99px;
+		background: var(--interface-border-subtle);
+
+		.swiper-pagination-progressbar-fill {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: var(--interface-border-active);
+			transform-origin: left;
+		}
+	}
+}
