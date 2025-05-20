@@ -17,9 +17,13 @@ function initSliders() {
 		// Read settings from data attributes
 		const autoplaySpeed = parseInt(carouselElement.dataset.autoplay, 10) || 0;
 		const pauseOnHover = carouselElement.dataset.pauseHover === 'true';
-		const slidesPerViewDesktop = parseInt(carouselElement.dataset.slidesPerView, 10) || 3;
+		const slidesPerViewDesktop = parseInt(carouselElement.dataset.slidesPerView, 10) || 'auto';
+		const slidesPerViewTablet = slidesPerViewDesktop === 'auto' ? 'auto' : Math.min(2, slidesPerViewDesktop);
+		const slidesPerViewMobile = slidesPerViewDesktop === 'auto' ? 'auto' : 1;
 		const showNavigation = carouselElement.dataset.showNavigation === 'true';
 		const showProgressbar = carouselElement.dataset.showProgressbar === 'true';
+		const spaceBetween = parseInt(carouselElement.dataset.spaceBetween, 10) || 16;
+		const loop = carouselElement.dataset.loop === 'true';
 
 		// Find navigation and scrollbar elements relative to the carousel element
 		const container = carouselElement.closest('.slider__carousel-container');
@@ -41,20 +45,20 @@ function initSliders() {
 
 			const swiperConfig = {
 				modules: swiperModules,
-				slidesPerView: 1, // Start with 1 for mobile
-				spaceBetween: 16,
-				loop: false,
+				slidesPerView: slidesPerViewMobile,
+				spaceBetween,
+				loop,
 				grabCursor: true,
 				speed: 700,
 				breakpoints: {
 					// 768px and up
 					768: {
-						slidesPerView: Math.min(2, slidesPerViewDesktop), // Use 2 or configured value
+						slidesPerView: slidesPerViewTablet,
 						spaceBetween: 24,
 					},
 					// 1024px and up
 					1024: {
-						slidesPerView: slidesPerViewDesktop, // Use configured desktop value
+						slidesPerView: slidesPerViewDesktop,
 					},
 				},
 			};

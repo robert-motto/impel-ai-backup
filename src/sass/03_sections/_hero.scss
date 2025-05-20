@@ -4,6 +4,7 @@
 	min-height: 800px;
 	padding: var(--padding-vertical-4xl) 0;
 	background-color: var(--background-bg-primary--c-brand-primary-forest);
+	overflow: hidden;
 
 	&.color-mode-variant-secondary {
 		background-color: var(--bg-secondary);
@@ -171,6 +172,39 @@
 		img {
 			border-radius: var(--border-radius-lg);
 			object-fit: cover;
+		}
+	}
+
+	&__logos-slider {
+		&-container {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			padding: var(--spacing-600) 0;
+			background: white;
+
+			&--blurred {
+				background: rgba(35, 34, 36, 0.2);
+				backdrop-filter: blur(50px);
+			}
+		}
+
+		.slider__item {
+			flex-direction: row;
+			align-items: center;
+			justify-items: center;
+		}
+
+		&__logo {
+			width: 100%;
+			max-width: 150px;
+			padding: 0 24px;
+
+			@include mobile {
+				max-width: 100px;
+				padding: 0;
+			}
 		}
 	}
 }

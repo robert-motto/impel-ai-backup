@@ -18,6 +18,9 @@
 	$image       				= $group['image'] ?? null;
 	$image_mobile 			= $group['image_mobile'] ?? null;
 	$video_group 				= $group['video_group'] ?? [];
+	$show_logos_slider 	= $group['show_logos_slider'] ?? false;
+	$slider_bg 					= $group['slider_bg'] ?? 'white';
+	$logos_slider 			= $group['logos_slider'] ?? [];
 
 	// Section classes
 	$classes = ['l-section', 'l-section--hero', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", "media-position-{$media_position}", "text-position-{$text_position}"];
@@ -70,6 +73,56 @@
 					<?php endif; ?>
 				</div>
 			</div>
+			<?php
+			if ($show_logos_slider && !empty($logos_slider)) :
+				$logo_slides = [];
+				foreach ($logos_slider as $logo) {
+					if (!empty($logo['logo'])) {
+						$logo_img = $logo['logo'];
+						ob_start();
+			?>
+
+						<?php if (!empty($logo_img['id'])) : ?>
+							<?php echo bis_get_attachment_picture(
+								$logo_img['id'],
+								[
+									1920 => [180, 100, 1],
+									2800 => [360, 200, 1],
+								],
+								[
+									'alt'     => esc_attr($alt_text),
+									'class'   => 'hero__logos-slider__logo',
+									'loading' => 'lazy',
+								],
+							); ?>
+						<?php elseif (!empty($logo_img['url'])) : ?>
+							<img class="hero__logos-slider__logo" src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($alt_text); ?>" loading="lazy" />
+						<?php endif; ?>
+				<?php
+						$logo_slides[] = ob_get_clean();
+					}
+				}
+
+				$slide_count = count($logo_slides);
+				if ($slide_count > 0) {
+					$multiplier = ceil(20 / $slide_count);
+					$logo_slides = array_merge(...array_fill(0, $multiplier, $logo_slides));
+				}
+				?>
+				<div class="hero__logos-slider-container hero__logos-slider-container--<?php echo esc_attr($slider_bg); ?>">
+					<?php
+					get_component('slider', [
+						'slides' => $logo_slides,
+						'slider_settings' => [
+							'show_progressbar' => false,
+							'autoplay_speed' => 3000,
+							'loop' => true,
+							'space_between' => 60,
+						],
+						'classes' => 'hero__logos-slider'
+					]); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</section>
 <?php endif; ?>

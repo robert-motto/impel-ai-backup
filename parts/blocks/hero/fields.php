@@ -84,7 +84,7 @@
 				'default_value' => get_template_directory_uri() . '/screenshot.jpg',
 			])
 				->conditional('media_type', '==', 'image')
-				->conditional('media_position', '==', 'background')
+				->and('media_position', '==', 'background')
 			->addField('video', 'clone', [
 				'label' => 'Video',
 				'clone' => [
@@ -94,6 +94,43 @@
 				'prefix_name' => true,
 			])
 				->conditional('media_type', '==', 'video')
+			->addTrueFalse('show_logos_slider', [
+				'label' => 'Display Logos Slider at Bottom',
+				'default_value' => 0,
+				'ui' => 1,
+			])
+				->conditional('media_type', '==', 'image')
+				->and('media_position', '==', 'background')
+			->addButtonGroup('slider_bg', [
+				'label'   => 'Sldier background',
+				'choices' => [
+					'white' => 'White',
+					'blurred'  => 'Blurred',
+				],
+				'default_value' => 'white',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
+				->conditional('show_logos_slider', '==', 1)
+				->and('media_type', '==', 'image')
+				->and('media_position', '==', 'background')
+			->addRepeater('logos_slider', [
+				'label' => 'Logos Slider',
+				'instructions' => 'Add logos to display in the slider',
+				'layout' => 'block',
+				'button_label' => 'Add Logo',
+			])
+				->conditional('show_logos_slider', '==', 1)
+				->and('media_type', '==', 'image')
+				->and('media_position', '==', 'background')
+				->addImage('logo', [
+					'label' => 'Logo Image',
+					'instructions' => 'Recommended size: 180px x 100px',
+					'return_format' => 'array',
+					'preview_size' => 'medium',
+					'required' => 1,
+				])
+			->endRepeater()
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path)
 			->or('page_template', '==', 'page-table-of-contents.php');
