@@ -1,0 +1,51 @@
+@use 'config' as *;
+
+.l-section--main-cta {
+	position: relative;
+	padding: var(--padding-vertical-4xl) 0;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: cover;
+}
+
+.main-cta {
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: rem(838px);
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	&__caption {
+		color: var(--txt-caption);
+		font-size: var(--t--caption-1);
+		line-height: var(--t--line-height-300);
+	}
+
+	&__heading {
+		margin-top: rem(16px);
+		color: var(--txt-heading);
+		font-size: var(--t--heading-1);
+		line-height: var(--t--line-height-1800);
+
+		strong {
+			color: var(--c--brand-primary-375);
+			font-weight: 400;
+		}
+	}
+
+	&__body {
+		max-width: rem(700px);
+		margin-top: var(--spacing-700);
+		color: var(--txt-paragraph-secondary);
+		font-size: var(--t--subheading-1);
+		line-height: var(--t--line-height-550);
+	}
+
+	&__btns {
+		margin-top: var(--spacing-1000);
+	}
+}
