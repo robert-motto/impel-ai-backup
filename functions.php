@@ -1,5 +1,10 @@
 <?php
 	require_once('vendor/stoutlogic/acf-builder/autoload.php');
+
+function impel_ai_theme_setup() {
+	global $featured_loaded_posts;
+	$featured_loaded_posts = [];
+
 	require get_template_directory() . '/inc/core.php';
 	require get_template_directory() . '/inc/scripts.php';
 	require get_template_directory() . '/inc/styles.php';
@@ -22,9 +27,7 @@
 	require get_template_directory() . '/inc/helpers/find-strpos-in-array.php';
 	require get_template_directory() . '/inc/helpers/get-custom-queried-object-id.php';
 	require get_template_directory() . '/inc/helpers/section-settings-attributes.php';
-    require get_template_directory() . '/inc/helpers/embed-player-id.php';
+	require get_template_directory() . '/inc/helpers/embed-player-id.php';
 	require get_template_directory() . '/inc/helpers/reading-time.php';
-
-	//featured posts
-	global $featured_loaded_posts;
-	$featured_loaded_posts = [];
+}
+add_action('after_setup_theme', 'impel_ai_theme_setup');
