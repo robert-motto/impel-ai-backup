@@ -79,6 +79,7 @@
 				foreach ($logos_slider as $logo) {
 					if (!empty($logo['logo'])) {
 						$logo_img = $logo['logo'];
+						$alt_text = !empty($logo_img['alt']) ? $logo_img['alt'] : 'Logo';
 						ob_start();
 			?>
 
