@@ -8,6 +8,8 @@ $pause_on_hover = $slider_settings['pause_on_hover'] ?? '';
 $slides_per_view = $slider_settings['slides_per_view'] ?? '';
 $show_navigation = $slider_settings['show_navigation'] ?? '';
 $show_progressbar = $slider_settings['show_progressbar'] ?? '';
+$space_between = $slider_settings['space_between'] ?? '';
+$loop = $slider_settings['loop'] ?? '';
 ?>
 
 <?php if (!empty($slides)) : ?>
@@ -17,7 +19,9 @@ $show_progressbar = $slider_settings['show_progressbar'] ?? '';
       data-pause-hover="<?php echo esc_attr($pause_on_hover ? 'true' : 'false'); ?>"
       data-slides-per-view="<?php echo esc_attr($slides_per_view); ?>"
       data-show-navigation="<?php echo esc_attr($show_navigation ? 'true' : 'false'); ?>"
-      data-show-progressbar="<?php echo esc_attr($show_progressbar ? 'true' : 'false'); ?>">
+      data-show-progressbar="<?php echo esc_attr($show_progressbar ? 'true' : 'false'); ?>"
+      data-space-between="<?php echo esc_attr($space_between); ?>"
+      data-loop="<?php echo esc_attr($loop ? 'true' : 'false'); ?>">
       <div class="swiper-wrapper">
 
         <?php foreach ($slides as $index => $slide) : ?>
