@@ -73,15 +73,18 @@
 				])
 				->addText('item_title', [
 					'label' => 'Title',
+					'maxlength' => '44',
 					'required' => 1,
 				])
 				->addText('item_subtitle', [
 					'label' => 'Subtitle',
+					'maxlength' => '58',
 					'required' => 1,
 				])
 				->addWysiwyg('item_text', [
 					'label' => 'Text',
 					'instructions' => 'Use Enter/Return for line breaks.',
+					'maxlength' => '548',
 					'media_upload' => 0,
 					'toolbar' => 'bold',
 					'tabs' => 'visual',

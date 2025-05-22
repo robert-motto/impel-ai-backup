@@ -58,11 +58,13 @@
 				->addText('metric_value', [
 					'label' => 'Metric Value',
 					'instructions' => 'Enter the value of the metric.',
+					'maxlength' => '8',
 					'required' => 1,
 				])
 				->addText('metric_label', [
 					'label' => 'Metric Label',
 					'instructions' => 'Enter a short label for the metric.',
+					'maxlength' => '73',
 					'required' => 1,
 				])
 			->endRepeater()
