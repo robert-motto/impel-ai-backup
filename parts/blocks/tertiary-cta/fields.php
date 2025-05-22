@@ -19,6 +19,7 @@
 			->addText('caption', [
 				'label' => 'Caption',
 				'instructions' => 'Short text above the heading, displayed in uppercase with letter spacing',
+				'maxlength' => '70',
 			])
 			->addWysiwyg('heading', [
 				'label' => 'Heading',
@@ -32,6 +33,7 @@
 			->addTextarea('content', [
 				'label' => 'Body Content',
 				'instructions' => 'Enter the main content text.',
+				'maxlength' => '400',
 				'rows' => 8,
 				'new_lines' => 'br',
 			])
