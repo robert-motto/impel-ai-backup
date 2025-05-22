@@ -14,23 +14,6 @@
 	$heading         		= $group['heading_box_group'] ?? '';
 	$items     					= $group['items'] ?? [];
 
-	// Set fallback image if none is selected and media type is image
-	if ($media_type === 'image' && (empty($image) || !isset($image['id']))) {
-		$fallback_image_path = get_template_directory() . '/screenshot.jpg';
-		$fallback_image_uri = get_template_directory_uri() . '/screenshot.jpg';
-		if (file_exists($fallback_image_path)) {
-			$fallback_attachment = attachment_url_to_postid($fallback_image_uri);
-			if ($fallback_attachment) {
-				$image = ['id' => $fallback_attachment];
-			} else {
-				$image = [
-					'url' => $fallback_image_uri,
-					'alt' => wp_strip_all_tags($heading ?? 'Content block image')
-				];
-			}
-		}
-	}
-
 	// Section classes
 	$classes = ['l-section', 'l-section--focus-scroll', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}",];
 
@@ -89,6 +72,23 @@
 							$media_type 	= $item['media_type'] ?? 'image';
 							$image      	= $item['image'] ?? '';
 							$video_group	= $item['video_group'] ?? [];
+
+							// Set fallback image if none is selected and media type is image
+							if ($media_type === 'image' && (empty($image) || !isset($image['id']))) {
+								$fallback_image_path = get_template_directory() . '/screenshot.jpg';
+								$fallback_image_uri = get_template_directory_uri() . '/screenshot.jpg';
+								if (file_exists($fallback_image_path)) {
+									$fallback_attachment = attachment_url_to_postid($fallback_image_uri);
+									if ($fallback_attachment) {
+										$image = ['id' => $fallback_attachment];
+									} else {
+										$image = [
+											'url' => $fallback_image_uri,
+											'alt' => wp_strip_all_tags($heading ?? 'Content block image')
+										];
+									}
+								}
+							}
 						?>
 							<?php if ($media_type === 'image') : ?>
 								<?php
