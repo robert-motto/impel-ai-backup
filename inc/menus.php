@@ -246,6 +246,7 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 			$active_class = $index === 0 ? ' is-active' : '';
 			$output .= '<button class="sub-menu-wrap__tab-btn' . $active_class . '" data-tab="' . $index . '">';
 			$output .= esc_html($tab['tab_title']);
+			$output .= '<span class="sub-menu-wrap__tab-chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
 			$output .= '</button>';
 		}
 		$output .= '</div>';
