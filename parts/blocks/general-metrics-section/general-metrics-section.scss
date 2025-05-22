@@ -17,7 +17,7 @@
 		gap: rem(24px);
 		margin-top: var(--spacing-1000);
 
-		@include mobile {
+		@include tablet-small {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}

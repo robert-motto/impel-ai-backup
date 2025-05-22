@@ -145,7 +145,6 @@
 		position: relative;
 		width: 100%;
 		border-radius: 16px;
-		background-color: var(--c--brand-neutral-100-10);
 		overflow: hidden;
 	}
 
@@ -155,6 +154,7 @@
 		height: auto;
 		object-fit: cover;
 		aspect-ratio: 1;
+		border-radius: 16px;
 	}
 
 	&__video {
@@ -175,6 +175,7 @@
 
 		@include mobile {
 			gap: 8px;
+			position: initial;
 		}
 	}
 
@@ -187,6 +188,7 @@
 		margin-left: var(--spacing-600);
 
 		@include mobile {
+			max-width: 30%;
 			margin-left: 4px;
 		}
 
