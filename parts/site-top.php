@@ -16,7 +16,7 @@
 								echo file_get_contents($potential_path);
 							} else {
 								get_icon('logo');
-							}
+				}
 						} else {
 							get_icon('logo');
 						}
@@ -48,26 +48,72 @@
 			?>
 		</nav>
 		<div class="site-top__actions">
-			<a href="#" class="site-top__action-item site-top__action-item--global">
-				<span class="site-top__action-icon site-top__action-icon--globe">
-					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.99992 14.6666C11.6818 14.6666 14.6666 11.6818 14.6666 7.99992C14.6666 4.31802 11.6818 1.33325 7.99992 1.33325C4.31802 1.33325 1.33325 4.31802 1.33325 7.99992C1.33325 11.6818 4.31802 14.6666 7.99992 14.6666Z" stroke="#121212" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.33325 8.00001H10.6666" stroke="#121212" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.99992 1.33325C9.69029 3.5389 10.564 5.71173 10.6666 7.99992C10.564 10.2881 9.69029 12.4609 7.99992 14.6666C6.30955 12.4609 5.43573 10.2881 5.33325 7.99992C5.43573 5.71173 6.30955 3.5389 7.99992 1.33325V1.33325Z" stroke="#121212" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-				</span>
-				<span class="text">Global</span>
-				<span class="site-top__action-chevron">▾</span>
-			</a>
-			<a href="#" class="site-top__action-item">
-				<span class="text">Log In</span>
-				<span class="site-top__action-chevron">▾</span>
-			</a>
+			<div class="site-top__action-group">
+				<a href="#" class="site-top__action-item site-top__action-item--global js-global-toggle">
+					<span class="site-top__action-icon site-top__action-icon--globe">
+						<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.99992 14.6666C11.6818 14.6666 14.6666 11.6818 14.6666 7.99992C14.6666 4.31802 11.6818 1.33325 7.99992 1.33325C4.31802 1.33325 1.33325 4.31802 1.33325 7.99992C1.33325 11.6818 4.31802 14.6666 7.99992 14.6666Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.33325 8.00001H10.6666" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.99992 1.33325C9.69029 3.5389 10.564 5.71173 10.6666 7.99992C10.564 10.2881 9.69029 12.4609 7.99992 14.6666C6.30955 12.4609 5.43573 10.2881 5.33325 7.99992C5.43573 5.71173 6.30955 3.5389 7.99992 1.33325V1.33325Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</span>
+					<span class="text">Global</span>
+					<span class="site-top__action-chevron">▾</span>
+				</a>
+				<div class="site-top__dropdown site-top__dropdown--global js-global-dropdown">
+					<?php
+						// Placeholder content for the global dropdown
+						$global_dropdown_title = 'Website Location (Placeholder)';
+						$global_dropdown_description = 'Select your region and language (Placeholder).';
+						$global_dropdown_links = [
+							['link' => ['url' => '#', 'title' => 'North America (EN)'], 'is_current' => true],
+							['link' => ['url' => '#', 'title' => 'Europe (EN)'], 'is_current' => false],
+							['link' => ['url' => '#', 'title' => 'Asia (EN)'], 'is_current' => false],
+						];
+
+						if ($global_dropdown_links): ?>
+							<div class="site-top__dropdown-content-wrapper">
+								<div class="site-top__dropdown-info">
+									<?php if ($global_dropdown_title): ?>
+										<h3 class="site-top__dropdown-info-title"><?php echo esc_html($global_dropdown_title); ?></h3>
+									<?php endif; ?>
+									<?php if ($global_dropdown_description): ?>
+										<p class="site-top__dropdown-info-description"><?php echo esc_html($global_dropdown_description); ?></p>
+									<?php endif; ?>
+								</div>
+								<ul class="site-top__dropdown-list">
+									<?php foreach ($global_dropdown_links as $item): ?>
+										<?php
+											$link = $item['link'] ?? [];
+											$is_current = $item['is_current'] ?? false;
+											if (empty($link['url']) || empty($link['title'])) continue;
+										?>
+										<li>
+											<a href="<?php echo esc_url($link['url']); ?>" class="<?php echo $is_current ? 'is-active' : ''; ?>" <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
+												<?php echo esc_html($link['title']); ?>
+												<?php if ($is_current): ?>
+													<span class="site-top__dropdown-check"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+												<?php endif; ?>
+											</a>
+										</li>
+									<?php endforeach; ?>
+								</ul>
+							</div>
+						<?php endif; ?>
+				</div>
+			</div>
+			<div class="site-top__action-group">
+				<a href="#" class="site-top__action-item">
+					<span class="text">Log In</span>
+					<span class="site-top__action-chevron">▾</span>
+				</a>
+				<?php // Placeholder for Log In dropdown if needed ?>
+			</div>
 			<a href="#" class="site-top__action-button btn btn--primary">Book a Demo</a>
 			<?php
 				$menu_buttons = get_field('menu_buttons', 'options')['buttons_group'] ?? [];
 				if (!empty($menu_buttons) && !empty($menu_buttons[0]['button']['url'])) {
 					echo '<div class="site-top__secondary-btns">';
-					get_acf_component('buttons', [
-						'data'    => $menu_buttons,
+				get_acf_component('buttons', [
+					'data'    => $menu_buttons,
 						'classes' => 'site-top__btns-acf',
-					]);
+				]);
 					echo '</div>';
 				}
 			?>
