@@ -40,6 +40,7 @@
 				'acf/general-form',
 				'acf/vertical-scrolling-cards',
 				'acf/bento-grid',
+				'acf/focus-scroll',
 			);
 		} else {
 			return array(
