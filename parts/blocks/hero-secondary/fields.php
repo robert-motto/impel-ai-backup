@@ -1,127 +1,152 @@
 <?php
-
-use StoutLogic\AcfBuilder\FieldsBuilder;
-
-$path = basename(__DIR__);
-$name = str_replace('-', '_', $path);
-$group_name = $name . '_group';
-$group_label = str_replace('-', ' ', $path);
-$name = new FieldsBuilder($name);
-$name
-  ->addGroup($group_name, [
-    'label' => ucwords($group_label) . ' Block',
-    'instructions' => '',
-    'layout' => 'block',
-  ])
-  ->addField('section_settings', 'clone', [
-    'clone' => [
-      'group_section_settings',
-    ]
-  ])
-  ->addText('caption', [
-    'label' => 'Caption',
-    'instructions' => 'Small text that appears above the heading',
-    'default_value' => 'Impel for Enterprise Dealer Group',
-  ])
-  ->addWysiwyg('heading', [
-    'label' => 'Heading',
-    'instructions' => 'Enter the main heading text. Use Enter/Return for line breaks.',
-    'media_upload' => 0,
-    'toolbar' => 'basic',
-    'tabs' => 'visual',
-    'delay' => 0,
-    'new_lines' => 'br',
-    'default_value' => 'Transform Your Automotive Business with Impel',
-  ])
-  ->addSelect('content_type', [
-    'label' => 'Content Type',
-    'instructions' => 'Choose content format to display',
-    'choices' => [
-      'paragraph' => 'Paragraph',
-      'icon_points' => 'Icon Points',
-    ],
-    'default_value' => 'icon_points',
-    'return_format' => 'value',
-    'multiple' => 0,
-    'ui' => 1,
-  ])
-  ->addWysiwyg('paragraph', [
-    'label' => 'Paragraph',
-    'instructions' => 'Enter paragraph text.',
-    'media_upload' => 0,
-    'toolbar' => 'basic',
-    'tabs' => 'all',
-    'delay' => 0,
-    'default_value' => 'Volutpat mi a sem amet diam odio nunc id maecenas. Egestas sed a leo nunc tortor magnis et ultrices. Eleifend neque sollicitudin scelerisque justo viverra. Et enim id id a tristique bibendum.',
-  ])
-  ->conditional('content_type', '==', 'paragraph')
-  ->addRepeater('icon_points', [
-    'label' => 'Icon Points',
-    'instructions' => 'Add bullet points with check circle icons',
-    'layout' => 'block',
-    'button_label' => 'Add Point',
-    'min' => 0,
-    'max' => 4,
-  ])
-  ->addText('text', [
-    'label' => 'Text',
-    'instructions' => 'Text for this point',
-    'required' => 1,
-    'default_value' => '35% increase in return sales to the same dealer',
-  ])
-  ->endRepeater()
-  ->conditional('content_type', '==', 'icon_points')
-  ->addField('buttons', 'clone', [
-    'clone' => [
-      'group_buttons',
-    ]
-  ])
-  ->addRadio('media_type', [
-    'label' => 'Media Type',
-    'choices' => [
-      'image' => 'Image',
-      'video' => 'Video',
-    ],
-    'default_value' => 'image',
-    'layout' => 'horizontal',
-    'return_format' => 'value',
-  ])
-  ->addImage('image', [
-    'label' => 'Hero Image',
-    'instructions' => 'Recommended size: 2560px x 1008px',
-    'return_format' => 'array',
-    'preview_size' => 'medium',
-    'default_value' => get_template_directory_uri() . '/screenshot.jpg',
-  ])
-  ->conditional('media_type', '==', 'image')
-  ->addField('video', 'clone', [
-    'label' => 'Video',
-    'clone' => [
-      'group_video',
-    ],
-    'display' => 'seamless',
-    'prefix_name' => true,
-  ])
-  ->conditional('media_type', '==', 'video')
-  ->addRepeater('logotypes', [
-    'label' => 'Logotypes',
-    'instructions' => 'Add partner/client logos for the bottom section',
-    'layout' => 'table',
-    'button_label' => 'Add Logo',
-    'min' => 0,
-  ])
-  ->addImage('logo', [
-    'label' => 'Logo',
-    'instructions' => 'Upload a logo (SVG recommended)',
-    'return_format' => 'array',
-    'preview_size' => 'thumbnail',
-    'library' => 'all',
-  ])
-  ->addText('name', [
-    'label' => 'Company Name',
-    'instructions' => 'For accessibility purposes',
-  ])
-  ->endRepeater()
-  ->endGroup()
-  ->setLocation('block', '==', 'acf/' . $path);
-return $name;
+	use StoutLogic\AcfBuilder\FieldsBuilder;
+	$path = basename(__DIR__);
+	$name = str_replace('-', '_', $path);
+	$group_name = $name . '_group';
+	$group_label = str_replace('-', ' ', $path);
+	$name = new FieldsBuilder($name);
+	$name
+		->addGroup($group_name, [
+			'label' => ucwords($group_label) . ' Block',
+			'instructions' => '',
+			'layout' => 'block',
+		])
+			->addField('section_settings', 'clone', [
+				'clone' => [
+					'group_section_settings',
+				]
+			])
+			->addButtonGroup('mode_variant', [
+				'label'   => 'Color Mode Variant',
+				'choices' => [
+					'primary' => 'Primary',
+					'secondary'  => 'Secondary',
+				],
+				'default_value' => 'primary',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
+			->addField('heading', 'clone', [
+				'clone' => [
+					'group_heading_box',
+				]
+			])
+			->addField('tab_buttons', 'clone', [
+				'clone' => [
+					'group_action_group',
+				],
+			])
+      ->addButtonGroup('custom_media', [
+				'label' => 'Do you want to display custom media (image or video)?',
+				'choices' => [
+					'y' => 'Yes',
+					'n' => 'No',
+				],
+				'default_value' => 'n',
+				'layout' => 'horizontal',
+				'return_format' => 'value',
+			])
+			->addRadio('media_type', [
+				'label' => 'Media Type',
+				'choices' => [
+					'image' => 'Image',
+					'video' => 'Video',
+				],
+				'default_value' => 'image',
+				'layout' => 'horizontal',
+				'return_format' => 'value',
+			])
+				->conditional('custom_media', '==', 'y')
+			->addButtonGroup('media_position', [
+				'label'   => 'Media Position',
+				'choices' => [
+					'background' => 'Background',
+					'right'  => 'Right',
+				],
+				'default_value' => 'background',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
+				->conditional('custom_media', '==', 'y')
+			->addButtonGroup('text_position', [
+				'label'   => 'Text Position',
+				'choices' => [
+					'center' => 'Center',
+					'left'  => 'Left',
+				],
+				'default_value' => 'center',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
+				->conditional('media_position', '==', 'background')
+				->conditional('custom_media', '==', 'y')
+			->addImage('image',[
+				'label' => 'Hero Image',
+				'instructions' => 'Recommended size: 2560px x 1008px',
+				'return_format' => 'array',
+				'preview_size' => 'medium',
+				'default_value' => get_template_directory_uri() . '/screenshot.jpg',
+			])
+				->conditional('media_type', '==', 'image')
+				->conditional('custom_media', '==', 'y')
+			->addImage('image_mobile', [
+				'label' => 'Hero Image (Mobile)',
+				'instructions' => 'Recommended size: 750px x 1008px',
+				'return_format' => 'array',
+				'preview_size' => 'medium',
+				'default_value' => get_template_directory_uri() . '/screenshot.jpg',
+			])
+				->conditional('media_type', '==', 'image')
+				->conditional('custom_media', '==', 'y')
+				->and('media_position', '==', 'background')
+			->addField('video', 'clone', [
+				'label' => 'Video',
+				'clone' => [
+					'group_video',
+				],
+				'display' => 'seamless',
+				'prefix_name' => true,
+			])
+				->conditional('media_type', '==', 'video')
+				->conditional('custom_media', '==', 'y')
+			->addTrueFalse('show_logos_slider', [
+				'label' => 'Display Logos Slider at Bottom',
+				'default_value' => 0,
+				'ui' => 1,
+			])
+				->conditional('media_type', '==', 'image')
+				->and('media_position', '==', 'background')
+			->addButtonGroup('slider_bg', [
+				'label'   => 'Sldier background',
+				'choices' => [
+					'white' => 'White',
+					'blurred'  => 'Blurred',
+				],
+				'default_value' => 'white',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
+				->conditional('show_logos_slider', '==', 1)
+				->and('media_type', '==', 'image')
+				->and('media_position', '==', 'background')
+			->addRepeater('logos_slider', [
+				'label' => 'Logos Slider',
+				'instructions' => 'Add logos to display in the slider',
+				'layout' => 'block',
+				'button_label' => 'Add Logo',
+			])
+				->conditional('show_logos_slider', '==', 1)
+				->and('media_type', '==', 'image')
+				->and('media_position', '==', 'background')
+				->addImage('logo', [
+					'label' => 'Logo Image',
+					'instructions' => 'Recommended size: 180px x 100px',
+					'return_format' => 'array',
+					'preview_size' => 'medium',
+					'required' => 1,
+				])
+			->endRepeater()
+		->endGroup()
+		->setLocation('block', '==', 'acf/' . $path)
+			->or('page_template', '==', 'page-table-of-contents.php');
+	return $name;
