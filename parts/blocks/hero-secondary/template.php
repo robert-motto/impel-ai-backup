@@ -7,167 +7,130 @@
   <?php block_preview(__FILE__); ?>
 <?php else : ?>
   <?php
-  $group        = blockFieldGroup(__FILE__);
-  $caption      = $group['caption'] ?? '';
-  $heading      = $group['heading'] ?? '';
-  $content_type = $group['content_type'] ?? 'icon_points';
-  $paragraph    = $group['paragraph'] ?? '';
-  $icon_points  = $group['icon_points'] ?? [];
-  $buttons      = $group['buttons_group'] ?? [];
-  $media_type   = $group['media_type'] ?? 'image';
-  $image        = $group['image'] ?? null;
-  $video_group  = $group['video_group'] ?? [];
-  $animation_url = $group['animation_url'] ?? '';
-  $logotypes    = $group['logotypes'] ?? [];
-
-  // Set fallback image if none is selected and media type is image
-  if ($media_type === 'image' && (empty($image) || !isset($image['id']))) {
-    $fallback_image_path = get_template_directory() . '/screenshot.jpg';
-    $fallback_image_uri = get_template_directory_uri() . '/screenshot.jpg';
-    if (file_exists($fallback_image_path)) {
-      $fallback_attachment = attachment_url_to_postid($fallback_image_uri);
-      if ($fallback_attachment) {
-        $image = ['id' => $fallback_attachment];
-      } else {
-        $image = [
-          'url' => $fallback_image_uri,
-          'alt' => wp_strip_all_tags($heading ?? 'Hero secondary image')
-        ];
-      }
-    }
-  }
+  $group               = blockFieldGroup(__FILE__);
+  $color_mode          = $group['section_settings_group']['mode'] ?? 'light';
+  $color_mode_variant  = $group['mode_variant'] ?? 'regular';
+  $heading             = $group['heading_box_group'] ?? '';
+  $buttons             = $group['action_group_group'] ?? [];
+  $custom_media       = $group['custom_media'] ?? 'n';
+  $media_type          = $group['media_type'] ?? 'image';
+  $media_position      = $group['media_position'] ?? 'image';
+  $text_position      = $group['text_position'] ?? 'image';
+  $image               = $group['image'] ?? null;
+  $image_mobile       = $group['image_mobile'] ?? null;
+  $video_group         = $group['video_group'] ?? [];
+  $show_logos_slider   = $group['show_logos_slider'] ?? false;
+  $slider_bg           = $group['slider_bg'] ?? 'white';
+  $logos_slider       = $group['logos_slider'] ?? [];
 
   // Section classes
-  $classes = ['l-section', 'l-section--hero-secondary', 'js-hero-secondary'];
-  if (!empty($group['section_settings_group']['background_color'])) {
-    $classes[] = 'is-' . $group['section_settings_group']['background_color'];
-  } else {
-    $classes[] = 'is-light';
-  }
+  $classes = ['l-section', 'l-section--hero', 'l-section--hero-secondary', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", "media-position-{$media_position}", "text-position-{$text_position}"];
   ?>
-  <section class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group); ?>" data-block="hero-secondary">
+  <section class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="hero">
     <div class="l-wrapper">
-      <?php get_component('breadcrumbs', ['classes' => 'hero-secondary__breadcrumbs']); ?>
-      <div class="hero-secondary">
-        <div class="hero-secondary__content">
-          <div class="hero-secondary__text-hld">
-            <?php if (!empty($caption)) : ?>
-              <div class="hero-secondary__caption">
-                <?php echo esc_html($caption); ?>
-              </div>
-            <?php endif; ?>
-            <?php if (!empty($heading)) : ?>
-              <h1 class="hero-secondary__heading">
-                <?php echo $heading; ?>
-              </h1>
-            <?php endif; ?>
-
-            <?php if ($content_type === 'paragraph' && !empty($paragraph)) : ?>
-              <div class="hero-secondary__paragraph">
-                <?php echo $paragraph; ?>
-              </div>
-            <?php elseif ($content_type === 'icon_points' && !empty($icon_points)) : ?>
-              <ul class="hero-secondary__points">
-                <?php foreach ($icon_points as $point) : ?>
-                  <li class="hero-secondary__point">
-                    <div class="hero-secondary__point-icon">
-                      <?php get_icon('check-circle'); ?>
-                    </div>
-                    <span class="hero-secondary__point-text"><?php echo esc_html($point['text']); ?></span>
-                  </li>
-                <?php endforeach; ?>
-              </ul>
-            <?php endif; ?>
-
-            <?php
-            get_acf_components([
-              'buttons' => [
-                'data'    => $buttons,
-                'classes' => 'hero-secondary__btns',
-              ],
-            ]);
-            ?>
-          </div>
-          <div class="hero-secondary__media-hld">
+      <div class="hero">
+        <div class="hero__text-hld">
+          <?php
+          get_acf_component(
+            'heading-box',
+            [
+              'data' => $heading,
+            ],
+          );
+          ?>
+          <?php
+          get_acf_component(
+            'action-group',
+            [
+              'data' => $buttons,
+              'classes' => 'hero__btns',
+            ],
+          );
+          ?>
+        </div>
+        <?php if ($custom_media === 'y') : ?>
+          <div class="hero__media-hld">
             <?php if ($media_type === 'image') : ?>
-              <?php
-              if (!empty($image['id'])) {
-                if (function_exists('bis_get_attachment_picture')) {
-                  echo bis_get_attachment_picture(
-                    $image['id'],
-                    [
-                      560  => [390 * 2, 772 * 2, 1],
-                      1024 => [1024, 1474, 1],
-                      1365 => [1400, 760, 1],
-                      2800 => [1400 * 2, 760 * 2, 1],
-                    ],
-                    [
-                      'alt'   => $image['alt'] ? $image['alt'] : wp_strip_all_tags($heading ?? ''),
-                      'class' => 'hero-secondary__image',
-                    ]
-                  );
-                } else {
-                  $img_src = wp_get_attachment_image_url($image['id'], 'large');
-                  $img_alt = get_post_meta($image['id'], '_wp_attachment_image_alt', true) ?: wp_strip_all_tags($heading ?? '');
-                  echo '<img class="hero-secondary__image" src="' . esc_url($img_src) . '" alt="' . esc_attr($img_alt) . '" />';
-                }
-              } elseif (!empty($image['url'])) {
-                echo '<img class="hero-secondary__image" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? '') . '" />';
-              }
-              ?>
+              <?php $has_mobile = ($media_position === 'background' && (!empty($image_mobile['id']) || !empty($image_mobile['url']))); ?>
+              <picture>
+                <?php if ($has_mobile) : ?>
+                  <source media="(max-width: 767px)" srcset="<?php echo esc_url(!empty($image_mobile['url']) ? $image_mobile['url'] : (isset($image_mobile['id']) ? wp_get_attachment_url($image_mobile['id']) : '')); ?>">
+                <?php endif; ?>
+                <?php
+                $desktop_src = !empty($image['url']) ? $image['url'] : (isset($image['id']) ? wp_get_attachment_url($image['id']) : '');
+                $desktop_alt = $image['alt'] ?? wp_strip_all_tags($heading ?? '');
+                $desktop_class = 'hero__image hero__image--desktop' . ($has_mobile ? ' has-mobile-sibling' : '');
+                ?>
+                <img src="<?php echo esc_url($desktop_src); ?>" alt="<?php echo esc_attr($desktop_alt); ?>" class="<?php echo esc_attr($desktop_class); ?>">
+              </picture>
             <?php elseif ($media_type === 'video' && !empty($video_group)) : ?>
               <?php
               get_acf_components([
                 'video' => [
                   'data'    => $video_group,
-                  'classes' => 'hero-secondary__video',
+                  'classes' => 'hero__video', // Added specific class for styling
                 ]
               ]);
               ?>
-            <?php elseif ($media_type === 'animation' && !empty($animation_url)) : ?>
-              <div class="hero-secondary__animation">
-                <?php echo $animation_url; ?>
-              </div>
             <?php endif; ?>
           </div>
-        </div>
-        <?php if (!empty($logotypes)) : ?>
-          <div class="hero-secondary__logotypes">
-            <div class="hero-secondary__logotypes-divider"></div>
-            <div class="hero-secondary__logotypes-grid">
-              <?php foreach ($logotypes as $logo) : ?>
-                <?php if (!empty($logo['logo'])) : ?>
-                  <div class="hero-secondary__logotype">
-                    <?php if (!empty($logo['logo']['id'])) : ?>
-                      <?php
-                      if (function_exists('bis_get_attachment_picture')) {
-                        echo bis_get_attachment_picture(
-                          $logo['logo']['id'],
-                          [
-                            300 => [120, 60, 0],
-                            600 => [120 * 2, 60 * 2, 0],
-                          ],
-                          [
-                            'alt' => !empty($logo['name']) ? esc_attr($logo['name']) . ' logo' : '',
-                            'class' => 'hero-secondary__logotype-img',
-                          ]
-                        );
-                      } else {
-                        $logo_src = wp_get_attachment_image_url($logo['logo']['id'], 'medium');
-                        $logo_alt = !empty($logo['name']) ? esc_attr($logo['name']) . ' logo' : '';
-                        echo '<img class="hero-secondary__logotype-img" src="' . esc_url($logo_src) . '" alt="' . esc_attr($logo_alt) . '" />';
-                      }
-                      ?>
-                    <?php elseif (!empty($logo['logo']['url'])) : ?>
-                      <img class="hero-secondary__logotype-img" src="<?php echo esc_url($logo['logo']['url']); ?>" alt="<?php echo !empty($logo['name']) ? esc_attr($logo['name']) . ' logo' : ''; ?>" />
-                    <?php endif; ?>
-                  </div>
-                <?php endif; ?>
-              <?php endforeach; ?>
-            </div>
+        <?php elseif ($color_mode === 'is-dark') : ?>
+          <div class="hero__media-hld">
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/parts/blocks/hero-secondary/bg.jpg'); ?>" alt="" class="hero__image hero__image--desktop">
           </div>
         <?php endif; ?>
       </div>
+      <?php
+      if ($show_logos_slider && !empty($logos_slider)) :
+        $logo_slides = [];
+        foreach ($logos_slider as $logo) {
+          if (!empty($logo['logo'])) {
+            $logo_img = $logo['logo'];
+            $alt_text = !empty($logo_img['alt']) ? $logo_img['alt'] : 'Logo';
+            ob_start();
+      ?>
+
+            <?php if (!empty($logo_img['id'])) : ?>
+              <?php echo bis_get_attachment_picture(
+                $logo_img['id'],
+                [
+                  1920 => [180, 100, 1],
+                  2800 => [360, 200, 1],
+                ],
+                [
+                  'alt'     => esc_attr($alt_text),
+                  'class'   => 'hero__logos-slider__logo',
+                  'loading' => 'lazy',
+                ],
+              ); ?>
+            <?php elseif (!empty($logo_img['url'])) : ?>
+              <img class="hero__logos-slider__logo" src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($alt_text); ?>" loading="lazy" />
+            <?php endif; ?>
+        <?php
+            $logo_slides[] = ob_get_clean();
+          }
+        }
+
+        $slide_count = count($logo_slides);
+        if ($slide_count > 0) {
+          $multiplier = ceil(20 / $slide_count);
+          $logo_slides = array_merge(...array_fill(0, $multiplier, $logo_slides));
+        }
+        ?>
+        <div class="hero__logos-slider-container hero__logos-slider-container--<?php echo esc_attr($slider_bg); ?>">
+          <?php
+          get_component('slider', [
+            'slides' => $logo_slides,
+            'slider_settings' => [
+              'show_progressbar' => false,
+              'autoplay_speed' => 3000,
+              'loop' => true,
+              'space_between' => 60,
+            ],
+            'classes' => 'hero__logos-slider'
+          ]); ?>
+        </div>
+      <?php endif; ?>
     </div>
   </section>
 <?php endif; ?>
