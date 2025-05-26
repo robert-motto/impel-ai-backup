@@ -1,11 +1,10 @@
 <?php
-	$menu_type = get_field('menu_type') ?? 'is-dark';
 	$top_bar_data = get_field('top_bar', 'options') ?? [];
 	$show_top_bar = $top_bar_data['show_top_bar'] ?? false;
 	$top_bar_message = $top_bar_data['top_bar_message'] ?? '';
 	$top_bar_link = $top_bar_data['top_bar_link'] ?? [];
 ?>
-<header class="site-top color-mode-is-light js-header <?php echo esc_attr($menu_type); ?>" type="<?php echo esc_attr($menu_type); ?>">
+<header class="site-top js-header">
 	<?php if ($show_top_bar && !empty($top_bar_message)): ?>
 		<div class="site-top__notification-bar js-notification-bar">
 			<div class="l-wrapper site-top__notification-bar-wrapper">
@@ -26,33 +25,25 @@
 	<div class="l-wrapper site-top__wrapper js-main-bar-hld">
 		<a class="site-top__logo" href="<?php echo esc_url(get_home_url()); ?>" title="<?php esc_attr_e('Go to home', get_option('template')); ?>">
 			<?php
-				$logo_url = get_field('logo', 'options');
-				if ($logo_url) {
-					$logo_path = '';
-					if (filter_var($logo_url, FILTER_VALIDATE_URL)) {
-						$parsed_url = wp_parse_url($logo_url);
-						if (isset($parsed_url['path'])) {
-							$potential_path = ABSPATH . ltrim($parsed_url['path'], '/');
-							if (file_exists($potential_path) && str_ends_with(strtolower($potential_path), '.svg')) {
-								echo file_get_contents($potential_path);
-							} else {
-								get_icon('logo');
-				}
-						} else {
-							get_icon('logo');
+				$logo_for_dark_header = get_field('logo', 'options');
+				$logo_for_light_header = get_field('logo_light_mode', 'options');
+
+				if (!function_exists('render_header_logo')) {
+					function render_header_logo($image_url, $alt_text = '') {
+						if ($image_url && filter_var($image_url, FILTER_VALIDATE_URL)) {
+							$alt_text = $alt_text ?: get_bloginfo('name') . ' Logo';
+							echo '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($alt_text) . '" />';
 						}
-					} elseif ($logo_url) {
-						if (file_exists($logo_url) && str_ends_with(strtolower($logo_url), '.svg')) {
-							echo file_get_contents($logo_url);
-						} else {
-							get_icon('logo');
-						}
-					} else {
-						get_icon('logo');
 					}
-				} else {
-					get_icon('logo');
 				}
+
+				echo '<span class="site-top__logo-image site-top__logo-image--for-dark-bg">';
+				render_header_logo($logo_for_dark_header);
+				echo '</span>';
+
+				echo '<span class="site-top__logo-image site-top__logo-image--for-light-bg">';
+				render_header_logo($logo_for_light_header);
+				echo '</span>';
 			?>
 		</a>
 		<nav class="site-top__navigation">

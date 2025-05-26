@@ -42,4 +42,4 @@
 </head>
 <body <?php body_class(); ?>>
 	<?php get_template_part('/parts/site-top');	?>
-	<main>
+	<main class="js-main">

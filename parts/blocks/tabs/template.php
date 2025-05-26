@@ -14,7 +14,7 @@
 		$color_mode_variant	= $group['mode_variant'] ?? 'regular';
 
 		// Section classes
-		$classes = ['l-section', 'l-section--tabs', 'js-tabs', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
+		$classes = ['js-section', 'l-section', 'l-section--tabs', 'js-tabs', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="tabs">
 		<div class="tabs l-wrapper">

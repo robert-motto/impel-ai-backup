@@ -25,7 +25,7 @@
 		$fallback_image_path = get_template_directory() . '/screenshot.jpg';
 		$fallback_image_uri = get_template_directory_uri() . '/screenshot.jpg';
 
-		$classes = ['l-section', 'l-section--carousel-slider', 'js-carousel-slider'];
+		$classes = ['js-section', 'l-section', 'l-section--carousel-slider', 'js-carousel-slider'];
 		if ($has_background) {
 			$classes[] = 'is-' . $background_color;
 		}

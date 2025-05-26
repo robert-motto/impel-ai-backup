@@ -8,12 +8,16 @@
 	left: 0;
 	z-index: 500;
 	width: 100%;
-	background-color: var(--c--brand-neutral-1000);
+	background-color: transparent;
 	box-shadow: 0 25px 113px 0 rgba(0, 0, 0, 0.06);
 	transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
 
-	&.is-scrolled-down {
-		transform: translate3d(0, -100%, 0);
+	.is-light & {
+		background-color: var(--c--brand-neutral-1000);
+	}
+
+	&.is-scrolled {
+		background-color: var(--c--brand-neutral-1000);
 
 		.site-top__dropdown.is-active {
 			pointer-events: none;
@@ -41,13 +45,41 @@
 			height: rem(30px);
 		}
 
-		svg {
-			color: var(--c--brand-primary-500);
-		}
-
 		&:hover,
 		&:focus-visible {
 			scale: 1.05;
+		}
+	}
+
+	&__logo-image {
+		display: none;
+		align-items: center;
+		justify-content: center;
+
+		img,
+		svg {
+			width: auto;
+			height: rem(30px);
+		}
+	}
+
+	&__logo-image--for-dark-bg {
+		.is-dark:not(.is-scrolled) & {
+			display: inline-flex;
+		}
+
+		.is-light & {
+			display: none;
+		}
+	}
+
+	&__logo-image--for-light-bg {
+		.is-dark:not(.is-scrolled) & {
+			display: none;
+		}
+
+		.is-light & {
+			display: inline-flex;
 		}
 	}
 
@@ -85,6 +117,24 @@
 
 		&--global {
 		}
+
+		.text {
+			.is-scrolled & {
+				color: var(--c--brand-neutral-100);
+			}
+		}
+
+		.is-dark & {
+			color: var(--txt-heading);
+
+			svg path {
+				stroke: var(--txt-heading);
+			}
+		}
+
+		.is-light & {
+			color: var(--txt-heading);
+		}
 	}
 
 	&__action-icon {
@@ -96,11 +146,25 @@
 			width: rem(16px);
 			height: rem(16px);
 		}
+
+		svg path {
+			.is-scrolled & {
+				stroke: var(--c--brand-neutral-100);
+			}
+		}
 	}
 
 	&__action-chevron {
 		font-size: rem(12px);
 		line-height: 1;
+
+		.is-dark & {
+			color: var(--txt-heading);
+		}
+
+		.is-light & {
+			color: var(--txt-heading);
+		}
 	}
 
 	&__action-button {
@@ -154,103 +218,18 @@
 			.is-dark & {
 				background-color: var(--txt-heading);
 			}
+
+			.is-dark & {
+				background-color: var(--txt-heading);
+			}
+
+			.is-light & {
+				background-color: var(--txt-heading);
+			}
 		}
 
 		@include xl {
 			display: none;
-		}
-	}
-
-	&.is-dark {
-		.site-top__logo svg {
-			color: var(--c--brand-neutral-1000);
-		}
-
-		.site-top-nav > .site-top-nav__item > a .text {
-			color: var(--c--brand-neutral-1000);
-
-			&::before {
-				color: var(--c--brand-neutral-1000);
-			}
-
-			&::after {
-				background-color: var(--c--brand-neutral-1000);
-			}
-		}
-
-		.site-top__action-item {
-			color: var(--c--brand-neutral-1000);
-
-			svg path {
-				stroke: var(--c--brand-neutral-1000);
-			}
-		}
-
-		.site-top__action-chevron {
-			color: var(--c--brand-neutral-1000);
-		}
-
-		.site-top__toggle-mobile span:not(.u-sr-only) {
-			background-color: var(--c--brand-neutral-1000);
-		}
-
-		&.is-scrolled {
-			background-color: var(--c--brand-neutral-1000);
-			box-shadow: 0 rem(4px) rem(10px) -rem(2px) rgba(49, 30, 4, 0.3);
-
-			.site-top__logo svg {
-				color: var(--c--brand-primary-500);
-			}
-
-			.site-top-nav > .site-top-nav__item > a .text {
-				color: var(--txt-heading);
-
-				&::before {
-					color: var(--txt-heading);
-				}
-
-				&::after {
-					background-color: var(--txt-heading);
-				}
-			}
-
-			.site-top__action-item {
-				color: var(--txt-heading);
-
-				svg path {
-					stroke: var(--txt-heading);
-				}
-			}
-
-			.site-top__action-chevron {
-				color: var(--txt-heading);
-			}
-
-			.site-top__toggle-mobile span:not(.u-sr-only) {
-				background-color: var(--txt-heading);
-			}
-		}
-	}
-
-	&:has(.mobile-nav-hld.is-active) {
-		.site-top__toggle-mobile {
-			span {
-				&:nth-child(2) {
-					opacity: 0;
-				}
-
-				&:first-child {
-					width: rem(28px);
-					rotate: 135deg;
-					translate: 0 rem(7px);
-				}
-
-				&:nth-child(3) {
-					width: rem(28px);
-					rotate: -135deg;
-					translate: 0 rem(-7px);
-				}
-			}
 		}
 	}
 
@@ -532,24 +511,14 @@
 				align-items: center;
 				justify-content: center;
 				position: relative;
-				color: var(--txt-heading);
+				color: var(--navigation-txt-txt-navigation);
 				font-family: var(--font-family-secondary);
 				font-size: var(--t--navigation-3);
 				font-weight: var(--font-weight-400);
 				line-height: var(--t--line-hight-secondary-6);
 
-				&::after {
-					content: '';
-					display: block;
-					position: absolute;
-					bottom: rem(-2px);
-					left: 0;
-					width: 100%;
-					height: rem(1.5px);
-					background-color: var(--txt-heading);
-					transform-origin: right;
-					transition: scale 0.3s;
-					scale: 0 1;
+				.is-scrolled & {
+					color: var(--c--brand-neutral-100);
 				}
 			}
 		}

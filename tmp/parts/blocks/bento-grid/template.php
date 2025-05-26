@@ -14,7 +14,7 @@
 		$segments        		= $group['segments'] ?? [];
 
 		// Section classes
-		$classes = ['l-section', 'l-section--bento-grid-section', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
+		$classes = ['js-section', 'l-section', 'l-section--bento-grid-section', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="bento-grid-section">
 		<div class="l-wrapper">

@@ -26,7 +26,7 @@
 		$fallback_image_uri = get_template_directory_uri() . '/screenshot.jpg';
 
 		// Section classes
-		$classes = ['l-section', 'l-section--logos-certification', 'js-logos-certification', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", "is-{$layout_variant}"];
+		$classes = ['js-section', 'l-section', 'l-section--logos-certification', 'js-logos-certification', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", "is-{$layout_variant}"];
 
 		$unique_id = 'logos-certification-' . uniqid();
 	?>

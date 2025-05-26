@@ -1,7 +1,4 @@
-<?php
-	$menu_type = get_field('menu_type') ?? 'is-dark';
-?>
-<header class="site-top js-header <?php echo $menu_type; ?>" type="<?php echo $menu_type; ?>">
+<header class="site-top js-header">
 	<div class="l-wrapper">
 		<a class="site-top__logo" href="<?php echo get_home_url(); ?>" title="<?php _e('Go to home', get_option('template')); ?>">
 			<?php

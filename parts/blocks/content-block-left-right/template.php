@@ -35,7 +35,7 @@
 	}
 
 	// Section classes
-	$classes = ['l-section', 'l-section--content-block', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}",];
+	$classes = ['js-section', 'l-section', 'l-section--content-block', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}",];
 
 	// Row classes for layout variants
 	$row_classes = ['content-block', 'l-wrapper'];

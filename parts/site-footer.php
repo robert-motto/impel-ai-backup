@@ -1,5 +1,5 @@
 <?php
-	$logo      = get_field('logo_white', 'options');
+	$logo      = get_field('logo_light_mode', 'options');
 	$buttons   = get_field('footer_buttons', 'options')['buttons_group'];
 	$copyright = get_field('copyright', 'options');
 	$address   = get_field('address', 'options');

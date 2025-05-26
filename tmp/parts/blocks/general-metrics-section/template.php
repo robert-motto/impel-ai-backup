@@ -14,7 +14,7 @@
 		$metrics        		= $group['metrics'] ?? [];
 
 		// Section classes
-		$classes = ['l-section', 'l-section--general-metrics-section', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
+		$classes = ['js-section', 'l-section', 'l-section--general-metrics-section', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="general-metrics-section">
 		<div class="l-wrapper">

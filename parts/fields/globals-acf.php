@@ -6,13 +6,13 @@
 			->addTextarea('head_code')
 		->addTab('header')
 			->addImage('logo', [
-				'insctructions' => 'Logo for dark mode, in svg format',
-				'mime_types' => 'svg',
+				'instructions' => 'Logo for dark header backgrounds (e.g., initial state on dark sections). This logo will be visible when the header has a dark background.',
+				'mime_types' => 'svg,jpg,jpeg,png,gif',
 				'return_format' => 'url',
 			])
-			->addImage('logo_white', [
-				'insctructions' => 'Logo for light mode, in svg format',
-				'mime_types' => 'svg',
+			->addImage('logo_light_mode', [
+				'instructions' => 'Logo for light header backgrounds (e.g., when header is scrolled or on light sections). This logo will be visible when the header has a light background.',
+				'mime_types' => 'svg,jpg,jpeg,png,gif',
 				'return_format' => 'url',
 			])
 			->addGroup('top_bar', [

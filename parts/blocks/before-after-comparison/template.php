@@ -52,7 +52,7 @@
 		}
 
 		// Section classes
-		$classes = ['l-section', 'l-section--before-after-comparison', 'js-before-after-comparison'];
+		$classes = ['js-section', 'l-section', 'l-section--before-after-comparison', 'js-before-after-comparison'];
 		if ($has_background) {
 			$classes[] = 'is-' . $background_color;
 		}
