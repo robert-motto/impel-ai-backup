@@ -38,7 +38,7 @@
 		}
 
 		// Section classes
-		$classes = ['l-section', 'l-section--secondary-cta', 'js-secondary-cta'];
+		$classes = ['js-section', 'l-section', 'l-section--secondary-cta', 'js-secondary-cta'];
 		if ($has_background) {
 			$classes[] = 'is-' . $background_color;
 		}

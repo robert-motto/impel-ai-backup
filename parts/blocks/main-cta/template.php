@@ -15,7 +15,7 @@
 		$buttons 		= $group['action_group_group'] ?? [];
 
 		// Section classes
-		$classes = ['l-section', 'l-section--main-cta', "color-mode-{$color_mode}"];
+		$classes = ['js-section', 'l-section', 'l-section--main-cta', "color-mode-{$color_mode}"];
 
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="main-cta" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/parts/blocks/main-cta/cta_main_' . ( $color_mode === 'is-dark' ? 'dark' : 'light' ) . '_glimmer.jpg' ); ?>');">

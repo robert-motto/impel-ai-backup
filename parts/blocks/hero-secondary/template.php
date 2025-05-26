@@ -38,7 +38,7 @@
   }
 
   // Section classes
-  $classes = ['l-section', 'l-section--hero-secondary', 'js-hero-secondary'];
+  $classes = ['js-section', 'l-section', 'l-section--hero-secondary', 'js-hero-secondary'];
   if (!empty($group['section_settings_group']['background_color'])) {
     $classes[] = 'is-' . $group['section_settings_group']['background_color'];
   } else {

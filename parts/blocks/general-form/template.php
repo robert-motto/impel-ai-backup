@@ -14,7 +14,7 @@
 		$add_background = $group['add_background'] ?? true;
 		$background_color = $group['background_color'] ?? 'light';
 
-		$classes = ['l-section', 'l-section--general-form', 'js-general-form'];
+		$classes = ['js-section', 'l-section', 'l-section--general-form', 'js-general-form'];
 
 		if ($add_background) {
 			$classes[] = 'is-' . $background_color;

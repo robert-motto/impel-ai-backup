@@ -77,7 +77,7 @@
 	}
 
 	// Section classes
-	$classes = ['l-section', 'l-section--shortlist', 'js-shortlist', "color-mode-{$color_mode}"];
+	$classes = ['js-section', 'l-section', 'l-section--shortlist', 'js-shortlist', "color-mode-{$color_mode}"];
 
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group); ?>" data-block="shortlist">

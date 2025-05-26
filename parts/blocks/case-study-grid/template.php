@@ -35,7 +35,7 @@
 		}
 
 		// Section classes
-		$classes = ['l-section', 'l-section--case-study-grid', 'js-case-study-grid'];
+		$classes = ['js-section', 'l-section', 'l-section--case-study-grid', 'js-case-study-grid'];
 		if ($has_background) {
 			$classes[] = 'is-' . $background_color;
 		}

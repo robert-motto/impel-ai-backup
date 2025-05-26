@@ -38,7 +38,7 @@
 		}
 
 		// Section classes
-		$classes = ['l-section', 'l-section--single-media', 'js-single-media'];
+		$classes = ['js-section', 'l-section', 'l-section--single-media', 'js-single-media'];
 		if ($has_background) {
 			$classes[] = 'is-' . $background_color;
 		}

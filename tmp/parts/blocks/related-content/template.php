@@ -14,7 +14,7 @@
 		$buttons         = $group['buttons_group'] ?? [];
 		$related_items   = $group['related_items'] ?? [];
 
-		$classes = ['l-section', 'l-section--related-content', 'js-related-content'];
+		$classes = ['js-section', 'l-section', 'l-section--related-content', 'js-related-content'];
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group); ?>" data-block="related-content">
 		<div class="l-wrapper related-content__wrapper">

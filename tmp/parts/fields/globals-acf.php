@@ -10,7 +10,7 @@
 				'mime_types' => 'svg',
 				'return_format' => 'url',
 			])
-			->addImage('logo_white', [
+			->addImage('logo_light_mode', [
 				'insctructions' => 'Logo for light mode, in svg format',
 				'mime_types' => 'svg',
 				'return_format' => 'url',

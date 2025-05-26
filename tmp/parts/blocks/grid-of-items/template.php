@@ -43,7 +43,7 @@
 	}
 
 	// Section classes
-	$classes = ['l-section', 'l-section--grid-of-items', 'js-grid-of-items'];
+	$classes = ['js-section', 'l-section', 'l-section--grid-of-items', 'js-grid-of-items'];
 	if ($has_background) {
 		$classes[] = 'is-' . $background_color;
 	}

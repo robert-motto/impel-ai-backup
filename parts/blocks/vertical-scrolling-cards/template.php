@@ -20,7 +20,7 @@
   $fallback_image_path = get_template_directory() . '/screenshot.jpg';
   $fallback_image_uri = get_template_directory_uri() . '/screenshot.jpg';
 
-  $classes = ['l-section', 'l-section--sticky-content-scroll', 'l-section--vertical-scrolling-cards'];
+  $classes = ['js-section', 'l-section', 'l-section--sticky-content-scroll', 'l-section--vertical-scrolling-cards'];
   if ($has_background) {
     $classes[] = 'is-' . $background_color;
   }

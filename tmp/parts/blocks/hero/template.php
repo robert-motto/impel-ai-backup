@@ -23,7 +23,7 @@
 	$logos_slider 			= $group['logos_slider'] ?? [];
 
 	// Section classes
-	$classes = ['l-section', 'l-section--hero', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", "media-position-{$media_position}", "text-position-{$text_position}"];
+	$classes = ['js-section', 'l-section', 'l-section--hero', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", "media-position-{$media_position}", "text-position-{$text_position}"];
 	?>
 	<section class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="hero">
 		<div class="l-wrapper">

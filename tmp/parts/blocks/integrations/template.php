@@ -39,7 +39,7 @@
 		}
 
 		// Section classes
-		$classes = ['l-section', 'l-section--integrations', 'js-integrations'];
+		$classes = ['js-section', 'l-section', 'l-section--integrations', 'js-integrations'];
 		if ($has_background) {
 			$classes[] = 'is-' . $background_color;
 		}
