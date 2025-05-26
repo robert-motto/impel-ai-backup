@@ -1,8 +1,29 @@
 <?php
 	$menu_type = get_field('menu_type') ?? 'is-dark';
+	$top_bar_data = get_field('top_bar', 'options') ?? [];
+	$show_top_bar = $top_bar_data['show_top_bar'] ?? false;
+	$top_bar_message = $top_bar_data['top_bar_message'] ?? '';
+	$top_bar_link = $top_bar_data['top_bar_link'] ?? [];
 ?>
-<header class="site-top js-header <?php echo esc_attr($menu_type); ?>" type="<?php echo esc_attr($menu_type); ?>">
-	<div class="l-wrapper site-top__wrapper">
+<header class="site-top color-mode-is-light js-header <?php echo esc_attr($menu_type); ?>" type="<?php echo esc_attr($menu_type); ?>">
+	<?php if ($show_top_bar && !empty($top_bar_message)): ?>
+		<div class="site-top__notification-bar js-notification-bar">
+			<div class="l-wrapper site-top__notification-bar-wrapper">
+				<div class="site-top__notification-bar-content">
+					<span class="site-top__notification-bar-message"><?php echo esc_html($top_bar_message); ?></span>
+					<?php if (!empty($top_bar_link['url']) && !empty($top_bar_link['title'])): ?>
+						<a href="<?php echo esc_url($top_bar_link['url']); ?>" class="site-top__notification-bar-link" <?php echo !empty($top_bar_link['target']) ? 'target="' . esc_attr($top_bar_link['target']) . '"' : ''; ?>>
+							<?php echo esc_html($top_bar_link['title']); ?>
+						</a>
+					<?php endif; ?>
+				</div>
+				<button class="site-top__notification-bar-close js-notification-bar-close" aria-label="<?php esc_attr_e('Close notification', get_option('template')); ?>">
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</button>
+			</div>
+		</div>
+	<?php endif; ?>
+	<div class="l-wrapper site-top__wrapper js-main-bar-hld">
 		<a class="site-top__logo" href="<?php echo esc_url(get_home_url()); ?>" title="<?php esc_attr_e('Go to home', get_option('template')); ?>">
 			<?php
 				$logo_url = get_field('logo', 'options');
@@ -58,13 +79,13 @@
 				</a>
 				<div class="site-top__dropdown site-top__dropdown--global js-global-dropdown">
 					<?php
-						// Placeholder content for the global dropdown
-						$global_dropdown_title = 'Website Location (Placeholder)';
-						$global_dropdown_description = 'Select your region and language (Placeholder).';
-						$global_dropdown_links = [
-							['link' => ['url' => '#', 'title' => 'North America (EN)'], 'is_current' => true],
-							['link' => ['url' => '#', 'title' => 'Europe (EN)'], 'is_current' => false],
-							['link' => ['url' => '#', 'title' => 'Asia (EN)'], 'is_current' => false],
+						$global_dropdown_data = get_field('global_dropdown', 'options') ?? [];
+						$global_dropdown_title = $global_dropdown_data['title'] ?? 'Website Location';
+						$global_dropdown_description = $global_dropdown_data['description'] ?? 'Select your region and language.';
+						$global_dropdown_links = $global_dropdown_data['links'] ?? [
+							['link' => ['url' => '#', 'title' => 'North America (EN)']],
+							['link' => ['url' => '#', 'title' => 'Europe (EN)']],
+							['link' => ['url' => '#', 'title' => 'Asia (EN)']],
 						];
 
 						if ($global_dropdown_links): ?>
@@ -81,15 +102,11 @@
 									<?php foreach ($global_dropdown_links as $item): ?>
 										<?php
 											$link = $item['link'] ?? [];
-											$is_current = $item['is_current'] ?? false;
 											if (empty($link['url']) || empty($link['title'])) continue;
 										?>
 										<li>
-											<a href="<?php echo esc_url($link['url']); ?>" class="<?php echo $is_current ? 'is-active' : ''; ?>" <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
+											<a href="<?php echo esc_url($link['url']); ?>" <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
 												<?php echo esc_html($link['title']); ?>
-												<?php if ($is_current): ?>
-													<span class="site-top__dropdown-check"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-												<?php endif; ?>
 											</a>
 										</li>
 									<?php endforeach; ?>
@@ -99,13 +116,55 @@
 				</div>
 			</div>
 			<div class="site-top__action-group">
-				<a href="#" class="site-top__action-item">
+				<a href="#" class="site-top__action-item js-login-toggle">
 					<span class="text">Log In</span>
 					<span class="site-top__action-chevron">▾</span>
 				</a>
-				<?php // Placeholder for Log In dropdown if needed ?>
+				<div class="site-top__dropdown site-top__dropdown--login js-login-dropdown">
+					<?php
+						$login_dropdown_data = get_field('login_dropdown', 'options') ?? [];
+						$login_dropdown_title = $login_dropdown_data['title'] ?? 'Log In';
+						$login_dropdown_description = $login_dropdown_data['description'] ?? 'Access your AI-powered tools and manage your account.';
+						$login_dropdown_links = $login_dropdown_data['links'] ?? [
+							['link' => ['url' => '#', 'title' => 'Sales AI Copilot']],
+							['link' => ['url' => '#', 'title' => 'Chat AI']],
+							['link' => ['url' => '#', 'title' => 'Service AI']],
+							['link' => ['url' => '#', 'title' => '360 Manager']],
+						];
+
+						if ($login_dropdown_links): ?>
+							<div class="site-top__dropdown-content-wrapper">
+								<div class="site-top__dropdown-info">
+									<?php if ($login_dropdown_title): ?>
+										<h3 class="site-top__dropdown-info-title"><?php echo esc_html($login_dropdown_title); ?></h3>
+									<?php endif; ?>
+									<?php if ($login_dropdown_description): ?>
+										<p class="site-top__dropdown-info-description"><?php echo esc_html($login_dropdown_description); ?></p>
+									<?php endif; ?>
+								</div>
+								<ul class="site-top__dropdown-list">
+									<?php foreach ($login_dropdown_links as $item): ?>
+										<?php
+											$link = $item['link'] ?? [];
+											if (empty($link['url']) || empty($link['title'])) continue;
+										?>
+										<li>
+											<a href="<?php echo esc_url($link['url']); ?>" <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
+												<?php echo esc_html($link['title']); ?>
+												<span class="site-top__dropdown-arrow">
+													<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+													</svg>
+												</span>
+											</a>
+										</li>
+									<?php endforeach; ?>
+								</ul>
+							</div>
+						<?php endif; ?>
+				</div>
 			</div>
-			<a href="#" class="site-top__action-button btn btn--primary">Book a Demo</a>
+			<a href="#" class="btn btn--primary site-top__action-button btn btn--primary">Book a Demo</a>
 			<?php
 				$menu_buttons = get_field('menu_buttons', 'options')['buttons_group'] ?? [];
 				if (!empty($menu_buttons) && !empty($menu_buttons[0]['button']['url'])) {
