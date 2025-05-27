@@ -17,40 +17,40 @@ const throttle = (func, delay) => {
 	};
 };
 
-window.addEventListener('load', () => {
-	let globalColorMode = 'dark';
-	const mainElement = document.querySelector('.js-main');
-	if (mainElement) {
-		const firstSection = mainElement.querySelector('.js-section');
-		if (firstSection) {
-			if (firstSection.classList.contains('color-mode-is-dark')) {
-				globalColorMode = 'dark';
-			} else if (firstSection.classList.contains('color-mode-is-light')) {
-				globalColorMode = 'light';
-			}
+
+console.log('test');
+let globalColorMode = 'dark';
+const mainElement = document.querySelector('.js-main');
+if (mainElement) {
+	const firstSection = mainElement.querySelector('.js-section');
+	if (firstSection) {
+		if (firstSection.classList.contains('color-mode-is-dark')) {
+			globalColorMode = 'dark';
+		} else if (firstSection.classList.contains('color-mode-is-light')) {
+			globalColorMode = 'light';
 		}
 	}
+}
 
-	const headerAll = document.querySelectorAll('.js-header');
-	headerAll.forEach((header) => {
-		const classesToRemove = ['color-mode-dark', 'color-mode-light', 'is-dark', 'is-light'];
-		classesToRemove.forEach(cls => header.classList.remove(cls));
+const headerAll = document.querySelectorAll('.js-header');
+headerAll.forEach((header) => {
+	const classesToRemove = ['color-mode-dark', 'color-mode-light', 'is-dark', 'is-light'];
+	classesToRemove.forEach(cls => header.classList.remove(cls));
 
-		if (globalColorMode === 'dark') {
-			header.classList.add('color-mode-is-dark');
-			header.classList.add('is-dark');
-		} else {
-			header.classList.add('color-mode-is-light');
-			header.classList.add('is-light');
-		}
+	if (globalColorMode === 'dark') {
+		header.classList.add('color-mode-is-dark');
+		header.classList.add('is-dark');
+	} else {
+		header.classList.add('color-mode-is-light');
+		header.classList.add('is-light');
+	}
 
-		const scrollOffset = 80;
-		let currentScroll;
-		let prevScroll = window.scrollY || document.documentElement.scrollTop;
-		let direction = prevScroll > 0 ? 2 : 1;
-		const type = header.classList.contains('is-dark') ? 'is-dark' : 'is-light';
+	const scrollOffset = 80;
+	let currentScroll;
+	let prevScroll = window.scrollY || document.documentElement.scrollTop;
+	let direction = prevScroll > 0 ? 2 : 1;
 
-		const limit =
+	const limit =
 			Math.max(
 				document.body.scrollHeight,
 				document.body.offsetHeight,
@@ -58,536 +58,536 @@ window.addEventListener('load', () => {
 				document.documentElement.scrollHeight,
 				document.documentElement.offsetHeight,
 			) - window.innerHeight;
-		const notificationBar = header.querySelector('.js-notification-bar');
+	const notificationBar = header.querySelector('.js-notification-bar');
 
-		const toggleHeader = (dir, curScroll) => {
-			if (notificationBar && !notificationBar.classList.contains('is-hidden')) {
-				if (dir === 2 && curScroll > scrollOffset) {
-					notificationBar.classList.add('is-scrolled-down-hidden');
-				} else if (dir === 1 || curScroll <= 10) {
-					notificationBar.classList.remove('is-scrolled-down-hidden');
-				}
+	const toggleHeader = (dir, curScroll) => {
+		if (notificationBar && !notificationBar.classList.contains('is-hidden')) {
+			if (dir === 2 && curScroll > scrollOffset) {
+				notificationBar.classList.add('is-scrolled-down-hidden');
+			} else if (dir === 1 || curScroll <= 10) {
+				notificationBar.classList.remove('is-scrolled-down-hidden');
 			}
-		};
+		}
+	};
 
-		const checkScroll = () => {
-			currentScroll =
+	const checkScroll = () => {
+		currentScroll =
 				window.scrollY || document.documentElement.scrollTop;
-			currentScroll = Math.max(0, Math.min(currentScroll, limit));
+		currentScroll = Math.max(0, Math.min(currentScroll, limit));
 
-			let dropdownWasClosed = false;
+		let dropdownWasClosed = false;
 
-			const openMenuItemOnScroll = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
-			if (openMenuItemOnScroll && prevScroll !== currentScroll) {
-				openMenuItemOnScroll.classList.remove('is-active');
-				dropdownWasClosed = true;
-			}
-
-			const globalDropdownOnScroll = document.querySelector('.js-global-dropdown.is-active');
-			const globalToggleOnScroll = document.querySelector('.js-global-toggle.is-active');
-			if (globalDropdownOnScroll && prevScroll !== currentScroll) {
-				globalDropdownOnScroll.classList.remove('is-active');
-				if (globalToggleOnScroll) {
-					globalToggleOnScroll.classList.remove('is-active');
-				}
-				dropdownWasClosed = true;
-			}
-
-			const loginDropdownOnScroll = document.querySelector('.js-login-dropdown.is-active');
-			const loginToggleOnScroll = document.querySelector('.js-login-toggle.is-active');
-			if (loginDropdownOnScroll && prevScroll !== currentScroll) {
-				loginDropdownOnScroll.classList.remove('is-active');
-				if (loginToggleOnScroll) {
-					loginToggleOnScroll.classList.remove('is-active');
-				}
-				dropdownWasClosed = true;
-			}
-
-			// Update header background if any dropdown was closed
-			if (dropdownWasClosed) {
-				updateHeaderBackground();
-			}
-
-			const scrollDifference = Math.abs(currentScroll - prevScroll);
-			if (scrollDifference > 5) {
-				if (currentScroll > prevScroll) {
-					direction = 2;
-				} else if (currentScroll < prevScroll) {
-					direction = 1;
-				}
-			}
-
-			toggleHeader(direction, currentScroll);
-
-			// Check if any dropdown is currently active
-			const hasActiveDropdown = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active') || document.querySelector('.js-global-dropdown.is-active') || document.querySelector('.js-login-dropdown.is-active');
-
-			// Only modify header classes if no dropdown is active
-			if (!hasActiveDropdown) {
-				if (currentScroll > 0) {
-					header.classList.add('is-scrolled', 'color-mode-is-light', 'is-light');
-					header.classList.remove('color-mode-is-dark', 'is-dark');
-				} else {
-					header.classList.remove('is-scrolled', 'color-mode-is-light', 'is-light');
-					header.classList.add('color-mode-is-dark', 'is-dark');
-				}
-			}
-			prevScroll = currentScroll;
-		};
-
-		window.addEventListener('scroll', throttle(checkScroll, 100));
-
-		// Reset header state to fix any broken states before checking scroll
-		resetHeaderState();
-
-		// Check scroll position after reset to apply correct classes
-		checkScroll();
-	});
-
-	initMegaMenu();
-	initLoginDropdown();
-	initGlobalDropdown();
-	initNotificationBar();
-
-	// Global escape key handler
-	document.addEventListener('keydown', (e) => {
-		if (e.key === 'Escape') {
-			let shouldUpdateBackground = false;
-
-			// Close sub-menu if open
-			const openMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
-			if (openMenuItem) {
-				openMenuItem.classList.remove('is-active');
-				shouldUpdateBackground = true;
-			}
-
-			// Close global dropdown if open
-			const globalDropdown = document.querySelector('.js-global-dropdown.is-active');
-			const globalToggle = document.querySelector('.js-global-toggle.is-active');
-			if (globalDropdown) {
-				globalDropdown.classList.remove('is-active');
-				if (globalToggle) {
-					globalToggle.classList.remove('is-active');
-				}
-				shouldUpdateBackground = true;
-			}
-
-			// Close login dropdown if open
-			const loginDropdown = document.querySelector('.js-login-dropdown.is-active');
-			const loginToggle = document.querySelector('.js-login-toggle.is-active');
-			if (loginDropdown) {
-				loginDropdown.classList.remove('is-active');
-				if (loginToggle) {
-					loginToggle.classList.remove('is-active');
-				}
-				shouldUpdateBackground = true;
-			}
-
-			if (shouldUpdateBackground) {
-				updateHeaderBackground();
-			}
-		}
-	});
-
-	function updateSubmenuTopPosition(subMenuElement, headerElement) {
-		if (subMenuElement && headerElement) {
-			const headerHeight = headerElement.getBoundingClientRect().height;
-			subMenuElement.style.top = `${headerHeight}px`;
-		}
-	}
-
-	function resetHeaderState() {
-		const header = document.querySelector('.js-header');
-		if (!header) return;
-
-		// Clean up any stuck data attributes
-		delete header.dataset.originalClasses;
-		delete header.dataset.originalColorModeClasses;
-		delete header.dataset.originalThemeClasses;
-
-		// Reset to original state based on global color mode
-		header.classList.remove('color-mode-is-dark', 'color-mode-is-light', 'is-dark', 'is-light');
-
-		if (globalColorMode === 'dark') {
-			header.classList.add('color-mode-is-dark', 'is-dark');
-		} else {
-			header.classList.add('color-mode-is-light', 'is-light');
-		}
-	}
-
-	function updateHeaderBackground() {
-		console.log('updateHeaderBackground called');
-		const header = document.querySelector('.js-header');
-		if (!header) {
-			console.log('No header found');
-			return;
+		const openMenuItemOnScroll = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
+		if (openMenuItemOnScroll && prevScroll !== currentScroll) {
+			openMenuItemOnScroll.classList.remove('is-active');
+			dropdownWasClosed = true;
 		}
 
-		const hasActiveSubmenu = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
-		const hasActiveGlobalDropdown = document.querySelector('.js-global-dropdown.is-active');
-		const hasActiveLoginDropdown = document.querySelector('.js-login-dropdown.is-active');
-
-		console.log('Active states:', {
-			submenu: !!hasActiveSubmenu,
-			globalDropdown: !!hasActiveGlobalDropdown,
-			loginDropdown: !!hasActiveLoginDropdown,
-		});
-
-		// Save header class lists if not already saved and dropdown is becoming active
-		if ((hasActiveSubmenu || hasActiveGlobalDropdown || hasActiveLoginDropdown) && !header.dataset.originalClasses) {
-			console.log('Saving original classes');
-			const colorModeClasses = [];
-			const themeClasses = [];
-
-			if (header.classList.contains('color-mode-is-dark')) colorModeClasses.push('color-mode-is-dark');
-			if (header.classList.contains('color-mode-is-light')) colorModeClasses.push('color-mode-is-light');
-			if (header.classList.contains('is-dark')) themeClasses.push('is-dark');
-			if (header.classList.contains('is-light')) themeClasses.push('is-light');
-
-			console.log('Original classes:', { colorModeClasses, themeClasses });
-
-			header.dataset.originalColorModeClasses = colorModeClasses.join(' ');
-			header.dataset.originalThemeClasses = themeClasses.join(' ');
-			header.dataset.originalClasses = 'saved';
+		const globalDropdownOnScroll = document.querySelector('.js-global-dropdown.is-active');
+		const globalToggleOnScroll = document.querySelector('.js-global-toggle.is-active');
+		if (globalDropdownOnScroll && prevScroll !== currentScroll) {
+			globalDropdownOnScroll.classList.remove('is-active');
+			if (globalToggleOnScroll) {
+				globalToggleOnScroll.classList.remove('is-active');
+			}
+			dropdownWasClosed = true;
 		}
 
-		if (hasActiveSubmenu || hasActiveGlobalDropdown || hasActiveLoginDropdown) {
-			console.log('Setting header to light mode');
-			header.classList.remove('color-mode-is-dark');
-			header.classList.remove('is-dark');
-			header.classList.add('color-mode-is-light');
-			header.classList.add('is-light');
-		} else {
-			console.log('Restoring original classes');
-			// Restore saved header class lists
-			if (header.dataset.originalClasses) {
-				console.log('Found saved classes, restoring...');
-				header.classList.remove('color-mode-is-dark', 'color-mode-is-light', 'is-dark', 'is-light');
+		const loginDropdownOnScroll = document.querySelector('.js-login-dropdown.is-active');
+		const loginToggleOnScroll = document.querySelector('.js-login-toggle.is-active');
+		if (loginDropdownOnScroll && prevScroll !== currentScroll) {
+			loginDropdownOnScroll.classList.remove('is-active');
+			if (loginToggleOnScroll) {
+				loginToggleOnScroll.classList.remove('is-active');
+			}
+			dropdownWasClosed = true;
+		}
 
-				if (header.dataset.originalColorModeClasses) {
-					const colorModeClasses = header.dataset.originalColorModeClasses.split(' ').filter(cls => cls);
-					console.log('Restoring color mode classes:', colorModeClasses);
-					colorModeClasses.forEach(cls => header.classList.add(cls));
-				}
+		// Update header background if any dropdown was closed
+		if (dropdownWasClosed) {
+			updateHeaderBackground();
+		}
 
-				if (header.dataset.originalThemeClasses) {
-					const themeClasses = header.dataset.originalThemeClasses.split(' ').filter(cls => cls);
-					console.log('Restoring theme classes:', themeClasses);
-					themeClasses.forEach(cls => header.classList.add(cls));
-				}
+		const scrollDifference = Math.abs(currentScroll - prevScroll);
+		if (scrollDifference > 5) {
+			if (currentScroll > prevScroll) {
+				direction = 2;
+			} else if (currentScroll < prevScroll) {
+				direction = 1;
+			}
+		}
 
-				delete header.dataset.originalClasses;
-				delete header.dataset.originalColorModeClasses;
-				delete header.dataset.originalThemeClasses;
+		toggleHeader(direction, currentScroll);
+
+		// Check if any dropdown is currently active
+		const hasActiveDropdown = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active') || document.querySelector('.js-global-dropdown.is-active') || document.querySelector('.js-login-dropdown.is-active');
+
+		// Only modify header classes if no dropdown is active
+		if (!hasActiveDropdown) {
+			if (currentScroll > 0) {
+				header.classList.add('is-scrolled', 'color-mode-is-light', 'is-light');
+				header.classList.remove('color-mode-is-dark', 'is-dark');
 			} else {
-				console.log('No saved classes found');
+				header.classList.remove('is-scrolled', 'color-mode-is-light', 'is-light');
+				header.classList.add('color-mode-is-dark', 'is-dark');
 			}
 		}
+		prevScroll = currentScroll;
+	};
 
-		console.log('Final header classes:', Array.from(header.classList));
-	}
+	window.addEventListener('scroll', throttle(checkScroll, 100));
 
-	function initMegaMenu() {
-		const siteHeader = document.querySelector('.js-header');
-		if (!siteHeader) return;
+	// Reset header state to fix any broken states before checking scroll
+	resetHeaderState();
 
-		const menuItemsWithSubmenu = document.querySelectorAll(
-			'.site-top-nav > .menu-item.has-submenu',
-		);
+	// Check scroll position after reset to apply correct classes
+	checkScroll();
+});
 
-		if (!menuItemsWithSubmenu.length) {
-			return;
+initMegaMenu();
+initLoginDropdown();
+initGlobalDropdown();
+initNotificationBar();
+
+// Global escape key handler
+document.addEventListener('keydown', (e) => {
+	if (e.key === 'Escape') {
+		let shouldUpdateBackground = false;
+
+		// Close sub-menu if open
+		const openMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
+		if (openMenuItem) {
+			openMenuItem.classList.remove('is-active');
+			shouldUpdateBackground = true;
 		}
 
-		menuItemsWithSubmenu.forEach((item) => {
-			const triggerLink = item.querySelector('a');
-			const subMenuWrap = item.querySelector('.sub-menu-wrap');
-
-			if (!triggerLink || !subMenuWrap) {
-				return;
+		// Close global dropdown if open
+		const globalDropdown = document.querySelector('.js-global-dropdown.is-active');
+		const globalToggle = document.querySelector('.js-global-toggle.is-active');
+		if (globalDropdown) {
+			globalDropdown.classList.remove('is-active');
+			if (globalToggle) {
+				globalToggle.classList.remove('is-active');
 			}
-
-			triggerLink.addEventListener('click', (e) => {
-				e.preventDefault();
-				const isActive = item.classList.contains('is-active');
-
-				if (!isActive) {
-					const globalDropdown = document.querySelector('.js-global-dropdown');
-					const globalToggle = document.querySelector('.js-global-toggle');
-					if (globalDropdown && globalDropdown.classList.contains('is-active')) {
-						globalDropdown.classList.remove('is-active');
-						if (globalToggle) {
-							globalToggle.classList.remove('is-active');
-						}
-					}
-				}
-
-				menuItemsWithSubmenu.forEach((otherItem) => {
-					if (otherItem !== item && otherItem.classList.contains('is-active')) {
-						otherItem.classList.remove('is-active');
-					}
-				});
-
-				if (isActive) {
-					item.classList.remove('is-active');
-				} else {
-					item.classList.add('is-active');
-					updateSubmenuTopPosition(subMenuWrap, siteHeader);
-					const firstFocusable = subMenuWrap.querySelector('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
-					if (firstFocusable) {
-						firstFocusable.focus();
-					}
-				}
-				updateHeaderBackground();
-			});
-
-			const tabsNav = subMenuWrap.querySelector('.sub-menu-wrap__tabs-nav');
-			if (tabsNav) {
-				const tabButtons = tabsNav.querySelectorAll('.sub-menu-wrap__tab-btn');
-				const tabPanels = subMenuWrap.querySelectorAll('.sub-menu-wrap__tab-panel');
-
-				tabButtons.forEach((button) => {
-					button.addEventListener('mouseenter', () => {
-						if (button.classList.contains('is-active')) {
-							return;
-						}
-
-						const tabIndex = button.getAttribute('data-tab');
-						tabButtons.forEach((btn) => btn.classList.remove('is-active'));
-						tabPanels.forEach((panel) => panel.classList.remove('is-active'));
-						button.classList.add('is-active');
-						const activePanel = subMenuWrap.querySelector(
-							`.sub-menu-wrap__tab-panel[data-tab='${tabIndex}']`,
-						);
-						if (activePanel) {
-							activePanel.classList.add('is-active');
-						}
-					});
-				});
-			}
-
-			const focusableElements = Array.from(subMenuWrap.querySelectorAll(
-				'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])',
-			));
-			const firstFocusableElement = focusableElements[0];
-			const lastFocusableElement = focusableElements[focusableElements.length - 1];
-
-			subMenuWrap.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape') {
-					item.classList.remove('is-active');
-					updateHeaderBackground();
-					if (triggerLink) {
-						triggerLink.focus();
-					}
-				}
-				if (e.key === 'Tab') {
-					if (e.shiftKey) {
-						if (document.activeElement === firstFocusableElement) {
-							e.preventDefault();
-							lastFocusableElement.focus();
-						}
-					} else {
-						if (document.activeElement === lastFocusableElement) {
-							e.preventDefault();
-							firstFocusableElement.focus();
-						}
-					}
-				}
-			});
-		});
-
-		document.addEventListener('click', (e) => {
-			const openMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
-
-			if (openMenuItem) {
-				if (!openMenuItem.contains(e.target)) {
-					openMenuItem.classList.remove('is-active');
-					updateHeaderBackground();
-				}
-			}
-
-			const globalDropdown = document.querySelector('.js-global-dropdown.is-active');
-			const globalToggle = document.querySelector('.js-global-toggle');
-
-			if (globalDropdown && globalToggle) {
-				if (!globalDropdown.contains(e.target) && !globalToggle.contains(e.target)) {
-					globalDropdown.classList.remove('is-active');
-					globalToggle.classList.remove('is-active');
-					updateHeaderBackground();
-				}
-			}
-
-			const loginDropdown = document.querySelector('.js-login-dropdown.is-active');
-			const loginToggle = document.querySelector('.js-login-toggle');
-
-			if (loginDropdown && loginToggle) {
-				if (!loginDropdown.contains(e.target) && !loginToggle.contains(e.target)) {
-					loginDropdown.classList.remove('is-active');
-					loginToggle.classList.remove('is-active');
-					updateHeaderBackground();
-				}
-			}
-		});
-	}
-
-	function initLoginDropdown() {
-		const siteHeader = document.querySelector('.js-header');
-		const loginToggle = document.querySelector('.js-login-toggle');
-		const loginDropdown = document.querySelector('.js-login-dropdown');
-
-		if (!siteHeader || !loginToggle || !loginDropdown) {
-			return;
+			shouldUpdateBackground = true;
 		}
 
-		loginToggle.addEventListener('click', (e) => {
-			e.preventDefault();
-
-			const isHeaderScrolledDown = siteHeader.classList.contains('is-scrolled-down');
-
-			if (!isHeaderScrolledDown) {
-				const openMegaMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
-				if (openMegaMenuItem) {
-					openMegaMenuItem.classList.remove('is-active');
-				}
-
-				const globalDropdown = document.querySelector('.js-global-dropdown.is-active');
-				const globalToggleElement = document.querySelector('.js-global-toggle.is-active');
-				if (globalDropdown) {
-					globalDropdown.classList.remove('is-active');
-					if (globalToggleElement) {
-						globalToggleElement.classList.remove('is-active');
-					}
-				}
-
-				const isActive = loginDropdown.classList.toggle('is-active');
-				loginToggle.classList.toggle('is-active', isActive);
-
-				if (isActive) {
-					updateSubmenuTopPosition(loginDropdown, siteHeader);
-					const firstFocusable = loginDropdown.querySelector('a, button');
-					if (firstFocusable) {
-						firstFocusable.focus();
-					}
-				}
-				updateHeaderBackground();
-			}
-		});
-
-		loginDropdown.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape') {
-				loginDropdown.classList.remove('is-active');
+		// Close login dropdown if open
+		const loginDropdown = document.querySelector('.js-login-dropdown.is-active');
+		const loginToggle = document.querySelector('.js-login-toggle.is-active');
+		if (loginDropdown) {
+			loginDropdown.classList.remove('is-active');
+			if (loginToggle) {
 				loginToggle.classList.remove('is-active');
-				updateHeaderBackground();
-				loginToggle.focus();
 			}
-		});
+			shouldUpdateBackground = true;
+		}
 
-		const dropdownLinks = Array.from(loginDropdown.querySelectorAll('.site-top__dropdown-list a'));
-		dropdownLinks.forEach((link, index) => {
-			link.addEventListener('keydown', (e) => {
-				if (e.key === 'ArrowDown') {
-					e.preventDefault();
-					const nextLink = dropdownLinks[index + 1];
-					if (nextLink) nextLink.focus();
-					else dropdownLinks[0].focus();
-				} else if (e.key === 'ArrowUp') {
-					e.preventDefault();
-					const prevLink = dropdownLinks[index - 1];
-					if (prevLink) prevLink.focus();
-					else dropdownLinks[dropdownLinks.length - 1].focus();
-				}
-			});
-		});
+		if (shouldUpdateBackground) {
+			updateHeaderBackground();
+		}
+	}
+});
+
+function updateSubmenuTopPosition(subMenuElement, headerElement) {
+	if (subMenuElement && headerElement) {
+		const headerHeight = headerElement.getBoundingClientRect().height;
+		subMenuElement.style.top = `${headerHeight}px`;
+	}
+}
+
+function resetHeaderState() {
+	const header = document.querySelector('.js-header');
+	if (!header) return;
+
+	// Clean up any stuck data attributes
+	delete header.dataset.originalClasses;
+	delete header.dataset.originalColorModeClasses;
+	delete header.dataset.originalThemeClasses;
+
+	// Reset to original state based on global color mode
+	header.classList.remove('color-mode-is-dark', 'color-mode-is-light', 'is-dark', 'is-light');
+
+	if (globalColorMode === 'dark') {
+		header.classList.add('color-mode-is-dark', 'is-dark');
+	} else {
+		header.classList.add('color-mode-is-light', 'is-light');
+	}
+}
+
+function updateHeaderBackground() {
+	console.log('updateHeaderBackground called');
+	const header = document.querySelector('.js-header');
+	if (!header) {
+		console.log('No header found');
+		return;
 	}
 
-	function initGlobalDropdown() {
-		const siteHeader = document.querySelector('.js-header');
-		const globalToggle = document.querySelector('.js-global-toggle');
-		const globalDropdown = document.querySelector('.js-global-dropdown');
+	const hasActiveSubmenu = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
+	const hasActiveGlobalDropdown = document.querySelector('.js-global-dropdown.is-active');
+	const hasActiveLoginDropdown = document.querySelector('.js-login-dropdown.is-active');
 
-		if (!siteHeader || !globalToggle || !globalDropdown) {
+	console.log('Active states:', {
+		submenu: !!hasActiveSubmenu,
+		globalDropdown: !!hasActiveGlobalDropdown,
+		loginDropdown: !!hasActiveLoginDropdown,
+	});
+
+	// Save header class lists if not already saved and dropdown is becoming active
+	if ((hasActiveSubmenu || hasActiveGlobalDropdown || hasActiveLoginDropdown) && !header.dataset.originalClasses) {
+		console.log('Saving original classes');
+		const colorModeClasses = [];
+		const themeClasses = [];
+
+		if (header.classList.contains('color-mode-is-dark')) colorModeClasses.push('color-mode-is-dark');
+		if (header.classList.contains('color-mode-is-light')) colorModeClasses.push('color-mode-is-light');
+		if (header.classList.contains('is-dark')) themeClasses.push('is-dark');
+		if (header.classList.contains('is-light')) themeClasses.push('is-light');
+
+		console.log('Original classes:', { colorModeClasses, themeClasses });
+
+		header.dataset.originalColorModeClasses = colorModeClasses.join(' ');
+		header.dataset.originalThemeClasses = themeClasses.join(' ');
+		header.dataset.originalClasses = 'saved';
+	}
+
+	if (hasActiveSubmenu || hasActiveGlobalDropdown || hasActiveLoginDropdown) {
+		console.log('Setting header to light mode');
+		header.classList.remove('color-mode-is-dark');
+		header.classList.remove('is-dark');
+		header.classList.add('color-mode-is-light');
+		header.classList.add('is-light');
+	} else {
+		console.log('Restoring original classes');
+		// Restore saved header class lists
+		if (header.dataset.originalClasses) {
+			console.log('Found saved classes, restoring...');
+			header.classList.remove('color-mode-is-dark', 'color-mode-is-light', 'is-dark', 'is-light');
+
+			if (header.dataset.originalColorModeClasses) {
+				const colorModeClasses = header.dataset.originalColorModeClasses.split(' ').filter(cls => cls);
+				console.log('Restoring color mode classes:', colorModeClasses);
+				colorModeClasses.forEach(cls => header.classList.add(cls));
+			}
+
+			if (header.dataset.originalThemeClasses) {
+				const themeClasses = header.dataset.originalThemeClasses.split(' ').filter(cls => cls);
+				console.log('Restoring theme classes:', themeClasses);
+				themeClasses.forEach(cls => header.classList.add(cls));
+			}
+
+			delete header.dataset.originalClasses;
+			delete header.dataset.originalColorModeClasses;
+			delete header.dataset.originalThemeClasses;
+		} else {
+			console.log('No saved classes found');
+		}
+	}
+
+	console.log('Final header classes:', Array.from(header.classList));
+}
+
+function initMegaMenu() {
+	const siteHeader = document.querySelector('.js-header');
+	if (!siteHeader) return;
+
+	const menuItemsWithSubmenu = document.querySelectorAll(
+		'.site-top-nav > .menu-item.has-submenu',
+	);
+
+	if (!menuItemsWithSubmenu.length) {
+		return;
+	}
+
+	menuItemsWithSubmenu.forEach((item) => {
+		const triggerLink = item.querySelector('a');
+		const subMenuWrap = item.querySelector('.sub-menu-wrap');
+
+		if (!triggerLink || !subMenuWrap) {
 			return;
 		}
 
-		globalToggle.addEventListener('click', (e) => {
+		triggerLink.addEventListener('click', (e) => {
 			e.preventDefault();
+			const isActive = item.classList.contains('is-active');
 
-			const isHeaderScrolledDown = siteHeader.classList.contains('is-scrolled-down');
-
-			if (!isHeaderScrolledDown) {
-				const openMegaMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
-				if (openMegaMenuItem) {
-					openMegaMenuItem.classList.remove('is-active');
-				}
-
-				const isActive = globalDropdown.classList.toggle('is-active');
-				globalToggle.classList.toggle('is-active', isActive);
-
-				if (isActive) {
-					updateSubmenuTopPosition(globalDropdown, siteHeader);
-					const firstFocusable = globalDropdown.querySelector('a, button');
-					if (firstFocusable) {
-						firstFocusable.focus();
+			if (!isActive) {
+				const globalDropdown = document.querySelector('.js-global-dropdown');
+				const globalToggle = document.querySelector('.js-global-toggle');
+				if (globalDropdown && globalDropdown.classList.contains('is-active')) {
+					globalDropdown.classList.remove('is-active');
+					if (globalToggle) {
+						globalToggle.classList.remove('is-active');
 					}
 				}
-				updateHeaderBackground();
 			}
+
+			menuItemsWithSubmenu.forEach((otherItem) => {
+				if (otherItem !== item && otherItem.classList.contains('is-active')) {
+					otherItem.classList.remove('is-active');
+				}
+			});
+
+			if (isActive) {
+				item.classList.remove('is-active');
+			} else {
+				item.classList.add('is-active');
+				updateSubmenuTopPosition(subMenuWrap, siteHeader);
+				const firstFocusable = subMenuWrap.querySelector('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+				if (firstFocusable) {
+					firstFocusable.focus();
+				}
+			}
+			updateHeaderBackground();
 		});
 
-		globalDropdown.addEventListener('keydown', (e) => {
+		const tabsNav = subMenuWrap.querySelector('.sub-menu-wrap__tabs-nav');
+		if (tabsNav) {
+			const tabButtons = tabsNav.querySelectorAll('.sub-menu-wrap__tab-btn');
+			const tabPanels = subMenuWrap.querySelectorAll('.sub-menu-wrap__tab-panel');
+
+			tabButtons.forEach((button) => {
+				button.addEventListener('mouseenter', () => {
+					if (button.classList.contains('is-active')) {
+						return;
+					}
+
+					const tabIndex = button.getAttribute('data-tab');
+					tabButtons.forEach((btn) => btn.classList.remove('is-active'));
+					tabPanels.forEach((panel) => panel.classList.remove('is-active'));
+					button.classList.add('is-active');
+					const activePanel = subMenuWrap.querySelector(
+						`.sub-menu-wrap__tab-panel[data-tab='${tabIndex}']`,
+					);
+					if (activePanel) {
+						activePanel.classList.add('is-active');
+					}
+				});
+			});
+		}
+
+		const focusableElements = Array.from(subMenuWrap.querySelectorAll(
+			'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])',
+		));
+		const firstFocusableElement = focusableElements[0];
+		const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+		subMenuWrap.addEventListener('keydown', (e) => {
 			if (e.key === 'Escape') {
+				item.classList.remove('is-active');
+				updateHeaderBackground();
+				if (triggerLink) {
+					triggerLink.focus();
+				}
+			}
+			if (e.key === 'Tab') {
+				if (e.shiftKey) {
+					if (document.activeElement === firstFocusableElement) {
+						e.preventDefault();
+						lastFocusableElement.focus();
+					}
+				} else {
+					if (document.activeElement === lastFocusableElement) {
+						e.preventDefault();
+						firstFocusableElement.focus();
+					}
+				}
+			}
+		});
+	});
+
+	document.addEventListener('click', (e) => {
+		const openMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
+
+		if (openMenuItem) {
+			if (!openMenuItem.contains(e.target)) {
+				openMenuItem.classList.remove('is-active');
+				updateHeaderBackground();
+			}
+		}
+
+		const globalDropdown = document.querySelector('.js-global-dropdown.is-active');
+		const globalToggle = document.querySelector('.js-global-toggle');
+
+		if (globalDropdown && globalToggle) {
+			if (!globalDropdown.contains(e.target) && !globalToggle.contains(e.target)) {
 				globalDropdown.classList.remove('is-active');
 				globalToggle.classList.remove('is-active');
 				updateHeaderBackground();
-				globalToggle.focus();
 			}
-		});
+		}
 
-		const dropdownLinks = Array.from(globalDropdown.querySelectorAll('.site-top__dropdown-list a'));
-		dropdownLinks.forEach((link, index) => {
-			link.addEventListener('keydown', (e) => {
-				if (e.key === 'ArrowDown') {
-					e.preventDefault();
-					const nextLink = dropdownLinks[index + 1];
-					if (nextLink) nextLink.focus();
-					else dropdownLinks[0].focus();
-				} else if (e.key === 'ArrowUp') {
-					e.preventDefault();
-					const prevLink = dropdownLinks[index - 1];
-					if (prevLink) prevLink.focus();
-					else dropdownLinks[dropdownLinks.length - 1].focus();
+		const loginDropdown = document.querySelector('.js-login-dropdown.is-active');
+		const loginToggle = document.querySelector('.js-login-toggle');
+
+		if (loginDropdown && loginToggle) {
+			if (!loginDropdown.contains(e.target) && !loginToggle.contains(e.target)) {
+				loginDropdown.classList.remove('is-active');
+				loginToggle.classList.remove('is-active');
+				updateHeaderBackground();
+			}
+		}
+	});
+}
+
+function initLoginDropdown() {
+	const siteHeader = document.querySelector('.js-header');
+	const loginToggle = document.querySelector('.js-login-toggle');
+	const loginDropdown = document.querySelector('.js-login-dropdown');
+
+	if (!siteHeader || !loginToggle || !loginDropdown) {
+		return;
+	}
+
+	loginToggle.addEventListener('click', (e) => {
+		e.preventDefault();
+
+		const isHeaderScrolledDown = siteHeader.classList.contains('is-scrolled-down');
+
+		if (!isHeaderScrolledDown) {
+			const openMegaMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
+			if (openMegaMenuItem) {
+				openMegaMenuItem.classList.remove('is-active');
+			}
+
+			const globalDropdown = document.querySelector('.js-global-dropdown.is-active');
+			const globalToggleElement = document.querySelector('.js-global-toggle.is-active');
+			if (globalDropdown) {
+				globalDropdown.classList.remove('is-active');
+				if (globalToggleElement) {
+					globalToggleElement.classList.remove('is-active');
 				}
-			});
-		});
-	}
+			}
 
-	function initNotificationBar() {
-		const notificationBar = document.querySelector('.js-notification-bar');
-		const closeButton = document.querySelector('.js-notification-bar-close');
-		const localStorageKey = 'notificationBarDismissed';
+			const isActive = loginDropdown.classList.toggle('is-active');
+			loginToggle.classList.toggle('is-active', isActive);
 
-		if (!notificationBar || !closeButton) {
-			return;
+			if (isActive) {
+				updateSubmenuTopPosition(loginDropdown, siteHeader);
+				const firstFocusable = loginDropdown.querySelector('a, button');
+				if (firstFocusable) {
+					firstFocusable.focus();
+				}
+			}
+			updateHeaderBackground();
 		}
+	});
 
-		// Check if the bar was previously dismissed
-		if (localStorage.getItem(localStorageKey) === 'true') {
-			notificationBar.classList.add('is-hidden');
-			return; // Don't proceed if already dismissed and hidden
+	loginDropdown.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') {
+			loginDropdown.classList.remove('is-active');
+			loginToggle.classList.remove('is-active');
+			updateHeaderBackground();
+			loginToggle.focus();
 		}
-		// If not dismissed, ensure it is visible (remove is-hidden if it was somehow added)
-		notificationBar.classList.remove('is-hidden');
+	});
 
-		closeButton.addEventListener('click', () => {
-			notificationBar.classList.add('is-hidden');
-			localStorage.setItem(localStorageKey, 'true');
-		});
-
-		// Optional: Adjust padding on resize if the bar is visible
-		window.addEventListener('resize', () => {
-			if (!notificationBar.classList.contains('is-hidden')) {
-				// No padding adjustment needed here anymore
+	const dropdownLinks = Array.from(loginDropdown.querySelectorAll('.site-top__dropdown-list a'));
+	dropdownLinks.forEach((link, index) => {
+		link.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowDown') {
+				e.preventDefault();
+				const nextLink = dropdownLinks[index + 1];
+				if (nextLink) nextLink.focus();
+				else dropdownLinks[0].focus();
+			} else if (e.key === 'ArrowUp') {
+				e.preventDefault();
+				const prevLink = dropdownLinks[index - 1];
+				if (prevLink) prevLink.focus();
+				else dropdownLinks[dropdownLinks.length - 1].focus();
 			}
 		});
+	});
+}
+
+function initGlobalDropdown() {
+	const siteHeader = document.querySelector('.js-header');
+	const globalToggle = document.querySelector('.js-global-toggle');
+	const globalDropdown = document.querySelector('.js-global-dropdown');
+
+	if (!siteHeader || !globalToggle || !globalDropdown) {
+		return;
 	}
-});
+
+	globalToggle.addEventListener('click', (e) => {
+		e.preventDefault();
+
+		const isHeaderScrolledDown = siteHeader.classList.contains('is-scrolled-down');
+
+		if (!isHeaderScrolledDown) {
+			const openMegaMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
+			if (openMegaMenuItem) {
+				openMegaMenuItem.classList.remove('is-active');
+			}
+
+			const isActive = globalDropdown.classList.toggle('is-active');
+			globalToggle.classList.toggle('is-active', isActive);
+
+			if (isActive) {
+				updateSubmenuTopPosition(globalDropdown, siteHeader);
+				const firstFocusable = globalDropdown.querySelector('a, button');
+				if (firstFocusable) {
+					firstFocusable.focus();
+				}
+			}
+			updateHeaderBackground();
+		}
+	});
+
+	globalDropdown.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') {
+			globalDropdown.classList.remove('is-active');
+			globalToggle.classList.remove('is-active');
+			updateHeaderBackground();
+			globalToggle.focus();
+		}
+	});
+
+	const dropdownLinks = Array.from(globalDropdown.querySelectorAll('.site-top__dropdown-list a'));
+	dropdownLinks.forEach((link, index) => {
+		link.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowDown') {
+				e.preventDefault();
+				const nextLink = dropdownLinks[index + 1];
+				if (nextLink) nextLink.focus();
+				else dropdownLinks[0].focus();
+			} else if (e.key === 'ArrowUp') {
+				e.preventDefault();
+				const prevLink = dropdownLinks[index - 1];
+				if (prevLink) prevLink.focus();
+				else dropdownLinks[dropdownLinks.length - 1].focus();
+			}
+		});
+	});
+}
+
+function initNotificationBar() {
+	const notificationBar = document.querySelector('.js-notification-bar');
+	const closeButton = document.querySelector('.js-notification-bar-close');
+	const localStorageKey = 'notificationBarDismissed';
+
+	if (!notificationBar || !closeButton) {
+		return;
+	}
+
+	// Check if the bar was previously dismissed
+	if (localStorage.getItem(localStorageKey) === 'true') {
+		notificationBar.classList.add('is-hidden');
+		return; // Don't proceed if already dismissed and hidden
+	}
+	// If not dismissed, ensure it is visible (remove is-hidden if it was somehow added)
+	notificationBar.classList.remove('is-hidden');
+
+	closeButton.addEventListener('click', () => {
+		notificationBar.classList.add('is-hidden');
+		localStorage.setItem(localStorageKey, 'true');
+	});
+
+	// Optional: Adjust padding on resize if the bar is visible
+	window.addEventListener('resize', () => {
+		if (!notificationBar.classList.contains('is-hidden')) {
+			// No padding adjustment needed here anymore
+		}
+	});
+}
+
