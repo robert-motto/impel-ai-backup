@@ -12,6 +12,8 @@
   $color_mode_variant  = $group['mode_variant'] ?? 'regular';
   $heading             = $group['heading_box_group'] ?? '';
   $buttons             = $group['action_group_group'] ?? [];
+  $show_breadcrumbs    = $group['show_breadcrumbs'] ?? false;
+  $custom_breadcrumbs  = $group['custom_breadcrumbs_links'] ?? [];
   $custom_media       = $group['custom_media'] ?? 'n';
   $media_type          = $group['media_type'] ?? 'image';
   $media_position      = $group['media_position'] ?? 'background';
@@ -20,6 +22,7 @@
   $image_mobile       = $group['image_mobile'] ?? null;
   $video_group         = $group['video_group'] ?? [];
   $show_logos_slider   = $group['show_logos_slider'] ?? false;
+  $use_global_logos   = $group['use_global_logos'] ?? false;
   $slider_bg           = $group['slider_bg'] ?? 'white';
   $logos_slider       = $group['logos_slider'] ?? [];
 
@@ -33,6 +36,43 @@
   ?>
   <section class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="hero">
     <div class="l-wrapper">
+      <?php if ($show_breadcrumbs) : ?>
+        <?php
+        $current_page_title = get_the_title();
+        ?>
+        <nav class="hero__breadcrumbs" aria-label="<?php esc_attr_e('Breadcrumb', 'impel-ai'); ?>">
+          <ol class="hero__breadcrumbs-list">
+            <li class="hero__breadcrumbs-item">
+              <a href="<?php echo esc_url(home_url('/')); ?>" class="hero__breadcrumbs-link"><?php esc_html_e('Homepage', 'impel-ai'); ?></a>
+            </li>
+            <?php if (!empty($custom_breadcrumbs)) : ?>
+              <?php foreach ($custom_breadcrumbs as $breadcrumb) : ?>
+                <?php $link = $breadcrumb['breadcrumb_link'] ?? null; ?>
+                <?php if ($link && !empty($link['url']) && !empty($link['title'])) : ?>
+                  <li class="hero__breadcrumbs-item">
+                    <span class="hero__breadcrumbs-separator" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <a href="<?php echo esc_url($link['url']); ?>" class="hero__breadcrumbs-link" <?php echo ($link['target'] ? 'target="' . esc_attr($link['target']) . '"' : ''); ?>><?php echo esc_html($link['title']); ?></a>
+                  </li>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if (!empty($current_page_title)) : ?>
+            <li class="hero__breadcrumbs-item hero__breadcrumbs-item--active">
+              <span class="hero__breadcrumbs-separator" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span aria-current="page"><?php echo esc_html($current_page_title); ?></span>
+            </li>
+            <?php endif; ?>
+          </ol>
+        </nav>
+      <?php endif; ?>
       <div class="hero">
         <div class="hero__text-hld">
           <?php
@@ -86,30 +126,40 @@
         <?php endif; ?>
       </div>
       <?php
-      if ($show_logos_slider && !empty($logos_slider)) :
-        $logo_slides = [];
-        foreach ($logos_slider as $logo) {
-          if (!empty($logo['logo'])) {
-            $logo_img = $logo['logo'];
-            $alt_text = !empty($logo_img['alt']) ? $logo_img['alt'] : 'Logo';
-            ob_start();
+      if ($show_logos_slider) :
+        $current_logos = [];
+        if ($use_global_logos) {
+          $options = get_fields('options');
+          $current_logos = $options['global_logos_slider'] ?? [];
+        } else {
+          $current_logos = $logos_slider;
+        }
+
+        if (!empty($current_logos)) :
+          $logo_slides = [];
+          foreach ($current_logos as $logo_item) {
+            if (!empty($logo_item['logo'])) {
+              $logo_img = $logo_item['logo'];
+              $alt_text = !empty($logo_img['alt']) ? $logo_img['alt'] : 'Logo';
+              ob_start();
       ?>
 
             <?php if (!empty($logo_img['id'])) : ?>
               <?php echo bis_get_attachment_picture(
                 $logo_img['id'],
                 [
-                  1920 => [180, 100, 1],
-                  2800 => [360, 200, 1],
+                  1920 => [180, 100, 0],
+                  2800 => [360, 200, 0],
                 ],
                 [
                   'alt'     => esc_attr($alt_text),
                   'class'   => 'hero__logos-slider__logo',
                   'loading' => 'lazy',
+				  'space_between' => 60,
                 ],
               ); ?>
             <?php elseif (!empty($logo_img['url'])) : ?>
-              <img class="hero__logos-slider__logo" src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($alt_text); ?>" loading="lazy" />
+              <img class="hero__logos-slider__logo" src="<?php echo esc_url($logo_img['url']); ?>" alt="<?php echo esc_attr($alt_text); ?>" />
             <?php endif; ?>
         <?php
             $logo_slides[] = ob_get_clean();
@@ -135,6 +185,7 @@
             'classes' => 'hero__logos-slider'
           ]); ?>
         </div>
+        <?php endif; ?>
       <?php endif; ?>
     </div>
   </section>

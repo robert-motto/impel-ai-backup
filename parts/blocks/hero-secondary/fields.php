@@ -26,6 +26,34 @@
 				'layout'        => 'horizontal',
 				'return_format' => 'value',
 			])
+			->addTrueFalse('show_breadcrumbs', [
+				'label' => 'Show Breadcrumbs',
+				'instructions' => 'Display breadcrumbs at the top of the hero section.',
+				'default_value' => 0,
+				'ui' => 1,
+				'ui_on_text' => 'Yes',
+				'ui_off_text' => 'No',
+			])
+			->addRepeater('custom_breadcrumbs_links', [
+				'label' => 'Custom Breadcrumb Links',
+				'instructions' => 'Add custom links for the breadcrumbs. "Homepage" is automatically added as the first link, and the current page title is automatically added as the last (active) item.',
+				'button_label' => 'Add Breadcrumb Link',
+				'layout' => 'block',
+				'conditional_logic' => [
+					[
+						[
+							'field' => 'show_breadcrumbs',
+							'operator' => '==',
+							'value' => '1',
+						],
+					],
+				],
+			])
+				->addLink('breadcrumb_link', [
+					'label' => 'Link',
+					'return_format' => 'array',
+				])
+			->endRepeater()
 			->addField('heading', 'clone', [
 				'clone' => [
 					'group_heading_box',
@@ -116,8 +144,15 @@
 			])
 				->conditional('media_type', '==', 'image')
 				->and('media_position', '==', 'background')
+			->addTrueFalse('use_global_logos', [
+				'label' => 'Use Global Logos Slider',
+				'instructions' => 'If selected, logos from Theme Options > Global Content will be used. Otherwise, you can add logos specifically for this block below.',
+				'default_value' => 0,
+				'ui' => 1,
+			])
+				->conditional('show_logos_slider', '==', 1)
 			->addButtonGroup('slider_bg', [
-				'label'   => 'Sldier background',
+				'label'   => 'Slider background',
 				'choices' => [
 					'white' => 'White',
 					'blurred'  => 'Blurred',
@@ -127,8 +162,7 @@
 				'return_format' => 'value',
 			])
 				->conditional('show_logos_slider', '==', 1)
-				->and('media_type', '==', 'image')
-				->and('media_position', '==', 'background')
+				->and('use_global_logos', '==', 0)
 			->addRepeater('logos_slider', [
 				'label' => 'Logos Slider',
 				'instructions' => 'Add logos to display in the slider',
@@ -136,8 +170,7 @@
 				'button_label' => 'Add Logo',
 			])
 				->conditional('show_logos_slider', '==', 1)
-				->and('media_type', '==', 'image')
-				->and('media_position', '==', 'background')
+				->and('use_global_logos', '==', 0)
 				->addImage('logo', [
 					'label' => 'Logo Image',
 					'instructions' => 'Recommended size: 180px x 100px',

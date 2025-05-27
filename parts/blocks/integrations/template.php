@@ -94,12 +94,11 @@
 								],
 								[
 									'alt'     => $image['alt'] ? $image['alt'] : wp_strip_all_tags($heading ?? ''),
-									'class'   => 'integrations__img',
-									'loading' => 'lazy',
+									'class'   => 'integrations__img'
 								],
 							);
 						} elseif (!empty($image['url'])) {
-							echo '<img class="integrations__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" loading="lazy" />';
+							echo '<img class="integrations__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '"  />';
 						}
 					?>
 				<?php elseif ($media_type === 'video' && !empty($video_group)) : ?>

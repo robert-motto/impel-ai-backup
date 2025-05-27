@@ -121,7 +121,7 @@
 															],
 														);
 													} elseif (!empty($image['url'])) {
-														echo '<img class="carousel-slider__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? 'Carousel item') . '" loading="lazy" />';
+														echo '<img class="carousel-slider__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? 'Carousel item') . '"  />';
 													}
 												?>
 											<?php elseif ($media_type === 'svg' && !empty($svg_icon)) : ?>
@@ -137,7 +137,7 @@
 															]
 														);
 													} elseif (!empty($svg_icon['url'])) {
-														echo '<img class="carousel-slider__svg" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '" loading="lazy" />';
+														echo '<img class="carousel-slider__svg" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '"  />';
 													}
 												?>
 											<?php endif; ?>
