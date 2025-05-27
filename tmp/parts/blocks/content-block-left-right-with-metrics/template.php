@@ -53,8 +53,7 @@
 										2800 => [ 360, 200, 1 ],
 									],
 									[
-										'alt'     => 'metric icon',
-										'loading' => 'lazy',
+										'alt'     => 'metric icon'
 									],
 								); ?>
 							</div>

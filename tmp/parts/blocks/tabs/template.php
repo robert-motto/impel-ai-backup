@@ -132,10 +132,10 @@
 													} else {
 														$img_src = wp_get_attachment_image_url($image['id'], 'large');
 														$img_alt = get_post_meta($image['id'], '_wp_attachment_image_alt', true) ?: wp_strip_all_tags($tab_heading ?? $tab_title);
-														echo '<img class="tabs__img" src="' . esc_url($img_src) . '" alt="' . esc_attr($img_alt) . '" loading="lazy" />';
+														echo '<img class="tabs__img" src="' . esc_url($img_src) . '" alt="' . esc_attr($img_alt) . '"  />';
 													}
 												} elseif (!empty($image['url'])) {
-													echo '<img class="tabs__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" loading="lazy" />';
+													echo '<img class="tabs__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '"  />';
 												}
 											?>
 

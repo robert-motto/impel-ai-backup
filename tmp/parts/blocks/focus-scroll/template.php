@@ -108,7 +108,7 @@
 										],
 									);
 								} elseif (!empty($image['url'])) {
-									echo '<img class="focus-scroll__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '" loading="lazy" />';
+									echo '<img class="focus-scroll__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '"  />';
 								}
 								?>
 							<?php elseif ($media_type === 'video' && !empty($video_group)) : ?>

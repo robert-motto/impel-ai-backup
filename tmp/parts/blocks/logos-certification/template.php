@@ -95,7 +95,7 @@
 														],
 													); ?>
 												<?php elseif (!empty($logo['url'])) : ?>
-													<img class="logos-certification__logo" src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($alt_text); ?>" loading="lazy" />
+													<img class="logos-certification__logo" src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($alt_text); ?>"  />
 												<?php endif; ?>
 											</div>
 										<?php else : ?>
@@ -117,7 +117,7 @@
 															],
 														); ?>
 													<?php elseif (!empty($logo['url'])) : ?>
-														<img class="logos-certification__logo" src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($alt_text); ?>" loading="lazy" />
+														<img class="logos-certification__logo" src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($alt_text); ?>"  />
 													<?php endif; ?>
 												</div>
 												<?php if (!empty($title)) : ?>
@@ -153,8 +153,7 @@
 								],
 								[
 									'alt'     => esc_attr($alt_text),
-									'class'   => 'logos-certification__logo',
-									'loading' => 'lazy',
+									'class'   => 'logos-certification__logo'
 								],
 							); ?>
 						<?php endforeach; ?>

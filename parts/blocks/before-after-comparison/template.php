@@ -105,12 +105,11 @@
 								],
 								[
 									'alt'     => $before_image['alt'] ? $before_image['alt'] : wp_strip_all_tags($heading ?? 'Before image'),
-									'class'   => 'before-after-comparison__img before-after-comparison__img--before',
-									'loading' => 'lazy',
+									'class'   => 'before-after-comparison__img before-after-comparison__img--before'
 								],
 							);
 						} elseif (!empty($before_image['url'])) {
-							echo '<img class="before-after-comparison__img before-after-comparison__img--before" src="' . esc_url($before_image['url']) . '" alt="' . esc_attr($before_image['alt']) . '" loading="lazy" />';
+							echo '<img class="before-after-comparison__img before-after-comparison__img--before" src="' . esc_url($before_image['url']) . '" alt="' . esc_attr($before_image['alt']) . '"  />';
 						}
 					?>
 				</div>
@@ -128,12 +127,11 @@
 								],
 								[
 									'alt'     => $after_image['alt'] ? $after_image['alt'] : wp_strip_all_tags($heading ?? 'After image'),
-									'class'   => 'before-after-comparison__img before-after-comparison__img--after',
-									'loading' => 'lazy',
+									'class'   => 'before-after-comparison__img before-after-comparison__img--after'
 								],
 							);
 						} elseif (!empty($after_image['url'])) {
-							echo '<img class="before-after-comparison__img before-after-comparison__img--after" src="' . esc_url($after_image['url']) . '" alt="' . esc_attr($after_image['alt']) . '" loading="lazy" />';
+							echo '<img class="before-after-comparison__img before-after-comparison__img--after" src="' . esc_url($after_image['url']) . '" alt="' . esc_attr($after_image['alt']) . '"  />';
 						}
 					?>
 				</div>

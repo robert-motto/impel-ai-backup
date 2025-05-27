@@ -58,12 +58,11 @@
 									'large',
 									false,
 									[
-										'class' => 'secondary-cta__image',
-										'loading' => 'lazy',
+										'class' => 'secondary-cta__image'
 									]
 								); ?>
 							<?php elseif (!empty($image['url'])) : ?>
-								<img class="secondary-cta__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?? 'Image'); ?>" loading="lazy" />
+								<img class="secondary-cta__image" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt'] ?? 'Image'); ?>"  />
 							<?php endif; ?>
 						</div>
 					<?php elseif ($media_type === 'video' && !empty($video_group)) : ?>
