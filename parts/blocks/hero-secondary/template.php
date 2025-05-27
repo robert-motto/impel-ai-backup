@@ -14,8 +14,8 @@
   $buttons             = $group['action_group_group'] ?? [];
   $custom_media       = $group['custom_media'] ?? 'n';
   $media_type          = $group['media_type'] ?? 'image';
-  $media_position      = $group['media_position'] ?? 'image';
-  $text_position      = $group['text_position'] ?? 'image';
+  $media_position      = $group['media_position'] ?? 'background';
+  $text_position      = $group['text_position'] ?? 'left';
   $image               = $group['image'] ?? null;
   $image_mobile       = $group['image_mobile'] ?? null;
   $video_group         = $group['video_group'] ?? [];
@@ -24,8 +24,7 @@
   $logos_slider       = $group['logos_slider'] ?? [];
 
   // Section classes
-  $classes = ['l-section', 'l-section--hero', 'l-section--hero-secondary', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", "media-position-{$media_position}", "text-position-{$text_position}"];
-  $classes = ['js-section', 'l-section', 'l-section--hero-secondary', 'js-hero-secondary'];
+  $classes = ['js-section', 'l-section', 'l-section--hero', 'l-section--hero-secondary', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", "media-position-{$media_position}", "text-position-{$text_position}"];
   if (!empty($group['section_settings_group']['background_color'])) {
     $classes[] = 'is-' . $group['section_settings_group']['background_color'];
   } else {
