@@ -141,6 +141,75 @@
 					])
 				->endRepeater()
 			->endGroup()
+			->addImage('header_logo')
+			->addText('first_dropdown')
+			->addPostObject('first_post', [
+				'label' => 'Featured post',
+			])
+			->addText('second_dropdown')
+			->addPostObject('second_post', [
+				'label' => 'Featured post',
+			])
+			->addText('third_dropdown')
+			->addPostObject('third_post', [
+				'label' => 'Featured post',
+			])
+			->addLink('menu_link')
+			->addText('fourth_dropdown')
+			->addPostObject('fourth_post', [
+				'label' => 'Featured post',
+			])
+			->addImage('cloud_image')
+			->addWysiwyg('cloud_intro', [
+				'label' => 'Cloud intro text'
+			])
+			->addLink('cloud_link', [
+				'label' => 'Cloud link',
+				'return_format' => 'array',
+			])
+			->addWysiwyg('cloud_industry', [
+				'label' => 'Cloud industry text'
+			])
+			->addImage('consulting_image')
+			->addWysiwyg('consulting_intro', [
+				'label' => 'Consulting intro text'
+			])
+			->addLink('consulting_link', [
+				'label' => 'Consulting link',
+				'return_format' => 'array',
+			])
+			->addWysiwyg('consulting_industry', [
+				'label' => 'Consulting industry text'
+			])
+			->addWysiwyg('consulting_solution', [
+				'label' => 'Consulting solution text'
+			])
+			->addRepeater('footer_links', [
+				'label' => 'Footer links',
+				'button_label' => 'Add Button',
+			])
+				->addText('text')
+				->addLink('link', [
+					'label' => 'Link',
+					'return_format' => 'array',
+				])
+			->endRepeater()
+			->addGroup('header_button', [
+				'label' => ' Get Started Button',
+				'instructions' => '',
+				'layout' => 'block',
+			])
+				->addText('text1')
+				->addLink('link1', [
+					'label' => 'Link',
+					'return_format' => 'array',
+				])
+				->addText('text2')
+				->addLink('link2', [
+					'label' => 'Link',
+					'return_format' => 'array',
+				])
+			->endGroup()
 		->addTab('footer')
 			->addField('footer_buttons', 'clone', [
 				'label' => 'Additional Footer Buttons',
