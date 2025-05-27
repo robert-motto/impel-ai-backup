@@ -3,6 +3,7 @@
 	$show_top_bar = $top_bar_data['show_top_bar'] ?? false;
 	$top_bar_message = $top_bar_data['top_bar_message'] ?? '';
 	$top_bar_link = $top_bar_data['top_bar_link'] ?? [];
+	$header_logo = get_field('header_logo', 'options');
 ?>
 <header class="site-top js-header">
 	<?php if ($show_top_bar && !empty($top_bar_message)): ?>
@@ -176,14 +177,17 @@
 				}
 			?>
 		</div>
-		<button class="site-top__toggle-mobile js-mobile-nav-toggle">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span class="u-sr-only"><?php _e('Open side navigation', get_option('template')); ?></span>
-		</button>
 	</div>
-	<?php get_template_part('/parts/mobile-nav', null, [
-		'menu_buttons' => $menu_buttons,
-	]); ?>
+</header>
+
+<header class="site-top-mobile js-header">
+	<a class="site-top-mobile__logo" href="/" title="<?php _e('logo', get_option('template')); ?>">
+		<img src="<?php echo $header_logo['url']; ?>" alt="">
+	</a>
+	<button class="site-top-mobile__toggle-mobile js-mobile-nav-toggle">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span class="u-sr-only"><?php _e('Open side navigation', get_option('template')); ?></span>
+	</button>
 </header>

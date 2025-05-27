@@ -42,4 +42,5 @@
 </head>
 <body <?php body_class(); ?>>
 	<?php get_template_part('/parts/site-top');	?>
+	<?php get_template_part('/parts/mobile-nav'); ?>
 	<main class="js-main">

@@ -9,30 +9,49 @@
 	left: 0;
 	z-index: 500;
 	width: 100%;
-	padding: 10px 20px;
-	border-bottom: 1px solid var(--c-black);
-	background-color: var(--c-white);
+	padding: rem(10px) rem(20px);
+	border-bottom: 1px solid var(--c--brand-primary-750);
+	background-color: var(--c--brand-neutral-1000);
 
-	@include tablet-big {
+	@include tablet-small {
 		display: flex;
+	}
+
+	&__logo {
+		width: rem(180px);
 	}
 }
 
 .site-top-mobile__toggle-mobile {
-	margin-right: -10px;
-	padding: 10px;
+	margin-right: rem(-10px);
+	padding: rem(10px);
 	border: 0;
 	outline: 0;
 	background-color: transparent;
 
+	.is-mobile-open & {
+		span:not(.u-sr-only):nth-child(2) {
+			display: none;
+		}
+
+		span:not(.u-sr-only):first-child {
+			transform: translateY(3px) rotate(45deg);
+		}
+
+		span:not(.u-sr-only):nth-child(3) {
+			transform: translateY(-4px) rotate(135deg);
+		}
+	}
+
 	span:not(.u-sr-only) {
 		display: block;
-		width: 30px;
-		height: 2px;
-		background-color: var(--c-black);
+		width: rem(30px);
+		height: rem(2px);
+		background-color: var(--c--brand-neutral-0);
+		transition: transform 0.3s ease-in-out;
 
 		&:not(:first-child) {
-			margin-top: 5px;
+			margin-top: rem(5px);
 		}
 	}
 }
