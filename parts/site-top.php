@@ -66,7 +66,11 @@
 						<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.99992 14.6666C11.6818 14.6666 14.6666 11.6818 14.6666 7.99992C14.6666 4.31802 11.6818 1.33325 7.99992 1.33325C4.31802 1.33325 1.33325 4.31802 1.33325 7.99992C1.33325 11.6818 4.31802 14.6666 7.99992 14.6666Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.33325 8.00001H10.6666" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.99992 1.33325C9.69029 3.5389 10.564 5.71173 10.6666 7.99992C10.564 10.2881 9.69029 12.4609 7.99992 14.6666C6.30955 12.4609 5.43573 10.2881 5.33325 7.99992C5.43573 5.71173 6.30955 3.5389 7.99992 1.33325V1.33325Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 					</span>
 					<span class="text">Global</span>
-					<span class="site-top__action-chevron">▾</span>
+					<?php
+						get_icon('chevron-down', [
+							'classes' => 'site-top__action-chevron',
+						]);
+					?>
 				</a>
 				<div class="site-top__dropdown site-top__dropdown--global js-global-dropdown">
 					<?php
@@ -109,7 +113,11 @@
 			<div class="site-top__action-group">
 				<a href="#" class="site-top__action-item js-login-toggle">
 					<span class="text">Log In</span>
-					<span class="site-top__action-chevron">▾</span>
+					<?php
+						get_icon('chevron-down', [
+							'classes' => 'site-top__action-chevron',
+						]);
+					?>
 				</a>
 				<div class="site-top__dropdown site-top__dropdown--login js-login-dropdown">
 					<?php
