@@ -1,0 +1,149 @@
+@use 'config'as *;
+// Sometimes we need a universal class that can be used in any component.
+// Prefix utility classes with .u-
+// From Trello CSS Guide
+
+.u-pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: fluid(32px, 64px);
+
+	.page-numbers {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: rem(42);
+		height: rem(42);
+		margin: 4px;
+		padding: 10px;
+		border-radius: 50%;
+		transition: background 0.2s;
+
+		.text,
+		.icon {
+			pointer-events: none; // IMPORTANT FOR JS FILTERS TO WORK
+			font-family: var(--font-family-secondary);
+			font-size: rem(15);
+		}
+
+		&:not(.prev):not(.next) {
+			&:hover {
+				border-color: var(--c--brand-primary-0);
+			}
+		}
+
+		&.current {
+			pointer-events: none;
+			background: blue;
+			color: var(--c--brand-primary-1200-main);
+		}
+
+		&.prev {
+			margin-left: 14px;
+			transform: rotate(180deg);
+
+			&.is-disabled {
+				margin-left: 15px;
+			}
+		}
+
+		&.next {
+			margin-left: 14px;
+
+			&.is-disabled {
+				margin-left: 30px;
+			}
+		}
+
+		&.is-disabled {
+			pointer-events: none;
+			opacity: 0.4;
+		}
+	}
+}
+
+.u-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+	overflow: hidden;
+}
+
+.u-swiper-pagination {
+	display: flex;
+	gap: rem(8px);
+
+	.swiper-pagination-bullet {
+		display: block;
+		cursor: pointer;
+		width: rem(8px);
+		height: rem(8px);
+		border-radius: 50%;
+		background-color: var(--accordion-txt-heading-slider);
+		transition: background-color 0.3s ease-in-out;
+		opacity: 0.5;
+
+		&-active {
+			background-color: var(--accordion-txt-heading-hover);
+			opacity: 1;
+		}
+	}
+}
+
+.u-swiper-nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	width: rem(42px);
+	height: rem(42px);
+	border: 1px solid var(--button-bg-icon-secondary-hover);
+	border-radius: 50%;
+	background-color: var(--button-bg-icon-secondary-hover);
+	color: var(--button-icon-primary-hover);
+	transition: border-color 0.3s ease-in-out,
+		background-color 0.3s ease-in-out,
+		color 0.3s ease-in-out;
+
+	.is-accent & {
+		color: var(--button-icon-secondary-hover);
+	}
+
+	&.swiper-button-disabled {
+		pointer-events: none;
+		border-color: var(--button-border-icon-secondary-disabled);
+		background-color: transparent;
+		color: var(--button-icon-secondary-disabled);
+	}
+
+	&:active {
+		border-color: var(--button-bg-icon-secondary-hover);
+		background-color: var(--button-bg-icon-secondary-hover);
+		color: var(--button-icon-primary-hover);
+
+		.is-accent & {
+			color: var(--button-icon-secondary-hover);
+		}
+	}
+
+	@include lg {
+
+		&:hover,
+		&:focus-visible {
+			border-color: var(--button-icon-secondary-idle);
+			background-color: transparent;
+			color: var(--button-icon-secondary-idle);
+		}
+	}
+
+	&--prev {
+		svg {
+			rotate: 180deg;
+		}
+	}
+}

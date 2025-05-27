@@ -1,0 +1,15 @@
+@use 'config' as *;
+
+.block-post-content-bg {
+	padding: fluid(16px, 30px) fluid(24px, 40px);
+	border-radius: var(--border-radius-xs);
+	background-color: var(--c--brand-primary-950);
+
+	> * {
+		margin-bottom: fluid(18px, 24px);
+
+		&:last-child {
+			padding-bottom: 0;
+		}
+	}
+}

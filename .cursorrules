@@ -101,7 +101,7 @@
 - Follow existing media query patterns; defined in src/sass/01_base/_mixins.scss file
 - Include breakpoint mixins directly within BEM elements
 - Use SCSS parent selector (&) for BEM elements and modifiers
-- Only use CSS variables that are defined in the src/sass/01_base/_variables.scss file
+- Only use CSS variables that are defined in the src/sass/01_base/variables folder
 - Do not create new CSS variables unless absolutely necessary and approved
 
 ## Class Naming Conventions

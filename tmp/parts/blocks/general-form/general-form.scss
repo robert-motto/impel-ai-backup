@@ -1,0 +1,200 @@
+@use 'config' as *;
+
+.l-section--general-form {
+	position: relative;
+
+	&.is-light {
+		background-color: var(--wf-neutral-neutral-95);
+	}
+
+	&.is-white {
+		background-color: var(--wf-neutral-neutral-100-white);
+	}
+
+	&.is-dark {
+		background-color: var(--wf-neutral-neutral-10);
+		color: var(--wf-neutral-neutral-100-white);
+	}
+}
+
+.general-form {
+	display: flex;
+	flex-direction: column;
+	gap: fluid(40px, 64px);
+
+	@include lg {
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: fluid(64px, 132px);
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: fluid(16px, 24px);
+
+		@include lg {
+			max-width: fluid(400px, 516px);
+			padding-top: rem(32px);
+		}
+	}
+
+	&__heading {
+		color: var(--wf-neutral-neutral-10);
+		font-size: fluid(32px, 40px);
+		font-weight: 700;
+		letter-spacing: 0.01em;
+		line-height: calc(48 / 40);
+
+		.is-dark & {
+			color: var(--wf-neutral-neutral-100-white);
+		}
+	}
+
+	&__description {
+		color: var(--wf-neutral-neutral-40);
+		font-size: fluid(16px, 18px);
+		line-height: calc(28 / 18);
+
+		.is-dark & {
+			color: var(--wf-neutral-neutral-80);
+		}
+	}
+
+	&__form-container {
+		flex-grow: 1;
+		width: 100%;
+
+		@include lg {
+			max-width: fluid(500px, 600px);
+		}
+
+		.gform {
+			padding: fluid(24px, 32px);
+			border-radius: rem(4px);
+			background-color: var(--wf-neutral-neutral-100-white);
+
+			.gform_title,
+			.gform_description {
+				display: none;
+			}
+
+			.gform_fields {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: fluid(24px, 40px);
+
+				@include md {
+					.ginput_container_name {
+						display: grid;
+						grid-template-columns: 1fr 1fr;
+						gap: rem(40px);
+					}
+				}
+			}
+
+			.gfield_label {
+				display: block;
+				margin-bottom: rem(8px);
+				color: var(--wf-neutral-neutral-0-black);
+				font-size: rem(14px);
+				font-weight: 400;
+				line-height: calc(17 / 14);
+			}
+
+			.ginput_container {
+				input[type='text'],
+				input[type='email'],
+				input[type='tel'],
+				input[type='url'],
+				select,
+				textarea {
+					width: 100%;
+					padding: rem(12px) rem(16px);
+					border: 2px solid var(--wf-neutral-neutral-80);
+					border-radius: rem(6px);
+					font-size: rem(16px);
+					line-height: calc(19 / 16);
+
+					&:focus {
+						border-color: var(--wf-neutral-neutral-40);
+						outline: none;
+					}
+				}
+
+				textarea {
+					min-height: rem(120px);
+				}
+
+				select {
+					padding-right: rem(40px);
+					background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23999999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+					background-repeat: no-repeat;
+					background-position: right rem(16px) center;
+					appearance: none;
+				}
+			}
+
+			.gfield_checkbox,
+			.gfield_radio {
+				margin-top: rem(8px);
+
+				li {
+					display: flex;
+					align-items: center;
+					margin-bottom: rem(16px);
+					gap: rem(12px);
+
+					input {
+						width: rem(20px);
+						height: rem(20px);
+						margin: 0;
+					}
+
+					label {
+						color: var(--wf-neutral-neutral-40);
+						font-size: rem(14px);
+						line-height: calc(21 / 14);
+					}
+				}
+			}
+
+			.gform_footer {
+				margin-top: rem(40px);
+
+				.gform_button {
+					cursor: pointer;
+					padding: rem(16px) rem(28px);
+					border: 2px solid var(--wf-neutral-neutral-10);
+					border-radius: rem(6px);
+					background-color: var(--wf-neutral-neutral-10);
+					color: var(--wf-neutral-neutral-100-white);
+					font-size: rem(16px);
+					font-weight: 700;
+					line-height: calc(24 / 16);
+					transition: all 0.3s ease;
+
+					&:hover {
+						border-color: var(--wf-neutral-neutral-0-black);
+						background-color: var(--wf-neutral-neutral-0-black);
+					}
+				}
+			}
+
+			.validation_error {
+				margin-bottom: rem(24px);
+				padding: rem(16px);
+				border: 1px solid var(--c-semanctic-error-60);
+				border-radius: rem(4px);
+				color: var(--c-semanctic-error-60);
+			}
+
+			.validation_message {
+				margin-top: rem(4px);
+				color: var(--c-semanctic-error-60);
+				font-size: rem(14px);
+			}
+		}
+	}
+}
