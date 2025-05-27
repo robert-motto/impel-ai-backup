@@ -75,9 +75,12 @@ window.addEventListener('load', () => {
 				window.scrollY || document.documentElement.scrollTop;
 			currentScroll = Math.max(0, Math.min(currentScroll, limit));
 
+			let dropdownWasClosed = false;
+
 			const openMenuItemOnScroll = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
 			if (openMenuItemOnScroll && prevScroll !== currentScroll) {
 				openMenuItemOnScroll.classList.remove('is-active');
+				dropdownWasClosed = true;
 			}
 
 			const globalDropdownOnScroll = document.querySelector('.js-global-dropdown.is-active');
@@ -87,6 +90,7 @@ window.addEventListener('load', () => {
 				if (globalToggleOnScroll) {
 					globalToggleOnScroll.classList.remove('is-active');
 				}
+				dropdownWasClosed = true;
 			}
 
 			const loginDropdownOnScroll = document.querySelector('.js-login-dropdown.is-active');
@@ -96,6 +100,12 @@ window.addEventListener('load', () => {
 				if (loginToggleOnScroll) {
 					loginToggleOnScroll.classList.remove('is-active');
 				}
+				dropdownWasClosed = true;
+			}
+
+			// Update header background if any dropdown was closed
+			if (dropdownWasClosed) {
+				updateHeaderBackground();
 			}
 
 			const scrollDifference = Math.abs(currentScroll - prevScroll);
@@ -108,25 +118,29 @@ window.addEventListener('load', () => {
 			}
 
 			toggleHeader(direction, currentScroll);
-			if (currentScroll > 0) {
-				if (type === 'is-dark') {
-					header.classList.add('is-scrolled', 'is-light');
-					header.classList.remove('is-dark');
+
+			// Check if any dropdown is currently active
+			const hasActiveDropdown = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active') || document.querySelector('.js-global-dropdown.is-active') || document.querySelector('.js-login-dropdown.is-active');
+
+			// Only modify header classes if no dropdown is active
+			if (!hasActiveDropdown) {
+				if (currentScroll > 0) {
+					header.classList.add('is-scrolled', 'color-mode-is-light', 'is-light');
+					header.classList.remove('color-mode-is-dark', 'is-dark');
 				} else {
-					header.classList.add('is-scrolled');
-				}
-			} else {
-				if (type === 'is-dark') {
-					header.classList.remove('is-scrolled', 'is-light');
-					header.classList.add('is-dark');
-				} else {
-					header.classList.remove('is-scrolled');
+					header.classList.remove('is-scrolled', 'color-mode-is-light', 'is-light');
+					header.classList.add('color-mode-is-dark', 'is-dark');
 				}
 			}
 			prevScroll = currentScroll;
 		};
 
 		window.addEventListener('scroll', throttle(checkScroll, 100));
+
+		// Reset header state to fix any broken states before checking scroll
+		resetHeaderState();
+
+		// Check scroll position after reset to apply correct classes
 		checkScroll();
 	});
 
@@ -138,10 +152,13 @@ window.addEventListener('load', () => {
 	// Global escape key handler
 	document.addEventListener('keydown', (e) => {
 		if (e.key === 'Escape') {
+			let shouldUpdateBackground = false;
+
 			// Close sub-menu if open
 			const openMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
 			if (openMenuItem) {
 				openMenuItem.classList.remove('is-active');
+				shouldUpdateBackground = true;
 			}
 
 			// Close global dropdown if open
@@ -152,6 +169,7 @@ window.addEventListener('load', () => {
 				if (globalToggle) {
 					globalToggle.classList.remove('is-active');
 				}
+				shouldUpdateBackground = true;
 			}
 
 			// Close login dropdown if open
@@ -162,6 +180,11 @@ window.addEventListener('load', () => {
 				if (loginToggle) {
 					loginToggle.classList.remove('is-active');
 				}
+				shouldUpdateBackground = true;
+			}
+
+			if (shouldUpdateBackground) {
+				updateHeaderBackground();
 			}
 		}
 	});
@@ -171,6 +194,97 @@ window.addEventListener('load', () => {
 			const headerHeight = headerElement.getBoundingClientRect().height;
 			subMenuElement.style.top = `${headerHeight}px`;
 		}
+	}
+
+	function resetHeaderState() {
+		const header = document.querySelector('.js-header');
+		if (!header) return;
+
+		// Clean up any stuck data attributes
+		delete header.dataset.originalClasses;
+		delete header.dataset.originalColorModeClasses;
+		delete header.dataset.originalThemeClasses;
+
+		// Reset to original state based on global color mode
+		header.classList.remove('color-mode-is-dark', 'color-mode-is-light', 'is-dark', 'is-light');
+
+		if (globalColorMode === 'dark') {
+			header.classList.add('color-mode-is-dark', 'is-dark');
+		} else {
+			header.classList.add('color-mode-is-light', 'is-light');
+		}
+	}
+
+	function updateHeaderBackground() {
+		console.log('updateHeaderBackground called');
+		const header = document.querySelector('.js-header');
+		if (!header) {
+			console.log('No header found');
+			return;
+		}
+
+		const hasActiveSubmenu = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
+		const hasActiveGlobalDropdown = document.querySelector('.js-global-dropdown.is-active');
+		const hasActiveLoginDropdown = document.querySelector('.js-login-dropdown.is-active');
+
+		console.log('Active states:', {
+			submenu: !!hasActiveSubmenu,
+			globalDropdown: !!hasActiveGlobalDropdown,
+			loginDropdown: !!hasActiveLoginDropdown,
+		});
+
+		// Save header class lists if not already saved and dropdown is becoming active
+		if ((hasActiveSubmenu || hasActiveGlobalDropdown || hasActiveLoginDropdown) && !header.dataset.originalClasses) {
+			console.log('Saving original classes');
+			const colorModeClasses = [];
+			const themeClasses = [];
+
+			if (header.classList.contains('color-mode-is-dark')) colorModeClasses.push('color-mode-is-dark');
+			if (header.classList.contains('color-mode-is-light')) colorModeClasses.push('color-mode-is-light');
+			if (header.classList.contains('is-dark')) themeClasses.push('is-dark');
+			if (header.classList.contains('is-light')) themeClasses.push('is-light');
+
+			console.log('Original classes:', { colorModeClasses, themeClasses });
+
+			header.dataset.originalColorModeClasses = colorModeClasses.join(' ');
+			header.dataset.originalThemeClasses = themeClasses.join(' ');
+			header.dataset.originalClasses = 'saved';
+		}
+
+		if (hasActiveSubmenu || hasActiveGlobalDropdown || hasActiveLoginDropdown) {
+			console.log('Setting header to light mode');
+			header.classList.remove('color-mode-is-dark');
+			header.classList.remove('is-dark');
+			header.classList.add('color-mode-is-light');
+			header.classList.add('is-light');
+		} else {
+			console.log('Restoring original classes');
+			// Restore saved header class lists
+			if (header.dataset.originalClasses) {
+				console.log('Found saved classes, restoring...');
+				header.classList.remove('color-mode-is-dark', 'color-mode-is-light', 'is-dark', 'is-light');
+
+				if (header.dataset.originalColorModeClasses) {
+					const colorModeClasses = header.dataset.originalColorModeClasses.split(' ').filter(cls => cls);
+					console.log('Restoring color mode classes:', colorModeClasses);
+					colorModeClasses.forEach(cls => header.classList.add(cls));
+				}
+
+				if (header.dataset.originalThemeClasses) {
+					const themeClasses = header.dataset.originalThemeClasses.split(' ').filter(cls => cls);
+					console.log('Restoring theme classes:', themeClasses);
+					themeClasses.forEach(cls => header.classList.add(cls));
+				}
+
+				delete header.dataset.originalClasses;
+				delete header.dataset.originalColorModeClasses;
+				delete header.dataset.originalThemeClasses;
+			} else {
+				console.log('No saved classes found');
+			}
+		}
+
+		console.log('Final header classes:', Array.from(header.classList));
 	}
 
 	function initMegaMenu() {
@@ -224,6 +338,7 @@ window.addEventListener('load', () => {
 						firstFocusable.focus();
 					}
 				}
+				updateHeaderBackground();
 			});
 
 			const tabsNav = subMenuWrap.querySelector('.sub-menu-wrap__tabs-nav');
@@ -260,6 +375,7 @@ window.addEventListener('load', () => {
 			subMenuWrap.addEventListener('keydown', (e) => {
 				if (e.key === 'Escape') {
 					item.classList.remove('is-active');
+					updateHeaderBackground();
 					if (triggerLink) {
 						triggerLink.focus();
 					}
@@ -286,6 +402,7 @@ window.addEventListener('load', () => {
 			if (openMenuItem) {
 				if (!openMenuItem.contains(e.target)) {
 					openMenuItem.classList.remove('is-active');
+					updateHeaderBackground();
 				}
 			}
 
@@ -296,6 +413,7 @@ window.addEventListener('load', () => {
 				if (!globalDropdown.contains(e.target) && !globalToggle.contains(e.target)) {
 					globalDropdown.classList.remove('is-active');
 					globalToggle.classList.remove('is-active');
+					updateHeaderBackground();
 				}
 			}
 
@@ -306,6 +424,7 @@ window.addEventListener('load', () => {
 				if (!loginDropdown.contains(e.target) && !loginToggle.contains(e.target)) {
 					loginDropdown.classList.remove('is-active');
 					loginToggle.classList.remove('is-active');
+					updateHeaderBackground();
 				}
 			}
 		});
@@ -350,6 +469,7 @@ window.addEventListener('load', () => {
 						firstFocusable.focus();
 					}
 				}
+				updateHeaderBackground();
 			}
 		});
 
@@ -357,6 +477,7 @@ window.addEventListener('load', () => {
 			if (e.key === 'Escape') {
 				loginDropdown.classList.remove('is-active');
 				loginToggle.classList.remove('is-active');
+				updateHeaderBackground();
 				loginToggle.focus();
 			}
 		});
@@ -409,6 +530,7 @@ window.addEventListener('load', () => {
 						firstFocusable.focus();
 					}
 				}
+				updateHeaderBackground();
 			}
 		});
 
@@ -416,6 +538,7 @@ window.addEventListener('load', () => {
 			if (e.key === 'Escape') {
 				globalDropdown.classList.remove('is-active');
 				globalToggle.classList.remove('is-active');
+				updateHeaderBackground();
 				globalToggle.focus();
 			}
 		});

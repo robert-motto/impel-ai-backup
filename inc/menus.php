@@ -29,8 +29,7 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 	function start_lvl(&$output, $depth = 0, $args = null)
 	{
 		$indent = str_repeat("\t", $depth);
-		$arrow_down = '<span class="arrow-down"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 8.25L11 13.75L16.5 8.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
-		$output .= "\n$indent $arrow_down <div class='sub-menu-wrap'><ul class='sub-menu'>\n";
+		$output .= "\n$indent <div class='sub-menu-wrap'><ul class='sub-menu'>\n";
 	}
 
 	function end_lvl(&$output, $depth = 0, $args = null)
@@ -114,6 +113,17 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 		$item_output = $args->before ?? '';
 		$item_output .= '<a' . $attributes . '>';
 		$item_output .= str_replace('%s', $title, $args->link_before) . $title . $args->link_after;
+
+		// Add chevron icon for menu items with submenu
+		$has_submenu = get_field('has_submenu', $menu_item->ID);
+		if ($has_submenu === 'y') {
+			ob_start();
+			get_icon('chevron-down', [
+				'classes' => 'site-top-nav__chevron',
+			]);
+			$item_output .= ob_get_clean();
+		}
+
 		$item_output .= '</a>';
 
 		// Handle submenu content
@@ -183,19 +193,19 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 		// Add image section if available
 		if (!empty($grid_submenu['image_section'])) {
 			$image_section = $grid_submenu['image_section'];
+			$output .= '<div class="sub-menu-wrap__image-section">';
 			if (!empty($image_section['image'])) {
-				$output .= '<div class="sub-menu-wrap__image-section">';
 				$output .= '<div class="sub-menu-wrap__image">';
 				$output .= wp_get_attachment_image($image_section['image'], 'large');
 				$output .= '</div>';
-				if (!empty($image_section['image_heading'])) {
-					$output .= '<h3 class="sub-menu-wrap__image-heading">' . esc_html($image_section['image_heading']) . '</h3>';
-				}
-				if (!empty($image_section['image_subheading'])) {
-					$output .= '<div class="sub-menu-wrap__image-subheading">' . esc_html($image_section['image_subheading']) . '</div>';
-				}
-				$output .= '</div>';
 			}
+			if (!empty($image_section['image_heading'])) {
+				$output .= '<h3 class="sub-menu-wrap__image-heading">' . esc_html($image_section['image_heading']) . '</h3>';
+			}
+			if (!empty($image_section['image_subheading'])) {
+				$output .= '<div class="sub-menu-wrap__image-subheading">' . esc_html($image_section['image_subheading']) . '</div>';
+			}
+			$output .= '</div>';
 		}
 
 		$output .= '</div>'; // Close .sub-menu-wrap__content
