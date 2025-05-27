@@ -1,0 +1,63 @@
+@use 'config' as *;
+
+.l-section--general-metrics-section {
+	padding: var(--padding-vertical-4xl) 0;
+	background-color: var(--background-bg-primary--c-brand-primary-forest);
+
+	&.color-mode-variant-secondary {
+		background-color: var(--bg-secondary);
+	}
+}
+
+.general-metrics-section {
+
+	&__metrics {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: rem(24px);
+		margin-top: var(--spacing-1000);
+
+		@include tablet-small {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	&__metric {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+		min-height: 340px;
+		padding: var(--padding-vertical-2xs) var(--padding-vertical-3xs);
+		border-radius: 16px;
+		background: var(--elevation-surface-sunken-secondary-default);
+		color: var(--txt-large-numbers);
+
+		@include tablet-big {
+			min-height: 200px;
+			padding: 16px;
+		}
+
+		&--wide {
+			grid-column: span 2;
+		}
+	}
+
+	&__metric-value {
+		font-size: var(--font-value-80);
+		line-height: var(--t--line-height-1900);
+
+		@include mobile {
+			font-size: 36px;
+		}
+	}
+
+	&__metric-label {
+		font-size: var(--t--heading-6);
+		line-height: var(--t--line-height-500);
+
+		@include mobile {
+			font-size: 16px;
+		}
+	}
+}
