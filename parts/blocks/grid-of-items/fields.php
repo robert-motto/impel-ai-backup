@@ -16,41 +16,27 @@
 					'group_section_settings',
 				]
 			])
-			->addText('caption', [
-				'label' => 'Caption',
-				'instructions' => 'Short text above the heading',
-				'default_value' => 'Tagline',
+	->addButtonGroup('mode_variant', [
+		'label'   => 'Color Mode Variant',
+		'choices' => [
+			'primary' => 'Primary',
+			'secondary'  => 'Secondary',
+		],
+		'default_value' => 'primary',
+		'layout'        => 'horizontal',
+		'return_format' => 'value',
 			])
-			->addWysiwyg('heading', [
-				'label' => 'Heading',
-				'instructions' => 'Enter the main heading text. Use Enter/Return for line breaks.',
-				'media_upload' => 0,
-				'toolbar' => 'basic',
-				'tabs' => 'visual',
-				'delay' => 0,
-				'new_lines' => 'br',
-				'default_value' => 'Short heading goes here',
-			])
-			->addWysiwyg('content', [
-				'label' => 'Body Content',
-				'instructions' => 'Enter the main content text.',
-				'media_upload' => 0,
-				'toolbar' => 'full',
-				'tabs' => 'all',
-				'delay' => 0,
-				'default_value' => 'Ornare purus enim pulvinar at volutpat. Arcu lobortis elementum eu consectetur. Diam proin et senectus condimentum imperdiet vitae nisi. Velit habitasse odio libero.',
-			])
-			->addField('buttons', 'clone', [
+	->addField('heading', 'clone', [
 				'clone' => [
-					'group_buttons',
+		'group_heading_box',
 				]
 			])
 			->addRadio('item_style', [
 				'label' => 'Item Style',
 				'instructions' => 'Select the style for the grid items',
 				'choices' => [
-					'with-icons' => 'With Icons (Smaller)',
-					'with-images' => 'With Images (Larger)'
+		'with-icons' => 'With Icons',
+		'with-images' => 'With Images'
 				],
 				'default_value' => 'with-icons',
 				'layout' => 'horizontal',
@@ -74,44 +60,21 @@
 				'layout' => 'block',
 				'button_label' => 'Add Item',
 			])
-				->addText('badge_label', [
-					'label' => 'Badge Label',
-					'instructions' => 'Optional label badge to show above item heading',
-					'default_value' => 'Label',
-				])
-				->addWysiwyg('item_heading', [
+	->addText('item_heading', [
 					'label' => 'Item Heading',
 					'instructions' => 'Heading for this grid item',
-					'media_upload' => 0,
-					'toolbar' => 'basic',
-					'tabs' => 'visual',
-					'delay' => 0,
-					'default_value' => 'Medium length section heading goes here',
+	'maxlength' => 124,
 				])
-				->addWysiwyg('item_content', [
+	->addTextarea('item_content', [
 					'label' => 'Item Content',
 					'instructions' => 'Main content for this grid item',
-					'media_upload' => 0,
-					'toolbar' => 'full',
-					'tabs' => 'all',
-					'delay' => 0,
-					'default_value' => 'Ornare purus enim pulvinar at volutpat. Arcu lobortis elementum eu consectetur. Diam proin et senectus condimentum imperdiet vitae nisi. Velit habitasse odio libero.',
+	'rows' => 8,
+	'maxlength' => 228,
 				])
-				->addField('item_buttons', 'clone', [
-					'clone' => [
-						'group_buttons',
-					],
-					'prefix_name' => 1,
-				])
-				->addRadio('media_type', [
-					'label' => 'Media Type',
-					'choices' => [
-						'image' => 'Image',
-						'svg' => 'SVG Icon',
-					],
-					'default_value' => 'image',
-					'layout' => 'horizontal',
-					'return_format' => 'value',
+	->addLink('item_link', [
+		'label' => 'Item Link',
+		'instructions' => 'Link for this grid item',
+		'return_format' => 'array',
 				])
 				->addImage('image', [
 					'label' => 'Image',
@@ -121,9 +84,9 @@
 					'conditional_logic' => [
 						[
 							[
-								'field' => 'media_type',
+				'field' => 'item_style',
 								'operator' => '==',
-								'value' => 'image',
+				'value' => 'with-images',
 							]
 						]
 					]
@@ -137,9 +100,9 @@
 					'conditional_logic' => [
 						[
 							[
-								'field' => 'media_type',
+				'field' => 'item_style',
 								'operator' => '==',
-								'value' => 'svg',
+				'value' => 'with-icons',
 							]
 						]
 					]
