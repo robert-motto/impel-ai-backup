@@ -11,22 +11,31 @@
 
 .focus-scroll {
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	position: absolute;
 	right: 0;
 	left: 0;
-	gap: fluid(40px, 64px);
 
-	@include lg {
-		flex-direction: row;
-		justify-content: space-between;
+	&__content-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		justify-content: center;
+		width: 100%;
+		gap: fluid(40px, 64px);
+
+		@include lg {
+			flex-direction: row;
+			justify-content: space-between;
+		}
 	}
 
 	&--reverse {
 		@include lg {
-			flex-direction: row-reverse;
+			.focus-scroll__content-wrapper {
+				flex-direction: row-reverse;
+			}
 		}
 	}
 
@@ -120,7 +129,7 @@
 		position: relative;
 		width: 100%;
 		max-height: 40vh;
-		aspect-ratio: 720 / 480;
+		aspect-ratio: 624 / 548;
 
 		@include lg {
 			order: unset;

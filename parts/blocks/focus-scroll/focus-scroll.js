@@ -143,7 +143,7 @@ function initFocusScroll() {
 				gsap.to(focusScroll, {
 					top: topValue,
 					bottom: bottomValue,
-					duration: 0.5,
+					duration: 0.4,
 					overwrite: true,
 				});
 			},
@@ -159,7 +159,7 @@ function initFocusScroll() {
 				if (index === 0) {
 					offset = 50;
 				} else if (index === items.length - 1) {
-					offset = -50;
+					offset = -100;
 				}
 
 				const to = wrapperTop + ((bounds.height / 3) * index) + offset;
