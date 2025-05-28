@@ -106,7 +106,7 @@
                       ]
                     );
                   } elseif (!empty($media['url'])) {
-                    echo '<img class="sticky-content-scroll__card-img" src="' . esc_url($media['url']) . '" alt="' . esc_attr($media['alt'] ?? 'Card image') . '" loading="lazy" />';
+                    echo '<img class="sticky-content-scroll__card-img" src="' . esc_url($media['url']) . '" alt="' . esc_attr($media['alt'] ?? 'Card image') . '"  />';
                   }
                   ?>
                 </div>
@@ -124,7 +124,7 @@
                       ]
                     );
                   } elseif (!empty($media['url'])) {
-                    echo '<img class="sticky-content-scroll__card-icon" src="' . esc_url($media['url']) . '" alt="' . esc_attr($media['alt'] ?? 'Icon') . '" loading="lazy" />';
+                    echo '<img class="sticky-content-scroll__card-icon" src="' . esc_url($media['url']) . '" alt="' . esc_attr($media['alt'] ?? 'Icon') . '"  />';
                   }
                   ?>
                 </div>

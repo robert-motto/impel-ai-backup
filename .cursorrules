@@ -78,7 +78,7 @@
 - Implement proper fallback for required components with sensible defaults
 
 ## Fallback Image Pattern - CRITICAL
-- Always implement fallback images exactly as in the hero/hero-left blocks:
+- Always implement fallback images exactly as in the hero block:
   - Check media_type first, then check for image ID, then check for image URL
   - Use main themescreenshot.jpg as the default fallback image source
   - Include proper alt text based on heading or default text

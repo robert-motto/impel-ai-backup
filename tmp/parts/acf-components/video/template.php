@@ -58,11 +58,10 @@ $photo_sizes = [
 					[
 						'alt'     => $photo['alt'] ? $photo['alt'] : wp_strip_all_tags($embed_title),
 						'class'   => 'video__player__cover__img',
-						'loading' => 'lazy',
 					]
 				);
 			} else { ?>
-				<img class="video__player__cover__img" src="<?php echo esc_url($photo['url']); ?>" alt="<?php echo esc_attr($photo['alt'] ?? wp_strip_all_tags($person_name ?? 'video cover')); ?>" loading="lazy" />
+				<img class="video__player__cover__img" src="<?php echo esc_url($photo['url']); ?>" alt="<?php echo esc_attr($photo['alt'] ?? wp_strip_all_tags($person_name ?? 'video cover')); ?>" />
 			<?php } ?>
 			<button type="button" class="video__player-btn">
 				<?php get_icon('circle-play', [

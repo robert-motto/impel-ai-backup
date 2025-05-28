@@ -38,11 +38,31 @@
 				'return_format' => 'value',
 				'ui' => 1,
 			])
+			->addTrueFalse('use_list_subheading', [
+				'label' => 'Use List for Subheading?',
+				'instructions' => 'Toggle on to use a bulleted list with icons for the subheading. Otherwise, a simple text area will be used.',
+				'default_value' => 0,
+				'ui' => 1,
+				'ui_on_text'  => 'List',
+				'ui_off_text' => 'Text',
+			])
 			->addTextarea('subheading', [
 				'label' => 'Subheading',
 				'rows' => '4',
 				'new_lines' => 'br',
 			])
+				->conditional('use_list_subheading', '==', '0')
+			->addRepeater('subheading_list', [
+				'label' => 'Subheading List',
+				'instructions' => 'Add items for the bulleted list. The icon is predefined.',
+				'layout' => 'block',
+				'button_label' => 'Add List Item',
+			])
+				->conditional('use_list_subheading', '==', '1')
+				->addText('list_item', [
+					'label' => 'List Item Text',
+				])
+			->endRepeater()
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path);
 	return $name;

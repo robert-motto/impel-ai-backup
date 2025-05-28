@@ -237,5 +237,20 @@
 					'default_value' => '<p>Please try a different category or topic.</p>',
 				])
 			->endGroup()
+		->addTab('Global Content')
+			->addRepeater('global_logos_slider', [
+				'label' => 'Global Logos Slider',
+				'instructions' => 'Logos added here can be used as a default by blocks that feature a logos slider. If a block is configured to use global logos, these will be displayed. Recommended size for logos: auto x 42px.',
+				'layout' => 'block',
+				'button_label' => 'Add Global Logo',
+			])
+				->addImage('logo', [
+					'label' => 'Logo Image',
+					'instructions' => 'Recommended size: auto x 42px. Will be displayed in the global logos slider if the block is configured to use it.',
+					'return_format' => 'array',
+					'preview_size' => 'medium',
+					'required' => 1,
+				])
+			->endRepeater()
 		->setLocation('options_page', '==', 'my_globals');
 	return $options;

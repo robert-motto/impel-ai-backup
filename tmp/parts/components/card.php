@@ -49,7 +49,7 @@ $link = $item['link'] ?? '';
           ],
         );
       } elseif (!empty($thumbnail['url'])) {
-        echo '<img class="card__item-img" src="' . esc_url($thumbnail['url']) . '" alt="' . esc_attr($thumbnail['alt']) . '" loading="lazy" />';
+        echo '<img class="card__item-img" src="' . esc_url($thumbnail['url']) . '" alt="' . esc_attr($thumbnail['alt']) . '"  />';
       }
     ?>
   </div>

@@ -102,7 +102,7 @@
 											],
 										);
 									} elseif (!empty($image['url'])) {
-										echo '<img class="grid-of-items__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? 'Grid item') . '" loading="lazy" />';
+										echo '<img class="grid-of-items__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? 'Grid item') . '"  />';
 									}
 									?>
 								<?php elseif ($item_style === 'with-icons' && !empty($svg_icon)) : ?>
@@ -118,7 +118,7 @@
 											]
 										);
 									} elseif (!empty($svg_icon['url'])) {
-										echo '<img class="grid-of-items__svg" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '" loading="lazy" />';
+										echo '<img class="grid-of-items__svg" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '"  />';
 									}
 									?>
 								<?php endif; ?>
@@ -144,6 +144,7 @@
 												'type' => 'link',
 												'size' => 'regular',
 												'has_icon' => 'y',
+												'icon_position' => 'right',
 												'button' => array(
 													'url' => $item_link['url'],
 													'title' => $item_link['title'],
