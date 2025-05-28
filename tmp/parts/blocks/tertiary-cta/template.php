@@ -14,8 +14,8 @@
 		$content		= $group['content'] ?? '';
 		$buttons		= $group['action_group_group'] ?? [];
 
-		// Section classes
-		$classes = ['js-section', 'l-section', 'l-section--tertiary-cta', 'color-mode-' . ($color_mode === 'is-dark' ? 'is-light' : 'is-dark')];
+	// Section classes
+	$classes = ['js-section', 'l-section', 'l-section--tertiary-cta', 'js-tertiary-cta', 'color-mode-' . ($color_mode === 'is-dark' ? 'is-light' : 'is-dark')];
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group); ?>" data-block="tertiary-cta">
 		<div class="l-wrapper">

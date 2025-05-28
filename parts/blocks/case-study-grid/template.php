@@ -143,7 +143,7 @@
 												]
 											);
 										} elseif (!empty($company_logo['url'])) {
-											echo '<img class="case-study-grid__logo" src="' . esc_url($company_logo['url']) . '" alt="' . esc_attr($company_logo['alt'] ?? 'Company logo') . '" loading="lazy" />';
+											echo '<img class="case-study-grid__logo" src="' . esc_url($company_logo['url']) . '" alt="' . esc_attr($company_logo['alt'] ?? 'Company logo') . '"  />';
 										}
 									?>
 								</div>
