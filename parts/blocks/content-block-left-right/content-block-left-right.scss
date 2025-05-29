@@ -38,6 +38,13 @@
 		}
 	}
 
+	&__text {
+		margin-top: var(--spacing-600);
+		color: var(--txt-subheading, #777581);
+		font-size: var(--t--paragraph-2);
+		line-height: var(--t--line-height-400);
+	}
+
 	&__btns {
 		margin-top: var(--spacing-40);
 	}

@@ -12,6 +12,7 @@
 	$color_mode      		= $group['section_settings_group']['mode'] ?? 'light';
 	$color_mode_variant	= $group['mode_variant'] ?? 'regular';
 	$heading         		= $group['heading_box_group'] ?? '';
+	$text         			= $group['text'] ?? '';
 	$buttons 						= $group['action_group_group'] ?? [];
 	$media_type     		= $group['media_type'] ?? 'image';
 	$image           		= $group['image'] ?? '';
@@ -56,6 +57,11 @@
 					],
 				);
 				?>
+				<?php if (!empty($text)) : ?>
+					<div class="content-block__text">
+						<?php echo $text; ?>
+					</div>
+				<?php endif; ?>
 				<?php
 				get_acf_component(
 					'action-group',
@@ -67,10 +73,10 @@
 				?>
 			</div>
 			<?php
-				$media_hld_classes = ['content-block__media-hld'];
-				if ($media_type === 'image' && $image_display_size === 'small') {
-					$media_hld_classes[] = 'content-block__media-hld--small';
-				}
+			$media_hld_classes = ['content-block__media-hld'];
+			if ($media_type === 'image' && $image_display_size === 'small') {
+				$media_hld_classes[] = 'content-block__media-hld--small';
+			}
 			?>
 			<div class="<?php echo esc_attr(implode(' ', $media_hld_classes)); ?>">
 				<?php if ($media_type === 'image') : ?>
