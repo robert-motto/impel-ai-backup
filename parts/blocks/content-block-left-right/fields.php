@@ -41,6 +41,11 @@
 					'group_heading_box',
 				]
 			])
+			->addTextarea('text', [
+				'label' => 'Text',
+				'rows' => '8',
+				'new_lines' => 'br',
+			])
 			->addField('tab_buttons', 'clone', [
 				'clone' => [
 					'group_action_group',
