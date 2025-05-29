@@ -74,6 +74,12 @@
 		color: var(--txt-subheading);
 		font-size: var(--t--subheading-2);
 		line-height: var(--t--line-height-500);
+
+		&--small {
+			padding-right: rem(30px);
+			font-size: var(--t--paragraph-2);
+			line-height: var(--t--line-height-400);
+		}
 	}
 
 	&__subheading-list {

@@ -33,7 +33,7 @@
 		width: 100%;
 
 		@include lg {
-			width: 45%;
+			width: 34%;
 		}
 	}
 
@@ -65,9 +65,10 @@
 
 	&__heading {
 		color: var(--wf-neutral-neutral-0-black);
-		font-size: fluid(36px, 48px);
-		font-weight: 600;
-		line-height: calc(58 / 48);
+		font-size: var(--t--heading-3);
+		font-weight: 400;
+		letter-spacing: -0.225px;
+		line-height: var(--t--line-height-1200);
 
 		.is-dark & {
 			color: var(--wf-neutral-neutral-100-white);
@@ -75,7 +76,7 @@
 	}
 
 	&__body {
-		margin-top: rem(16px);
+		margin-top: rem(30px);
 		color: var(--wf-neutral-neutral-40);
 		font-size: fluid(16px, 18px);
 		line-height: calc(28 / 18);
@@ -126,7 +127,7 @@
 		width: 100%;
 
 		@include lg {
-			width: 48%;
+			width: 49%;
 			padding-bottom: rem(100px);
 		}
 	}
@@ -155,10 +156,8 @@
 	&__card-media {
 		position: relative;
 		width: 100%;
-		height: 0;
-		padding-bottom: 66.67%; // 3:2 aspect ratio
+		height: auto;
 		background-color: var(--wf-neutral-neutral-95);
-		overflow: hidden;
 
 		.is-dark & {
 			background-color: var(--wf-neutral-neutral-20);
@@ -166,9 +165,6 @@
 	}
 
 	&__card-img {
-		position: absolute;
-		top: 0;
-		left: 0;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;

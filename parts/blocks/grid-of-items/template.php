@@ -12,32 +12,32 @@
 	<?php block_preview(__FILE__); ?>
 <?php else : ?>
 	<?php
-	$group           = isset($args['data']) ? $args['data'] : blockFieldGroup(__FILE__);
-	$color_mode      		= $group['section_settings_group']['mode'] ?? 'light';
-	$color_mode_variant	= $group['mode_variant'] ?? 'regular';
-	$heading         		= $group['heading_box_group'] ?? '';
+		$group           = isset($args['data']) ? $args['data'] : blockFieldGroup(__FILE__);
+		$color_mode      		= $group['section_settings_group']['mode'] ?? 'light';
+		$color_mode_variant	= $group['mode_variant'] ?? 'regular';
+		$heading         		= $group['heading_box_group'] ?? '';
 
-	$item_style      = $group['item_style'] ?? 'with-icons';
-	$grid_items      = $group['grid_items'] ?? [];
-	$columns_count   = $group['columns_count'] ?? '3';
+		$item_style      = $group['item_style'] ?? 'with-icons';
+		$grid_items      = $group['grid_items'] ?? [];
+		$columns_count   = $group['columns_count'] ?? '3';
 
-	// Section classes
-	$classes = ['l-section', 'l-section--grid-of-items', 'js-grid-of-items', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
+		// Section classes
+		$classes = ['l-section', 'l-section--grid-of-items', 'js-grid-of-items', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
 
 
-	// // Grid item classes
-	$grid_classes = ['grid-of-items__grid'];
-	if ($item_style === 'with-icons') {
-		$grid_classes[] = 'grid-of-items__grid--icons';
-	} else {
-		$grid_classes[] = 'grid-of-items__grid--images';
-	}
-	$grid_classes[] = 'grid-of-items__grid--cols-' . $columns_count;
+		// // Grid item classes
+		$grid_classes = ['grid-of-items__grid'];
+		if ($item_style === 'with-icons') {
+			$grid_classes[] = 'grid-of-items__grid--icons';
+		} else {
+			$grid_classes[] = 'grid-of-items__grid--images';
+		}
+		$grid_classes[] = 'grid-of-items__grid--cols-' . $columns_count;
 
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="tabs">
 
-		<div class="grid-of-items l-wrapper">
+		<div class="grid-of-items l-wrapper l-wrapper--medium">
 			<?php
 			get_acf_component(
 				'heading-box',

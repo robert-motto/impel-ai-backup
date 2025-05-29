@@ -155,7 +155,7 @@
                   'alt'     => esc_attr($alt_text),
                   'class'   => 'hero__logos-slider__logo',
                   'loading' => 'lazy',
-				  'space_between' => 60,
+				  'space_between' => 80,
                 ],
               ); ?>
             <?php elseif (!empty($logo_img['url'])) : ?>

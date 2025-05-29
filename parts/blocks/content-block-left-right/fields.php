@@ -63,6 +63,17 @@
 				'preview_size' => 'medium',
 			])
 				->conditional('media_type', '==', 'image')
+			->addSelect('image_display_size', [
+				'label' => 'Image Display Size',
+				'choices' => [
+					'regular' => 'Regular',
+					'small'   => 'Small',
+				],
+				'default_value' => 'regular',
+				'return_format' => 'value',
+				'ui'            => 1,
+			])
+				->conditional('media_type', '==', 'image')
 			->addField('video', 'clone', [
 				'label' => 'Video',
 				'clone' => [
