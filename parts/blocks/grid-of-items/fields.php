@@ -114,20 +114,6 @@
 				'default_value' => 0,
 				'ui' => 1,
 			])
-			->addSelect('background_color', [
-				'label' => 'Background Color',
-				'instructions' => 'Select background color',
-				'choices' => [
-					'light' => 'Light (Gray)',
-					'white' => 'White',
-					'dark' => 'Dark',
-				],
-				'default_value' => 'light',
-				'return_format' => 'value',
-				'multiple' => 0,
-				'ui' => 1,
-			])
-				->conditional('has_background', '==', 1)
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path);
 	return $name;

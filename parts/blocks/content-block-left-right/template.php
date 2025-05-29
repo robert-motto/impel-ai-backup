@@ -16,6 +16,7 @@
 	$media_type     		= $group['media_type'] ?? 'image';
 	$image           		= $group['image'] ?? '';
 	$video_group     		= $group['video_group'] ?? [];
+	$image_display_size = $group['image_display_size'] ?? 'regular';
 
 	// Set fallback image if none is selected and media type is image
 	if ($media_type === 'image' && (empty($image) || !isset($image['id']))) {
@@ -28,7 +29,7 @@
 			} else {
 				$image = [
 					'url' => $fallback_image_uri,
-					'alt' => wp_strip_all_tags($heading ?? 'Content block image')
+					'alt' => wp_strip_all_tags((is_array($heading) && isset($heading['heading']) && is_string($heading['heading'])) ? $heading['heading'] : 'Content block image')
 				];
 			}
 		}
@@ -65,7 +66,13 @@
 				);
 				?>
 			</div>
-			<div class="content-block__media-hld">
+			<?php
+				$media_hld_classes = ['content-block__media-hld'];
+				if ($media_type === 'image' && $image_display_size === 'small') {
+					$media_hld_classes[] = 'content-block__media-hld--small';
+				}
+			?>
+			<div class="<?php echo esc_attr(implode(' ', $media_hld_classes)); ?>">
 				<?php if ($media_type === 'image') : ?>
 					<?php
 					if (!empty($image['id'])) {
@@ -78,7 +85,7 @@
 								2800 => [720 * 2, 720 * 2, 1],
 							],
 							[
-								'alt'     => $image['alt'] ? $image['alt'] : wp_strip_all_tags($heading ?? ''),
+								'alt'     => $image['alt'] ? $image['alt'] : wp_strip_all_tags((is_array($heading) && isset($heading['heading']) && is_string($heading['heading'])) ? $heading['heading'] : ''),
 								'class'   => 'content-block__img',
 								'loading' => 'lazy',
 							],

@@ -49,6 +49,12 @@
 		@include lg {
 			width: 48%;
 		}
+
+		&--small {
+			width: 37%;
+			margin-top: rem(14px);
+			margin-left: rem(50px);
+		}
 	}
 
 	&__img,
