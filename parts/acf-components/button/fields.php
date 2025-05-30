@@ -14,11 +14,11 @@
 			->addButtonGroup('size', [
 				'label' => 'Select button size',
 				'choices' => [
-					'default' => 'Default',
-					'large' => 'Large',
-					'extra-large' => 'Extra Large',
+					'default' => 'Small',
+					'large' => 'Default',
+					'extra-large' => 'Large',
 				],
-				'default_value' => 'default',
+				'default_value' => 'large',
 				'layout' => 'horizontal',
 				'return_format' => 'value',
 			])
