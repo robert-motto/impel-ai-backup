@@ -18,6 +18,11 @@
 			height: 100%;
 			background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
 		}
+
+		.heading-box {
+			margin-top: rem(114px);
+			margin-left: rem(12px);
+		}
 	}
 
 	&.color-mode-variant-secondary {
