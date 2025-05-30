@@ -17,7 +17,7 @@ function initSliders() {
 		// Read settings from data attributes
 		const autoplaySpeed = parseInt(carouselElement.dataset.autoplay, 10) || 0;
 		const pauseOnHover = carouselElement.dataset.pauseHover === 'true';
-		const slidesPerViewDesktop = parseInt(carouselElement.dataset.slidesPerView, 10) || 'auto';
+		const slidesPerViewDesktop = parseFloat(carouselElement.dataset.slidesPerView, 10) || 'auto';
 		const slidesPerViewTablet = slidesPerViewDesktop === 'auto' ? 'auto' : Math.min(2, slidesPerViewDesktop);
 		const slidesPerViewMobile = slidesPerViewDesktop === 'auto' ? 'auto' : 1;
 		const showNavigation = carouselElement.dataset.showNavigation === 'true';
