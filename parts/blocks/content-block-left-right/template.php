@@ -56,7 +56,7 @@
 				get_acf_component(
 					'heading-box',
 					[
-						'data' => $heading,
+						'data' => array_merge($heading, ['alignment' => 'left']),
 					],
 				);
 				?>
