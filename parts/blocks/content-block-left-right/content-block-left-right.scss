@@ -54,7 +54,7 @@
 		width: 100%;
 
 		@include lg {
-			width: 48%;
+			width: 44%;
 		}
 
 		&--small {
@@ -83,6 +83,58 @@
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
+		}
+	}
+
+	&__metric {
+		display: flex;
+		align-items: center;
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		left: 16px;
+		padding: 16px;
+		border-radius: 12px;
+		background: var(--c--brand-primary-250-main);
+		gap: 20px;
+
+		@include mobile {
+			top: 8px;
+			right: 8px;
+			left: 8px;
+			padding: 8px;
+		}
+
+		&-icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 32px;
+			min-width: 32px;
+			height: 32px;
+			min-height: 32px;
+			border-radius: 100%;
+			background-color: var(--c--brand-neutral-1000);
+
+			svg {
+				width: 16px;
+				height: 16px;
+
+				* {
+					fill: #fff;
+				}
+			}
+		}
+
+		&-text {
+			color: var(--c--brand-neutral-1000);
+			font-size: var(--t--interface-1);
+			font-weight: 500;
+			line-height: var(--t--line-height-300);
+
+			@include mobile {
+				line-height: 1.2;
+			}
 		}
 	}
 }
