@@ -24,6 +24,7 @@ function initSliders() {
 		const showProgressbar = carouselElement.dataset.showProgressbar === 'true';
 		const spaceBetween = parseInt(carouselElement.dataset.spaceBetween, 10) || 16;
 		const loop = carouselElement.dataset.loop === 'true';
+		const slidesOffsetBefore = parseInt(carouselElement.dataset.slidesOffsetBefore, 10) || 0;
 
 		// Find navigation and scrollbar elements relative to the carousel element
 		const container = carouselElement.closest('.slider__carousel-container');
@@ -48,8 +49,8 @@ function initSliders() {
 				slidesPerView: slidesPerViewMobile,
 				spaceBetween,
 				loop,
+				slidesOffsetBefore,
 				grabCursor: true,
-				speed: 700,
 				breakpoints: {
 					// 768px and up
 					768: {
@@ -113,38 +114,3 @@ function initSliders() {
 }
 
 initSliders();
-
-
-// // By default Swiper exports only core version without additional modules (like Navigation, Pagination, etc.). So you need to import and configure them:
-// import Swiper from 'swiper';
-// import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
-// // Import Lazyload for looped sliders to avoid image jumping
-// import { lazyLoadInstance } from '../libs/lazyLoad';
-
-// const exampleSliderHldAll = document.querySelectorAll('.js-example-slider-hld');
-// exampleSliderHldAll.forEach(sliderHld => {
-// 	const sliderEl = sliderHld.querySelector('.js-example-slider');
-// 	const slider = new Swiper(sliderEl, {
-// 		modules: [EffectFade, Navigation, Pagination, Autoplay],
-// 		slidesPerView: 3,
-// 		spaceBetween: 20,
-// 		loop: true,
-// 		grabCursor: true,
-// 		navigation: {
-// 			prevEl: sliderHld.querySelector('.js-example-slider-prev-btn'),
-// 			nextEl: sliderHld.querySelector('.js-example-slider-next-btn'),
-// 		},
-// 		pagination: {
-// 			el: sliderHld.querySelector('.js-example-slider-pagination'),
-// 			type: 'bullets',
-// 			bulletActiveClass: 'is-active',
-// 			clickable: true,
-// 		},
-// 		on: {
-// 			slideChange: function() {
-// 				lazyLoadInstance.update();
-// 			},
-// 		},
-// 	});
-// 	slider;
-// });
