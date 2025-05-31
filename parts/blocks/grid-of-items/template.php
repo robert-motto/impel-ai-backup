@@ -49,7 +49,11 @@
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-block="grid-of-items">
 
-		<div class="grid-of-items l-wrapper l-wrapper--medium">
+		<?php if ($display_mode === 'carousel') : ?>
+			<div class="grid-of-items">
+		<?php else : ?>
+			<div class="grid-of-items l-wrapper l-wrapper--medium">
+		<?php endif; ?>
 			<?php
 			get_acf_component(
 				'heading-box',
@@ -105,17 +109,28 @@
 							<?php elseif ($item_style === 'with-icons' && !empty($svg_icon)) : ?>
 								<?php
 								if (!empty($svg_icon['id'])) {
+									$svg_class = 'grid-of-items__svg';
+									$svg_url_for_class = wp_get_attachment_url($svg_icon['id']);
+									if ($svg_url_for_class) {
+										$filename_for_class = pathinfo($svg_url_for_class, PATHINFO_FILENAME);
+										$sanitized_filename = sanitize_title($filename_for_class);
+										$svg_class .= ' is-' . strtolower($sanitized_filename);
+									}
 									echo wp_get_attachment_image(
 										$svg_icon['id'],
 										'full',
 										false,
 										[
-											'class' => 'grid-of-items__svg',
+											'class' => esc_attr($svg_class),
 											'loading' => 'lazy',
 										]
 									);
 								} elseif (!empty($svg_icon['url'])) {
-									echo '<img class="grid-of-items__svg" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '"  />';
+									$svg_class = 'grid-of-items__svg';
+									$filename_for_class = pathinfo($svg_icon['url'], PATHINFO_FILENAME);
+									$sanitized_filename = sanitize_title($filename_for_class);
+									$svg_class .= ' is-' . strtolower($sanitized_filename);
+									echo '<img class="' . esc_attr($svg_class) . '" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '"  />';
 								}
 								?>
 							<?php endif; ?>
@@ -207,17 +222,28 @@
 								<?php elseif ($item_style === 'with-icons' && !empty($svg_icon)) : ?>
 									<?php
 									if (!empty($svg_icon['id'])) {
+										$svg_class = 'grid-of-items__svg';
+										$svg_url_for_class = wp_get_attachment_url($svg_icon['id']);
+										if ($svg_url_for_class) {
+											$filename_for_class = pathinfo($svg_url_for_class, PATHINFO_FILENAME);
+											$sanitized_filename = sanitize_title($filename_for_class);
+											$svg_class .= ' is-' . strtolower($sanitized_filename);
+										}
 										echo wp_get_attachment_image(
 											$svg_icon['id'],
 											'full',
 											false,
 											[
-												'class' => 'grid-of-items__svg',
+												'class' => esc_attr($svg_class),
 												'loading' => 'lazy',
 											]
 										);
 									} elseif (!empty($svg_icon['url'])) {
-										echo '<img class="grid-of-items__svg" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '"  />';
+										$svg_class = 'grid-of-items__svg';
+										$filename_for_class = pathinfo($svg_icon['url'], PATHINFO_FILENAME);
+										$sanitized_filename = sanitize_title($filename_for_class);
+										$svg_class .= ' is-' . strtolower($sanitized_filename);
+										echo '<img class="' . esc_attr($svg_class) . '" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '"  />';
 									}
 									?>
 								<?php endif; ?>
@@ -289,14 +315,21 @@
 						'pause_on_hover' => $carousel_pause_on_hover,
 						'show_navigation' => $carousel_show_navigation,
 						'show_progressbar' => $carousel_show_progressbar,
+						'space_between' => 24,
+						'slides_offset_before' => 84,
 					];
 
 				?>
 				<div class="grid-of-items__carousel">
 					<?php
+						$slider_button_data = $button_group;
+						$slider_button_data['type'] = 'link';
+						$slider_button_data['size'] = 'regular';
+						$slider_button_data['has_icon'] = 'y';
+						$slider_button_data['icon_position'] = 'right';
 						get_component('slider', [
-							'slides' => $slides_content,
-							'button' => $button_group,
+							'slides'          => $slides_content,
+							'button'          => $slider_button_data,
 							'slider_settings' => $slider_component_settings
 						]);
 					?>

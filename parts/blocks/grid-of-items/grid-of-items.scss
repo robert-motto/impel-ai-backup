@@ -4,6 +4,13 @@
 	padding: var(--padding-vertical-4xl) 0;
 	background-color: var(--background-bg-primary--c-brand-primary-forest);
 
+	&--carousel {
+		padding-top: var(--padding-vertical-lg);
+		padding-right: 0;
+		padding-bottom: var(--padding-vertical-4xl);
+		padding-left: 0;
+	}
+
 	&.color-mode-variant-secondary {
 		background-color: var(--bg-secondary);
 	}
@@ -175,11 +182,14 @@
 			flex-direction: column;
 			width: auto;
 			height: auto;
+			min-height: rem(512px);
 
 			> .grid-of-items__item {
 				width: 100%;
 				height: 100%;
+				border: 2px solid var(--elevation-surface-sunken-secondary-default);
 				border-radius: 24px;
+				border-radius: var(--border-radius-xxl);
 				background-color: var(--background-bg-primary--c-brand-primary-forest);
 
 				.color-mode-variant-secondary & {
@@ -187,18 +197,39 @@
 					background-color: var(--bg-secondary);
 				}
 
+				.grid-of-items__item-link-wrapper {
+					display: flex;
+					flex-direction: column;
+					height: 100%;
+				}
+
 				.grid-of-items__media-container {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: fit-content;
+					height: 48px;
+					margin: rem(10px);
+					margin: rem(28px) 0 rem(18px) rem(26px);
+					padding: 0 rem(16px);
+					border: 1px solid var(--interface-divider-divider);
+					border-radius: var(--border-radius-s);
 				}
 
 				.grid-of-items__svg {
-					width: auto;
-					height: rem(27px);
+					width: rem(134px);
+					height: auto;
+					max-height: rem(42px);
 					margin: 0 auto;
 					object-fit: contain;
+
+					&.is-lithia {
+						width: rem(95px);
+					}
 				}
 
 				.grid-of-items__content {
-					padding: var(--spacing-600) rem(28px) var(--spacing-800);
+					padding: var(--spacing-600) rem(28px) var(--spacing-600);
 				}
 
 				.grid-of-items__item-heading {
@@ -207,15 +238,16 @@
 				}
 
 				.grid-of-items__item-content {
+					margin-bottom: rem(26px);
+					padding-right: rem(20px);
 					line-height: calc(24 / 14);
 				}
 
 				.grid-of-items__metric-box {
 					display: flex;
 					align-items: center;
-					margin: 0 rem(28px) rem(32px);
-					margin-top: auto;
-					padding: rem(8px) rem(24px);
+					margin: auto 0 0;
+					padding: rem(8px) rem(54px) rem(8px) rem(22px);
 					border-radius: rem(8px);
 					background-color: #EDECF4;
 					gap: rem(16px);
@@ -224,11 +256,11 @@
 				.grid-of-items__metric-value {
 					display: flex;
 					align-items: baseline;
-					gap: rem(4px);
 					color: var(--txt-heading);
 					font-size: rem(28px);
 					font-weight: 400;
 					line-height: calc(48 / 28);
+					gap: rem(4px);
 
 					.grid-of-items__metric-icon {
 						svg {
@@ -246,6 +278,10 @@
 					line-height: calc(15.6 / 12);
 				}
 			}
+		}
+
+		.slider__navigation {
+			margin: rem(80px) rem(68px) 0 rem(114px);
 		}
 	}
 
