@@ -41,7 +41,7 @@
 				} else {
 					$thumbnail = [
 						'url' => $fallback_image_uri,
-						'alt' => wp_strip_all_tags($person_name ?? 'Testimonial')
+						'alt' => wp_strip_all_tags(is_array($person_name) ? ($person_name[0] ?? 'Testimonial') : ($person_name ?? 'Testimonial'))
 					];
 				}
 			}
@@ -65,7 +65,7 @@
 									2800 => [800 * 2, 450 * 2, 1],
 								],
 								[
-									'alt'     => $thumbnail['alt'] ? $thumbnail['alt'] : wp_strip_all_tags($person_name ?? 'Testimonial'),
+									'alt'     => $thumbnail['alt'] ? $thumbnail['alt'] : wp_strip_all_tags(is_array($person_name) ? ($person_name[0] ?? 'Testimonial') : ($person_name ?? 'Testimonial')),
 									'class'   => 'testimonials__img'
 								],
 							);
@@ -73,12 +73,12 @@
 						<?php else : ?>
 							<?php
 							$img_src = wp_get_attachment_image_url($thumbnail['id'], 'large');
-							$img_alt = get_post_meta($thumbnail['id'], '_wp_attachment_image_alt', true) ?: wp_strip_all_tags($person_name ?? 'Testimonial');
+							$img_alt = get_post_meta($thumbnail['id'], '_wp_attachment_image_alt', true) ?: wp_strip_all_tags(is_array($person_name) ? ($person_name[0] ?? 'Testimonial') : ($person_name ?? 'Testimonial'));
 							echo '<img class="testimonials__img" src="' . esc_url($img_src) . '" alt="' . esc_attr($img_alt) . '"  />';
 							?>
 						<?php endif; ?>
 					<?php elseif (!empty($thumbnail['url'])) : ?>
-						<img class="testimonials__img" src="<?php echo esc_url($thumbnail['url']); ?>" alt="<?php echo esc_attr($thumbnail['alt'] ?? wp_strip_all_tags($person_name ?? 'Testimonial')); ?>"  />
+						<img class="testimonials__img" src="<?php echo esc_url($thumbnail['url']); ?>" alt="<?php echo esc_attr($thumbnail['alt'] ?? wp_strip_all_tags(is_array($person_name) ? ($person_name[0] ?? 'Testimonial') : ($person_name ?? 'Testimonial'))); ?>"  />
 					<?php endif; ?>
 				<?php endif; ?>
 

@@ -17,8 +17,6 @@ const throttle = (func, delay) => {
 	};
 };
 
-
-console.log('test');
 let globalColorMode = 'dark';
 const mainElement = document.querySelector('.js-main');
 if (mainElement) {
@@ -216,7 +214,6 @@ function resetHeaderState() {
 }
 
 function updateHeaderBackground() {
-	console.log('updateHeaderBackground called');
 	const header = document.querySelector('.js-header');
 	if (!header) {
 		console.log('No header found');
@@ -227,15 +224,7 @@ function updateHeaderBackground() {
 	const hasActiveGlobalDropdown = document.querySelector('.js-global-dropdown.is-active');
 	const hasActiveLoginDropdown = document.querySelector('.js-login-dropdown.is-active');
 
-	console.log('Active states:', {
-		submenu: !!hasActiveSubmenu,
-		globalDropdown: !!hasActiveGlobalDropdown,
-		loginDropdown: !!hasActiveLoginDropdown,
-	});
-
-	// Save header class lists if not already saved and dropdown is becoming active
 	if ((hasActiveSubmenu || hasActiveGlobalDropdown || hasActiveLoginDropdown) && !header.dataset.originalClasses) {
-		console.log('Saving original classes');
 		const colorModeClasses = [];
 		const themeClasses = [];
 
@@ -244,47 +233,36 @@ function updateHeaderBackground() {
 		if (header.classList.contains('is-dark')) themeClasses.push('is-dark');
 		if (header.classList.contains('is-light')) themeClasses.push('is-light');
 
-		console.log('Original classes:', { colorModeClasses, themeClasses });
-
 		header.dataset.originalColorModeClasses = colorModeClasses.join(' ');
 		header.dataset.originalThemeClasses = themeClasses.join(' ');
 		header.dataset.originalClasses = 'saved';
 	}
 
 	if (hasActiveSubmenu || hasActiveGlobalDropdown || hasActiveLoginDropdown) {
-		console.log('Setting header to light mode');
 		header.classList.remove('color-mode-is-dark');
 		header.classList.remove('is-dark');
 		header.classList.add('color-mode-is-light');
 		header.classList.add('is-light');
 	} else {
-		console.log('Restoring original classes');
 		// Restore saved header class lists
 		if (header.dataset.originalClasses) {
-			console.log('Found saved classes, restoring...');
 			header.classList.remove('color-mode-is-dark', 'color-mode-is-light', 'is-dark', 'is-light');
 
 			if (header.dataset.originalColorModeClasses) {
 				const colorModeClasses = header.dataset.originalColorModeClasses.split(' ').filter(cls => cls);
-				console.log('Restoring color mode classes:', colorModeClasses);
 				colorModeClasses.forEach(cls => header.classList.add(cls));
 			}
 
 			if (header.dataset.originalThemeClasses) {
 				const themeClasses = header.dataset.originalThemeClasses.split(' ').filter(cls => cls);
-				console.log('Restoring theme classes:', themeClasses);
 				themeClasses.forEach(cls => header.classList.add(cls));
 			}
 
 			delete header.dataset.originalClasses;
 			delete header.dataset.originalColorModeClasses;
 			delete header.dataset.originalThemeClasses;
-		} else {
-			console.log('No saved classes found');
 		}
 	}
-
-	console.log('Final header classes:', Array.from(header.classList));
 }
 
 function initMegaMenu() {

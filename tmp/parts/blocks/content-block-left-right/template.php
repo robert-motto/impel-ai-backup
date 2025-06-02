@@ -12,10 +12,15 @@
 	$color_mode      		= $group['section_settings_group']['mode'] ?? 'light';
 	$color_mode_variant	= $group['mode_variant'] ?? 'regular';
 	$heading         		= $group['heading_box_group'] ?? '';
+	$text         			= $group['text'] ?? '';
 	$buttons 						= $group['action_group_group'] ?? [];
 	$media_type     		= $group['media_type'] ?? 'image';
 	$image           		= $group['image'] ?? '';
 	$video_group     		= $group['video_group'] ?? [];
+	$image_display_size = $group['image_display_size'] ?? 'regular';
+	$show_metric        = $group['show_metric'] ?? 0;
+	$metric_icon        = $group['metric_icon'] ?? 'arrow-up';
+	$metric_text        = $group['metric_text'] ?? '';
 
 	// Set fallback image if none is selected and media type is image
 	if ($media_type === 'image' && (empty($image) || !isset($image['id']))) {
@@ -28,7 +33,7 @@
 			} else {
 				$image = [
 					'url' => $fallback_image_uri,
-					'alt' => wp_strip_all_tags($heading ?? 'Content block image')
+					'alt' => wp_strip_all_tags((is_array($heading) && isset($heading['heading']) && is_string($heading['heading'])) ? $heading['heading'] : 'Content block image')
 				];
 			}
 		}
@@ -51,10 +56,15 @@
 				get_acf_component(
 					'heading-box',
 					[
-						'data' => $heading,
+						'data' => array_merge($heading, ['alignment' => 'left']),
 					],
 				);
 				?>
+				<?php if (!empty($text)) : ?>
+					<div class="content-block__text">
+						<?php echo $text; ?>
+					</div>
+				<?php endif; ?>
 				<?php
 				get_acf_component(
 					'action-group',
@@ -65,7 +75,13 @@
 				);
 				?>
 			</div>
-			<div class="content-block__media-hld">
+			<?php
+			$media_hld_classes = ['content-block__media-hld'];
+			if ($media_type === 'image' && $image_display_size === 'small') {
+				$media_hld_classes[] = 'content-block__media-hld--small';
+			}
+			?>
+			<div class="<?php echo esc_attr(implode(' ', $media_hld_classes)); ?>">
 				<?php if ($media_type === 'image') : ?>
 					<?php
 					if (!empty($image['id'])) {
@@ -73,12 +89,12 @@
 							$image['id'],
 							[
 								560  => [560, 560, 1],
-								1024 => [720, 720, 1],
-								1920 => [720, 720, 1],
-								2800 => [720 * 2, 720 * 2, 1],
+								1024 => [564, 634, 1],
+								1920 => [564, 634, 1],
+								2800 => [564 * 2, 634 * 2, 1],
 							],
 							[
-								'alt'     => $image['alt'] ? $image['alt'] : wp_strip_all_tags($heading ?? ''),
+								'alt'     => $image['alt'] ? $image['alt'] : wp_strip_all_tags((is_array($heading) && isset($heading['heading']) && is_string($heading['heading'])) ? $heading['heading'] : ''),
 								'class'   => 'content-block__img',
 								'loading' => 'lazy',
 							],
@@ -96,6 +112,25 @@
 						]
 					]);
 					?>
+				<?php endif; ?>
+
+				<?php if ($show_metric) : ?>
+					<div class="content-block__metric">
+						<div class="content-block__metric-icon">
+							<?php
+							$icon_name = 'check';
+							if ($metric_icon === 'arrow-up') {
+								$icon_name = 'arrow-up-right';
+							} elseif ($metric_icon === 'arrow-down') {
+								$icon_name = 'arrow-down-right';
+							}
+							get_icon($icon_name);
+							?>
+						</div>
+						<div class="content-block__metric-text">
+							<?php echo esc_html($metric_text); ?>
+						</div>
+					</div>
 				<?php endif; ?>
 			</div>
 		</div>

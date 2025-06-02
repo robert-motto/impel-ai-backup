@@ -3,7 +3,6 @@
 	const mobileNav = document.querySelector('.js-mobile-nav');
 	const mobileNavToggle = document.querySelectorAll('.js-mobile-nav-toggle');
 	const mobileNavClose = document.querySelectorAll('.js-mobile-nav-close');
-	console.log(mobileNav);
 	if (!mobileNav) {
 		return;
 	}
