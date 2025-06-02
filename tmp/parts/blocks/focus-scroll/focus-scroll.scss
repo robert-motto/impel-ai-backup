@@ -2,7 +2,7 @@
 
 .l-section--focus-scroll {
 	padding: var(--padding-vertical-4xl) 0;
-	background-color: var(--background-bg-primary--c-brand-primary-forest);
+	background-color: red;//var(--background-bg-primary--c-brand-primary-forest);
 
 	&.color-mode-variant-secondary {
 		background-color: var(--bg-secondary);
@@ -47,7 +47,7 @@
 
 	&__content-hld {
 		order: 2;
-		max-width: rem(516px);
+		max-width: rem(544px);
 
 		* {
 			text-align: left;
