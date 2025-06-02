@@ -173,7 +173,8 @@
 		svg {
 			path,
 			ellipse {
-				.is-scrolled & {
+				.is-scrolled &,
+				.submenu-is-active & {
 					stroke: var(--c--brand-neutral-100);
 				}
 			}
@@ -351,11 +352,21 @@
 			}
 		}
 
+		&-icon {
+			width: 16px;
+			height: 16px;
+			margin-right: 8px;
+
+			svg path {
+				transition: stroke 0.3s;
+			}
+		}
+
 		&-arrow {
 			display: inline-flex;
 			align-items: center;
-			transition: opacity 0.3s;
-			opacity: 0;
+			margin-left: 8px;
+			transition: fill 0.3s;
 
 			svg {
 				width: rem(16px);
@@ -365,12 +376,26 @@
 
 		&--login {
 			.site-top__dropdown-list {
-				li a {
-					&:hover,
-					&:focus-visible,
-					&.is-active {
-						.site-top__dropdown-arrow {
-							opacity: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+
+				li {
+					display: inline-block;
+
+					a {
+						&:hover,
+						&:focus-visible,
+						&.is-active {
+							.site-top__dropdown-icon {
+								svg path {
+									stroke: var(--c--brand-primary-250-main);
+								}
+							}
+
+							.site-top__dropdown-arrow {
+								fill: var(--c--brand-primary-250-main);
+							}
 						}
 					}
 				}
@@ -558,12 +583,12 @@
 				background-color: var(--navigation-item-fill-hover);
 
 				.text {
-					color: var(--c--brand-primary-500);
+					color: var(--c--brand-primary-250-main);
 				}
 			}
 
 			.site-top-nav__chevron.site-top-nav__chevron.site-top-nav__chevron {
-				color: var(--c--brand-primary-500);
+				color: var(--c--brand-primary-250-main);
 				transform: rotate(180deg);
 			}
 
@@ -615,7 +640,8 @@
 			display: block;
 			color: var(--txt-heading);
 
-			&:hover {
+			&:hover,
+			&.is-active {
 				.sub-menu-wrap__tab-link-title,
 				.sub-menu-wrap__grid-title {
 					&::after {
@@ -919,22 +945,30 @@
 						z-index: -1;
 						border-radius: var(--border-radius-s);
 						background-color: var(--button-bg-primary-idle);
+						transition: opacity 0.3s;
+						opacity: 0;
 					}
 
 					svg path {
-						stroke: var(--c--brand-neutral-1000);
+						stroke: var(--c--brand-neutral-100);
+						transition: stroke 0.3s;
 					}
-				}
-
-				&:hover {
-					background-color: var(--c--ui-gray-50);
-					color: var(--c--brand-primary-700);
 				}
 
 				&.is-active {
 					background-color: rgba(226, 217, 255, 0.4);
 					color: var(--c--brand-primary-250-main);
 					font-weight: var(--font-weight-500);
+
+					.sub-menu-wrap__tab-chevron {
+						&::before {
+							opacity: 1;
+						}
+
+						svg path {
+							stroke: var(--c--brand-neutral-1000);
+						}
+					}
 				}
 			}
 

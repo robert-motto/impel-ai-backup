@@ -358,7 +358,13 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 	{
 		$output = '';
 		if (!empty($link['link'])) {
-			$output .= '<a href="' . esc_url($link['link']['url']) . '" class="sub-menu-wrap__tab-link">';
+			// Check if this link is the current page
+			$current_url = home_url($_SERVER['REQUEST_URI']);
+			$link_url = $link['link']['url'];
+			$is_current = ($current_url === $link_url) || (rtrim($current_url, '/') === rtrim($link_url, '/'));
+
+			$active_class = $is_current ? ' is-active' : '';
+			$output .= '<a href="' . esc_url($link['link']['url']) . '" class="sub-menu-wrap__tab-link' . $active_class . '">';
 			$output .= '<span class="sub-menu-wrap__tab-link-title">' . esc_html($link['link']['title']) . '</span>';
 			if (!empty($link['text'])) {
 				$output .= '<span class="sub-menu-wrap__tab-link-desc">' . esc_html($link['text']) . '</span>';

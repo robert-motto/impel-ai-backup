@@ -139,6 +139,12 @@
 						'label' => 'Link',
 						'return_format' => 'array',
 					])
+					->addTextarea('svg_icon', [
+						'label' => 'SVG Icon',
+						'instructions' => 'Paste the complete SVG code for the icon. This will be displayed inline before the link text.',
+						'rows' => 4,
+						'placeholder' => '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>'
+					])
 				->endRepeater()
 			->endGroup()
 			->addImage('header_logo')
