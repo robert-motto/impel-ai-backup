@@ -976,7 +976,7 @@
 			position: relative;
 			width: 100%;
 			margin-top: 0;
-			padding: rem(54px) rem(76px) rem(0);
+			padding: rem(64px) rem(76px) rem(0);
 
 			&::before {
 				content: '';
@@ -987,6 +987,12 @@
 				left: -60px;
 				height: 1px;
 				background-color: rgba(18, 18, 18, 0.1);
+			}
+
+			svg {
+				position: absolute;
+				top: 56px;
+				left: 12px;
 			}
 		}
 

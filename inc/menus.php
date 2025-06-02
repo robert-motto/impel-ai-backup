@@ -227,6 +227,11 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 		$grey_bar = get_field('grey_bar', $menu_item->ID);
 		if (!empty($grey_bar) && $grey_bar['show_grey_bar'] === 'y') {
 			$output .= '<div class="sub-menu-wrap__grey-bar">';
+
+			ob_start();
+			get_icon('grid');
+			$output .= ob_get_clean();
+
 			if (!empty($grey_bar['grey_bar_text'])) {
 				$output .= '<p class="sub-menu-wrap__grey-bar-text">' . esc_html($grey_bar['grey_bar_text']) . '</p>';
 			}
