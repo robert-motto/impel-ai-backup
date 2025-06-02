@@ -41,6 +41,11 @@
 					'group_heading_box',
 				]
 			])
+			->addTextarea('text', [
+				'label' => 'Text',
+				'rows' => '8',
+				'new_lines' => 'br',
+			])
 			->addField('tab_buttons', 'clone', [
 				'clone' => [
 					'group_action_group',
@@ -63,6 +68,17 @@
 				'preview_size' => 'medium',
 			])
 				->conditional('media_type', '==', 'image')
+			->addSelect('image_display_size', [
+				'label' => 'Image Display Size',
+				'choices' => [
+					'regular' => 'Regular',
+					'small'   => 'Small',
+				],
+				'default_value' => 'regular',
+				'return_format' => 'value',
+				'ui'            => 1,
+			])
+				->conditional('media_type', '==', 'image')
 			->addField('video', 'clone', [
 				'label' => 'Video',
 				'clone' => [
@@ -72,6 +88,29 @@
 				'prefix_name' => true,
 			])
 				->conditional('media_type', '==', 'video')
+			->addTrueFalse('show_metric', [
+				'label' => 'Show Metric',
+				'default_value' => 0,
+				'ui' => 1,
+			])
+			->addSelect('metric_icon', [
+				'label' => 'Metric Icon',
+				'instructions' => 'Select icon to display in the metric badge',
+				'choices' => [
+					'arrow-up' => 'Arrow Up (Increase)',
+					'arrow-down' => 'Arrow Down (Decrease)',
+					'check' => 'Check',
+				],
+				'default_value' => 'arrow-up',
+				'return_format' => 'value',
+				'ui' => 1,
+			])
+			->conditional('show_metric', '==', 1)
+			->addText('metric_text', [
+				'label' => 'Metric Text',
+				'instructions' => 'Text describing the metric',
+			])
+			->conditional('show_metric', '==', 1)
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path);
 	return $name;

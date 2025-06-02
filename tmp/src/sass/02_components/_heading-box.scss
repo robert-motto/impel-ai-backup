@@ -13,8 +13,6 @@
 	&--left {
 		align-items: flex-start;
 		max-width: initial;
-		margin-top: rem(114px);
-		margin-left: rem(12px);
 		text-align: left;
 
 		* {
@@ -71,12 +69,14 @@
 	&__subheading {
 		max-width: 622px;
 		margin-top: var(--spacing-600);
-		color: var(--txt-paragraph-secondary);
+		color: var(--txt-subheading);
 		font-size: var(--t--subheading-2);
 		line-height: var(--t--line-height-500);
 
-		.color-mode-variant-secondary & {
-			color: var(--txt-subheading);
+		&--small {
+			padding-right: rem(30px);
+			font-size: var(--t--paragraph-2);
+			line-height: var(--t--line-height-400);
 		}
 	}
 

@@ -52,6 +52,17 @@
 				'new_lines' => 'br',
 			])
 				->conditional('use_list_subheading', '==', '0')
+			->addSelect('subheading_font_size', [
+				'label' => 'Subheading Font Size',
+				'choices' => [
+					'regular' => 'Regular (18px)',
+					'small'   => 'Small (14px)',
+				],
+				'default_value' => 'regular',
+				'return_format' => 'value',
+				'ui'            => 1,
+			])
+				->conditional('use_list_subheading', '==', '0')
 			->addRepeater('subheading_list', [
 				'label' => 'Subheading List',
 				'instructions' => 'Add items for the bulleted list. The icon is predefined.',

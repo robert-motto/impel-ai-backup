@@ -10,7 +10,8 @@
 	$title        = $btn['title'] ?? '';
 	$target       = isset($btn['target']) ? 'target="'.$btn['target'].'"' : '';
 	$has_icon     = $button['has_icon'] ?? 'n';
-	$btn_classes .= !empty($button['has_icon']) ? ($button['icon_position'] === 'left' ? ' is-reverse' : '') : '';
+	$icon_position = $button['icon_position'] ?? 'right';
+	$btn_classes .= !empty($button['has_icon']) ? ($icon_position === 'left' ? ' is-reverse' : '') : '';
 	$icon         = $button['icon'] ?? '';
 ?>
 
@@ -23,7 +24,7 @@
 					echo file_get_contents($icon['url']);
 				} else{
 					get_icon('arrow-right', [
-						'classes' => $button['icon_position'] === 'left' ? 'is-rotated' : '',
+					'classes' => $icon_position === 'left' ? 'is-rotated' : '',
 					]);
 				}
 			?>
