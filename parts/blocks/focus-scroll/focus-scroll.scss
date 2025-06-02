@@ -47,7 +47,7 @@
 
 	&__content-hld {
 		order: 2;
-		max-width: rem(516px);
+		max-width: rem(544px);
 
 		* {
 			text-align: left;
@@ -67,6 +67,10 @@
 		background: transparent;
 		transition: all 0.3s ease;
 		gap: var(--spacing-400);
+
+		&:not(:last-child) {
+			margin-bottom: var(--spacing-400);
+		}
 
 		&:hover {
 			background: var(--elevation-surface-sunken-primary-default);
@@ -97,14 +101,14 @@
 
 			img {
 				width: auto;
-				height: 28px;
+				height: 24px;
 			}
 		}
 
 		&-title {
 			color: var(--txt-heading);
 			font-size: var(--t--heading-6);
-			line-height: var(--t--line-height-500);
+			line-height: rem(24px);
 		}
 
 		&-subtitle {
