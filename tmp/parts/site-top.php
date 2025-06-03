@@ -51,7 +51,7 @@
 			<?php
 				wp_nav_menu(array(
 					'theme_location' => 'main_menu',
-					'menu_class'     => 'site-top__main-nav site-top-nav',
+					'menu_class'     => 'site-top__main-nav site-top-nav js-site-top-nav',
 					'container'      => false,
 					'link_class'     => 'site-top-nav__item',
 					'link_before'    => '<span class="text">',
@@ -63,7 +63,7 @@
 		<div class="site-top__actions">
 			<div class="site-top__action-group">
 				<a href="#" class="site-top__action-item site-top__action-item--global js-global-toggle">
-					<span class="site-top__action-icon site-top__action-icon--globe">
+					<span class="site-top__action-icon site-top__action-icon--globe js-globe-icon">
 						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M11.8106 3.67126C12.13 5.29608 12.3262 7.49664 12.3262 9.91947C12.3262 12.3423 12.13 14.5429 11.8106 16.1677" stroke="#fff" stroke-width="1.11"/>
 							<path d="M7.81196 3.67126C7.41478 5.29608 7.1709 7.49664 7.1709 9.91947C7.1709 12.3423 7.41478 14.5429 7.81196 16.1677" stroke="#fff" stroke-width="1.11"/>
@@ -151,15 +151,17 @@
 									<?php foreach ($login_dropdown_links as $item): ?>
 										<?php
 											$link = $item['link'] ?? [];
+											$svg_icon = $item['svg_icon'] ?? '';
 											if (empty($link['url']) || empty($link['title'])) continue;
 										?>
 										<li>
 											<a href="<?php echo esc_url($link['url']); ?>" <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
-												<?php echo esc_html($link['title']); ?>
+												<?php if (!empty($svg_icon)): ?>
+													<span class="site-top__dropdown-icon"><?php echo $svg_icon; ?></span>
+												<?php endif; ?>
+												<span class="text"><?php echo esc_html($link['title']); ?></span>
 												<span class="site-top__dropdown-arrow">
-													<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-													</svg>
+													<?php get_icon('arrow-up-right'); ?>
 												</span>
 											</a>
 										</li>

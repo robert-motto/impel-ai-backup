@@ -32,6 +32,7 @@
 
 		@include lg {
 			width: 40%;
+			max-width: rem(516px);
 		}
 	}
 
@@ -70,7 +71,7 @@
 		}
 
 		&-label {
-			max-width: 160px;
+			max-width: 176px;
 			font-size: var(--t--paragraph-2);
 			line-height: var(--t--line-height-400);
 		}

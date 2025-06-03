@@ -2,7 +2,7 @@
 
 .l-section--focus-scroll {
 	padding: var(--padding-vertical-4xl) 0;
-	background-color: red;//var(--background-bg-primary--c-brand-primary-forest);
+	background-color: var(--background-bg-primary--c-brand-primary-forest);
 
 	&.color-mode-variant-secondary {
 		background-color: var(--bg-secondary);
@@ -68,6 +68,10 @@
 		transition: all 0.3s ease;
 		gap: var(--spacing-400);
 
+		&:not(:last-child) {
+			margin-bottom: var(--spacing-400);
+		}
+
 		&:hover {
 			background: var(--elevation-surface-sunken-primary-default);
 		}
@@ -97,14 +101,14 @@
 
 			img {
 				width: auto;
-				height: 28px;
+				height: 24px;
 			}
 		}
 
 		&-title {
 			color: var(--txt-heading);
 			font-size: var(--t--heading-6);
-			line-height: var(--t--line-height-500);
+			line-height: rem(24px);
 		}
 
 		&-subtitle {

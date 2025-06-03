@@ -32,12 +32,31 @@
 			});
 		});
 	}
-	const mobileNavParents = document.querySelectorAll('.mobile-nav__parent');
+	const mobileNavParents = document.querySelectorAll('.js-mobile-nav-parent');
 	if (mobileNavParents && mobileNavParents.length > 0) {
 		mobileNavParents.forEach(parent => {
 			parent.addEventListener('click', () => {
 				const item = parent.parentElement;
-				item.classList.toggle('is-active');
+				const isCurrentlyActive = item.classList.contains('is-active');
+
+				// Close all other mobile nav items
+				mobileNavParents.forEach(otherParent => {
+					const otherItem = otherParent.parentElement;
+					otherItem.classList.remove('is-active');
+				});
+
+				// Toggle the clicked item (if it wasn't active, make it active)
+				if (!isCurrentlyActive) {
+					item.classList.add('is-active');
+
+					// Scroll the clicked item to the top of the viewport
+					setTimeout(() => {
+						item.scrollIntoView({
+							behavior: 'smooth',
+							block: 'start',
+						});
+					}, 100);
+				}
 			});
 		});
 	}

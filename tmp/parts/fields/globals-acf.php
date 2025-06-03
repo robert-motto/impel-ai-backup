@@ -139,51 +139,15 @@
 						'label' => 'Link',
 						'return_format' => 'array',
 					])
+					->addTextarea('svg_icon', [
+						'label' => 'SVG Icon',
+						'instructions' => 'Paste the complete SVG code for the icon. This will be displayed inline before the link text.',
+						'rows' => 4,
+						'placeholder' => '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>'
+					])
 				->endRepeater()
 			->endGroup()
 			->addImage('header_logo')
-			->addText('first_dropdown')
-			->addPostObject('first_post', [
-				'label' => 'Featured post',
-			])
-			->addText('second_dropdown')
-			->addPostObject('second_post', [
-				'label' => 'Featured post',
-			])
-			->addText('third_dropdown')
-			->addPostObject('third_post', [
-				'label' => 'Featured post',
-			])
-			->addLink('menu_link')
-			->addText('fourth_dropdown')
-			->addPostObject('fourth_post', [
-				'label' => 'Featured post',
-			])
-			->addImage('cloud_image')
-			->addWysiwyg('cloud_intro', [
-				'label' => 'Cloud intro text'
-			])
-			->addLink('cloud_link', [
-				'label' => 'Cloud link',
-				'return_format' => 'array',
-			])
-			->addWysiwyg('cloud_industry', [
-				'label' => 'Cloud industry text'
-			])
-			->addImage('consulting_image')
-			->addWysiwyg('consulting_intro', [
-				'label' => 'Consulting intro text'
-			])
-			->addLink('consulting_link', [
-				'label' => 'Consulting link',
-				'return_format' => 'array',
-			])
-			->addWysiwyg('consulting_industry', [
-				'label' => 'Consulting industry text'
-			])
-			->addWysiwyg('consulting_solution', [
-				'label' => 'Consulting solution text'
-			])
 			->addRepeater('footer_links', [
 				'label' => 'Footer links',
 				'button_label' => 'Add Button',
@@ -206,6 +170,87 @@
 				])
 				->addText('text2')
 				->addLink('link2', [
+					'label' => 'Link',
+					'return_format' => 'array',
+				])
+			->endGroup()
+		->addTab('Mobile Menu')
+			->addGroup('mobile_menu_1_intro', [
+				'label' => 'Why Impel - Intro Box',
+				'instructions' => 'Optional intro box for Why Impel mobile menu',
+			])
+				->addImage('image', [
+					'label' => 'Image',
+					'return_format' => 'array',
+				])
+				->addWysiwyg('intro_text', [
+					'label' => 'Intro Text'
+				])
+				->addLink('link', [
+					'label' => 'Link',
+					'return_format' => 'array',
+				])
+			->endGroup()
+			->addGroup('mobile_menu_2_intro', [
+				'label' => 'Platform - Intro Box',
+				'instructions' => 'Optional intro box for Platform mobile menu',
+			])
+				->addImage('image', [
+					'label' => 'Image',
+					'return_format' => 'array',
+				])
+				->addWysiwyg('intro_text', [
+					'label' => 'Intro Text'
+				])
+				->addLink('link', [
+					'label' => 'Link',
+					'return_format' => 'array',
+				])
+			->endGroup()
+			->addGroup('mobile_menu_3_intro', [
+				'label' => 'Solutions - Intro Box',
+				'instructions' => 'Optional intro box for Solutions mobile menu',
+			])
+				->addImage('image', [
+					'label' => 'Image',
+					'return_format' => 'array',
+				])
+				->addWysiwyg('intro_text', [
+					'label' => 'Intro Text'
+				])
+				->addLink('link', [
+					'label' => 'Link',
+					'return_format' => 'array',
+				])
+			->endGroup()
+			->addGroup('mobile_menu_4_intro', [
+				'label' => 'Resources - Intro Box',
+				'instructions' => 'Optional intro box for Resources mobile menu',
+			])
+				->addImage('image', [
+					'label' => 'Image',
+					'return_format' => 'array',
+				])
+				->addWysiwyg('intro_text', [
+					'label' => 'Intro Text'
+				])
+				->addLink('link', [
+					'label' => 'Link',
+					'return_format' => 'array',
+				])
+			->endGroup()
+			->addGroup('mobile_menu_5_intro', [
+				'label' => 'Company - Intro Box',
+				'instructions' => 'Optional intro box for Company mobile menu',
+			])
+				->addImage('image', [
+					'label' => 'Image',
+					'return_format' => 'array',
+				])
+				->addWysiwyg('intro_text', [
+					'label' => 'Intro Text'
+				])
+				->addLink('link', [
 					'label' => 'Link',
 					'return_format' => 'array',
 				])

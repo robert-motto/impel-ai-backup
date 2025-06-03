@@ -78,6 +78,7 @@ headerAll.forEach((header) => {
 		const openMenuItemOnScroll = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
 		if (openMenuItemOnScroll && prevScroll !== currentScroll) {
 			openMenuItemOnScroll.classList.remove('is-active');
+			updateSubmenuBodyClass();
 			dropdownWasClosed = true;
 		}
 
@@ -97,6 +98,18 @@ headerAll.forEach((header) => {
 			loginDropdownOnScroll.classList.remove('is-active');
 			if (loginToggleOnScroll) {
 				loginToggleOnScroll.classList.remove('is-active');
+			}
+			// Reset global text display and globe icon
+			const globalElement = document.querySelector('.js-global-toggle');
+			if (globalElement) {
+				const globalText = globalElement.querySelector('.text');
+				const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
+				if (globalText) {
+					globalText.style.display = '';
+				}
+				globeIconPaths.forEach(path => {
+					path.style.stroke = '';
+				});
 			}
 			dropdownWasClosed = true;
 		}
@@ -156,6 +169,7 @@ document.addEventListener('keydown', (e) => {
 		const openMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
 		if (openMenuItem) {
 			openMenuItem.classList.remove('is-active');
+			updateSubmenuBodyClass();
 			shouldUpdateBackground = true;
 		}
 
@@ -178,6 +192,18 @@ document.addEventListener('keydown', (e) => {
 			if (loginToggle) {
 				loginToggle.classList.remove('is-active');
 			}
+			// Reset global text display and globe icon
+			const globalElement = document.querySelector('.js-global-toggle');
+			if (globalElement) {
+				const globalText = globalElement.querySelector('.text');
+				const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
+				if (globalText) {
+					globalText.style.display = '';
+				}
+				globeIconPaths.forEach(path => {
+					path.style.stroke = '';
+				});
+			}
 			shouldUpdateBackground = true;
 		}
 
@@ -191,6 +217,16 @@ function updateSubmenuTopPosition(subMenuElement, headerElement) {
 	if (subMenuElement && headerElement) {
 		const headerHeight = headerElement.getBoundingClientRect().height;
 		subMenuElement.style.top = `${headerHeight}px`;
+	}
+}
+
+function updateSubmenuBodyClass() {
+	const hasActiveSubmenu = document.querySelector('.js-site-top-nav > .menu-item.has-submenu.is-active');
+	const body = document.body;
+	if (hasActiveSubmenu) {
+		body.classList.add('submenu-is-active');
+	} else {
+		body.classList.remove('submenu-is-active');
 	}
 }
 
@@ -316,6 +352,7 @@ function initMegaMenu() {
 					firstFocusable.focus();
 				}
 			}
+			updateSubmenuBodyClass();
 			updateHeaderBackground();
 		});
 
@@ -353,6 +390,7 @@ function initMegaMenu() {
 		subMenuWrap.addEventListener('keydown', (e) => {
 			if (e.key === 'Escape') {
 				item.classList.remove('is-active');
+				updateSubmenuBodyClass();
 				updateHeaderBackground();
 				if (triggerLink) {
 					triggerLink.focus();
@@ -380,6 +418,7 @@ function initMegaMenu() {
 		if (openMenuItem) {
 			if (!openMenuItem.contains(e.target)) {
 				openMenuItem.classList.remove('is-active');
+				updateSubmenuBodyClass();
 				updateHeaderBackground();
 			}
 		}
@@ -402,6 +441,18 @@ function initMegaMenu() {
 			if (!loginDropdown.contains(e.target) && !loginToggle.contains(e.target)) {
 				loginDropdown.classList.remove('is-active');
 				loginToggle.classList.remove('is-active');
+				// Reset global text display and globe icon
+				const globalElement = document.querySelector('.js-global-toggle');
+				if (globalElement) {
+					const globalText = globalElement.querySelector('.text');
+					const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
+					if (globalText) {
+						globalText.style.display = '';
+					}
+					globeIconPaths.forEach(path => {
+						path.style.stroke = '';
+					});
+				}
 				updateHeaderBackground();
 			}
 		}
@@ -426,6 +477,7 @@ function initLoginDropdown() {
 			const openMegaMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
 			if (openMegaMenuItem) {
 				openMegaMenuItem.classList.remove('is-active');
+				updateSubmenuBodyClass();
 			}
 
 			const globalDropdown = document.querySelector('.js-global-dropdown.is-active');
@@ -439,6 +491,19 @@ function initLoginDropdown() {
 
 			const isActive = loginDropdown.classList.toggle('is-active');
 			loginToggle.classList.toggle('is-active', isActive);
+
+			// Hide global text and change globe icon when login is active
+			const globalElement = document.querySelector('.js-global-toggle');
+			if (globalElement) {
+				const globalText = globalElement.querySelector('.text');
+				const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
+				if (globalText) {
+					globalText.style.display = isActive ? 'none' : '';
+				}
+				globeIconPaths.forEach(path => {
+					path.style.stroke = isActive ? 'var(--c--brand-neutral-100)' : '';
+				});
+			}
 
 			if (isActive) {
 				updateSubmenuTopPosition(loginDropdown, siteHeader);
@@ -455,6 +520,18 @@ function initLoginDropdown() {
 		if (e.key === 'Escape') {
 			loginDropdown.classList.remove('is-active');
 			loginToggle.classList.remove('is-active');
+			// Reset global text display and globe icon
+			const globalElement = document.querySelector('.js-global-toggle');
+			if (globalElement) {
+				const globalText = globalElement.querySelector('.text');
+				const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
+				if (globalText) {
+					globalText.style.display = '';
+				}
+				globeIconPaths.forEach(path => {
+					path.style.stroke = '';
+				});
+			}
 			updateHeaderBackground();
 			loginToggle.focus();
 		}
@@ -496,6 +573,7 @@ function initGlobalDropdown() {
 			const openMegaMenuItem = document.querySelector('.site-top-nav > .menu-item.has-submenu.is-active');
 			if (openMegaMenuItem) {
 				openMegaMenuItem.classList.remove('is-active');
+				updateSubmenuBodyClass();
 			}
 
 			const isActive = globalDropdown.classList.toggle('is-active');

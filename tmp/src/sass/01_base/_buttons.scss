@@ -120,25 +120,25 @@
 	}
 
 	&--secondary {
-		outline-color: var(--button-border-secondary-idle);
+		border-color: var(--button-border-secondary-idle);
 		box-shadow: 0 0 0 1px transparent inset;
 		color: var(--button-label-secondary-idle);
 
 		&:hover {
-			outline-color: var(--button-bg-secondary-hover);
+			border-color: var(--button-bg-secondary-hover);
 			background-color: var(--button-bg-secondary-hover);
 			color: var(--button-label-secondary-hover);
 		}
 
 		&:focus {
-			border-color: var(--bg-primary);
-			outline-color: var(--button-border-focus);
+			border-color: var(--button-border-focus);
+			outline-color: var(--bg-primary);
 			box-shadow: 0 0 0 1px var(--button-border-secondary-idle) inset;
 		}
 
 		&.is-disabled {
 			pointer-events: none;
-			outline-color: var(--button-border-secondary-disabled);
+			border-color: var(--button-border-secondary-disabled);
 			color: var(--button-label-secondary-disabled);
 		}
 
