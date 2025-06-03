@@ -54,11 +54,20 @@ $options
     'preview_size' => 'medium',
     'library' => 'all',
   ])
+  ->addText('label', [
+    'label' => 'Label',
+    'instructions' => 'Label text to appear above the heading',
+  ])
   ->addText('image_heading', [
     'label' => 'Image Heading',
   ])
   ->addTextarea('image_subheading', [
     'label' => 'Image Subheading',
+  ])
+  ->addLink('link', [
+    'label' => 'Link',
+    'instructions' => 'Link to appear below the subheading',
+    'return_format' => 'array',
   ])
   ->endGroup()
   ->endGroup()
@@ -82,11 +91,20 @@ $options
     'preview_size' => 'medium',
     'library' => 'all',
   ])
+  ->addText('label', [
+    'label' => 'Label',
+    'instructions' => 'Label text to appear above the heading',
+  ])
   ->addText('image_heading', [
     'label' => 'Image Heading',
   ])
   ->addTextarea('image_subheading', [
     'label' => 'Image Subheading',
+  ])
+  ->addLink('link', [
+    'label' => 'Link',
+    'instructions' => 'Link to appear below the subheading',
+    'return_format' => 'array',
   ])
   ->addRepeater('links', [
     'label' => 'Links',
