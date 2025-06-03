@@ -6,7 +6,11 @@ function register_nav()
 	register_nav_menus(
 		array(
 			'main_menu' => __('Main menu'),
-			'header_menu' => __('Header menu'),
+			'mobile_menu_1' => __('Mobile Menu 1 (Why Impel)'),
+			'mobile_menu_2' => __('Mobile Menu 2 (Platform)'),
+			'mobile_menu_3' => __('Mobile Menu 3 (Solutions)'),
+			'mobile_menu_4' => __('Mobile Menu 4 (Resources)'),
+			'mobile_menu_5' => __('Mobile Menu 5 (Company)'),
 			'footer_menu_col_1' => __('Footer - column 1'),
 			'footer_menu_col_2' => __('Footer - column 2'),
 			'footer_menu_col_3' => __('Footer - column 3'),
