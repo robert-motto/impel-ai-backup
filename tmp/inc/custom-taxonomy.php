@@ -5,9 +5,13 @@
 	 * @param string $name
 	 * @param string $slug
 	 * @param array $supports
+	 * @param string $dashicon
+	 * @param string $add
+	 * @param int $menu_position
 	 * @param bool $exclude_from_search
+	 * @param bool $publicly_queryable
 	 */
-	function rk_register_post_type_visible($name, $slug, $supports, $exclude_from_search = false, $dashicon, $add, $menu_position, $publicly_queryable = true) {
+	function rk_register_post_type_visible($name, $slug, $supports, $dashicon, $add, $menu_position, $exclude_from_search = false, $publicly_queryable = true) {
 		$labels = [
 			'name' => ucfirst($name),
 			'singular_name' => ucfirst($name),
@@ -122,7 +126,7 @@
 	}
 
 	// CUSTOM POST TYPE
-	rk_register_post_type_visible('Custom Posts', 'custom', ['title', 'editor', 'thumbnail'], true, 'dashicons-text-page', 'Add custom post', 6);
+	rk_register_post_type_visible('Custom Posts', 'custom', ['title', 'editor', 'thumbnail'], 'dashicons-text-page', 'Add custom post', 6, true);
 	// CUSTOM CATEGORIES FOR CUSTOM POST
 	rk_register_taxonomy('Custom Post categories', 'custom_category', ['custom'], true, 'custom-category');
 	rk_register_taxonomy('Custom Post tags', 'custom_tag', ['custom'], false);

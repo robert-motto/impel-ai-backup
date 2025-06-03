@@ -91,17 +91,17 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		gap: 24px;
 
 		@include mobile {
 			flex-direction: column;
-			gap: 24px;
 		}
 	}
 
 	&__text-side {
 		display: flex;
 		flex-direction: column;
-		max-width: 464px;
+		max-width: 540px;
 		padding: var(--spacing-700) 0 var(--spacing-700) 76px;
 
 		@include tablet-big {

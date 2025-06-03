@@ -6,7 +6,11 @@ function register_nav()
 	register_nav_menus(
 		array(
 			'main_menu' => __('Main menu'),
-			'header_menu' => __('Header menu'),
+			'mobile_menu_1' => __('Mobile Menu 1 (Why Impel)'),
+			'mobile_menu_2' => __('Mobile Menu 2 (Platform)'),
+			'mobile_menu_3' => __('Mobile Menu 3 (Solutions)'),
+			'mobile_menu_4' => __('Mobile Menu 4 (Resources)'),
+			'mobile_menu_5' => __('Mobile Menu 5 (Company)'),
 			'footer_menu_col_1' => __('Footer - column 1'),
 			'footer_menu_col_2' => __('Footer - column 2'),
 			'footer_menu_col_3' => __('Footer - column 3'),
@@ -163,7 +167,10 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 			}
 			if (!empty($grid_submenu['link'])) {
 				$link = $grid_submenu['link'];
-				$output .= '<a href="' . esc_url($link['url']) . '" class="sub-menu-wrap__link">' . esc_html($link['title']) . '</a>';
+				$output .= '<a href="' . esc_url($link['url']) . '" class="sub-menu-wrap__link">';
+				$output .= '<span class="text">' . esc_html($link['title']) . '</span>';
+				$output .= '<span class="arrow-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.16406 10H15.8307M15.8307 10L10.8307 15M15.8307 10L10.8307 5" stroke="#F6F5FA" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>';
+				$output .= '</a>';
 			}
 			$output .= '</div>';
 		}
@@ -199,11 +206,21 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 				$output .= wp_get_attachment_image($image_section['image'], 'large');
 				$output .= '</div>';
 			}
+			if (!empty($image_section['label'])) {
+				$output .= '<div class="sub-menu-wrap__image-label">' . esc_html($image_section['label']) . '</div>';
+			}
 			if (!empty($image_section['image_heading'])) {
 				$output .= '<h3 class="sub-menu-wrap__image-heading">' . esc_html($image_section['image_heading']) . '</h3>';
 			}
 			if (!empty($image_section['image_subheading'])) {
 				$output .= '<div class="sub-menu-wrap__image-subheading">' . esc_html($image_section['image_subheading']) . '</div>';
+			}
+			if (!empty($image_section['link'])) {
+				$link = $image_section['link'];
+				$output .= '<a href="' . esc_url($link['url']) . '" class="sub-menu-wrap__image-link">';
+				$output .= '<span class="text">' . esc_html($link['title']) . '</span>';
+				$output .= '<span class="arrow-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.16406 10H15.8307M15.8307 10L10.8307 15M15.8307 10L10.8307 5" stroke="#F6F5FA" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>';
+				$output .= '</a>';
 			}
 			$output .= '</div>';
 		}
@@ -214,6 +231,11 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 		$grey_bar = get_field('grey_bar', $menu_item->ID);
 		if (!empty($grey_bar) && $grey_bar['show_grey_bar'] === 'y') {
 			$output .= '<div class="sub-menu-wrap__grey-bar">';
+
+			ob_start();
+			get_icon('grid');
+			$output .= ob_get_clean();
+
 			if (!empty($grey_bar['grey_bar_text'])) {
 				$output .= '<p class="sub-menu-wrap__grey-bar-text">' . esc_html($grey_bar['grey_bar_text']) . '</p>';
 			}
@@ -295,11 +317,21 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 				$output .= '<div class="sub-menu-wrap__image">';
 				$output .= wp_get_attachment_image($tab['tab_image'], 'large');
 				$output .= '</div>';
+				if (!empty($tab['label'])) {
+					$output .= '<div class="sub-menu-wrap__image-label">' . esc_html($tab['label']) . '</div>';
+				}
 				if (!empty($tab['image_heading'])) {
 					$output .= '<h3 class="sub-menu-wrap__image-heading">' . esc_html($tab['image_heading']) . '</h3>';
 				}
 				if (!empty($tab['image_subheading'])) {
 					$output .= '<div class="sub-menu-wrap__image-subheading">' . esc_html($tab['image_subheading']) . '</div>';
+				}
+				if (!empty($tab['link'])) {
+					$link = $tab['link'];
+					$output .= '<a href="' . esc_url($link['url']) . '" class="sub-menu-wrap__image-link">';
+					$output .= '<span class="text">' . esc_html($link['title']) . '</span>';
+					$output .= '<span class="arrow-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.16406 10H15.8307M15.8307 10L10.8307 15M15.8307 10L10.8307 5" stroke="#F6F5FA" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>';
+					$output .= '</a>';
 				}
 				$output .= '</div>';
 			}
@@ -330,7 +362,13 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 	{
 		$output = '';
 		if (!empty($link['link'])) {
-			$output .= '<a href="' . esc_url($link['link']['url']) . '" class="sub-menu-wrap__tab-link">';
+			// Check if this link is the current page
+			$current_url = home_url($_SERVER['REQUEST_URI']);
+			$link_url = $link['link']['url'];
+			$is_current = ($current_url === $link_url) || (rtrim($current_url, '/') === rtrim($link_url, '/'));
+
+			$active_class = $is_current ? ' is-active' : '';
+			$output .= '<a href="' . esc_url($link['link']['url']) . '" class="sub-menu-wrap__tab-link' . $active_class . '">';
 			$output .= '<span class="sub-menu-wrap__tab-link-title">' . esc_html($link['link']['title']) . '</span>';
 			if (!empty($link['text'])) {
 				$output .= '<span class="sub-menu-wrap__tab-link-desc">' . esc_html($link['text']) . '</span>';

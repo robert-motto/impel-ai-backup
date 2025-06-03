@@ -8,6 +8,7 @@
 	$use_list_subheading 	= $data['use_list_subheading'] ?? false;
 	$subheading				= $data['subheading'] ?? '';
 	$subheading_list		= $data['subheading_list'] ?? [];
+	$subheading_font_size = $data['subheading_font_size'] ?? 'regular';
 ?>
 
 <?php if (!empty($caption) || !empty($heading) || !empty($subheading) || (!empty($subheading_list) && $use_list_subheading)) : ?>
@@ -39,7 +40,11 @@
 				<?php endforeach; ?>
 			</ul>
 		<?php elseif (!$use_list_subheading && !empty($subheading)) : ?>
-			<div class="heading-box__subheading">
+			<?php $subheading_classes = 'heading-box__subheading'; ?>
+			<?php if ($subheading_font_size === 'small') : ?>
+				<?php $subheading_classes .= ' heading-box__subheading--small'; ?>
+			<?php endif; ?>
+			<div class="<?php echo esc_attr($subheading_classes); ?>">
 				<?php echo wp_kses_post(nl2br($subheading)); ?>
 			</div>
 		<?php endif; ?>
