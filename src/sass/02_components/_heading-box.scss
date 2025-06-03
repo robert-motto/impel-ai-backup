@@ -16,7 +16,11 @@
 		text-align: left;
 
 		* {
-			max-width: rem(640px);
+			max-width: rem(516px);
+
+			.l-section--hero & {
+				max-width: rem(640px);
+			}
 		}
 
 		.heading-box__subheading {
