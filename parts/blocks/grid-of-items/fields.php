@@ -251,6 +251,12 @@
 						]
 					]
 				])
+				->addTrueFalse('item_show_icon', [
+					'label' => 'Show Icon',
+					'instructions' => 'Show the svg icon',
+					'default_value' => 1,
+					'ui' => 1,
+				])
 				->addTrueFalse('item_has_metric_box', [
 					'label' => 'Add Metric Box?',
 					'instructions' => 'Display a metric box at the bottom of the item (carousel mode only).',
