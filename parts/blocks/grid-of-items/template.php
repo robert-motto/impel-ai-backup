@@ -73,7 +73,7 @@
 						$media_type = $item['media_type'] ?? 'image'; // Assuming media_type exists per item from original
 						$image = $item['image'] ?? '';
 						$svg_icon = $item['svg_icon'] ?? '';
-
+						$item_show_icon = $item['item_show_icon'] ?? true;
 						?>
 
 						<?php if (!empty($item_link)) : ?>
@@ -84,7 +84,7 @@
 						<?php else : ?>
 							<div class="grid-of-items__item">
 						<?php endif; ?>
-						<div class="grid-of-items__media-container">
+						<div class="grid-of-items__media-container<?php echo ($item_style === 'with-icons' && !$item_show_icon) ? ' grid-of-items__media-container--no-icon' : ''; ?>">
 							<?php if ($item_style === 'with-images' && !empty($image)) : ?>
 								<?php
 								if (!empty($image['id'])) {
@@ -106,7 +106,7 @@
 									echo '<img class="grid-of-items__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? 'Grid item') . '"  />';
 								}
 								?>
-							<?php elseif ($item_style === 'with-icons' && !empty($svg_icon)) : ?>
+							<?php elseif ($item_style === 'with-icons' && $item_show_icon && !empty($svg_icon)) : ?>
 								<?php
 								if (!empty($svg_icon['id'])) {
 									$svg_class = 'grid-of-items__svg';
@@ -185,6 +185,7 @@
 						$item_link = $item['item_link'] ?? '';
 						$image = $item['image'] ?? '';
 						$svg_icon = $item['svg_icon'] ?? '';
+						$item_show_icon = $item['item_show_icon'] ?? true;
 						$item_has_metric_box = $item['item_has_metric_box'] ?? false;
 						$item_metric_value = $item['item_metric_value'] ?? '';
 						$item_metric_description = $item['item_metric_description'] ?? '';
@@ -197,7 +198,7 @@
 									<?php echo !empty($item_link['target']) ? 'target="' . esc_attr($item_link['target']) . '"' : ''; ?>
 									aria-label="<?php echo esc_attr($item_link['title'] ?? $item_heading ?? 'Grid item link'); ?>">
 							<?php endif; ?>
-							<div class="grid-of-items__media-container">
+							<div class="grid-of-items__media-container<?php echo ($item_style === 'with-icons' && !$item_show_icon) ? ' grid-of-items__media-container--no-icon' : ''; ?>">
 								<?php if ($item_style === 'with-images' && !empty($image)) : ?>
 									<?php
 									if (!empty($image['id'])) {
@@ -219,7 +220,7 @@
 										echo '<img class="grid-of-items__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? 'Grid item') . '"  />';
 									}
 									?>
-								<?php elseif ($item_style === 'with-icons' && !empty($svg_icon)) : ?>
+								<?php elseif ($item_style === 'with-icons' && $item_show_icon && !empty($svg_icon)) : ?>
 									<?php
 									if (!empty($svg_icon['id'])) {
 										$svg_class = 'grid-of-items__svg';

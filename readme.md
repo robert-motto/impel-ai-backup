@@ -286,3 +286,4 @@ To check all the shorthand functions used `get_template_part()` check file `inc/
 - And: SCSS injection, JS reloading, PHP reloading, JS linter, SCSS linter with properties order, JS minification, CSS minification, CSS versioning, Images lazyload, dist directory with all files you need in production
 
 ## Enjoy!
+ 

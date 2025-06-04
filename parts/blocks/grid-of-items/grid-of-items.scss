@@ -77,6 +77,11 @@
 				.color-mode-variant-secondary & {
 					background: var(--elevation-surface-sunken-primary-default);
 				}
+
+				&--no-icon {
+					height: 0;
+					margin-bottom: 0;
+				}
 			}
 
 			.grid-of-items__svg {
