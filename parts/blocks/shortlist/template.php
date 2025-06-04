@@ -12,6 +12,7 @@
 	$heading         	= $group['heading'] ?? '';
 	$type_of_display	= $group['type_of_display'] ?? 'newest';
 	$selected_posts 	= $group['selected_posts'] ?? [];
+	$show_images     	= $group['show_images'] ?? true;
 
 	$items = [];
 	if ($type_of_display === 'custom' && !empty($selected_posts)) {
@@ -106,27 +107,27 @@
 
 				<?php if (!empty($items)) : ?>
 					<?php
-					// Prepare slides for the slider
-					$slides = [];
-					foreach ($items as $item) {
-						ob_start();
-						get_component('card', [
-							'item' => $item
+						$slides = [];
+						foreach ($items as $item) {
+							ob_start();
+							get_component('card', [
+								'item' => $item,
+								'show_image' => $show_images
+							]);
+							$slides[] = ob_get_clean();
+						}
+
+						$classes = 'shortlist__slider' . (count($slides) <= 3 ? ' shortlist__slider--hide-desktop-nav' : '');
+
+						get_component('slider', [
+							'slides' => $slides,
+							'slider_settings' => [
+								'slides_per_view' => 3,
+								'show_navigation' => true,
+								'show_progressbar' => true,
+							],
+							'classes' => $classes
 						]);
-						$slides[] = ob_get_clean();
-					}
-
-					$classes = 'shortlist__slider' . (count($slides) <= 3 ? ' shortlist__slider--hide-desktop-nav' : '');
-
-					get_component('slider', [
-						'slides' => $slides,
-						'slider_settings' => [
-							'slides_per_view' => 3,
-							'show_navigation' => true,
-							'show_progressbar' => true,
-						],
-						'classes' => $classes
-					]);
 					?>
 				<?php endif; ?>
 			</div>
