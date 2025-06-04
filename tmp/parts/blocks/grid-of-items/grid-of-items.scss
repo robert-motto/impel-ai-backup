@@ -77,11 +77,16 @@
 				.color-mode-variant-secondary & {
 					background: var(--elevation-surface-sunken-primary-default);
 				}
+
+				&--no-icon {
+					height: 0;
+					margin-bottom: 0;
+				}
 			}
 
 			.grid-of-items__svg {
 				width: auto;
-				height: rem(27px);
+				height: 27px;
 				margin: 0 auto;
 				object-fit: contain;
 			}
@@ -217,19 +222,15 @@
 				}
 
 				.grid-of-items__svg {
-					width: rem(134px);
+					width: 134px;
 					height: auto;
-					max-height: rem(42px);
+					max-height: 42px;
 					margin: 0 auto;
 					object-fit: contain;
-
-					&.is-lithia {
-						width: rem(95px);
-					}
 				}
 
 				.grid-of-items__content {
-					padding: var(--spacing-600) rem(28px) var(--spacing-600);
+					padding: var(--spacing-600) 28px var(--spacing-600);
 				}
 
 				.grid-of-items__item-heading {

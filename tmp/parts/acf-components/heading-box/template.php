@@ -40,11 +40,7 @@
 				<?php endforeach; ?>
 			</ul>
 		<?php elseif (!$use_list_subheading && !empty($subheading)) : ?>
-			<?php $subheading_classes = 'heading-box__subheading'; ?>
-			<?php if ($subheading_font_size === 'small') : ?>
-				<?php $subheading_classes .= ' heading-box__subheading--small'; ?>
-			<?php endif; ?>
-			<div class="<?php echo esc_attr($subheading_classes); ?>">
+			<div class="heading-box__subheading<?php echo $subheading_font_size !== 'regular' ? ' heading-box__subheading--' . esc_attr($subheading_font_size) : ''; ?>">
 				<?php echo wp_kses_post(nl2br($subheading)); ?>
 			</div>
 		<?php endif; ?>
