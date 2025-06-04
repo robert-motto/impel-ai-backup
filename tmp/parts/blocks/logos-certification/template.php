@@ -31,24 +31,30 @@
 		$unique_id = 'logos-certification-' . uniqid();
 	?>
 	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group); ?>" data-block="logos-certification">
-		<div class="logos-certification l-wrapper">
-			<?php
-				get_acf_component(
-					'heading-box', [
-						'data' => $heading,
-					],
-				);
-			?>
+		<div class="logos-certification">
+			<div class="l-wrapper">
+				<?php
+					get_acf_component(
+						'heading-box', [
+							'data' => $heading,
+						],
+					);
+				?>
+			</div>
 
 			<?php if (!empty($logos)) : ?>
 				<?php if ($display_mode === 'carousel') : ?>
+					<?php
+						// Triple the logos array for seamless loop functionality
+						$tripled_logos = array_merge($logos, $logos, $logos);
+					?>
 					<div class="logos-certification__carousel-container">
 						<div class="logos-certification__carousel js-logos-carousel swiper" id="<?php echo esc_attr($unique_id); ?>"
 							data-autoplay="<?php echo esc_attr($autoplay_speed); ?>"
 							data-pause-hover="<?php echo esc_attr($pause_on_hover ? 'true' : 'false'); ?>"
 							data-slides-per-view="<?php echo esc_attr($slides_per_view); ?>">
 							<div class="swiper-wrapper">
-								<?php foreach ($logos as $item) : ?>
+								<?php foreach ($tripled_logos as $item) : ?>
 									<?php
 										$logo = $item['logo'] ?? [];
 										$title = $item['title'] ?? '';
@@ -138,37 +144,41 @@
 						</div>
 					</div>
 				<?php else: ?>
-					<div class="logos-certification__grid-container">
-						<?php foreach ($logos as $item) :
-							$logo = $item['logo'] ?? [];
-							$alt_text = !empty($logo['alt']) ? $logo['alt'] : 'Logo';
-						?>
-							<?php echo bis_get_attachment_picture(
-									$logo['id'],
-								[
-									560  => [ 180, 100, 1 ],
-									1024 => [ 180, 100, 1 ],
-									1920 => [ 180, 100, 1 ],
-									2800 => [ 360, 200, 1 ],
-								],
-								[
-									'alt'     => esc_attr($alt_text),
-									'class'   => 'logos-certification__logo'
-								],
-							); ?>
-						<?php endforeach; ?>
+					<div class="l-wrapper">
+						<div class="logos-certification__grid-container">
+							<?php foreach ($logos as $item) :
+								$logo = $item['logo'] ?? [];
+								$alt_text = !empty($logo['alt']) ? $logo['alt'] : 'Logo';
+							?>
+								<?php echo bis_get_attachment_picture(
+										$logo['id'],
+									[
+										560  => [ 180, 100, 1 ],
+										1024 => [ 180, 100, 1 ],
+										1920 => [ 180, 100, 1 ],
+										2800 => [ 360, 200, 1 ],
+									],
+									[
+										'alt'     => esc_attr($alt_text),
+										'class'   => 'logos-certification__logo'
+									],
+								); ?>
+							<?php endforeach; ?>
+						</div>
 					</div>
 				<?php endif; ?>
 			<?php endif; ?>
 
-			<?php
-				get_acf_component(
-					'action-group', [
-						'data' => $buttons,
-						'classes' => 'logos-certification__btns',
-					],
-				);
-			?>
+			<div class="l-wrapper">
+				<?php
+					get_acf_component(
+						'action-group', [
+							'data' => $buttons,
+							'classes' => 'logos-certification__btns',
+						],
+					);
+				?>
+			</div>
 		</div>
 	</section>
 <?php endif; ?>

@@ -20,8 +20,12 @@
 		}
 
 		.heading-box {
-			margin-top: rem(114px);
-			margin-left: rem(12px);
+			margin-top: 114px;
+			margin-left: 12px;
+
+			&--large {
+				margin-top: 64px;
+			}
 		}
 	}
 
@@ -34,6 +38,10 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+
+		&.has-heading-box-left {
+			justify-content: flex-start;
+		}
 	}
 
 	@include tablet-big {
@@ -236,11 +244,11 @@
 
 .hero__breadcrumbs {
 	position: absolute;
-	top: rem(134px);
-	width: calc(100% - rem(40));
-	max-width: rem(1300px);
+	top: 82px;
+	width: calc(100% - 40px);
+	max-width: 1300px;
 	margin: 0 auto;
-	margin-left: rem(12px);
+	margin-left: 12px;
 
 	&-list {
 		display: flex;

@@ -4,6 +4,11 @@
 	padding: var(--padding-vertical-4xl) 0;
 	background-color: var(--background-bg-primary--c-brand-primary-forest);
 
+	.enterprise-dealer-group-slug,
+	.single-solution-by-business-type-slug & {
+		padding-top: var(--padding-vertical-s);
+	}
+
 	&.color-mode-variant-secondary {
 		background-color: var(--bg-secondary);
 	}
@@ -143,6 +148,11 @@
 		transform: translateY(-50%);
 	}
 
+	&__btns {
+		display: flex;
+		justify-content: center;
+	}
+
 	.swiper-wrapper {
 		display: flex;
 		align-items: center;
@@ -150,7 +160,9 @@
 
 	.swiper-slide {
 		display: flex;
+		flex-shrink: 0;
 		justify-content: center;
+		width: auto;
 		height: auto;
 	}
 

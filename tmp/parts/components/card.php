@@ -1,5 +1,6 @@
 <?php
 $item = $args['item'] ?? [];
+$show_image = $args['show_image'] ?? true;
 $thumbnail = $item['thumbnail'] ?? '';
 $category = $item['category'] ?? '';
 $reading_time = $item['reading_time'] ?? '';
@@ -31,28 +32,30 @@ $link = $item['link'] ?? '';
     <a href="<?php echo esc_url($link['url']); ?>" class="card__item-link" <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
   <?php endif; ?>
 
-  <div class="card__item-media">
-    <?php
-      if (!empty($thumbnail['id'])) {
-        echo bis_get_attachment_picture(
-          $thumbnail['id'],
-          [
-            560  => [ 400, 250, 1 ],
-            1024 => [ 400, 250, 1 ],
-            1920 => [ 400, 250, 1 ],
-            2800 => [ 800, 500, 1 ],
-          ],
-          [
-            'alt'     => $thumbnail['alt'] ? $thumbnail['alt'] : wp_strip_all_tags($title ?? ''),
-            'class'   => 'card__item-img',
-            'loading' => 'lazy',
-          ],
-        );
-      } elseif (!empty($thumbnail['url'])) {
-        echo '<img class="card__item-img" src="' . esc_url($thumbnail['url']) . '" alt="' . esc_attr($thumbnail['alt']) . '"  />';
-      }
-    ?>
-  </div>
+  <?php if ($show_image) : ?>
+    <div class="card__item-media">
+      <?php
+        if (!empty($thumbnail['id'])) {
+          echo bis_get_attachment_picture(
+            $thumbnail['id'],
+            [
+              560  => [ 400, 250, 1 ],
+              1024 => [ 400, 250, 1 ],
+              1920 => [ 400, 250, 1 ],
+              2800 => [ 800, 500, 1 ],
+            ],
+            [
+              'alt'     => $thumbnail['alt'] ? $thumbnail['alt'] : wp_strip_all_tags($title ?? ''),
+              'class'   => 'card__item-img',
+              'loading' => 'lazy',
+            ],
+          );
+        } elseif (!empty($thumbnail['url'])) {
+          echo '<img class="card__item-img" src="' . esc_url($thumbnail['url']) . '" alt="' . esc_attr($thumbnail['alt']) . '"  />';
+        }
+      ?>
+    </div>
+  <?php endif; ?>
 
   <div class="card__item-content">
     <div class="card__item-meta">
