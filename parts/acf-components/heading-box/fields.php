@@ -30,9 +30,9 @@
 			->addSelect('heading_size', [
 				'label' => 'Heading size',
 				'choices' => [
-					'small' => 'Small',
-					'regular' => 'Regular',
-					'large' => 'Large',
+					'small' => 'Small (34px)',
+					'regular' => 'Regular (45px)',
+					'large' => 'Large (52px)',
 				],
 				'default_value' => 'regular',
 				'return_format' => 'value',
@@ -56,6 +56,7 @@
 				'label' => 'Subheading Font Size',
 				'choices' => [
 					'regular' => 'Regular (18px)',
+					'medium'  => 'Medium (16px)',
 					'small'   => 'Small (14px)',
 				],
 				'default_value' => 'regular',
