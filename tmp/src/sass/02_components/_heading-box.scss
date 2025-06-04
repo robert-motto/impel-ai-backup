@@ -16,7 +16,21 @@
 		text-align: left;
 
 		* {
-			max-width: rem(640px);
+			max-width: rem(516px);
+
+			.l-section--hero & {
+				max-width: rem(640px);
+			}
+		}
+
+		.heading-box__caption {
+			color: var(--txt-caption-alt);
+		}
+
+		.heading-box__heading {
+			font-weight: 400;
+			letter-spacing: -0.26px;
+			line-height: var(--t--line-height-1600, 64px);
 		}
 
 		.heading-box__subheading {
@@ -61,6 +75,11 @@
 		color: var(--txt-subheading);
 		font-size: var(--t--subheading-2);
 		line-height: var(--t--line-height-500);
+
+		&--medium {
+			font-size: var(--t--paragraph-1);
+			line-height: var(--t--line-height-400);
+		}
 
 		&--small {
 			padding-right: rem(30px);
