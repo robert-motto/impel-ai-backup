@@ -14,25 +14,23 @@ function initLogosCarousels() {
 	carousels.forEach((carouselElement, index) => {
 		const autoplaySpeed = parseInt(carouselElement.dataset.autoplay, 10) || 3000;
 		const pauseOnHover = carouselElement.dataset.pauseHover === 'true';
+		const slidesPerViewDesktop = parseInt(carouselElement.dataset.slidesPerView, 10) || 5;
 
 		const slides = carouselElement.querySelectorAll('.swiper-slide');
+		const shouldLoop = slides.length > slidesPerViewDesktop;
 
 		try {
 			const swiperConfig = {
 				modules: [Autoplay],
-				slidesPerView: 2,
+				slidesPerView: 1,
 				spaceBetween: 16,
-				loop: true,
-				loopedSlides: slides.length,
-				loopAdditionalSlides: 2,
-				loopFillGroupWithBlank: true,
+				loop: shouldLoop,
 				grabCursor: true,
 				speed: 700,
+				centeredSlides: false,
+				watchOverflow: true,
+				normalizeSlideIndex: true,
 				breakpoints: {
-					320: {
-						slidesPerView: 1,
-						spaceBetween: 16,
-					},
 					480: {
 						slidesPerView: 2,
 						spaceBetween: 20,
@@ -46,10 +44,15 @@ function initLogosCarousels() {
 						spaceBetween: 30,
 					},
 					1280: {
+						slidesPerView: slidesPerViewDesktop,
 						spaceBetween: 88,
 					},
 				},
 			};
+
+			if (shouldLoop) {
+				swiperConfig.loopAdditionalSlides = Math.max(slidesPerViewDesktop * 2, 6);
+			}
 
 			swiperConfig.autoplay = {
 				delay: autoplaySpeed,

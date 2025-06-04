@@ -44,6 +44,14 @@
 				'return_format' => 'id',
 			])
 				->conditional('type_of_display', '==', 'custom')
+			->addTrueFalse('show_images', [
+				'label' => 'Show Images',
+				'instructions' => 'Toggle to show or hide images in the cards',
+				'default_value' => 1,
+				'ui' => 1,
+				'ui_on_text' => 'Show',
+				'ui_off_text' => 'Hide',
+			])
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path);
 	return $name;
