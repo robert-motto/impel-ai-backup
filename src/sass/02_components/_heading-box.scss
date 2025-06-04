@@ -24,7 +24,6 @@
 		}
 
 		.heading-box__heading {
-			font-size: var(--t--heading-2, 52px);
 			font-weight: 400;
 			letter-spacing: -0.26px;
 			line-height: var(--t--line-height-1600, 64px);
@@ -72,6 +71,11 @@
 		color: var(--txt-subheading);
 		font-size: var(--t--subheading-2);
 		line-height: var(--t--line-height-500);
+
+		&--medium {
+			font-size: var(--t--paragraph-1);
+			line-height: var(--t--line-height-400);
+		}
 
 		&--small {
 			padding-right: rem(30px);
