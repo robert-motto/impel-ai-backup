@@ -23,6 +23,7 @@
 			->addFile('file',[
 				'instructions' => 'Allowed file types: mp4',
 				'mime_types'   => 'mp4',
+				'return_format' => 'array',
 			])
 				->conditional('player', '==', 'wp')
 			->addText('embed_link')

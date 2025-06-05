@@ -19,6 +19,12 @@
 			->addText('heading', [
 				'label' => 'Heading',
 			])
+			->addField('buttons', 'clone', [
+				'label' => 'Header Button',
+				'clone' => [
+					'group_buttons',
+				]
+			])
 			->addButtonGroup('type_of_display', [
 				'label' => 'Which posts to display?',
 				'choices' => [
@@ -51,6 +57,12 @@
 				'ui' => 1,
 				'ui_on_text' => 'Show',
 				'ui_off_text' => 'Hide',
+			])
+			->addField('button_settings', 'clone', [
+				'label' => 'Button Settings',
+				'clone' => [
+					'group_button',
+				]
 			])
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path);
