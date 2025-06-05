@@ -79,8 +79,7 @@
 				}
 
 				&--no-icon {
-					height: 0;
-					margin-bottom: 0;
+					background: none;
 				}
 			}
 
@@ -219,6 +218,10 @@
 					padding: 0 rem(16px);
 					border: 1px solid var(--interface-divider-divider);
 					border-radius: var(--border-radius-s);
+
+					&--no-icon {
+						border: none;
+					}
 				}
 
 				.grid-of-items__svg {
