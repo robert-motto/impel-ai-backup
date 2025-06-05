@@ -15,8 +15,8 @@
 	$show_breadcrumbs 		= $group['show_breadcrumbs'] ?? false;
 	$custom_breadcrumbs 	= $group['custom_breadcrumbs_links'] ?? [];
 	$media_type  				= $group['media_type'] ?? 'image';
-	$media_position  		= $group['media_position'] ?? 'image';
-	$text_position  		= $group['text_position'] ?? 'image';
+	$media_position  		= $group['media_position'] ?? 'background';
+	$text_position  		= $group['text_position'] ?? 'center';
 	$image       				= $group['image'] ?? null;
 	$image_mobile 			= $group['image_mobile'] ?? null;
 	$video_group 				= $group['video_group'] ?? [];
