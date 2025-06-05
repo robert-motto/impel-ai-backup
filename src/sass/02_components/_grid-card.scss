@@ -1,0 +1,91 @@
+@use 'config' as *;
+
+.grid-card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	border: 1px solid var(--wf-neutral-neutral-80);
+	border-radius: 8px;
+	transition: transform 0.3s ease;
+	overflow: hidden;
+
+	&--link:hover {
+		transform: translateY(rem(-4px));
+
+		.btn {
+			.text {
+				&::after {
+					transform-origin: left;
+					scale: 1 1;
+				}
+			}
+		}
+	}
+
+	&__link-wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	&__heading {
+		margin-bottom: var(--spacing-400);
+		color: var(--txt-heading);
+		font-size: var(--t--card-title-2);
+		line-height: var(--t--line-height-600);
+	}
+
+	&__content {
+		margin-bottom: var(--spacing-600);
+		color: var(--txt-paragraph-primary);
+		font-size: var(--t--paragraph-2);
+		line-height: var(--t--line-height-400);
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-200);
+	}
+
+	&__metric-box {
+		display: flex;
+		align-items: center;
+		margin: auto 0 0;
+		padding: rem(8px) rem(54px) rem(8px) rem(22px);
+		border-radius: rem(8px);
+		background-color: #EDECF4;
+		gap: rem(16px);
+	}
+
+	&__metric-value {
+		display: flex;
+		align-items: baseline;
+		color: var(--txt-heading);
+		font-size: rem(28px);
+		font-weight: 400;
+		line-height: calc(48 / 28);
+		gap: rem(4px);
+
+		.grid-card__metric-icon {
+			svg {
+				width: rem(14px);
+				height: rem(14px);
+				stroke: var(--brand-secondary-default);
+			}
+		}
+	}
+
+	&__metric-description {
+		color: var(--txt-heading);
+		font-size: rem(12px);
+		font-weight: 400;
+		line-height: calc(15.6 / 12);
+	}
+
+	&__metric-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

@@ -30,16 +30,16 @@ $image_sizes = $display_mode === 'carousel' ? [
 
 <?php if (!empty($item_link) && $display_mode === 'grid') : ?>
 	<a href="<?php echo esc_url($item_link['url']); ?>"
-		class="grid-of-items__item grid-of-items__item--link"
+		class="grid-card grid-card--link"
 		<?php echo !empty($item_link['target']) ? 'target="' . esc_attr($item_link['target']) . '"' : ''; ?>
 		aria-label="<?php echo esc_attr($item_link['title'] ?? $item_heading ?? 'Grid item link'); ?>">
 <?php else : ?>
-	<div class="grid-of-items__item <?php echo !empty($item_link) ? 'grid-of-items__item--link' : ''; ?>">
+	<div class="grid-card <?php echo !empty($item_link) ? 'grid-card--link' : ''; ?>">
 <?php endif; ?>
 
 <?php if (!empty($item_link) && $display_mode === 'carousel') : ?>
 	<a href="<?php echo esc_url($item_link['url']); ?>"
-		class="grid-of-items__item-link-wrapper"
+		class="grid-card__link-wrapper"
 		<?php echo !empty($item_link['target']) ? 'target="' . esc_attr($item_link['target']) . '"' : ''; ?>
 		aria-label="<?php echo esc_attr($item_link['title'] ?? $item_heading ?? 'Grid item link'); ?>">
 <?php endif; ?>
@@ -93,19 +93,19 @@ $image_sizes = $display_mode === 'carousel' ? [
 
 	<div class="grid-of-items__content">
 		<?php if (!empty($item_heading)) : ?>
-			<div class="grid-of-items__item-heading">
+			<div class="grid-card__heading">
 				<?php echo $item_heading; ?>
 			</div>
 		<?php endif; ?>
 
 		<?php if (!empty($item_content)) : ?>
-			<div class="grid-of-items__item-content">
+			<div class="grid-card__content">
 				<?php echo $item_content; ?>
 			</div>
 		<?php endif; ?>
 
 		<?php if (!empty($item_link)) : ?>
-			<div class="grid-of-items__item-link">
+			<div class="grid-card__link">
 				<?php get_acf_component('button', [
 					'data' => [
 						'type' => 'link',
@@ -126,16 +126,16 @@ $image_sizes = $display_mode === 'carousel' ? [
 		<?php
 		if ($item_has_metric_box) {
 			if (!empty($item_metric_value) && !empty($item_metric_description)) : ?>
-				<div class="grid-of-items__metric-box">
-					<div class="grid-of-items__metric-value">
+				<div class="grid-card__metric-box">
+					<div class="grid-card__metric-value">
 						<span><?php echo esc_html($item_metric_value); ?></span>
 						<?php if ($item_metric_icon !== 'none' && function_exists('get_icon')) : ?>
-							<div class="grid-of-items__metric-icon">
+							<div class="grid-card__metric-icon">
 								<?php get_icon($item_metric_icon); ?>
 							</div>
 						<?php endif; ?>
 					</div>
-					<div class="grid-of-items__metric-description">
+					<div class="grid-card__metric-description">
 						<?php echo esc_html($item_metric_description); ?>
 					</div>
 				</div>
@@ -151,5 +151,5 @@ $image_sizes = $display_mode === 'carousel' ? [
 <?php if (!empty($item_link) && $display_mode === 'grid') : ?>
 	</a>
 <?php else : ?>
-	</div> <?php // .grid-of-items__item ?>
-<?php endif; ?> 
+	</div> <?php // .grid-card ?>
+<?php endif; ?>
