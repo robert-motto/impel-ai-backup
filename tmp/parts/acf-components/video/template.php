@@ -33,14 +33,18 @@ $photo_sizes = [
 ?>
 <div class="video__player is-paused <?php echo $classes; ?>">
 	<div class="video__player__container">
-		<?php if ($player === 'wp') : ?>
+		<?php if ($player === 'wp' && !empty($file) && !empty($file['url'])) : ?>
 			<?php if (!empty($photo)) : ?>
-				<video class="video__player__file js-video" data-src="<?php echo $file['url']; ?>" controls playsinline></video>
+				<video class="video__player__file js-video" data-src="<?php echo esc_url($file['url']); ?>" controls playsinline></video>
 			<?php else : ?>
-				<video class="video__player__file js-video is-active is-loaded" data-src="<?php echo $file['url']; ?>" controls playsinline>
-					<source src="<?php echo $file['url']; ?>" type="video/mp4">
+				<video class="video__player__file js-video is-active is-loaded" data-src="<?php echo esc_url($file['url']); ?>" controls playsinline>
+					<source src="<?php echo esc_url($file['url']); ?>" type="video/mp4">
 				</video>
 			<?php endif; ?>
+		<?php elseif ($player === 'wp' && (empty($file) || empty($file['url']))) : ?>
+			<div class="video__player__placeholder">
+				<p>Please select a video file to display.</p>
+			</div>
 		<?php elseif ($player === 'youtube') :
 			$youtube_id = embed_player_id($player, $embed_link);
 		?>
@@ -50,25 +54,38 @@ $photo_sizes = [
 		?>
 			<iframe id="vimeoPlayer-<?php echo $vimeo_id; ?>" data-player-id="<?php echo $vimeo_id; ?>" class="video__player__file js-video" loading="lazy" title="<?php echo $embed_title; ?>" data-src="https://player.vimeo.com/video/<?php echo $vimeo_id; ?>?color=FF6947" width="500" height="281" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
 		<?php endif; ?>
-		<div class="video__player__cover js-video-btn-play" data-player="<?php echo $player; ?>">
-			<?php if (!empty($photo) && !empty($photo['id'])) {
-				echo bis_get_attachment_picture(
-					$photo['id'],
-					$photo_sizes,
-					[
-						'alt'     => $photo['alt'] ? $photo['alt'] : wp_strip_all_tags(is_array($embed_title) ? ($embed_title[0] ?? 'video cover') : $embed_title),
-						'class'   => 'video__player__cover__img',
-					]
-				);
-			} else { ?>
-				<img class="video__player__cover__img" src="<?php echo esc_url($photo['url']); ?>" alt="<?php echo esc_attr($photo['alt'] ?? wp_strip_all_tags(is_array($embed_title) ? ($embed_title[0] ?? 'video cover') : ($embed_title ?? 'video cover'))); ?>" />
-			<?php } ?>
-			<button type="button" class="video__player-btn">
-				<?php get_icon('circle-play', [
-					'classes' => 'video__player-btn__icon',
-				]); ?>
-				<span class="u-sr-only"><?php _e('Play', get_option('template')); ?></span>
-			</button>
-		</div>
+		<?php
+			// Only show video cover if there's actually a video to play
+			$has_valid_video = false;
+			if ($player === 'wp' && !empty($file) && !empty($file['url'])) {
+				$has_valid_video = true;
+			} elseif ($player === 'youtube' && !empty($embed_link)) {
+				$has_valid_video = true;
+			} elseif ($player === 'vimeo' && !empty($embed_link)) {
+				$has_valid_video = true;
+			}
+		?>
+		<?php if ($has_valid_video) : ?>
+			<div class="video__player__cover js-video-btn-play" data-player="<?php echo $player; ?>">
+				<?php if (!empty($photo) && !empty($photo['id'])) {
+					echo bis_get_attachment_picture(
+						$photo['id'],
+						$photo_sizes,
+						[
+							'alt'     => $photo['alt'] ? $photo['alt'] : wp_strip_all_tags(is_array($embed_title) ? ($embed_title[0] ?? 'video cover') : $embed_title),
+							'class'   => 'video__player__cover__img',
+						]
+					);
+				} else { ?>
+					<img class="video__player__cover__img" src="<?php echo esc_url($photo['url']); ?>" alt="<?php echo esc_attr($photo['alt'] ?? wp_strip_all_tags(is_array($embed_title) ? ($embed_title[0] ?? 'video cover') : ($embed_title ?? 'video cover'))); ?>" />
+				<?php } ?>
+				<button type="button" class="video__player-btn">
+					<?php get_icon('circle-play', [
+						'classes' => 'video__player-btn__icon',
+					]); ?>
+					<span class="u-sr-only"><?php _e('Play', get_option('template')); ?></span>
+				</button>
+			</div>
+		<?php endif; ?>
 	</div>
 </div>
