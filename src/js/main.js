@@ -7,3 +7,4 @@ import './scripts/mobileNav';
 import './scripts/select';
 import './scripts/video';
 import './scripts/sliders';
+import './scripts/sections';
