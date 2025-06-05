@@ -33,14 +33,18 @@ $photo_sizes = [
 ?>
 <div class="video__player is-paused <?php echo $classes; ?>">
 	<div class="video__player__container">
-		<?php if ($player === 'wp') : ?>
+		<?php if ($player === 'wp' && !empty($file) && !empty($file['url'])) : ?>
 			<?php if (!empty($photo)) : ?>
-				<video class="video__player__file js-video" data-src="<?php echo $file['url']; ?>" controls playsinline></video>
+				<video class="video__player__file js-video" data-src="<?php echo esc_url($file['url']); ?>" controls playsinline></video>
 			<?php else : ?>
-				<video class="video__player__file js-video is-active is-loaded" data-src="<?php echo $file['url']; ?>" controls playsinline>
-					<source src="<?php echo $file['url']; ?>" type="video/mp4">
+				<video class="video__player__file js-video is-active is-loaded" data-src="<?php echo esc_url($file['url']); ?>" controls playsinline>
+					<source src="<?php echo esc_url($file['url']); ?>" type="video/mp4">
 				</video>
 			<?php endif; ?>
+		<?php elseif ($player === 'wp' && (empty($file) || empty($file['url']))) : ?>
+			<div class="video__player__placeholder">
+				<p>Please select a video file to display.</p>
+			</div>
 		<?php elseif ($player === 'youtube') :
 			$youtube_id = embed_player_id($player, $embed_link);
 		?>

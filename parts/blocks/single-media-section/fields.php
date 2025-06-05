@@ -78,7 +78,6 @@
 					'group_video',
 				],
 				'display' => 'seamless',
-				'prefix_name' => true,
 			])
 				->conditional('media_type', '==', 'video')
 			->addText('media_caption', [

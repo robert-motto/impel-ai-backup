@@ -100,11 +100,9 @@
 						?>
 					<?php elseif ($media_type === 'video' && !empty($video_group)) : ?>
 						<?php
-							get_acf_components([
-								'video' => [
-									'data'    => $video_group,
-									'classes' => 'single-media__video',
-								]
+							get_acf_component('video', [
+								'data'    => $video_group,
+								'classes' => 'single-media__video',
 							]);
 						?>
 					<?php endif; ?>
