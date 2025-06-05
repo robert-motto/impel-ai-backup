@@ -1,130 +1,123 @@
 @use '../../../src/sass/01_base/mixins' as *;
 @use '../../../src/sass/01_base/functions' as *;
+@use 'config' as *;
 
 .l-section--single-media {
 	position: relative;
+	padding: 144px 0;
+
+	@include desktop-small {
+		padding: 80px 0;
+	}
+
+	@include tablet-big {
+		padding: 64px 0;
+	}
+
+	@include mobile {
+		padding: 64px 0;
+	}
+
+	&.color-mode-is-dark {
+		background-color: var(--bg-secondary);
+	}
+
+	&.color-mode-is-light {
+		background-color: var(--elevation-surface-sunken-primary-default);
+	}
 }
 
 .single-media {
 	display: flex;
 	flex-direction: column;
-	gap: rem(57px);
+	gap: var(--spacing-1100);
 
-	&__content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		max-width: rem(768px);
-		margin: 0 auto;
-		text-align: center;
-
-		&--left {
-			align-items: flex-start;
-			text-align: left;
-		}
-	}
-
-	&__caption {
-		margin-bottom: rem(16px);
-		color: var(--wf-neutral-neutral-20);
-		font-size: rem(14px);
-		font-weight: 400;
-		letter-spacing: 7%;
-		line-height: calc(17 / 14);
-		text-transform: uppercase;
-
-		.is-dark & {
-			color: var(--wf-neutral-neutral-80);
-		}
-	}
-
-	&__heading {
-		margin-bottom: rem(24px);
-		color: var(--wf-neutral-neutral-0-black);
-		font-size: fluid(32px, 48px);
-		font-weight: 600;
-		line-height: calc(58 / 48);
-
-		.is-dark & {
-			color: var(--wf-neutral-neutral-100-white);
-		}
-	}
-
-	&__body {
-		color: var(--wf-neutral-neutral-40);
-		font-size: rem(16px);
-		line-height: calc(24 / 16);
-
-		.is-dark & {
-			color: var(--wf-neutral-neutral-80);
-		}
-
-		ul,
-		ol {
-			margin-bottom: rem(16px);
-			padding-left: rem(20px);
-
-			li {
-				margin-bottom: rem(8px);
-
-				&:last-child {
-					margin-bottom: 0;
-				}
-			}
-		}
-
-		ul {
-			list-style-type: disc;
-		}
-
-		ol {
-			list-style-type: decimal;
-		}
-	}
-
-	&__btns {
-		display: flex;
-		flex-wrap: wrap;
-		gap: rem(16px);
-		margin-top: rem(32px);
-
-		@include mobile {
-			flex-direction: column;
-			width: 100%;
-		}
-
-		.single-media__content--left & {
-			justify-content: flex-start;
-		}
+	@include mobile {
+		gap: var(--spacing-800);
 	}
 
 	&__media-hld {
 		position: relative;
 		width: 100%;
+		max-width: 1272px;
+		margin: 0 auto;
 	}
 
 	&__img,
 	&__video {
 		width: 100%;
 		height: auto;
-		border: 1px solid var(--wf-neutral-neutral-80);
-		border-radius: 8px;
-		background-color: var(--wf-neutral-neutral-90);
+		border-radius: 16px;
+		background-color: var(--elevation-surface-sunken-secondary-default);
 		object-fit: cover;
-		aspect-ratio: 1040 / 580;
+
+		@include mobile {
+			border-radius: 12px;
+		}
 
 		.video__player {
 			width: 100%;
 			height: 100%;
-			border-radius: 8px;
+			border-radius: 16px;
+			background-color: var(--elevation-surface-sunken-secondary-default);
 			overflow: hidden;
-		}
 
-		.video__player__container,
-		.video__player__file {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
+			@include mobile {
+				border-radius: 12px;
+			}
+
+			&__container {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				border-radius: 16px;
+				overflow: hidden;
+
+				@include mobile {
+					border-radius: 12px;
+				}
+			}
+
+			&__file {
+				width: 100%;
+				height: 100%;
+				border-radius: 16px;
+				object-fit: cover;
+
+				@include mobile {
+					border-radius: 12px;
+				}
+			}
+
+			&__cover {
+				&__img {
+					border-radius: 16px;
+
+					@include mobile {
+						border-radius: 12px;
+					}
+				}
+			}
+
+			&__placeholder {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 100%;
+				border-radius: 16px;
+				background-color: var(--elevation-surface-sunken-secondary-default);
+				color: var(--txt-paragraph-primary);
+				font-size: 16px;
+
+				@include mobile {
+					border-radius: 12px;
+				}
+
+				p {
+					margin: 0;
+				}
+			}
 		}
 	}
 
@@ -135,14 +128,10 @@
 		z-index: 1;
 		padding: 10px;
 		border-radius: 8px;
-		background-color: var(--wf-neutral-neutral-100-white);
-		color: var(--wf-neutral-neutral-0-black);
-		font-size: rem(14px);
+		background-color: var(--elevation-surface-raised-default);
+		color: var(--txt-ui-body);
+		font-size: 14px;
 		line-height: calc(20 / 14);
 		text-align: center;
-
-		.is-dark & {
-			color: var(--wf-neutral-neutral-80);
-		}
 	}
 }
