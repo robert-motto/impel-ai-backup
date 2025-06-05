@@ -39,23 +39,6 @@ function adjustSectionPadding() {
 		section.style.paddingTop = `${value}px`;
 	}
 
-	// Store original padding values for reset capability
-	if (!window.originalSectionPaddings) {
-		window.originalSectionPaddings = new Map();
-	}
-
-	// Reset all sections to original padding first
-	sections.forEach(section => {
-		if (window.originalSectionPaddings.has(section)) {
-			const originalPadding = window.originalSectionPaddings.get(section);
-			section.style.paddingTop = originalPadding;
-		} else {
-			// Store original padding if not already stored
-			const originalPadding = getPaddingTop(section);
-			window.originalSectionPaddings.set(section, `${originalPadding}px`);
-		}
-	});
-
 	// Process each section starting from the second one
 	for (let i = 1; i < sections.length; i++) {
 		const currentSection = sections[i];
@@ -86,6 +69,3 @@ if (document.readyState === 'complete') {
 	// Wait for all resources to load, not just DOM
 	window.addEventListener('load', adjustSectionPadding);
 }
-
-// Recalculate on window resize
-window.addEventListener('resize', adjustSectionPadding);
