@@ -16,10 +16,10 @@ function adjustSectionPadding() {
 		}
 
 		// Get variant
-		if (classList.includes('variant-primary')) {
-			variant = 'variant-primary';
-		} else if (classList.includes('variant-secondary')) {
-			variant = 'variant-secondary';
+		if (classList.includes('color-mode-variant-primary')) {
+			variant = 'color-mode-variant-primary';
+		} else if (classList.includes('color-mode-variant-secondary')) {
+			variant = 'color-mode-variant-secondary';
 		}
 
 		// Return combined background identifier
