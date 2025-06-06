@@ -41,8 +41,10 @@
 		$grid_classes = ['grid-of-items__grid'];
 		if ($item_style === 'with-icons') {
 			$grid_classes[] = 'grid-of-items__grid--icons';
-		} else {
+		} elseif ($item_style === 'with-images') {
 			$grid_classes[] = 'grid-of-items__grid--images';
+		} elseif ($item_style === 'portfolio') {
+			$grid_classes[] = 'grid-of-items__grid--portfolio';
 		}
 		$grid_classes[] = 'grid-of-items__grid--cols-' . $columns_count;
 
