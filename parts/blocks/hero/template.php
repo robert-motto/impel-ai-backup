@@ -165,9 +165,10 @@
 							'slides' => $logo_slides,
 							'slider_settings' => [
 								'show_progressbar' => false,
-								'autoplay_speed' => 3000,
+								'autoplay_speed' => 5000,
 								'loop' => true,
 								'space_between' => 60,
+								'linear' => true,
 							],
 							'classes' => 'hero__logos-slider'
 						]); ?>
