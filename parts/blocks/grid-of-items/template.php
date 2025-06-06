@@ -31,7 +31,7 @@
 		$button_group                           = $group['button_group'] ?? [];
 
 		// Section classes
-		$classes = ['l-section', 'l-section--grid-of-items', 'js-grid-of-items', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
+		$classes = ['js-section', 'l-section', 'l-section--grid-of-items', 'js-grid-of-items', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}", "display-mode-{$display_mode}"];
 		if ($display_mode === 'carousel') {
 			$classes[] = 'l-section--grid-of-items--carousel';
 		}
