@@ -20,26 +20,26 @@
 	$fallback_image_path = get_template_directory() . '/screenshot.jpg';
 	$fallback_image_uri	= get_template_directory_uri() . '/screenshot.jpg';
 
-	$classes = ['js-section', 'l-section', 'l-section--sticky-content-scroll', 'l-section--vertical-scrolling-cards', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
+	$classes = ['js-section', 'l-section', 'l-section--vertical-scrolling-cards', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
 
-	$unique_id = 'sticky-content-scroll-' . uniqid();
+	$unique_id = 'vertical-scrolling-cards-' . uniqid();
 	?>
-	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group); ?>" data-block="sticky-content-scroll" data-media-type="<?php echo esc_attr($cards_media_type); ?>">
-		<div class="sticky-content-scroll l-wrapper l-wrapper--medium">
-			<div class="sticky-content-scroll__content">
-				<div class="sticky-content-scroll__sticky-wrapper">
+	<section <?php echo section_settings_id($group); ?> class="<?php echo esc_attr(implode(' ', $classes)); ?> <?php echo section_settings_padding_classes($group); ?>" data-block="vertical-scrolling-cards" data-media-type="<?php echo esc_attr($cards_media_type); ?>">
+		<div class="vertical-scrolling-cards l-wrapper l-wrapper--medium">
+			<div class="vertical-scrolling-cards__content">
+				<div class="vertical-scrolling-cards__sticky-wrapper">
 					<?php if (!empty($caption)) : ?>
-						<div class="sticky-content-scroll__caption">
+						<div class="vertical-scrolling-cards__caption">
 							<?php echo esc_html($caption); ?>
 						</div>
 					<?php endif; ?>
 					<?php if (!empty($heading)) : ?>
-						<div class="sticky-content-scroll__heading">
+						<div class="vertical-scrolling-cards__heading">
 							<?php echo $heading; ?>
 						</div>
 					<?php endif; ?>
 					<?php if (!empty($content)) : ?>
-						<div class="sticky-content-scroll__body">
+						<div class="vertical-scrolling-cards__body">
 							<?php echo $content; ?>
 						</div>
 					<?php endif; ?>
@@ -47,7 +47,7 @@
 					get_acf_components([
 						'buttons' => [
 							'data'		=> $buttons,
-							'classes' => 'sticky-content-scroll__btns',
+							'classes' => 'vertical-scrolling-cards__btns',
 						],
 					]);
 					?>
@@ -55,7 +55,7 @@
 			</div>
 
 			<?php if (!empty($cards)) : ?>
-				<div class="sticky-content-scroll__cards" id="<?php echo esc_attr($unique_id); ?>">
+				<div class="vertical-scrolling-cards__cards" id="<?php echo esc_attr($unique_id); ?>">
 					<?php foreach ($cards as $card) : ?>
 						<?php
 							$badge_label = $card['badge_label'] ?? '';
@@ -87,12 +87,12 @@
 							}
 						?>
 						<?php if (!empty($card_link) && !empty($card_link['url'])) : ?>
-							<a href="<?php echo esc_url($card_link['url']); ?>" class="sticky-content-scroll__card">
+							<a href="<?php echo esc_url($card_link['url']); ?>" class="vertical-scrolling-cards__card">
 						<?php else : ?>
-							<div class="sticky-content-scroll__card">
+							<div class="vertical-scrolling-cards__card">
 						<?php endif; ?>
 								<?php if ($cards_media_type === 'image' && !empty($media)) : ?>
-									<div class="sticky-content-scroll__card-media">
+									<div class="vertical-scrolling-cards__card-media">
 										<?php
 										if (!empty($media['id'])) {
 											// Use WordPress default image function as fallback
@@ -102,17 +102,17 @@
 												false,
 												[
 													'alt'		 => !empty($media['alt']) ? $media['alt'] : wp_strip_all_tags($headline ?? 'Card image'),
-													'class' => 'sticky-content-scroll__card-img',
+													'class' => 'vertical-scrolling-cards__card-img',
 													'loading' => 'lazy',
 												]
 											);
 										} elseif (!empty($media['url'])) {
-											echo '<img class="sticky-content-scroll__card-img" src="' . esc_url($media['url']) . '" alt="' . esc_attr($media['alt'] ?? 'Card image') . '"  />';
+											echo '<img class="vertical-scrolling-cards__card-img" src="' . esc_url($media['url']) . '" alt="' . esc_attr($media['alt'] ?? 'Card image') . '"  />';
 										}
 										?>
 									</div>
 								<?php elseif ($cards_media_type === 'icon' && !empty($media)) : ?>
-									<div class="sticky-content-scroll__card-icon-container">
+									<div class="vertical-scrolling-cards__card-icon-container">
 										<?php
 										if (!empty($media['id'])) {
 											echo wp_get_attachment_image(
@@ -120,36 +120,36 @@
 												'full',
 												false,
 												[
-													'class' => 'sticky-content-scroll__card-icon',
+													'class' => 'vertical-scrolling-cards__card-icon',
 													'loading' => 'lazy',
 												]
 											);
 										} elseif (!empty($media['url'])) {
-											echo '<img class="sticky-content-scroll__card-icon" src="' . esc_url($media['url']) . '" alt="' . esc_attr($media['alt'] ?? 'Icon') . '"  />';
+											echo '<img class="vertical-scrolling-cards__card-icon" src="' . esc_url($media['url']) . '" alt="' . esc_attr($media['alt'] ?? 'Icon') . '"  />';
 										}
 										?>
 									</div>
 								<?php endif; ?>
 
-								<div class="sticky-content-scroll__card-content">
+								<div class="vertical-scrolling-cards__card-content">
 									<?php if (!empty($badge_label)) : ?>
-										<div class="sticky-content-scroll__card-badge">
+										<div class="vertical-scrolling-cards__card-badge">
 											<?php echo esc_html($badge_label); ?>
 										</div>
 									<?php endif; ?>
 
 									<?php if (!empty($headline)) : ?>
-										<h3 class="sticky-content-scroll__card-heading">
+										<h3 class="vertical-scrolling-cards__card-heading">
 											<?php echo $headline; ?>
 										</h3>
 									<?php endif; ?>
 
 									<?php if (!empty($body)) : ?>
-										<div class="sticky-content-scroll__card-body">
+										<div class="vertical-scrolling-cards__card-body">
 											<?php echo $body; ?>
 										</div>
 									<?php endif; ?>
-									<div class="sticky-content-scroll__card-link">
+									<div class="vertical-scrolling-cards__card-link">
 										<?php
 											get_acf_component('button', [
 												'data' => [

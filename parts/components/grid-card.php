@@ -33,13 +33,12 @@ $card_classes = ['grid-card'];
 if (!empty($item_link)) {
 	$card_classes[] = 'grid-card--link';
 }
-if ($display_mode === 'carousel') {
-	$card_classes[] = 'grid-card--carousel';
-}
 if ($item_style === 'with-icons') {
 	$card_classes[] = 'grid-card--icons';
 } elseif ($item_style === 'with-images') {
 	$card_classes[] = 'grid-card--images';
+} elseif ($item_style === 'portfolio') {
+	$card_classes[] = 'grid-card--portfolio';
 }
 $card_class_string = esc_attr(implode(' ', $card_classes));
 ?>
@@ -60,7 +59,7 @@ $card_class_string = esc_attr(implode(' ', $card_classes));
 		aria-label="<?php echo esc_attr($item_link['title'] ?? $item_heading ?? 'Grid item link'); ?>">
 <?php endif; ?>
 
-	<div class="grid-card__media-container<?php echo ($item_style === 'with-icons' && !$item_show_icon) ? ' grid-card__media-container--no-icon' : ''; ?>">
+	<div class="grid-card__media-container<?php echo (($item_style === 'with-icons' || $item_style === 'portfolio') && !$item_show_icon) ? ' grid-card__media-container--no-icon' : ''; ?>">
 		<?php if ($item_style === 'with-images' && !empty($image)) : ?>
 			<?php
 			if (!empty($image['id'])) {
@@ -77,31 +76,60 @@ $card_class_string = esc_attr(implode(' ', $card_classes));
 				echo '<img class="grid-card__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? 'Grid item') . '"  />';
 			}
 			?>
-		<?php elseif ($item_style === 'with-icons' && $item_show_icon && !empty($svg_icon)) : ?>
+		<?php elseif (($item_style === 'with-icons' || $item_style === 'portfolio') && $item_show_icon && !empty($svg_icon)) : ?>
 			<?php
 			if (!empty($svg_icon['id'])) {
 				$svg_class = 'grid-card__svg';
 				$svg_url_for_class = wp_get_attachment_url($svg_icon['id']);
+				$svg_path = get_attached_file($svg_icon['id']);
+
 				if ($svg_url_for_class) {
 					$filename_for_class = pathinfo($svg_url_for_class, PATHINFO_FILENAME);
 					$sanitized_filename = sanitize_title($filename_for_class);
 					$svg_class .= ' is-' . strtolower($sanitized_filename);
 				}
-				echo wp_get_attachment_image(
-					$svg_icon['id'],
-					'full',
-					false,
-					[
-						'class' => esc_attr($svg_class),
-						'loading' => 'lazy',
-					]
-				);
+
+				if ($svg_path && pathinfo($svg_path, PATHINFO_EXTENSION) === 'svg' && file_exists($svg_path)) {
+					$svg_content = file_get_contents($svg_path);
+					if ($svg_content) {
+						$svg_content = preg_replace('/^<\?xml.*?\?>\s*/', '', $svg_content);
+						$svg_content = preg_replace('/<!DOCTYPE.*?>\s*/', '', $svg_content);
+						$svg_content = preg_replace('/<svg/', '<svg class="' . esc_attr($svg_class) . '"', $svg_content, 1);
+						echo $svg_content;
+					}
+				} else {
+					echo wp_get_attachment_image(
+						$svg_icon['id'],
+						'full',
+						false,
+						[
+							'class' => esc_attr($svg_class),
+							'loading' => 'lazy',
+						]
+					);
+				}
 			} elseif (!empty($svg_icon['url'])) {
 				$svg_class = 'grid-card__svg';
 				$filename_for_class = pathinfo($svg_icon['url'], PATHINFO_FILENAME);
 				$sanitized_filename = sanitize_title($filename_for_class);
 				$svg_class .= ' is-' . strtolower($sanitized_filename);
-				echo '<img class="' . esc_attr($svg_class) . '" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '"  />';
+
+				if (pathinfo($svg_icon['url'], PATHINFO_EXTENSION) === 'svg') {
+					$svg_path = str_replace(wp_upload_dir()['baseurl'], wp_upload_dir()['basedir'], $svg_icon['url']);
+					if (file_exists($svg_path)) {
+						$svg_content = file_get_contents($svg_path);
+						if ($svg_content) {
+							$svg_content = preg_replace('/^<\?xml.*?\?>\s*/', '', $svg_content);
+							$svg_content = preg_replace('/<!DOCTYPE.*?>\s*/', '', $svg_content);
+							$svg_content = preg_replace('/<svg/', '<svg class="' . esc_attr($svg_class) . '"', $svg_content, 1);
+							echo $svg_content;
+						}
+					} else {
+						echo '<img class="' . esc_attr($svg_class) . '" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '"  />';
+					}
+				} else {
+					echo '<img class="' . esc_attr($svg_class) . '" src="' . esc_url($svg_icon['url']) . '" alt="' . esc_attr($svg_icon['alt'] ?? 'SVG icon') . '"  />';
+				}
 			}
 			?>
 		<?php endif; ?>

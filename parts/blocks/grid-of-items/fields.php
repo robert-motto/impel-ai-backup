@@ -47,7 +47,8 @@
 				'instructions' => 'Select the visual style for each grid card',
 				'choices' => [
 					'with-icons' => 'With Icons',
-					'with-images' => 'With Images'
+					'with-images' => 'With Images',
+					'portfolio' => 'Portfolio'
 				],
 				'default_value' => 'with-icons',
 				'layout' => 'horizontal',
@@ -247,6 +248,13 @@
 				'field' => 'item_style',
 								'operator' => '==',
 				'value' => 'with-icons',
+							]
+						],
+						[
+							[
+				'field' => 'item_style',
+								'operator' => '==',
+				'value' => 'portfolio',
 							]
 						]
 					]

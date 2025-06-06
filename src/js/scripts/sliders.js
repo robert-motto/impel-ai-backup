@@ -49,17 +49,23 @@ function initSliders() {
 				slidesPerView: slidesPerViewMobile,
 				spaceBetween,
 				loop,
-				slidesOffsetBefore,
 				grabCursor: true,
 				breakpoints: {
 					// 768px and up
 					768: {
 						slidesPerView: slidesPerViewTablet,
 						spaceBetween: 24,
+						slidesOffsetBefore: slidesOffsetBefore / 4,
 					},
 					// 1024px and up
 					1024: {
 						slidesPerView: slidesPerViewDesktop,
+						slidesOffsetBefore: slidesOffsetBefore / 4,
+					},
+					// 1280px and up
+					1280: {
+						slidesPerView: slidesPerViewDesktop,
+						slidesOffsetBefore,
 					},
 				},
 			};
