@@ -28,13 +28,29 @@ $image_sizes = $display_mode === 'carousel' ? [
 ];
 ?>
 
+<?php
+$card_classes = ['grid-card'];
+if (!empty($item_link)) {
+	$card_classes[] = 'grid-card--link';
+}
+if ($display_mode === 'carousel') {
+	$card_classes[] = 'grid-card--carousel';
+}
+if ($item_style === 'with-icons') {
+	$card_classes[] = 'grid-card--icons';
+} elseif ($item_style === 'with-images') {
+	$card_classes[] = 'grid-card--images';
+}
+$card_class_string = esc_attr(implode(' ', $card_classes));
+?>
+
 <?php if (!empty($item_link) && $display_mode === 'grid') : ?>
 	<a href="<?php echo esc_url($item_link['url']); ?>"
-		class="grid-card grid-card--link"
+		class="<?php echo $card_class_string; ?>"
 		<?php echo !empty($item_link['target']) ? 'target="' . esc_attr($item_link['target']) . '"' : ''; ?>
 		aria-label="<?php echo esc_attr($item_link['title'] ?? $item_heading ?? 'Grid item link'); ?>">
 <?php else : ?>
-	<div class="grid-card <?php echo !empty($item_link) ? 'grid-card--link' : ''; ?>">
+	<div class="<?php echo $card_class_string; ?>">
 <?php endif; ?>
 
 <?php if (!empty($item_link) && $display_mode === 'carousel') : ?>
@@ -44,7 +60,7 @@ $image_sizes = $display_mode === 'carousel' ? [
 		aria-label="<?php echo esc_attr($item_link['title'] ?? $item_heading ?? 'Grid item link'); ?>">
 <?php endif; ?>
 
-	<div class="grid-of-items__media-container<?php echo ($item_style === 'with-icons' && !$item_show_icon) ? ' grid-of-items__media-container--no-icon' : ''; ?>">
+	<div class="grid-card__media-container<?php echo ($item_style === 'with-icons' && !$item_show_icon) ? ' grid-card__media-container--no-icon' : ''; ?>">
 		<?php if ($item_style === 'with-images' && !empty($image)) : ?>
 			<?php
 			if (!empty($image['id'])) {
@@ -53,18 +69,18 @@ $image_sizes = $display_mode === 'carousel' ? [
 					$image_sizes,
 					[
 						'alt'     => $image['alt'] ? $image['alt'] : wp_strip_all_tags($item_heading ?? 'Grid item'),
-						'class'   => 'grid-of-items__img',
+						'class'   => 'grid-card__img',
 						'loading' => 'lazy',
 					],
 				);
 			} elseif (!empty($image['url'])) {
-				echo '<img class="grid-of-items__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? 'Grid item') . '"  />';
+				echo '<img class="grid-card__img" src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ?? 'Grid item') . '"  />';
 			}
 			?>
 		<?php elseif ($item_style === 'with-icons' && $item_show_icon && !empty($svg_icon)) : ?>
 			<?php
 			if (!empty($svg_icon['id'])) {
-				$svg_class = 'grid-of-items__svg';
+				$svg_class = 'grid-card__svg';
 				$svg_url_for_class = wp_get_attachment_url($svg_icon['id']);
 				if ($svg_url_for_class) {
 					$filename_for_class = pathinfo($svg_url_for_class, PATHINFO_FILENAME);
@@ -81,7 +97,7 @@ $image_sizes = $display_mode === 'carousel' ? [
 					]
 				);
 			} elseif (!empty($svg_icon['url'])) {
-				$svg_class = 'grid-of-items__svg';
+				$svg_class = 'grid-card__svg';
 				$filename_for_class = pathinfo($svg_icon['url'], PATHINFO_FILENAME);
 				$sanitized_filename = sanitize_title($filename_for_class);
 				$svg_class .= ' is-' . strtolower($sanitized_filename);
@@ -91,7 +107,7 @@ $image_sizes = $display_mode === 'carousel' ? [
 		<?php endif; ?>
 	</div>
 
-	<div class="grid-of-items__content">
+	<div class="grid-card__inner-content">
 		<?php if (!empty($item_heading)) : ?>
 			<div class="grid-card__heading">
 				<?php echo $item_heading; ?>
@@ -142,7 +158,7 @@ $image_sizes = $display_mode === 'carousel' ? [
 			<?php endif;
 		}
 		?>
-	</div> <?php // .grid-of-items__content ?>
+	</div> <?php // .grid-card__inner-content ?>
 
 	<?php if (!empty($item_link) && $display_mode === 'carousel') : ?>
 		</a>
