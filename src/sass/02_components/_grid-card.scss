@@ -1,0 +1,238 @@
+@use 'config' as *;
+
+.grid-card {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--wf-neutral-neutral-80);
+	border-radius: 8px;
+	transition: transform 0.3s ease;
+	overflow: hidden;
+
+	&--link:hover {
+		transform: translateY(-4px);
+
+		.btn {
+			.text {
+				&::after {
+					transform-origin: left;
+					scale: 1 1;
+				}
+			}
+		}
+	}
+
+	&__link-wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	&__heading {
+		margin-bottom: var(--spacing-400);
+		color: var(--txt-heading);
+		font-size: var(--t--card-title-2);
+		line-height: var(--t--line-height-600);
+	}
+
+	&__content {
+		margin-bottom: var(--spacing-600);
+		color: var(--txt-paragraph-primary);
+		font-size: var(--t--paragraph-2);
+		line-height: var(--t--line-height-400);
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-200);
+	}
+
+	&__metric-box {
+		display: flex;
+		align-items: center;
+		margin: auto 0 0;
+		padding: 8px 54px 8px 22px;
+		border-radius: 8px;
+		background-color: var(--elevation-surface-sunken-secondary-default);
+		gap: 16px;
+	}
+
+	&__metric-value {
+		display: flex;
+		align-items: baseline;
+		color: var(--txt-heading);
+		font-size: 28px;
+		font-weight: 400;
+		line-height: calc(48 / 28);
+		gap: 4px;
+
+		.grid-card__metric-icon {
+			svg {
+				width: 14px;
+				height: 14px;
+				stroke: var(--brand-secondary-default);
+			}
+		}
+	}
+
+	&__metric-description {
+		max-width: 180px;
+		color: var(--txt-heading);
+		font-size: 12px;
+		font-weight: 400;
+		line-height: calc(15.6 / 12);
+	}
+
+	&__metric-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__media-container {
+		width: 100%;
+		margin-bottom: var(--spacing-600);
+		background-color: var(--wf-neutral-neutral-95);
+		overflow: hidden;
+	}
+
+	&__img,
+	&__svg {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&__inner-content {
+		display: flex;
+		flex-grow: 1;
+		flex-direction: column;
+	}
+
+	&--icons {
+		justify-content: space-between;
+		min-height: 442px;
+		padding: 32px 34px 32px 28px;
+		border-radius: var(--border-radius-lg);
+		background-color: var(--elevation-surface-sunken-primary-default);
+
+		&:hover {
+			.grid-card__svg {
+				path {
+					fill: var(--button-label-link-idle);
+				}
+			}
+		}
+
+		.color-mode-variant-secondary & {
+			background-color: var(--elevation-surface-sunken-secondary-default);
+		}
+
+		.grid-card__inner-content {
+			flex-grow: unset;
+		}
+
+		.grid-card__media-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 80px;
+			height: 80px;
+			border-radius: var(--border-radius-s);
+			background-color: var(--elevation-surface-sunken-secondary-default);
+
+			.color-mode-variant-secondary & {
+				background-color: var(--elevation-surface-sunken-primary-default);
+			}
+
+			&--no-icon {
+				background-color: transparent;
+			}
+		}
+
+		.grid-card__svg {
+			width: auto;
+			height: 27px;
+			margin: 0 auto;
+			object-fit: contain;
+
+			path {
+				transition: fill 0.3s ease;
+			}
+		}
+	}
+
+	&--images {
+		.grid-card__media-container {
+			aspect-ratio: 4 / 3;
+		}
+
+		.grid-card__img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: var(--radius-16);
+		}
+	}
+
+	&--portfolio {
+		width: 100%;
+		height: 100%;
+		padding: 30px 26px;
+		border: 2px solid var(--elevation-surface-sunken-secondary-default);
+		border-radius: var(--border-radius-xxl);
+		background-color: var(--background-bg-primary--c-brand-primary-forest);
+
+		.color-mode-variant-secondary & {
+			border-color: var(--border-subtle);
+			background-color: var(--bg-secondary);
+		}
+
+		.grid-card__link-wrapper {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+
+		.grid-card__media-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: fit-content;
+			height: 48px;
+			padding: 0 16px;
+			border: 1px solid var(--interface-divider-divider);
+			border-radius: var(--border-radius-s);
+			background-color: transparent;
+
+			&--no-icon {
+				border: none;
+			}
+		}
+
+		.grid-card__svg {
+			width: 134px;
+			height: auto;
+			max-height: 42px;
+			margin: 0 auto;
+			object-fit: contain;
+		}
+
+		.grid-card__inner-content {
+			height: 100%;
+			margin-top: 18px;
+		}
+
+		.grid-card__heading {
+			padding-right: 20px;
+			letter-spacing: -0.005em;
+			line-height: calc(36 / 25);
+		}
+
+		.grid-card__content {
+			margin-bottom: 26px;
+			padding-right: 20px;
+			line-height: calc(24 / 14);
+		}
+	}
+}

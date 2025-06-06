@@ -31,17 +31,6 @@
 				'group_heading_box',
 						]
 					])
-			->addRadio('item_style', [
-				'label' => 'Item Style',
-				'instructions' => 'Select the style for the grid items',
-				'choices' => [
-					'with-icons' => 'With Icons',
-					'with-images' => 'With Images'
-				],
-				'default_value' => 'with-icons',
-				'layout' => 'horizontal',
-				'return_format' => 'value',
-			])
 			->addRadio('display_mode', [
 				'label' => 'Display Mode',
 				'instructions' => 'Select how to display the items.',
@@ -50,6 +39,18 @@
 					'carousel' => 'Carousel'
 				],
 				'default_value' => 'grid',
+				'layout' => 'horizontal',
+				'return_format' => 'value',
+			])
+			->addRadio('item_style', [
+				'label' => 'Grid Card Style',
+				'instructions' => 'Select the visual style for each grid card',
+				'choices' => [
+					'with-icons' => 'With Icons',
+					'with-images' => 'With Images',
+					'portfolio' => 'Portfolio'
+				],
+				'default_value' => 'with-icons',
 				'layout' => 'horizontal',
 				'return_format' => 'value',
 			])
@@ -198,26 +199,26 @@
 				]
 			])
 			->addRepeater('grid_items', [
-				'label' => 'Grid Items',
-				'instructions' => 'Add items to display in the grid',
+				'label' => 'Grid Cards',
+				'instructions' => 'Add cards to display in the grid',
 				'min' => 1,
 				'layout' => 'block',
-				'button_label' => 'Add Item',
+				'button_label' => 'Add Card',
 			])
 	->addText('item_heading', [
-					'label' => 'Item Heading',
-					'instructions' => 'Heading for this grid item',
+					'label' => 'Card Heading',
+					'instructions' => 'Heading for this grid card',
 	'maxlength' => 124,
 				])
 	->addTextarea('item_content', [
-					'label' => 'Item Content',
-					'instructions' => 'Main content for this grid item',
+					'label' => 'Card Content',
+					'instructions' => 'Main content for this grid card',
 	'rows' => 8,
 	'maxlength' => 228,
 				])
 	->addLink('item_link', [
-		'label' => 'Item Link',
-		'instructions' => 'Link for this grid item',
+		'label' => 'Card Link',
+		'instructions' => 'Link for this grid card',
 		'return_format' => 'array',
 				])
 				->addImage('image', [
@@ -248,6 +249,13 @@
 								'operator' => '==',
 				'value' => 'with-icons',
 							]
+						],
+						[
+							[
+				'field' => 'item_style',
+								'operator' => '==',
+				'value' => 'portfolio',
+							]
 						]
 					]
 				])
@@ -259,7 +267,7 @@
 				])
 				->addTrueFalse('item_has_metric_box', [
 					'label' => 'Add Metric Box?',
-					'instructions' => 'Display a metric box at the bottom of the item (carousel mode only).',
+					'instructions' => 'Display a metric box at the bottom of the card (carousel mode only).',
 					'default_value' => 0,
 					'ui' => 1,
 				])
