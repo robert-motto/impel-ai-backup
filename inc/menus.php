@@ -11,10 +11,8 @@ function register_nav()
 			'mobile_menu_3' => __('Mobile Menu 3 (Solutions)'),
 			'mobile_menu_4' => __('Mobile Menu 4 (Resources)'),
 			'mobile_menu_5' => __('Mobile Menu 5 (Company)'),
-			'footer_menu_col_1' => __('Footer - column 1'),
-			'footer_menu_col_2' => __('Footer - column 2'),
-			'footer_menu_col_3' => __('Footer - column 3'),
-			'footer_menu_col_4' => __('Footer - column 4'),
+			'footer_menu_col_1' => __('Footer Top'),
+			'footer_menu_col_2' => __('Footer Bottom'),
 		)
 	);
 }
@@ -115,20 +113,33 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 		$title = apply_filters('nav_menu_item_title', $title, $menu_item, $args, $depth);
 
 		$item_output = $args->before ?? '';
-		$item_output .= '<a' . $attributes . '>';
-		$item_output .= str_replace('%s', $title, $args->link_before) . $title . $args->link_after;
+		
+		// Check if this is a top-level item with children (for footer menus)
+		$has_children = in_array('menu-item-has-children', $classes);
+		$is_footer_menu = isset($args->theme_location) && (strpos($args->theme_location, 'footer_menu') !== false);
+		
+		if ($depth === 0 && $has_children && $is_footer_menu) {
+			// For top-level footer menu items with children, render as span (no link)
+			$item_output .= '<span class="' . $args->link_class . ' site-footer-nav__parent">';
+			$item_output .= str_replace('%s', $title, $args->link_before) . $title . $args->link_after;
+			$item_output .= '</span>';
+		} else {
+			// Regular link for all other items
+			$item_output .= '<a' . $attributes . '>';
+			$item_output .= str_replace('%s', $title, $args->link_before) . $title . $args->link_after;
 
-		// Add chevron icon for menu items with submenu
-		$has_submenu = get_field('has_submenu', $menu_item->ID);
-		if ($has_submenu === 'y') {
-			ob_start();
-			get_icon('chevron-down', [
-				'classes' => 'site-top-nav__chevron',
-			]);
-			$item_output .= ob_get_clean();
+			// Add chevron icon for menu items with submenu
+			$has_submenu = get_field('has_submenu', $menu_item->ID);
+			if ($has_submenu === 'y') {
+				ob_start();
+				get_icon('chevron-down', [
+					'classes' => 'site-top-nav__chevron',
+				]);
+				$item_output .= ob_get_clean();
+			}
+
+			$item_output .= '</a>';
 		}
-
-		$item_output .= '</a>';
 
 		// Handle submenu content
 		$has_submenu = get_field('has_submenu', $menu_item->ID);
