@@ -1,6 +1,5 @@
 @use 'config' as *;
 
-.l-section--sticky-content-scroll,
 .l-section--vertical-scrolling-cards {
 	position: relative;
 	padding-top: rem(72px);
@@ -10,7 +9,7 @@
 	}
 }
 
-.sticky-content-scroll {
+.vertical-scrolling-cards {
 	display: flex;
 	flex-direction: column;
 	gap: fluid(40px, 64px);
@@ -118,7 +117,7 @@
 		flex-direction: column;
 		width: 100%;
 		border: 1px solid var(--wf-neutral-neutral-80);
-		border-radius: 8px;
+		border-radius: var(--radius-16);
 		background-color: var(--wf-neutral-neutral-100-white);
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 		overflow: hidden;

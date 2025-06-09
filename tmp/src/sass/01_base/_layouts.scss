@@ -102,16 +102,16 @@
 
 .l-wrapper {
 	position: relative;
-	width: calc(100% - rem(40));
-	max-width: rem(1300px);
+	width: calc(100% - 40px);
+	max-width: 1300px;
 	margin: 0 auto;
 
 	&--medium {
-		max-width: rem(1270px);
+		max-width: 1270px;
 	}
 
 	&--tight {
-		max-width: rem(1000);
+		max-width: 1000px;
 	}
 }
 
@@ -169,6 +169,6 @@
 .l-sidebar {
 	@include lg {
 		position: sticky;
-		top: rem(120);
+		top: 120px;
 	}
 }

@@ -146,6 +146,10 @@
 					}
 				}
 			}
+
+			.mobile-nav__action-chevron {
+				transform: rotate(180deg);
+			}
 		}
 
 		& > a {
@@ -244,8 +248,7 @@
 	&__sub {
 		display: none;
 		padding: var(--spacing-400) var(--spacing-450) var(--spacing-450);
-		border-radius: var(--border-radius-s);
-		background-color: var(--elevation-surface-sunken-secondary-default);
+		background-color: rgba(#3E245C, 0.04);
 	}
 
 	&__subitem {
@@ -321,7 +324,6 @@
 		font-size: var(--t--interface-2);
 		font-weight: var(--font-weight-500);
 		letter-spacing: 0.5px;
-		text-transform: uppercase;
 
 		&:not(:first-child) {
 			margin-top: var(--spacing-600);

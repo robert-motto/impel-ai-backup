@@ -113,11 +113,11 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 		$title = apply_filters('nav_menu_item_title', $title, $menu_item, $args, $depth);
 
 		$item_output = $args->before ?? '';
-		
+
 		// Check if this is a top-level item with children (for footer menus)
 		$has_children = in_array('menu-item-has-children', $classes);
 		$is_footer_menu = isset($args->theme_location) && (strpos($args->theme_location, 'footer_menu') !== false);
-		
+
 		if ($depth === 0 && $has_children && $is_footer_menu) {
 			// For top-level footer menu items with children, render as span (no link)
 			$item_output .= '<span class="' . $args->link_class . ' site-footer-nav__parent">';
@@ -171,19 +171,26 @@ class WPSE_78121_Sublevel_Walker extends Walker_Nav_Menu
 		$output .= '<div class="sub-menu-wrap__content">';
 
 		if (!empty($grid_submenu['title'])) {
-			$output .= '<div class="sub-menu-wrap__header">';
-			$output .= '<h2 class="sub-menu-wrap__title">' . esc_html($grid_submenu['title']) . '</h2>';
-			if (!empty($grid_submenu['text'])) {
-				$output .= '<div class="sub-menu-wrap__text">' . esc_html($grid_submenu['text']) . '</div>';
-			}
 			if (!empty($grid_submenu['link'])) {
 				$link = $grid_submenu['link'];
-				$output .= '<a href="' . esc_url($link['url']) . '" class="sub-menu-wrap__link">';
+				$output .= '<a href="' . esc_url($link['url']) . '" class="sub-menu-wrap__header">';
+				$output .= '<h2 class="sub-menu-wrap__title">' . esc_html($grid_submenu['title']) . '</h2>';
+				if (!empty($grid_submenu['text'])) {
+					$output .= '<div class="sub-menu-wrap__text">' . esc_html($grid_submenu['text']) . '</div>';
+				}
+				$output .= '<div class="sub-menu-wrap__link">';
 				$output .= '<span class="text">' . esc_html($link['title']) . '</span>';
 				$output .= '<span class="arrow-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.16406 10H15.8307M15.8307 10L10.8307 15M15.8307 10L10.8307 5" stroke="#F6F5FA" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>';
+				$output .= '</div>';
 				$output .= '</a>';
+			} else {
+				$output .= '<div class="sub-menu-wrap__header">';
+				$output .= '<h2 class="sub-menu-wrap__title">' . esc_html($grid_submenu['title']) . '</h2>';
+				if (!empty($grid_submenu['text'])) {
+					$output .= '<div class="sub-menu-wrap__text">' . esc_html($grid_submenu['text']) . '</div>';
+				}
+				$output .= '</div>';
 			}
-			$output .= '</div>';
 		}
 
 		if (!empty($grid_submenu['menu_items'])) {

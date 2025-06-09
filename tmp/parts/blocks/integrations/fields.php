@@ -16,6 +16,16 @@
 					'group_section_settings',
 				]
 			])
+			->addButtonGroup('mode_variant', [
+				'label'   => 'Color Mode Variant',
+				'choices' => [
+					'primary' => 'Primary',
+					'secondary'  => 'Secondary',
+				],
+				'default_value' => 'primary',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
+			])
 			->addButtonGroup('layout_variant', [
 				'label' => 'Layout Variant',
 				'choices' => [
@@ -92,26 +102,6 @@
 				'default_value' => 0,
 				'ui' => 1,
 			])
-			->addTrueFalse('has_background', [
-				'label' => 'Use Background Color',
-				'instructions' => 'Add background color to the section',
-				'default_value' => 0,
-				'ui' => 1,
-			])
-			->addSelect('background_color', [
-				'label' => 'Background Color',
-				'instructions' => 'Select background color',
-				'choices' => [
-					'light' => 'Light (Gray)',
-					'white' => 'White',
-					'dark' => 'Dark',
-				],
-				'default_value' => 'light',
-				'return_format' => 'value',
-				'multiple' => 0,
-				'ui' => 1,
-			])
-				->conditional('has_background', '==', 1)
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path);
 	return $name;
