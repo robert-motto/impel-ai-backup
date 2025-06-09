@@ -7,19 +7,19 @@
 	<?php block_preview(__FILE__); ?>
 <?php else :?>
 	<?php
-		$group           = isset($args['data']) ? $args['data'] : blockFieldGroup(__FILE__);
-		$layout_variant  = $group['layout_variant'] ?? 'text-left';
-		$caption         = $group['caption'] ?? '';
-		$heading         = $group['heading'] ?? '';
-		$content         = $group['content'] ?? '';
-		$buttons         = $group['buttons_group'] ?? [];
-		$media_type      = $group['media_type'] ?? 'image';
-		$image           = $group['image'] ?? '';
-		$video_group     = $group['video_group'] ?? [];
-		$media_disclaimer = $group['media_disclaimer'] ?? '';
-		$show_divider    = $group['show_divider'] ?? false;
-		$has_background  = $group['has_background'] ?? false;
-		$background_color = $group['background_color'] ?? 'light';
+		$group           		= isset($args['data']) ? $args['data'] : blockFieldGroup(__FILE__);
+		$layout_variant  		= $group['layout_variant'] ?? 'text-left';
+		$color_mode      		= $group['section_settings_group']['mode'] ?? 'light';
+		$color_mode_variant	= $group['mode_variant'] ?? 'primary';
+		$caption         		= $group['caption'] ?? '';
+		$heading         		= $group['heading'] ?? '';
+		$content         		= $group['content'] ?? '';
+		$buttons         		= $group['buttons_group'] ?? [];
+		$media_type      		= $group['media_type'] ?? 'image';
+		$image           		= $group['image'] ?? '';
+		$video_group     		= $group['video_group'] ?? [];
+		$media_disclaimer 	= $group['media_disclaimer'] ?? '';
+		$show_divider    		= $group['show_divider'] ?? false;
 
 		// Set fallback image if none is selected and media type is image
 		if ($media_type === 'image' && (empty($image) || !isset($image['id']))) {
@@ -39,13 +39,10 @@
 		}
 
 		// Section classes
-		$classes = ['js-section', 'l-section', 'l-section--integrations', 'js-integrations'];
-		if ($has_background) {
-			$classes[] = 'is-' . $background_color;
-		}
+		$classes = ['js-section', 'l-section', 'l-section--integrations', 'js-integrations', "color-mode-{$color_mode}", "color-mode-variant-{$color_mode_variant}"];
 
 		// Row classes for layout variants
-		$row_classes = ['integrations', 'l-wrapper'];
+		$row_classes = ['integrations', 'l-wrapper', 'l-wrapper--medium'];
 		if ($layout_variant === 'text-right') {
 			$row_classes[] = 'integrations--reverse';
 		}
@@ -88,9 +85,9 @@
 								$image['id'],
 								[
 									560  => [ 560, 373, 1 ],
-									1024 => [ 720, 480, 1 ],
-									1920 => [ 720, 480, 1 ],
-									2800 => [ 720 * 2, 480 * 2, 1 ],
+									1024 => [ 624, 680, 1 ],
+									1920 => [ 624, 680, 1 ],
+									2800 => [ 624 * 2, 680 * 2, 1 ],
 								],
 								[
 									'alt'     => $image['alt'] ? $image['alt'] : wp_strip_all_tags($heading ?? ''),

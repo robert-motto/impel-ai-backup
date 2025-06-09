@@ -16,29 +16,36 @@
 					'group_section_settings',
 				]
 			])
-			->addText('caption', [
-				'label' => 'Caption',
-				'instructions' => 'Short text above the heading',
-				'default_value' => 'TAGLINE',
+			->addButtonGroup('mode_variant', [
+				'label'   => 'Color Mode Variant',
+				'choices' => [
+					'primary' => 'Primary',
+					'secondary'  => 'Secondary',
+				],
+				'default_value' => 'primary',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
 			])
-			->addWysiwyg('heading', [
-				'label' => 'Heading',
-				'instructions' => 'Enter the main heading text. Use Enter/Return for line breaks.',
-				'media_upload' => 0,
-				'toolbar' => 'basic',
-				'tabs' => 'visual',
-				'delay' => 0,
-				'new_lines' => 'br',
-				'default_value' => 'Before & After',
+			->addButtonGroup('image_position', [
+				'label'   => 'Image Position',
+				'choices' => [
+					'left' => 'Left',
+					'center'  => 'Center',
+					'right' => 'Right',
+				],
+				'default_value' => 'center',
+				'layout'        => 'horizontal',
+				'return_format' => 'value',
 			])
-			->addWysiwyg('content', [
-				'label' => 'Body Content',
-				'instructions' => 'Enter the main content text. Use the toolbar for lists and formatting.',
-				'media_upload' => 0,
-				'toolbar' => 'full',
-				'tabs' => 'all',
-				'delay' => 0,
-				'default_value' => 'Ornare purus enim pulvinar at volutpat. Arcu lobortis elementum eu consectetur. Diam proin et senectus condimentum imperdiet vitae nisi. Velit habitasse odio libero.',
+			->addField('heading', 'clone', [
+				'clone' => [
+					'group_heading_box',
+				]
+					])
+			->addField('buttons', 'clone', [
+				'clone' => [
+					'group_action_group',
+				],
 			])
 			->addGroup('comparison_images', [
 				'label' => 'Comparison Images',
@@ -70,26 +77,6 @@
 					'default_value' => 'After',
 				])
 			->endGroup()
-			->addTrueFalse('has_background', [
-				'label' => 'Use Background Color',
-				'instructions' => 'Add background color to the section',
-				'default_value' => 0,
-				'ui' => 1,
-			])
-			->addSelect('background_color', [
-				'label' => 'Background Color',
-				'instructions' => 'Select background color',
-				'choices' => [
-					'light' => 'Light (Gray)',
-					'white' => 'White',
-					'dark' => 'Dark',
-				],
-				'default_value' => 'light',
-				'return_format' => 'value',
-				'multiple' => 0,
-				'ui' => 1,
-			])
-				->conditional('has_background', '==', 1)
 		->endGroup()
 		->setLocation('block', '==', 'acf/' . $path);
 	return $name;

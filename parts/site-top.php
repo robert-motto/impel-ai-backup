@@ -23,7 +23,7 @@
 			</div>
 		</div>
 	<?php endif; ?>
-	<div class="l-wrapper site-top__wrapper js-main-bar-hld">
+	<div class="site-top__wrapper js-main-bar-hld">
 		<a class="site-top__logo" href="<?php echo esc_url(get_home_url()); ?>" title="<?php esc_attr_e('Go to home', get_option('template')); ?>">
 			<?php
 				$logo_for_dark_header = get_field('logo', 'options');

@@ -94,9 +94,11 @@
 				<li class="mobile-nav__item">
 					<div class="mobile-nav__parent js-mobile-nav-parent">
 						<button class="text"><?php echo esc_html($menu1_title); ?></button>
-						<svg class="svg-nav-arrow-down">
-							<use xlink:href="#svg-nav-arrow-down"></use>
-						</svg>
+						<?php
+							get_icon('chevron-down', [
+								'classes' => 'mobile-nav__action-chevron',
+							]);
+						?>
 					</div>
 					<div class="mobile-nav__sub">
 						<?php echo render_mobile_intro_box($mobile_menu_1_intro); ?>
@@ -120,9 +122,11 @@
 				<li class="mobile-nav__item">
 					<div class="mobile-nav__parent js-mobile-nav-parent">
 						<button class="text"><?php echo esc_html($menu2_title); ?></button>
-						<svg class="svg-nav-arrow-down">
-							<use xlink:href="#svg-nav-arrow-down"></use>
-						</svg>
+						<?php
+							get_icon('chevron-down', [
+								'classes' => 'mobile-nav__action-chevron',
+							]);
+						?>
 					</div>
 					<div class="mobile-nav__sub">
 						<?php echo render_mobile_intro_box($mobile_menu_2_intro); ?>
@@ -146,9 +150,11 @@
 				<li class="mobile-nav__item">
 					<div class="mobile-nav__parent js-mobile-nav-parent">
 						<button class="text"><?php echo esc_html($menu3_title); ?></button>
-						<svg class="svg-nav-arrow-down">
-							<use xlink:href="#svg-nav-arrow-down"></use>
-						</svg>
+						<?php
+							get_icon('chevron-down', [
+								'classes' => 'mobile-nav__action-chevron',
+							]);
+						?>
 					</div>
 					<div class="mobile-nav__sub">
 						<?php echo render_mobile_intro_box($mobile_menu_3_intro); ?>
@@ -184,9 +190,11 @@
 				<li class="mobile-nav__item">
 					<div class="mobile-nav__parent js-mobile-nav-parent">
 						<button class="text"><?php echo esc_html($menu4_title); ?></button>
-						<svg class="svg-nav-arrow-down">
-							<use xlink:href="#svg-nav-arrow-down"></use>
-						</svg>
+						<?php
+							get_icon('chevron-down', [
+								'classes' => 'mobile-nav__action-chevron',
+							]);
+						?>
 					</div>
 					<div class="mobile-nav__sub">
 						<?php echo render_mobile_intro_box($mobile_menu_4_intro); ?>
@@ -210,9 +218,11 @@
 				<li class="mobile-nav__item">
 					<div class="mobile-nav__parent js-mobile-nav-parent">
 						<button class="text"><?php echo esc_html($menu5_title); ?></button>
-						<svg class="svg-nav-arrow-down">
-							<use xlink:href="#svg-nav-arrow-down"></use>
-						</svg>
+						<?php
+							get_icon('chevron-down', [
+								'classes' => 'mobile-nav__action-chevron',
+							]);
+						?>
 					</div>
 					<div class="mobile-nav__sub">
 						<?php echo render_mobile_intro_box($mobile_menu_5_intro); ?>
@@ -232,9 +242,11 @@
 				<li class="mobile-nav__item">
 					<div class="mobile-nav__parent js-mobile-nav-parent">
 						<button class="text"><?php echo esc_html($global_dropdown_data['title'] ?? 'Global'); ?></button>
-						<svg class="svg-nav-arrow-down">
-							<use xlink:href="#svg-nav-arrow-down"></use>
-						</svg>
+						<?php
+							get_icon('chevron-down', [
+								'classes' => 'mobile-nav__action-chevron',
+							]);
+						?>
 					</div>
 					<div class="mobile-nav__sub">
 						<span class="mobile-nav__header t-caption"><?php echo esc_html($global_dropdown_data['description'] ?? 'Select your region and language.'); ?></span>
@@ -260,9 +272,11 @@
 				<li class="mobile-nav__item">
 					<div class="mobile-nav__parent js-mobile-nav-parent">
 						<button class="text"><?php echo esc_html($login_dropdown_data['title'] ?? 'Log In'); ?></button>
-						<svg class="svg-nav-arrow-down">
-							<use xlink:href="#svg-nav-arrow-down"></use>
-						</svg>
+						<?php
+							get_icon('chevron-down', [
+								'classes' => 'mobile-nav__action-chevron',
+							]);
+						?>
 					</div>
 					<div class="mobile-nav__sub">
 						<span class="mobile-nav__header t-caption"><?php echo esc_html($login_dropdown_data['description'] ?? 'Access your AI-powered tools and manage your account.'); ?></span>

@@ -28,8 +28,12 @@ function initBeforeAfterComparison() {
 			return;
 		}
 
+		// Initialize positions - set initial state without conflicting transforms
+		gsap.set(slider, {
+			left: '50%',
+			x: '-50%', // This replaces the CSS transform to avoid conflicts
+		});
 		gsap.set(afterWrapper, { clipPath: 'inset(0 50% 0 0)' });
-		gsap.set(slider, { left: '50%' });
 
 		function updateUI(percentage) {
 			const insetRight = 100 - percentage;
@@ -52,26 +56,40 @@ function initBeforeAfterComparison() {
 			bounds: container,
 			inertia: false,
 			onDrag: function() {
-				const bounds = this.target.getBoundingClientRect();
-				const containerBounds = container.getBoundingClientRect();
-				const position = bounds.left - containerBounds.left;
-				const percentage = (position / containerBounds.width) * 100;
+				const containerRect = container.getBoundingClientRect();
+				const sliderRect = this.target.getBoundingClientRect();
+				const sliderCenter = sliderRect.left + (sliderRect.width / 2);
+				const containerLeft = containerRect.left;
+				const position = sliderCenter - containerLeft;
+				const percentage = Math.max(0, Math.min(100, (position / containerRect.width) * 100));
 
 				updateUI(percentage);
 			},
 			onRelease: function() {
-				const bounds = this.target.getBoundingClientRect();
-				const containerBounds = container.getBoundingClientRect();
-				const position = bounds.left - containerBounds.left;
-				const percentage = (position / containerBounds.width) * 100;
+				const containerRect = container.getBoundingClientRect();
+				const sliderRect = this.target.getBoundingClientRect();
+				const sliderCenter = sliderRect.left + (sliderRect.width / 2);
+				const containerLeft = containerRect.left;
+				const position = sliderCenter - containerLeft;
+				const percentage = Math.max(0, Math.min(100, (position / containerRect.width) * 100));
 
 				if (percentage < 5) {
-					gsap.to(slider, { left: '0%', duration: 0.3, ease: 'power2.out' });
+					gsap.to(slider, {
+						left: '0%',
+						x: '0%',
+						duration: 0.3,
+						ease: 'power2.out',
+					});
 					gsap.to(afterWrapper, { clipPath: 'inset(0 100% 0 0)', duration: 0.3, ease: 'power2.out' });
 					beforeButton?.classList.add('is-active');
 					afterButton?.classList.remove('is-active');
 				} else if (percentage > 95) {
-					gsap.to(slider, { left: '100%', duration: 0.3, ease: 'power2.out' });
+					gsap.to(slider, {
+						left: '100%',
+						x: '-100%',
+						duration: 0.3,
+						ease: 'power2.out',
+					});
 					gsap.to(afterWrapper, { clipPath: 'inset(0 0% 0 0)', duration: 0.3, ease: 'power2.out' });
 					afterButton?.classList.add('is-active');
 					beforeButton?.classList.remove('is-active');
@@ -81,7 +99,12 @@ function initBeforeAfterComparison() {
 
 		if (beforeButton && afterButton) {
 			beforeButton.addEventListener('click', () => {
-				gsap.to(slider, { left: '0%', duration: 0.6, ease: 'power2.out' });
+				gsap.to(slider, {
+					left: '0%',
+					x: '0%',
+					duration: 0.6,
+					ease: 'power2.out',
+				});
 				gsap.to(afterWrapper, { clipPath: 'inset(0 100% 0 0)', duration: 0.6, ease: 'power2.out' });
 				beforeButton.classList.add('is-active');
 				afterButton.classList.remove('is-active');
@@ -89,7 +112,12 @@ function initBeforeAfterComparison() {
 			});
 
 			afterButton.addEventListener('click', () => {
-				gsap.to(slider, { left: '100%', duration: 0.6, ease: 'power2.out' });
+				gsap.to(slider, {
+					left: '100%',
+					x: '-100%',
+					duration: 0.6,
+					ease: 'power2.out',
+				});
 				gsap.to(afterWrapper, { clipPath: 'inset(0 0% 0 0)', duration: 0.6, ease: 'power2.out' });
 				afterButton.classList.add('is-active');
 				beforeButton.classList.remove('is-active');
