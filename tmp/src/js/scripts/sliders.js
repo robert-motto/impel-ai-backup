@@ -25,12 +25,21 @@ function initSliders() {
 		const spaceBetween = parseInt(carouselElement.dataset.spaceBetween, 10) || 16;
 		const loop = carouselElement.dataset.loop === 'true';
 		const slidesOffsetBefore = parseInt(carouselElement.dataset.slidesOffsetBefore, 10) || 0;
+		const linear = carouselElement.dataset.linear === 'true';
 
 		// Find navigation and scrollbar elements relative to the carousel element
 		const container = carouselElement.closest('.slider__carousel-container');
 		const prevButton = container ? container.querySelector('.js-slider-prev') : null;
 		const nextButton = container ? container.querySelector('.js-slider-next') : null;
 		const progressbarEl = container ? container.querySelector('.js-slider-progressbar') : null;
+
+		// Add linear transition styling if linear option is enabled
+		if (linear) {
+			const swiperWrapper = carouselElement.querySelector('.swiper-wrapper');
+			if (swiperWrapper) {
+				swiperWrapper.style.transitionTimingFunction = 'linear';
+			}
+		}
 
 		try {
 			// Dynamically build modules array
@@ -49,17 +58,23 @@ function initSliders() {
 				slidesPerView: slidesPerViewMobile,
 				spaceBetween,
 				loop,
-				slidesOffsetBefore,
 				grabCursor: true,
 				breakpoints: {
 					// 768px and up
 					768: {
 						slidesPerView: slidesPerViewTablet,
 						spaceBetween: 24,
+						slidesOffsetBefore: slidesOffsetBefore / 4,
 					},
 					// 1024px and up
 					1024: {
 						slidesPerView: slidesPerViewDesktop,
+						slidesOffsetBefore: slidesOffsetBefore / 4,
+					},
+					// 1280px and up
+					1280: {
+						slidesPerView: slidesPerViewDesktop,
+						slidesOffsetBefore,
 					},
 				},
 			};
@@ -83,11 +98,22 @@ function initSliders() {
 
 			// Add autoplay configuration if speed is greater than 0
 			if (autoplaySpeed > 0) {
-				swiperConfig.autoplay = {
-					delay: autoplaySpeed,
-					disableOnInteraction: false, // Keep playing after user interaction
-					pauseOnMouseEnter: pauseOnHover,
-				};
+				if (linear) {
+					// Linear autoplay configuration
+					swiperConfig.autoplay = {
+						delay: 0,
+						disableOnInteraction: false,
+						pauseOnMouseEnter: pauseOnHover,
+					};
+					swiperConfig.speed = autoplaySpeed;
+				} else {
+					// Standard autoplay configuration
+					swiperConfig.autoplay = {
+						delay: autoplaySpeed,
+						disableOnInteraction: false, // Keep playing after user interaction
+						pauseOnMouseEnter: pauseOnHover,
+					};
+				}
 			}
 
 			// Initialize Swiper

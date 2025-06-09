@@ -13,7 +13,7 @@
 	border-bottom: 1px solid var(--c--brand-primary-750);
 	background-color: var(--c--brand-neutral-1000);
 
-	@include tablet-small {
+	@include media-max(1100) {
 		display: flex;
 	}
 

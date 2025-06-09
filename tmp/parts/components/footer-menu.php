@@ -7,7 +7,6 @@
 <div class="site-footer__menu <?php echo $classes; ?>">
 	<?php
 		if ($menu) {
-			echo '<span class="site-footer-nav__title">'.$menu->name.'</span>';
 			wp_nav_menu(array(
 				'theme_location' => $menu_name,
 				'menu_class' => 'site-footer-nav',
