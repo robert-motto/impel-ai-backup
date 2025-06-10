@@ -2,11 +2,11 @@
 @use 'typography' as *;
 
 .site-footer {
-
+	// Footer Top
 	&__top {
 		background-color: var(--c--brand-neutral-100);
-		padding-block: fluid(50px, 80px);
 		color: var(--c--brand-neutral-1000);
+		padding-block: fluid(50px, 80px);
 	}
 
 	&__menus-hld {
@@ -24,8 +24,96 @@
 		}
 	}
 
+	// Footer Top nav styles
+	&__menu--1 {
+		.site-footer-nav {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: flex-start;
+			width: 100%;
+			box-sizing: border-box;
+			font-family: var(--font-family-secondary);
+			font-size: var(--t--paragraph-3);
+			gap: fluid(24px, 32px) fluid(32px, 48px);
+
+			> .site-footer-nav__item {
+				display: flex;
+				flex: 0 0 auto;
+				flex-direction: column;
+				position: relative;
+				max-width: calc(50% - fluid(16px, 24px));
+				margin-bottom: rem(20px);
+				color: var(--c--brand-neutral-625);
+				font-size: rem(16);
+				font-weight: 600;
+
+				@include md {
+					max-width: calc(33.333% - fluid(20px, 32px));
+				}
+
+				@include lg {
+					max-width: calc(25% - fluid(24px, 36px));
+				}
+
+				> a {
+					color: var(--c--brand-neutral-625);
+				}
+
+				> .site-footer-nav__parent {
+					pointer-events: none;
+					cursor: default;
+					color: var(--c--brand-neutral-625);
+				}
+
+				.sub-menu-wrap {
+					margin-top: rem(20px);
+				}
+			}
+
+			.site-footer-nav__title {
+				margin-bottom: rem(14px);
+				color: var(--c--brand-neutral-625) !important;
+				font-weight: 600;
+			}
+
+			.site-footer-nav__item {
+				color: var(--c--brand-neutral-1000);
+				transition: color 0.3s ease-in-out;
+
+				> a {
+					@extend %footer-link;
+				}
+
+				&.site-footer-nav__title {
+					margin-top: fluid(12px, 20px);
+					margin-bottom: rem(2px);
+				}
+			}
+
+			.sub-menu {
+				display: flex;
+				flex-direction: column;
+				margin-top: 0;
+				padding-left: 0;
+				gap: rem(4px);
+
+				.site-footer-nav__item {
+					margin-bottom: 0;
+					color: var(--c--brand-neutral-1000);
+					font-size: var(--t--paragraph-3);
+					font-weight: 400;
+
+					> a {
+						color: var(--c--brand-neutral-1000);
+					}
+				}
+			}
+		}
+	}
+
 	// Footer Bottom
 	&__bottom {
+		border-top: 1px solid var(--interface-divider-divider);
 		background-color: var(--c--brand-neutral-100);
 		padding-block: fluid(24px, 32px);
 		color: var(--c--brand-neutral-1000);
@@ -150,99 +238,14 @@
 			}
 
 			&:hover {
-				color: var(--footer-icon-primary-hover);
-
 				.socials__item__link__icon {
-					color: var(--c--brand-primary-500);
+					color: var(--interface-interactive-icon-icon-hover);
 				}
 			}
 		}
 	}
 
-	&-nav {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: flex-start;
-		width: 100%;
-		box-sizing: border-box;
-		font-family: var(--font-family-secondary);
-		font-size: var(--t--paragraph-3);
-		gap: fluid(24px, 32px) fluid(32px, 48px);
-
-		> .site-footer-nav__item {
-			display: flex;
-			flex: 0 0 auto;
-			flex-direction: column;
-			position: relative;
-			max-width: calc(50% - fluid(16px, 24px));
-			margin-bottom: rem(20px);
-			color: var(--c--brand-neutral-625);
-			font-size: rem(16);
-			font-weight: 600;
-
-			@include md {
-				max-width: calc(33.333% - fluid(20px, 32px));
-			}
-
-			@include lg {
-				max-width: calc(25% - fluid(24px, 36px));
-			}
-
-			> a {
-				color: var(--c--brand-neutral-625);
-			}
-
-			> .site-footer-nav__parent {
-				pointer-events: none;
-				cursor: default;
-				color: var(--c--brand-neutral-625);
-			}
-
-			.sub-menu-wrap {
-				margin-top: rem(20px);
-			}
-		}
-
-		&__title {
-			margin-bottom: rem(14px);
-			color: var(--c--brand-neutral-625) !important;
-			font-weight: 600;
-		}
-
-		&__item {
-			color: var(--c--brand-neutral-1000);
-			transition: color 0.3s ease-in-out;
-
-			> a {
-				@extend %footer-link;
-			}
-
-			&.site-footer-nav__title {
-				margin-top: fluid(12px, 20px);
-				margin-bottom: rem(2px);
-			}
-		}
-
-		.sub-menu {
-			display: flex;
-			flex-direction: column;
-			margin-top: 0;
-			padding-left: 0;
-			gap: rem(4px);
-
-			.site-footer-nav__item {
-				margin-bottom: 0;
-				color: var(--c--brand-neutral-1000);
-				font-size: var(--t--paragraph-3);
-				font-weight: 400;
-
-				> a {
-					color: var(--c--brand-neutral-1000);
-				}
-			}
-		}
-	}
-
+	// Footer Bottom nav styles
 	&__menu--2 {
 		width: 100%;
 		max-width: 100%;
@@ -282,6 +285,8 @@
 				}
 
 				> a {
+					@extend %footer-link;
+
 					display: inline-block;
 					max-width: 100%;
 					padding: rem(4px) rem(8px);
