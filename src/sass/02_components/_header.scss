@@ -130,14 +130,6 @@
 			}
 		}
 
-		&--global {
-			&.is-active {
-				.text {
-					display: none;
-				}
-			}
-		}
-
 		.text {
 			.is-scrolled & {
 				color: var(--c--brand-neutral-100);
@@ -802,7 +794,7 @@
 		}
 
 		&--grid {
-			padding-bottom: 20px;
+			padding-bottom: 0;
 
 			.l-wrapper {
 				width: 100%;
@@ -1061,7 +1053,7 @@
 			position: relative;
 			width: 100%;
 			margin-top: 0;
-			padding: 64px 76px 20px;
+			padding: 64px 76px 40px;
 
 			&::before {
 				content: '';

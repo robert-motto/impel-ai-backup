@@ -99,14 +99,10 @@ headerAll.forEach((header) => {
 			if (loginToggleOnScroll) {
 				loginToggleOnScroll.classList.remove('is-active');
 			}
-			// Reset global text display and globe icon
+			// Reset globe icon
 			const globalElement = document.querySelector('.js-global-toggle');
 			if (globalElement) {
-				const globalText = globalElement.querySelector('.text');
 				const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
-				if (globalText) {
-					globalText.style.display = '';
-				}
 				globeIconPaths.forEach(path => {
 					path.style.stroke = '';
 				});
@@ -192,14 +188,10 @@ document.addEventListener('keydown', (e) => {
 			if (loginToggle) {
 				loginToggle.classList.remove('is-active');
 			}
-			// Reset global text display and globe icon
+			// Reset globe icon
 			const globalElement = document.querySelector('.js-global-toggle');
 			if (globalElement) {
-				const globalText = globalElement.querySelector('.text');
 				const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
-				if (globalText) {
-					globalText.style.display = '';
-				}
 				globeIconPaths.forEach(path => {
 					path.style.stroke = '';
 				});
@@ -441,14 +433,10 @@ function initMegaMenu() {
 			if (!loginDropdown.contains(e.target) && !loginToggle.contains(e.target)) {
 				loginDropdown.classList.remove('is-active');
 				loginToggle.classList.remove('is-active');
-				// Reset global text display and globe icon
+				// Reset globe icon
 				const globalElement = document.querySelector('.js-global-toggle');
 				if (globalElement) {
-					const globalText = globalElement.querySelector('.text');
 					const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
-					if (globalText) {
-						globalText.style.display = '';
-					}
 					globeIconPaths.forEach(path => {
 						path.style.stroke = '';
 					});
@@ -492,14 +480,10 @@ function initLoginDropdown() {
 			const isActive = loginDropdown.classList.toggle('is-active');
 			loginToggle.classList.toggle('is-active', isActive);
 
-			// Hide global text and change globe icon when login is active
+			// Update globe icon when login is active
 			const globalElement = document.querySelector('.js-global-toggle');
 			if (globalElement) {
-				const globalText = globalElement.querySelector('.text');
 				const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
-				if (globalText) {
-					globalText.style.display = isActive ? 'none' : '';
-				}
 				globeIconPaths.forEach(path => {
 					path.style.stroke = isActive ? 'var(--c--brand-neutral-100)' : '';
 				});
@@ -520,14 +504,10 @@ function initLoginDropdown() {
 		if (e.key === 'Escape') {
 			loginDropdown.classList.remove('is-active');
 			loginToggle.classList.remove('is-active');
-			// Reset global text display and globe icon
+			// Reset globe icon
 			const globalElement = document.querySelector('.js-global-toggle');
 			if (globalElement) {
-				const globalText = globalElement.querySelector('.text');
 				const globeIconPaths = globalElement.querySelectorAll('.js-globe-icon svg path, .js-globe-icon svg ellipse');
-				if (globalText) {
-					globalText.style.display = '';
-				}
 				globeIconPaths.forEach(path => {
 					path.style.stroke = '';
 				});
