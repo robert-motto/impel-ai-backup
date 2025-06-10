@@ -145,7 +145,7 @@
 					</div>
 				<?php else: ?>
 					<div class="l-wrapper">
-						<div class="logos-certification__grid-container">
+						<div class="logos-certification__grid-container js-logos-grid-container">
 							<?php foreach ($logos as $item) :
 								$logo = $item['logo'] ?? [];
 								$alt_text = !empty($logo['alt']) ? $logo['alt'] : 'Logo';

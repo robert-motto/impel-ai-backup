@@ -8,7 +8,7 @@
 	background-color: var(--background-bg-primary--c-brand-primary-forest);
 	overflow: hidden;
 
-	@include tablet-big {
+	@include mobile {
 		padding-top: 0;
 	}
 

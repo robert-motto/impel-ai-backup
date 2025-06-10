@@ -45,6 +45,18 @@
 				opacity: 1;
 			}
 		}
+
+		.video__player-btn {
+			top: unset;
+			bottom: 32px;
+			left: 24px;
+			transform: unset;
+
+			&-icon {
+				width: 64px;
+				height: 64px;
+			}
+		}
 	}
 
 	&__img {
@@ -72,8 +84,7 @@
 	&__metric {
 		display: flex;
 		flex-direction: column;
-		max-width: 40%;
-		padding: rem(12px) rem(8px);
+		padding: rem(8px) rem(12px);
 		border-radius: 8px;
 	}
 

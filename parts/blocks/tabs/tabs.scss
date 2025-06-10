@@ -3,14 +3,14 @@
 .l-section--tabs {
 	position: relative;
 	padding: var(--padding-vertical-4xl) 0;
-	background-color: var(--bg-secondary);
+	background-color: var(--background-bg-primary--c-brand-primary-forest);
 	overflow: hidden;
 
 	&.color-mode-variant-secondary {
-		background-color: var(--background-bg-primary--c-brand-primary-forest);
+		background-color: var(--bg-secondary);
 
 		.tabs__container {
-			background-color: var(--bg-secondary);
+			background-color: var(--background-bg-primary--c-brand-primary-forest);
 		}
 	}
 }
@@ -24,10 +24,26 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		padding: var(--padding-vertical-4xs) var(--padding-vertical-3xs);
+		padding: 32px;
+		padding-top: 24px;
 		border-radius: 24px;
-		background-color: var(--background-bg-primary--c-brand-primary-forest);
+		background-color: var(--bg-secondary);
 		gap: 24px;
+
+		@include tablet-small {
+			padding: 0;
+			background-color: var(--background-bg-primary--c-brand-primary-forest);
+
+			.tabs {
+				&__content-wrapper {
+					padding: 0;
+				}
+
+				&__text-side {
+					padding: 0;
+				}
+			}
+		}
 	}
 
 	&__navigation {
@@ -41,7 +57,36 @@
 		gap: 8px;
 
 		@include mobile {
-			flex-direction: column;
+			display: grid;
+			justify-content: unset;
+			grid-auto-columns: 50vw;
+			grid-auto-flow: column;
+			padding: 0;
+			padding-bottom: 16px;
+			background: transparent;
+			overflow-x: auto;
+
+			&::-webkit-scrollbar {
+				height: 2px;
+			}
+
+			&::-webkit-scrollbar-track {
+				background: var(--interface-border-subtle);
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background: var(--c--brand-primary-250-main);
+			}
+
+			.tabs__nav-button {
+				width: 100%;
+				padding: 14px 20px;
+				background-color: var(--interface-ui-controls-bg-fill);
+
+				&.is-active {
+					background-color: var(--interface-ui-controls-item-hover);
+				}
+			}
 		}
 	}
 
@@ -72,7 +117,7 @@
 	&__content-wrapper {
 		width: 100%;
 
-		@include mobile {
+		@include tablet-small {
 			padding: 12px;
 			padding-top: 0;
 		}
@@ -93,7 +138,7 @@
 		justify-content: space-between;
 		gap: 24px;
 
-		@include mobile {
+		@include tablet-small {
 			flex-direction: column;
 		}
 	}
@@ -120,6 +165,10 @@
 		color: var(--txt-heading);
 		font-size: var(--t--heading-4);
 		line-height: var(--t--line-height-700);
+
+		@include tablet-small {
+			line-height: var(--t--line-height-800);
+		}
 	}
 
 	&__tab-content {
@@ -136,8 +185,9 @@
 	&__media-side {
 		width: 45%;
 
-		@include mobile {
+		@include tablet-small {
 			width: 100%;
+			max-width: 540px;
 		}
 	}
 
@@ -174,8 +224,10 @@
 		gap: var(--spacing-800);
 
 		@include mobile {
-			gap: 8px;
 			position: initial;
+			padding: 0;
+			padding-top: 12px;
+			gap: 24px;
 		}
 	}
 
@@ -206,7 +258,7 @@
 		padding: 8px var(--spacing-300) 8px var(--spacing-500);
 		border-radius: var(--border-radius-s);
 		background-color: var(--interface-ui-controls-tab-highlight-bar-fill);
-		gap: var(--spacing-800);
+		gap: var(--spacing-450);
 
 		@include mobile {
 			gap: 12px;
@@ -231,6 +283,7 @@
 
 			* {
 				fill: #fff;
+				stroke: #fff;
 			}
 		}
 	}
@@ -241,14 +294,14 @@
 		font-weight: 500;
 		line-height: var(--t--line-height-300);
 
-		@include mobile {
+		@include tablet-small {
 			line-height: 1.2;
 		}
 	}
 }
 
 // Mobile accordion transformation
-// @include mobile {
+// @include tablet-small {
 // 	.tabs {
 // 		&__navigation {
 // 			padding: 0;

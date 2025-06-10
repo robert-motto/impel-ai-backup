@@ -28,11 +28,11 @@ if (empty($thumbnail) || !isset($thumbnail['id'])) {
 }
 ?>
 
+<?php if (!empty($link) && !empty($link['url'])) : ?>
+	<a href="<?php echo esc_url($link['url']); ?>" class="card__item-link"
+		<?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
+<?php endif; ?>
 <div class="card <?php echo $show_image ? 'has-image' : 'has-no-image'; ?>">
-	<?php if (!empty($link) && !empty($link['url'])) : ?>
-		<a href="<?php echo esc_url($link['url']); ?>" class="card__item-link"
-			<?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
-	<?php endif; ?>
 
 	<?php if ($show_image) : ?>
 		<div class="card__item-media">
@@ -111,7 +111,7 @@ if (empty($thumbnail) || !isset($thumbnail['id'])) {
 			?>
 	</div>
 
-	<?php if (!empty($link) && !empty($link['url'])) : ?>
-		</a>
-	<?php endif; ?>
 </div>
+<?php if (!empty($link) && !empty($link['url'])) : ?>
+	</a>
+<?php endif; ?>

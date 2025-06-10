@@ -18,7 +18,8 @@
 		margin-top: var(--spacing-1000);
 		gap: var(--spacing-500);
 
-		@include mobile {
+		@include tablet-small {
+			grid-auto-rows: auto;
 			grid-template-columns: 1fr;
 		}
 	}
@@ -31,6 +32,21 @@
 		&--double {
 			.bento-grid-section__tile {
 				flex-direction: row;
+
+				@include tablet-small {
+					flex-direction: column;
+
+					.bento-grid-section__tile-content {
+						order: 2;
+						width: initial;
+					}
+
+					.bento-grid-section__tile-image {
+						order: 1;
+						width: initial;
+						margin: calc(var(--spacing-600) * -1);
+					}
+				}
 
 				&::before {
 					content: '';
@@ -86,6 +102,10 @@
 			width: 100%;
 			height: 100%;
 			background: linear-gradient(180deg, rgba(96, 96, 96, 0.2) 0%, rgba(96, 96, 96, 0) 100%);
+		}
+
+		@include tablet-small {
+			flex-grow: 0;
 		}
 
 		&-image {

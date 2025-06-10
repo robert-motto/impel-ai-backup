@@ -29,9 +29,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: rem(64px);
+		gap: 64px;
 		width: 100%;
-		max-width: rem(1272px);
+		max-width: 1272px;
 		padding: var(--padding-vertical-s) var(--padding-horizontal-3xl);
 		border-radius: 16px;
 		background-repeat: no-repeat;
@@ -40,7 +40,8 @@
 
 		@include tablet-big {
 			flex-direction: column;
-			padding: rem(32px);
+			padding: 32px;
+			padding-bottom: 36px;
 			text-align: center;
 		}
 	}
@@ -49,7 +50,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: left;
-		max-width: rem(464px);
+		max-width: 464px;
 	}
 
 	&__caption {
@@ -59,10 +60,13 @@
 	}
 
 	&__heading {
-		margin-top: var(--spacing-400);
 		color: var(--txt-heading);
 		font-size: var(--t--heading-3);
 		line-height: var(--t--line-height-1200);
+
+		@include tablet-small {
+			line-height: var(--t--line-height-800);
+		}
 
 		strong {
 			color: var(--c--brand-primary-375);
@@ -75,9 +79,5 @@
 		color: var(--txt-paragraph-secondary);
 		font-size: var(--t--paragraph-1);
 		line-height: var(--t--line-height-550);
-	}
-
-	&__buttons {
-
 	}
 }
